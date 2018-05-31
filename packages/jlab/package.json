@@ -16,7 +16,7 @@
     "style/*.css"
   ],
   "jupyterlab": {
-    "extension": true
+    "mimeExtension": true
   },
   "publishConfig": {
     "access": "public"

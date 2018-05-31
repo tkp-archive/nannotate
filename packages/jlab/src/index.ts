@@ -1,6 +1,6 @@
 import {AnnotateWidget} from '@nannotate/core';
 import {Widget} from '@phosphor/widgets';
-// import {Message} from '@phosphor/messaging';
+import {Message} from '@phosphor/messaging';
 // import {Session} from '@jupyterlab/services';
 import {IRenderMime} from '@jupyterlab/rendermime-interfaces';
 import '../style/index.css';
@@ -19,27 +19,26 @@ const NANO_MIME_TYPE = 'application/nano+json';
 export class NannotateWidget extends Widget implements IRenderMime.IRenderer {
 
     constructor() {
-        let widget = new AnnotateWidget();
         let div = document.createElement('div');
-        div.style.backgroundColor = 'red';
         div.style.minHeight = '400px';
         div.style.minWidth = '400px';
-        div.setAttribute('type', NANO_MIME_TYPE);
 
-        let div2 = document.createElement('div');
-        // div.appendChild(div2)
-        Widget.attach(widget, div2);
+        div.setAttribute('type', NANO_MIME_TYPE);
         super({node: div});
+
+        this._nanowidget = new AnnotateWidget();
     }
 
-    // onAfterAttach(msg: Message) : void {
-    // }
+    onAfterAttach(msg: Message) : void {
+        Widget.attach(this._nanowidget, this.node);
+    }
 
     renderModel(model: IRenderMime.IMimeModel): Promise<void> {
         // const {data, schema, layout, config} = model.data[MIME_TYPE] as any | PerspectiveSpec;
-        this.node.textContent = 'test';
         return Promise.resolve();
     }
+
+    private _nanowidget: AnnotateWidget;
 }
 
 
