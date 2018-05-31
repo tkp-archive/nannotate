@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "declaration": false,
+    "declaration": true,
     "noImplicitAny": true,
     "noEmitOnError": true,
     "noUnusedLocals": true,
@@ -12,5 +12,5 @@
     "lib": ["ES5", "ES2015.Promise", "DOM"],
     "types": []
   },
-  "include": ["ts/src/*"]
+  "include": ["src/*"]
 }

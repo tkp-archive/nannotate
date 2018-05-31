@@ -6,7 +6,7 @@ import {
   Widget
 } from '@phosphor/widgets';
 
-import '../ts/style/index.css';
+import '../style/index.css';
 
 
 export

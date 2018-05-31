@@ -1,7 +1,7 @@
 run:  ## clean and make target, run target
 	python3 -m nannotate 
 
-build:  ## Build the repository
+build: js  ## Build the repository
 	python3 setup.py build 
 
 tests: ## Clean and Make unit tests
@@ -26,6 +26,7 @@ clean: ## clean the repository
 js:  ## build the js
 	npm install
 	npm run build
+	cp packages/viewer/build/assets/bundle.js nannotate/assets/
 
 serverextension: install ## enable serverextension
 	jupyter serverextension enable --py nannotate
@@ -33,7 +34,7 @@ serverextension: install ## enable serverextension
 labextension: install ## enable labextension
 	jupyter labextension install jlab
 
-install:  ## install to site-packages
+install: js  ## install to site-packages
 	python3 setup.py install
 
 preinstall:  ## install dependencies
@@ -61,4 +62,4 @@ help:
 print-%:
 	@echo '$*=$($*)'
 
-.PHONY: clean build run test tests help annotate annotate_l docs
+.PHONY: clean build run test tests help annotate annotate_l docs js

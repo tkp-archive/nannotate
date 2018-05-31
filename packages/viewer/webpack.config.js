@@ -3,7 +3,7 @@ var path = require('path');
 module.exports = {
   entry: './build/index.js',
   output: {
-    path: __dirname + '/nannotate/assets/',
+    path: __dirname + '/build/assets/',
     filename: 'bundle.js',
     publicPath: './static/js/'
   },

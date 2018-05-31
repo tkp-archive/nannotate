@@ -15,16 +15,12 @@ import {
   BoxPanel, DockPanel, DockLayout, Menu, MenuBar, Widget, CommandPalette
 } from '@phosphor/widgets';
 
-import '../ts/style/index.css';
-
 import {
-  ControlsWidget
-} from './controls';
+  AnnotateWidget, ControlsWidget
+} from '@nannotate/core';
 
-import {
-  AnnotateWidget
-} from './annotate';
 
+import '../style/index.css';
 
 const commands = new CommandRegistry();
 
