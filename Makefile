@@ -35,7 +35,8 @@ serverextension: install ## enable serverextension
 labextension: install ## enable labextension
 	jupyter labextension install packages/jlab
 
-install: js  ## install to site-packages
+# install: js  ## install to site-packages
+install:   ## install to site-packages
 	python3 setup.py install
 
 preinstall:  ## install dependencies
