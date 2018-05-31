@@ -12,6 +12,9 @@
     "build/*.{d.ts,eot,gif,html,jpg,js,js.map,json,png,svg,woff2,ttf}",
     "style/*.css"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "dependencies": {
     "@nannotate/core": "^0.0.1",
     "@phosphor/commands": "^1.5.0",

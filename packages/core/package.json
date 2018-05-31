@@ -12,6 +12,9 @@
     "build/*.{d.ts,eot,gif,html,jpg,js,js.map,json,png,svg,woff2,ttf}",
     "style/*.css"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "dependencies": {
     "@phosphor/commands": "^1.5.0",
     "@phosphor/dragdrop": "^1.3.0",

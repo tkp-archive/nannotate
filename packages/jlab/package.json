@@ -18,6 +18,9 @@
   "jupyterlab": {
     "extension": true
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "dependencies": {
     "@jupyterlab/application": "^0.16.0",
     "@jupyterlab/rendermime-interfaces": "^1.0.0",
