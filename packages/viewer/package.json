@@ -1,6 +1,6 @@
 {
   "name": "@nannotate/viewer",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "main": "build/index.js",
   "types": "build/index.d.ts",
   "scripts": {
@@ -13,11 +13,11 @@
     "style/*.css"
   ],
   "dependencies": {
+    "@nannotate/core": "^0.0.2",
     "@phosphor/commands": "^1.5.0",
     "@phosphor/dragdrop": "^1.3.0",
     "@phosphor/messaging": "^1.2.2",
     "@phosphor/widgets": "^1.6.0",
-    "@nannotate/core": "0.0.1",
     "es6-promise": "^4.0.5"
   },
   "devDependencies": {
