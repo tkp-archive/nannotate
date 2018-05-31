@@ -12,7 +12,7 @@ import {
 } from '@phosphor/commands';
 
 import {
-  BoxPanel, DockPanel, Menu, MenuBar, Widget, CommandPalette
+  BoxPanel, DockPanel, DockLayout, Menu, MenuBar, Widget, CommandPalette
 } from '@phosphor/widgets';
 
 import '../ts/style/index.css';
@@ -21,12 +21,22 @@ import {
   ControlsWidget
 } from './controls';
 
+import {
+  AnnotateWidget
+} from './annotate';
+
+
 const commands = new CommandRegistry();
 
 function main(): void {
   let bar = new MenuBar();
   let menu = new Menu({commands});
+
   menu.addItem({ command: 'controls:open' });
+  menu.addItem({ type: 'separator'});
+  menu.addItem({ command: 'save-dock-layout'});
+  menu.addItem({ command: 'restore-dock-layout'});
+
   menu.title.label = 'File';
   menu.title.mnemonic = 0;
   bar.addMenu(menu);
@@ -40,27 +50,36 @@ function main(): void {
   // contextMenu.addItem({ command: 'example:cut', selector: '.content' });
 
   let ctrl = new ControlsWidget();
+  let anno = new AnnotateWidget();
 
   let dock = new DockPanel();
   dock.addWidget(ctrl);
+  dock.addWidget(anno, {mode: 'split-right', ref: ctrl});
 
   commands.addCommand('controls:open', {
     label: 'Controls',
     mnemonic: 1,
     iconClass: 'fa fa-plus',
     execute: () => {
-      dock.addWidget(ctrl);
+      dock.addWidget(ctrl, {mode: 'split-left', ref: anno});
+      /* hack for custom sizing */
+      var layout = dock.saveLayout();
+      var sizes: number[] = (layout.main as DockLayout.ISplitAreaConfig).sizes;
+      sizes[0] = 0.3;
+      sizes[1] = 0.7;
+      dock.restoreLayout(layout);
     }
   });
 
   /* hack for custom sizing */
-  // var layout = dock.saveLayout();
-  // var sizes: number[] = (layout.main as DockLayout.ISplitAreaConfig).sizes;
-  // sizes[0] = 0.3;
-  // sizes[1] = 0.7;
-  // dock.restoreLayout(layout);
+  var layout = dock.saveLayout();
+  var sizes: number[] = (layout.main as DockLayout.ISplitAreaConfig).sizes;
+  sizes[0] = 0.3;
+  sizes[1] = 0.7;
+  dock.restoreLayout(layout);
 
   let savedLayouts: DockPanel.ILayoutConfig[] = [];
+
   commands.addCommand('save-dock-layout', {
     label: 'Save Layout',
     caption: 'Save the current dock layout',
