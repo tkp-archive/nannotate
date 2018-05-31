@@ -11,25 +11,17 @@ import '../style/index.css';
 
 export
 class ControlsWidget extends Widget {
-
-  static createNode(): HTMLElement {
-    let node = document.createElement('div');
-    let content = document.createElement('div');
-
-    node.appendChild(content);
-    return node;
-  }
-
   constructor() {
-    super({ node: ControlsWidget.createNode() });
+    super({ node: Private.createNode() });
+    
     this.setFlag(Widget.Flag.DisallowLayout);
     this.addClass('controls');
+
     this.title.label = 'Controls';
-    // this.title.closable = false;
     this.title.closable = true;
     this.title.caption = 'Controls';
-    this.node.id = 'controls';
 
+    this.node.id = 'controls';
   }
 
   // get inputNode(): HTMLInputElement {
@@ -39,5 +31,15 @@ class ControlsWidget extends Widget {
 
   protected onActivateRequest(msg: Message): void {
     this.node.focus();
+  }
+}
+
+
+namespace Private {
+  export function createNode(): HTMLDivElement {
+    let div = document.createElement('div');
+    div.classList.add('nano-controls');
+
+    return div;
   }
 }
