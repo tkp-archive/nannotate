@@ -22,6 +22,7 @@ clean: ## clean the repository
 	find . -name ".ipynb_checkpoints" | xargs  rm -rf 
 	rm -rf .coverage cover htmlcov logs build dist *.egg-info
 	make -C ./docs clean
+	npm run clean
 
 js:  ## build the js
 	npm install
@@ -32,7 +33,7 @@ serverextension: install ## enable serverextension
 	jupyter serverextension enable --py nannotate
 
 labextension: install ## enable labextension
-	jupyter labextension install jlab
+	jupyter labextension install packages/jlab
 
 install: js  ## install to site-packages
 	python3 setup.py install
@@ -53,6 +54,9 @@ docs:  ## make documentation
 
 dist:  ## dist to pypi
 	python3 setup.py sdist upload -r pypi
+
+distjs:  ## dist to npm
+	npm upload
 
 # Thanks to Francoise at marmelab.com for this
 .DEFAULT_GOAL := help
