@@ -1,0 +1,38 @@
+.controls {
+  min-width: 50px;
+  min-height: 50px;
+  /*max-width: 350px;*/
+  display: flex;
+  flex-direction: column;
+  padding: 8px;
+  border: 1px solid #C0C0C0;
+  border-top: none;
+  background: white;
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+
+.controls > div {
+  flex: 1 1 auto;
+  border: 1px solid #505050;
+  overflow: auto;
+}
+
+
+.controls  input {
+  margin: 8px;
+  width:90%;
+}
+
+
+.controls input::-webkit-outer-spin-button,
+.controls input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+/* specifically hide the arrow on focus */
+.controls input::-webkit-calendar-picker-indicator {
+    display: none;
+}

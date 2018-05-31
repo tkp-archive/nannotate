@@ -9,7 +9,7 @@ tests: ## Clean and Make unit tests
 	
 test: ## run the tests for travis CI
 	@ python3 -m nose -v tests --with-coverage --cover-erase --cover-package=`find nannotate -name "*.py" | sed "s=\./==g" | sed "s=/=.=g" | sed "s/.py//g" | tr '\n' ',' | rev | cut -c2- | rev`
- 
+
 annotate: ## MyPy type annotation check
 	mypy -s nannotate  
 
@@ -22,6 +22,10 @@ clean: ## clean the repository
 	find . -name ".ipynb_checkpoints" | xargs  rm -rf 
 	rm -rf .coverage cover htmlcov logs build dist *.egg-info
 	make -C ./docs clean
+
+js:  ## build the js
+	npm install
+	npm run build
 
 serverextension: install ## enable serverextension
 	jupyter serverextension enable --py nannotate
