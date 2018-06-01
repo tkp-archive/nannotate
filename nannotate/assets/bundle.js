@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "./static/js/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 247);
+/******/ 	return __webpack_require__(__webpack_require__.s = 258);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -100,7 +100,7 @@ if (typeof Object.create === 'function') {
 /***/ (function(module, exports, __webpack_require__) {
 
 /* eslint-disable node/no-deprecated-api */
-var buffer = __webpack_require__(2)
+var buffer = __webpack_require__(3)
 var Buffer = buffer.Buffer
 
 // alternative to using Object.keys for old browsers
@@ -168,6 +168,41 @@ SafeBuffer.allocUnsafeSlow = function (size) {
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
+
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+Object.defineProperty(exports, "__esModule", { value: true });
+/*-----------------------------------------------------------------------------
+| Copyright (c) 2014-2017, PhosphorJS Contributors
+|
+| Distributed under the terms of the BSD 3-Clause License.
+|
+| The full license is in the file LICENSE, distributed with this software.
+|----------------------------------------------------------------------------*/
+__export(__webpack_require__(111));
+__export(__webpack_require__(112));
+__export(__webpack_require__(113));
+__export(__webpack_require__(114));
+__export(__webpack_require__(115));
+__export(__webpack_require__(12));
+__export(__webpack_require__(116));
+__export(__webpack_require__(117));
+__export(__webpack_require__(118));
+__export(__webpack_require__(119));
+__export(__webpack_require__(120));
+__export(__webpack_require__(121));
+__export(__webpack_require__(122));
+__export(__webpack_require__(123));
+__export(__webpack_require__(124));
+__export(__webpack_require__(125));
+
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
 /* WEBPACK VAR INJECTION */(function(global) {/*!
  * The buffer module from node.js, for the browser.
  *
@@ -178,9 +213,9 @@ SafeBuffer.allocUnsafeSlow = function (size) {
 
 
 
-var base64 = __webpack_require__(150)
-var ieee754 = __webpack_require__(220)
-var isArray = __webpack_require__(85)
+var base64 = __webpack_require__(159)
+var ieee754 = __webpack_require__(231)
+var isArray = __webpack_require__(90)
 
 exports.Buffer = Buffer
 exports.SlowBuffer = SlowBuffer
@@ -1961,42 +1996,63 @@ function isnan (val) {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(14)))
 
 /***/ }),
-/* 3 */
-/***/ (function(module, exports, __webpack_require__) {
+/* 4 */
+/***/ (function(module, exports) {
 
-"use strict";
+/*
+	MIT License http://www.opensource.org/licenses/mit-license.php
+	Author Tobias Koppers @sokra
+*/
+// css base code, injected by the css-loader
+module.exports = function() {
+	var list = [];
 
-function __export(m) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-}
-Object.defineProperty(exports, "__esModule", { value: true });
-/*-----------------------------------------------------------------------------
-| Copyright (c) 2014-2017, PhosphorJS Contributors
-|
-| Distributed under the terms of the BSD 3-Clause License.
-|
-| The full license is in the file LICENSE, distributed with this software.
-|----------------------------------------------------------------------------*/
-__export(__webpack_require__(106));
-__export(__webpack_require__(107));
-__export(__webpack_require__(108));
-__export(__webpack_require__(109));
-__export(__webpack_require__(110));
-__export(__webpack_require__(12));
-__export(__webpack_require__(111));
-__export(__webpack_require__(112));
-__export(__webpack_require__(113));
-__export(__webpack_require__(114));
-__export(__webpack_require__(115));
-__export(__webpack_require__(116));
-__export(__webpack_require__(117));
-__export(__webpack_require__(118));
-__export(__webpack_require__(119));
-__export(__webpack_require__(120));
+	// return the list of modules as css string
+	list.toString = function toString() {
+		var result = [];
+		for(var i = 0; i < this.length; i++) {
+			var item = this[i];
+			if(item[2]) {
+				result.push("@media " + item[2] + "{" + item[1] + "}");
+			} else {
+				result.push(item[1]);
+			}
+		}
+		return result.join("");
+	};
+
+	// import a list of modules into the list
+	list.i = function(modules, mediaQuery) {
+		if(typeof modules === "string")
+			modules = [[null, modules, ""]];
+		var alreadyImportedModules = {};
+		for(var i = 0; i < this.length; i++) {
+			var id = this[i][0];
+			if(typeof id === "number")
+				alreadyImportedModules[id] = true;
+		}
+		for(i = 0; i < modules.length; i++) {
+			var item = modules[i];
+			// skip already imported module
+			// this implementation is not 100% perfect for weird media query combinations
+			//  when a module is imported multiple times with different media queries.
+			//  I hope this will never occur (Hey this way we have smaller bundles)
+			if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
+				if(mediaQuery && !item[2]) {
+					item[2] = mediaQuery;
+				} else if(mediaQuery) {
+					item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
+				}
+				list.push(item);
+			}
+		}
+	};
+	return list;
+};
 
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(module) {(function (module, exports) {
@@ -2051,7 +2107,7 @@ __export(__webpack_require__(120));
 
   var Buffer;
   try {
-    Buffer = __webpack_require__(248).Buffer;
+    Buffer = __webpack_require__(259).Buffer;
   } catch (e) {
   }
 
@@ -5427,63 +5483,7 @@ __export(__webpack_require__(120));
   };
 })(typeof module === 'undefined' || module, this);
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(244)(module)))
-
-/***/ }),
-/* 5 */
-/***/ (function(module, exports) {
-
-/*
-	MIT License http://www.opensource.org/licenses/mit-license.php
-	Author Tobias Koppers @sokra
-*/
-// css base code, injected by the css-loader
-module.exports = function() {
-	var list = [];
-
-	// return the list of modules as css string
-	list.toString = function toString() {
-		var result = [];
-		for(var i = 0; i < this.length; i++) {
-			var item = this[i];
-			if(item[2]) {
-				result.push("@media " + item[2] + "{" + item[1] + "}");
-			} else {
-				result.push(item[1]);
-			}
-		}
-		return result.join("");
-	};
-
-	// import a list of modules into the list
-	list.i = function(modules, mediaQuery) {
-		if(typeof modules === "string")
-			modules = [[null, modules, ""]];
-		var alreadyImportedModules = {};
-		for(var i = 0; i < this.length; i++) {
-			var id = this[i][0];
-			if(typeof id === "number")
-				alreadyImportedModules[id] = true;
-		}
-		for(i = 0; i < modules.length; i++) {
-			var item = modules[i];
-			// skip already imported module
-			// this implementation is not 100% perfect for weird media query combinations
-			//  when a module is imported multiple times with different media queries.
-			//  I hope this will never occur (Hey this way we have smaller bundles)
-			if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
-				if(mediaQuery && !item[2]) {
-					item[2] = mediaQuery;
-				} else if(mediaQuery) {
-					item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
-				}
-				list.push(item);
-			}
-		}
-	};
-	return list;
-};
-
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(255)(module)))
 
 /***/ }),
 /* 6 */
@@ -5509,11 +5509,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 |
 | The full license is in the file LICENSE, distributed with this software.
 |----------------------------------------------------------------------------*/
-var algorithm_1 = __webpack_require__(3);
+var algorithm_1 = __webpack_require__(2);
 var messaging_1 = __webpack_require__(8);
 var properties_1 = __webpack_require__(19);
-var signaling_1 = __webpack_require__(11);
-var title_1 = __webpack_require__(46);
+var signaling_1 = __webpack_require__(10);
+var title_1 = __webpack_require__(47);
 /**
  * The base class of the Phosphor widget hierarchy.
  *
@@ -6468,9 +6468,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 |
 | The full license is in the file LICENSE, distributed with this software.
 |----------------------------------------------------------------------------*/
-__export(__webpack_require__(128));
-__export(__webpack_require__(129));
-__export(__webpack_require__(130));
+__export(__webpack_require__(137));
+__export(__webpack_require__(138));
+__export(__webpack_require__(139));
 
 
 /***/ }),
@@ -6497,8 +6497,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 |
 | The full license is in the file LICENSE, distributed with this software.
 |----------------------------------------------------------------------------*/
-var algorithm_1 = __webpack_require__(3);
-var collections_1 = __webpack_require__(121);
+var algorithm_1 = __webpack_require__(2);
+var collections_1 = __webpack_require__(126);
 /**
  * A message which can be delivered to a message handler.
  *
@@ -7006,7 +7006,7 @@ var MessageLoop;
     }
 })(MessageLoop = exports.MessageLoop || (exports.MessageLoop = {}));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(39).setImmediate, __webpack_require__(39).clearImmediate))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(40).setImmediate, __webpack_require__(40).clearImmediate))
 
 /***/ }),
 /* 9 */
@@ -7017,36 +7017,19 @@ var MessageLoop;
 
 var elliptic = exports;
 
-elliptic.version = __webpack_require__(211).version;
-elliptic.utils = __webpack_require__(210);
-elliptic.rand = __webpack_require__(70);
-elliptic.curve = __webpack_require__(35);
-elliptic.curves = __webpack_require__(202);
+elliptic.version = __webpack_require__(222).version;
+elliptic.utils = __webpack_require__(221);
+elliptic.rand = __webpack_require__(75);
+elliptic.curve = __webpack_require__(36);
+elliptic.curves = __webpack_require__(213);
 
 // Protocols
-elliptic.ec = __webpack_require__(203);
-elliptic.eddsa = __webpack_require__(206);
+elliptic.ec = __webpack_require__(214);
+elliptic.eddsa = __webpack_require__(217);
 
 
 /***/ }),
 /* 10 */
-/***/ (function(module, exports) {
-
-module.exports = assert;
-
-function assert(val, msg) {
-  if (!val)
-    throw new Error(msg || 'Assertion failed');
-}
-
-assert.equal = function assertEqual(l, r, msg) {
-  if (l != r)
-    throw new Error(msg || ('Assertion failed: ' + l + ' != ' + r));
-};
-
-
-/***/ }),
-/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7059,7 +7042,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 |
 | The full license is in the file LICENSE, distributed with this software.
 |----------------------------------------------------------------------------*/
-var algorithm_1 = __webpack_require__(3);
+var algorithm_1 = __webpack_require__(2);
 /**
  * A concrete implementation of `ISignal`.
  *
@@ -7574,7 +7557,24 @@ var Private;
     }
 })(Private || (Private = {}));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(39).setImmediate))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(40).setImmediate))
+
+/***/ }),
+/* 11 */
+/***/ (function(module, exports) {
+
+module.exports = assert;
+
+function assert(val, msg) {
+  if (!val)
+    throw new Error(msg || 'Assertion failed');
+}
+
+assert.equal = function assertEqual(l, r, msg) {
+  if (l != r)
+    throw new Error(msg || ('Assertion failed: ' + l + ' != ' + r));
+};
+
 
 /***/ }),
 /* 12 */
@@ -7806,7 +7806,7 @@ exports.ArrayIterator = ArrayIterator;
 "use strict";
 
 
-var assert = __webpack_require__(10);
+var assert = __webpack_require__(11);
 var inherits = __webpack_require__(0);
 
 exports.inherits = inherits;
@@ -8290,11 +8290,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 |
 | The full license is in the file LICENSE, distributed with this software.
 |----------------------------------------------------------------------------*/
-var algorithm_1 = __webpack_require__(3);
+var algorithm_1 = __webpack_require__(2);
 var domutils_1 = __webpack_require__(7);
 var messaging_1 = __webpack_require__(8);
 var properties_1 = __webpack_require__(19);
-var signaling_1 = __webpack_require__(11);
+var signaling_1 = __webpack_require__(10);
 var widget_1 = __webpack_require__(6);
 /**
  * An abstract base class for creating Phosphor layouts.
@@ -9065,8 +9065,8 @@ var Private;
 /***/ (function(module, exports, __webpack_require__) {
 
 var Buffer = __webpack_require__(1).Buffer
-var Transform = __webpack_require__(58).Transform
-var StringDecoder = __webpack_require__(59).StringDecoder
+var Transform = __webpack_require__(59).Transform
+var StringDecoder = __webpack_require__(60).StringDecoder
 var inherits = __webpack_require__(0)
 
 function CipherBase (hashMode) {
@@ -9200,7 +9200,7 @@ module.exports = CipherBase
 
 /*<replacement>*/
 
-var pna = __webpack_require__(38);
+var pna = __webpack_require__(39);
 /*</replacement>*/
 
 /*<replacement>*/
@@ -9215,12 +9215,12 @@ var objectKeys = Object.keys || function (obj) {
 module.exports = Duplex;
 
 /*<replacement>*/
-var util = __webpack_require__(27);
+var util = __webpack_require__(28);
 util.inherits = __webpack_require__(0);
 /*</replacement>*/
 
-var Readable = __webpack_require__(95);
-var Writable = __webpack_require__(54);
+var Readable = __webpack_require__(100);
+var Writable = __webpack_require__(55);
 
 util.inherits(Duplex, Readable);
 
@@ -9638,1099 +9638,8 @@ module.exports = Hash
 
 "use strict";
 
-/*-----------------------------------------------------------------------------
-| Copyright (c) 2014-2017, PhosphorJS Contributors
-|
-| Distributed under the terms of the BSD 3-Clause License.
-|
-| The full license is in the file LICENSE, distributed with this software.
-|----------------------------------------------------------------------------*/
 Object.defineProperty(exports, "__esModule", { value: true });
-/**
- * A sizer object for use with the box engine layout functions.
- *
- * #### Notes
- * A box sizer holds the geometry information for an object along an
- * arbitrary layout orientation.
- *
- * For best performance, this class should be treated as a raw data
- * struct. It should not typically be subclassed.
- */
-var BoxSizer = (function () {
-    function BoxSizer() {
-        /**
-         * The preferred size for the sizer.
-         *
-         * #### Notes
-         * The sizer will be given this initial size subject to its size
-         * bounds. The sizer will not deviate from this size unless such
-         * deviation is required to fit into the available layout space.
-         *
-         * There is no limit to this value, but it will be clamped to the
-         * bounds defined by [[minSize]] and [[maxSize]].
-         *
-         * The default value is `0`.
-         */
-        this.sizeHint = 0;
-        /**
-         * The minimum size of the sizer.
-         *
-         * #### Notes
-         * The sizer will never be sized less than this value, even if
-         * it means the sizer will overflow the available layout space.
-         *
-         * It is assumed that this value lies in the range `[0, Infinity)`
-         * and that it is `<=` to [[maxSize]]. Failure to adhere to this
-         * constraint will yield undefined results.
-         *
-         * The default value is `0`.
-         */
-        this.minSize = 0;
-        /**
-         * The maximum size of the sizer.
-         *
-         * #### Notes
-         * The sizer will never be sized greater than this value, even if
-         * it means the sizer will underflow the available layout space.
-         *
-         * It is assumed that this value lies in the range `[0, Infinity]`
-         * and that it is `>=` to [[minSize]]. Failure to adhere to this
-         * constraint will yield undefined results.
-         *
-         * The default value is `Infinity`.
-         */
-        this.maxSize = Infinity;
-        /**
-         * The stretch factor for the sizer.
-         *
-         * #### Notes
-         * This controls how much the sizer stretches relative to its sibling
-         * sizers when layout space is distributed. A stretch factor of zero
-         * is special and will cause the sizer to only be resized after all
-         * other sizers with a stretch factor greater than zero have been
-         * resized to their limits.
-         *
-         * It is assumed that this value is an integer that lies in the range
-         * `[0, Infinity)`. Failure to adhere to this constraint will yield
-         * undefined results.
-         *
-         * The default value is `1`.
-         */
-        this.stretch = 1;
-        /**
-         * The computed size of the sizer.
-         *
-         * #### Notes
-         * This value is the output of a call to [[boxCalc]]. It represents
-         * the computed size for the object along the layout orientation,
-         * and will always lie in the range `[minSize, maxSize]`.
-         *
-         * This value is output only.
-         *
-         * Changing this value will have no effect.
-         */
-        this.size = 0;
-        /**
-         * An internal storage property for the layout algorithm.
-         *
-         * #### Notes
-         * This value is used as temporary storage by the layout algorithm.
-         *
-         * Changing this value will have no effect.
-         */
-        this.done = false;
-    }
-    return BoxSizer;
-}());
-exports.BoxSizer = BoxSizer;
-/**
- * The namespace for the box engine layout functions.
- */
-var BoxEngine;
-(function (BoxEngine) {
-    /**
-     * Calculate the optimal layout sizes for a sequence of box sizers.
-     *
-     * This distributes the available layout space among the box sizers
-     * according to the following algorithm:
-     *
-     * 1. Initialize the sizers's size to its size hint and compute the
-     *    sums for each of size hint, min size, and max size.
-     *
-     * 2. If the total size hint equals the available space, return.
-     *
-     * 3. If the available space is less than the total min size, set all
-     *    sizers to their min size and return.
-     *
-     * 4. If the available space is greater than the total max size, set
-     *    all sizers to their max size and return.
-     *
-     * 5. If the layout space is less than the total size hint, distribute
-     *    the negative delta as follows:
-     *
-     *    a. Shrink each sizer with a stretch factor greater than zero by
-     *       an amount proportional to the negative space and the sum of
-     *       stretch factors. If the sizer reaches its min size, remove
-     *       it and its stretch factor from the computation.
-     *
-     *    b. If after adjusting all stretch sizers there remains negative
-     *       space, distribute the space equally among the sizers with a
-     *       stretch factor of zero. If a sizer reaches its min size,
-     *       remove it from the computation.
-     *
-     * 6. If the layout space is greater than the total size hint,
-     *    distribute the positive delta as follows:
-     *
-     *    a. Expand each sizer with a stretch factor greater than zero by
-     *       an amount proportional to the postive space and the sum of
-     *       stretch factors. If the sizer reaches its max size, remove
-     *       it and its stretch factor from the computation.
-     *
-     *    b. If after adjusting all stretch sizers there remains positive
-     *       space, distribute the space equally among the sizers with a
-     *       stretch factor of zero. If a sizer reaches its max size,
-     *       remove it from the computation.
-     *
-     * 7. return
-     *
-     * @param sizers - The sizers for a particular layout line.
-     *
-     * @param space - The available layout space for the sizers.
-     *
-     * @returns The delta between the provided available space and the
-     *   actual consumed space. This value will be zero if the sizers
-     *   can be adjusted to fit, negative if the available space is too
-     *   small, and positive if the available space is too large.
-     *
-     * #### Notes
-     * The [[size]] of each sizer is updated with the computed size.
-     *
-     * This function can be called at any time to recompute the layout for
-     * an existing sequence of sizers. The previously computed results will
-     * have no effect on the new output. It is therefore not necessary to
-     * create new sizer objects on each resize event.
-     */
-    function calc(sizers, space) {
-        // Bail early if there is nothing to do.
-        var count = sizers.length;
-        if (count === 0) {
-            return space;
-        }
-        // Setup the size and stretch counters.
-        var totalMin = 0;
-        var totalMax = 0;
-        var totalSize = 0;
-        var totalStretch = 0;
-        var stretchCount = 0;
-        // Setup the sizers and compute the totals.
-        for (var i = 0; i < count; ++i) {
-            var sizer = sizers[i];
-            var min = sizer.minSize;
-            var max = sizer.maxSize;
-            var hint = sizer.sizeHint;
-            sizer.done = false;
-            sizer.size = Math.max(min, Math.min(hint, max));
-            totalSize += sizer.size;
-            totalMin += min;
-            totalMax += max;
-            if (sizer.stretch > 0) {
-                totalStretch += sizer.stretch;
-                stretchCount++;
-            }
-        }
-        // If the space is equal to the total size, return early.
-        if (space === totalSize) {
-            return 0;
-        }
-        // If the space is less than the total min, minimize each sizer.
-        if (space <= totalMin) {
-            for (var i = 0; i < count; ++i) {
-                var sizer = sizers[i];
-                sizer.size = sizer.minSize;
-            }
-            return space - totalMin;
-        }
-        // If the space is greater than the total max, maximize each sizer.
-        if (space >= totalMax) {
-            for (var i = 0; i < count; ++i) {
-                var sizer = sizers[i];
-                sizer.size = sizer.maxSize;
-            }
-            return space - totalMax;
-        }
-        // The loops below perform sub-pixel precision sizing. A near zero
-        // value is used for compares instead of zero to ensure that the
-        // loop terminates when the subdivided space is reasonably small.
-        var nearZero = 0.01;
-        // A counter which is decremented each time a sizer is resized to
-        // its limit. This ensures the loops terminate even if there is
-        // space remaining to distribute.
-        var notDoneCount = count;
-        // Distribute negative delta space.
-        if (space < totalSize) {
-            // Shrink each stretchable sizer by an amount proportional to its
-            // stretch factor. If a sizer reaches its min size it's marked as
-            // done. The loop progresses in phases where each sizer is given
-            // a chance to consume its fair share for the pass, regardless of
-            // whether a sizer before it reached its limit. This continues
-            // until the stretchable sizers or the free space is exhausted.
-            var freeSpace = totalSize - space;
-            while (stretchCount > 0 && freeSpace > nearZero) {
-                var distSpace = freeSpace;
-                var distStretch = totalStretch;
-                for (var i = 0; i < count; ++i) {
-                    var sizer = sizers[i];
-                    if (sizer.done || sizer.stretch === 0) {
-                        continue;
-                    }
-                    var amt = sizer.stretch * distSpace / distStretch;
-                    if (sizer.size - amt <= sizer.minSize) {
-                        freeSpace -= sizer.size - sizer.minSize;
-                        totalStretch -= sizer.stretch;
-                        sizer.size = sizer.minSize;
-                        sizer.done = true;
-                        notDoneCount--;
-                        stretchCount--;
-                    }
-                    else {
-                        freeSpace -= amt;
-                        sizer.size -= amt;
-                    }
-                }
-            }
-            // Distribute any remaining space evenly among the non-stretchable
-            // sizers. This progresses in phases in the same manner as above.
-            while (notDoneCount > 0 && freeSpace > nearZero) {
-                var amt = freeSpace / notDoneCount;
-                for (var i = 0; i < count; ++i) {
-                    var sizer = sizers[i];
-                    if (sizer.done) {
-                        continue;
-                    }
-                    if (sizer.size - amt <= sizer.minSize) {
-                        freeSpace -= sizer.size - sizer.minSize;
-                        sizer.size = sizer.minSize;
-                        sizer.done = true;
-                        notDoneCount--;
-                    }
-                    else {
-                        freeSpace -= amt;
-                        sizer.size -= amt;
-                    }
-                }
-            }
-        }
-        else {
-            // Expand each stretchable sizer by an amount proportional to its
-            // stretch factor. If a sizer reaches its max size it's marked as
-            // done. The loop progresses in phases where each sizer is given
-            // a chance to consume its fair share for the pass, regardless of
-            // whether a sizer before it reached its limit. This continues
-            // until the stretchable sizers or the free space is exhausted.
-            var freeSpace = space - totalSize;
-            while (stretchCount > 0 && freeSpace > nearZero) {
-                var distSpace = freeSpace;
-                var distStretch = totalStretch;
-                for (var i = 0; i < count; ++i) {
-                    var sizer = sizers[i];
-                    if (sizer.done || sizer.stretch === 0) {
-                        continue;
-                    }
-                    var amt = sizer.stretch * distSpace / distStretch;
-                    if (sizer.size + amt >= sizer.maxSize) {
-                        freeSpace -= sizer.maxSize - sizer.size;
-                        totalStretch -= sizer.stretch;
-                        sizer.size = sizer.maxSize;
-                        sizer.done = true;
-                        notDoneCount--;
-                        stretchCount--;
-                    }
-                    else {
-                        freeSpace -= amt;
-                        sizer.size += amt;
-                    }
-                }
-            }
-            // Distribute any remaining space evenly among the non-stretchable
-            // sizers. This progresses in phases in the same manner as above.
-            while (notDoneCount > 0 && freeSpace > nearZero) {
-                var amt = freeSpace / notDoneCount;
-                for (var i = 0; i < count; ++i) {
-                    var sizer = sizers[i];
-                    if (sizer.done) {
-                        continue;
-                    }
-                    if (sizer.size + amt >= sizer.maxSize) {
-                        freeSpace -= sizer.maxSize - sizer.size;
-                        sizer.size = sizer.maxSize;
-                        sizer.done = true;
-                        notDoneCount--;
-                    }
-                    else {
-                        freeSpace -= amt;
-                        sizer.size += amt;
-                    }
-                }
-            }
-        }
-        // Indicate that the consumed space equals the available space.
-        return 0;
-    }
-    BoxEngine.calc = calc;
-    /**
-     * Adjust a sizer by a delta and update its neighbors accordingly.
-     *
-     * @param sizers - The sizers which should be adjusted.
-     *
-     * @param index - The index of the sizer to grow.
-     *
-     * @param delta - The amount to adjust the sizer, positive or negative.
-     *
-     * #### Notes
-     * This will adjust the indicated sizer by the specified amount, along
-     * with the sizes of the appropriate neighbors, subject to the limits
-     * specified by each of the sizers.
-     *
-     * This is useful when implementing box layouts where the boundaries
-     * between the sizers are interactively adjustable by the user.
-     */
-    function adjust(sizers, index, delta) {
-        // Bail early when there is nothing to do.
-        if (sizers.length === 0 || delta === 0) {
-            return;
-        }
-        // Dispatch to the proper implementation.
-        if (delta > 0) {
-            growSizer(sizers, index, delta);
-        }
-        else {
-            shrinkSizer(sizers, index, -delta);
-        }
-    }
-    BoxEngine.adjust = adjust;
-    /**
-     * Grow a sizer by a positive delta and adjust neighbors.
-     */
-    function growSizer(sizers, index, delta) {
-        // Compute how much the items to the left can expand.
-        var growLimit = 0;
-        for (var i = 0; i <= index; ++i) {
-            var sizer = sizers[i];
-            growLimit += sizer.maxSize - sizer.size;
-        }
-        // Compute how much the items to the right can shrink.
-        var shrinkLimit = 0;
-        for (var i = index + 1, n = sizers.length; i < n; ++i) {
-            var sizer = sizers[i];
-            shrinkLimit += sizer.size - sizer.minSize;
-        }
-        // Clamp the delta adjustment to the limits.
-        delta = Math.min(delta, growLimit, shrinkLimit);
-        // Grow the sizers to the left by the delta.
-        var grow = delta;
-        for (var i = index; i >= 0 && grow > 0; --i) {
-            var sizer = sizers[i];
-            var limit = sizer.maxSize - sizer.size;
-            if (limit >= grow) {
-                sizer.sizeHint = sizer.size + grow;
-                grow = 0;
-            }
-            else {
-                sizer.sizeHint = sizer.size + limit;
-                grow -= limit;
-            }
-        }
-        // Shrink the sizers to the right by the delta.
-        var shrink = delta;
-        for (var i = index + 1, n = sizers.length; i < n && shrink > 0; ++i) {
-            var sizer = sizers[i];
-            var limit = sizer.size - sizer.minSize;
-            if (limit >= shrink) {
-                sizer.sizeHint = sizer.size - shrink;
-                shrink = 0;
-            }
-            else {
-                sizer.sizeHint = sizer.size - limit;
-                shrink -= limit;
-            }
-        }
-    }
-    /**
-     * Shrink a sizer by a positive delta and adjust neighbors.
-     */
-    function shrinkSizer(sizers, index, delta) {
-        // Compute how much the items to the right can expand.
-        var growLimit = 0;
-        for (var i = index + 1, n = sizers.length; i < n; ++i) {
-            var sizer = sizers[i];
-            growLimit += sizer.maxSize - sizer.size;
-        }
-        // Compute how much the items to the left can shrink.
-        var shrinkLimit = 0;
-        for (var i = 0; i <= index; ++i) {
-            var sizer = sizers[i];
-            shrinkLimit += sizer.size - sizer.minSize;
-        }
-        // Clamp the delta adjustment to the limits.
-        delta = Math.min(delta, growLimit, shrinkLimit);
-        // Grow the sizers to the right by the delta.
-        var grow = delta;
-        for (var i = index + 1, n = sizers.length; i < n && grow > 0; ++i) {
-            var sizer = sizers[i];
-            var limit = sizer.maxSize - sizer.size;
-            if (limit >= grow) {
-                sizer.sizeHint = sizer.size + grow;
-                grow = 0;
-            }
-            else {
-                sizer.sizeHint = sizer.size + limit;
-                grow -= limit;
-            }
-        }
-        // Shrink the sizers to the left by the delta.
-        var shrink = delta;
-        for (var i = index; i >= 0 && shrink > 0; --i) {
-            var sizer = sizers[i];
-            var limit = sizer.size - sizer.minSize;
-            if (limit >= shrink) {
-                sizer.sizeHint = sizer.size - shrink;
-                shrink = 0;
-            }
-            else {
-                sizer.sizeHint = sizer.size - limit;
-                shrink -= limit;
-            }
-        }
-    }
-})(BoxEngine = exports.BoxEngine || (exports.BoxEngine = {}));
-
-
-/***/ }),
-/* 23 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-Object.defineProperty(exports, "__esModule", { value: true });
-/*-----------------------------------------------------------------------------
-| Copyright (c) 2014-2017, PhosphorJS Contributors
-|
-| Distributed under the terms of the BSD 3-Clause License.
-|
-| The full license is in the file LICENSE, distributed with this software.
-|----------------------------------------------------------------------------*/
-var algorithm_1 = __webpack_require__(3);
-var messaging_1 = __webpack_require__(8);
-var layout_1 = __webpack_require__(16);
-var widget_1 = __webpack_require__(6);
-/**
- * A concrete layout implementation suitable for many use cases.
- *
- * #### Notes
- * This class is suitable as a base class for implementing a variety of
- * layouts, but can also be used directly with standard CSS to layout a
- * collection of widgets.
- */
-var PanelLayout = (function (_super) {
-    __extends(PanelLayout, _super);
-    function PanelLayout() {
-        var _this = _super !== null && _super.apply(this, arguments) || this;
-        _this._widgets = [];
-        return _this;
-    }
-    /**
-     * Dispose of the resources held by the layout.
-     *
-     * #### Notes
-     * This will clear and dispose all widgets in the layout.
-     *
-     * All reimplementations should call the superclass method.
-     *
-     * This method is called automatically when the parent is disposed.
-     */
-    PanelLayout.prototype.dispose = function () {
-        while (this._widgets.length > 0) {
-            this._widgets.pop().dispose();
-        }
-        _super.prototype.dispose.call(this);
-    };
-    Object.defineProperty(PanelLayout.prototype, "widgets", {
-        /**
-         * A read-only array of the widgets in the layout.
-         */
-        get: function () {
-            return this._widgets;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    /**
-     * Create an iterator over the widgets in the layout.
-     *
-     * @returns A new iterator over the widgets in the layout.
-     */
-    PanelLayout.prototype.iter = function () {
-        return algorithm_1.iter(this._widgets);
-    };
-    /**
-     * Add a widget to the end of the layout.
-     *
-     * @param widget - The widget to add to the layout.
-     *
-     * #### Notes
-     * If the widget is already contained in the layout, it will be moved.
-     */
-    PanelLayout.prototype.addWidget = function (widget) {
-        this.insertWidget(this._widgets.length, widget);
-    };
-    /**
-     * Insert a widget into the layout at the specified index.
-     *
-     * @param index - The index at which to insert the widget.
-     *
-     * @param widget - The widget to insert into the layout.
-     *
-     * #### Notes
-     * The index will be clamped to the bounds of the widgets.
-     *
-     * If the widget is already added to the layout, it will be moved.
-     *
-     * #### Undefined Behavior
-     * An `index` which is non-integral.
-     */
-    PanelLayout.prototype.insertWidget = function (index, widget) {
-        // Remove the widget from its current parent. This is a no-op
-        // if the widget's parent is already the layout parent widget.
-        widget.parent = this.parent;
-        // Look up the current index of the widget.
-        var i = this._widgets.indexOf(widget);
-        // Clamp the insert index to the array bounds.
-        var j = Math.max(0, Math.min(index, this._widgets.length));
-        // If the widget is not in the array, insert it.
-        if (i === -1) {
-            // Insert the widget into the array.
-            algorithm_1.ArrayExt.insert(this._widgets, j, widget);
-            // If the layout is parented, attach the widget to the DOM.
-            if (this.parent) {
-                this.attachWidget(j, widget);
-            }
-            // There is nothing more to do.
-            return;
-        }
-        // Otherwise, the widget exists in the array and should be moved.
-        // Adjust the index if the location is at the end of the array.
-        if (j === this._widgets.length) {
-            j--;
-        }
-        // Bail if there is no effective move.
-        if (i === j) {
-            return;
-        }
-        // Move the widget to the new location.
-        algorithm_1.ArrayExt.move(this._widgets, i, j);
-        // If the layout is parented, move the widget in the DOM.
-        if (this.parent) {
-            this.moveWidget(i, j, widget);
-        }
-    };
-    /**
-     * Remove a widget from the layout.
-     *
-     * @param widget - The widget to remove from the layout.
-     *
-     * #### Notes
-     * A widget is automatically removed from the layout when its `parent`
-     * is set to `null`. This method should only be invoked directly when
-     * removing a widget from a layout which has yet to be installed on a
-     * parent widget.
-     *
-     * This method does *not* modify the widget's `parent`.
-     */
-    PanelLayout.prototype.removeWidget = function (widget) {
-        this.removeWidgetAt(this._widgets.indexOf(widget));
-    };
-    /**
-     * Remove the widget at a given index from the layout.
-     *
-     * @param index - The index of the widget to remove.
-     *
-     * #### Notes
-     * A widget is automatically removed from the layout when its `parent`
-     * is set to `null`. This method should only be invoked directly when
-     * removing a widget from a layout which has yet to be installed on a
-     * parent widget.
-     *
-     * This method does *not* modify the widget's `parent`.
-     *
-     * #### Undefined Behavior
-     * An `index` which is non-integral.
-     */
-    PanelLayout.prototype.removeWidgetAt = function (index) {
-        // Remove the widget from the array.
-        var widget = algorithm_1.ArrayExt.removeAt(this._widgets, index);
-        // If the layout is parented, detach the widget from the DOM.
-        if (widget && this.parent) {
-            this.detachWidget(index, widget);
-        }
-    };
-    /**
-     * Perform layout initialization which requires the parent widget.
-     */
-    PanelLayout.prototype.init = function () {
-        var _this = this;
-        _super.prototype.init.call(this);
-        algorithm_1.each(this, function (widget, index) {
-            _this.attachWidget(index, widget);
-        });
-    };
-    /**
-     * Attach a widget to the parent's DOM node.
-     *
-     * @param index - The current index of the widget in the layout.
-     *
-     * @param widget - The widget to attach to the parent.
-     *
-     * #### Notes
-     * This method is called automatically by the panel layout at the
-     * appropriate time. It should not be called directly by user code.
-     *
-     * The default implementation adds the widgets's node to the parent's
-     * node at the proper location, and sends the appropriate attach
-     * messages to the widget if the parent is attached to the DOM.
-     *
-     * Subclasses may reimplement this method to control how the widget's
-     * node is added to the parent's node.
-     */
-    PanelLayout.prototype.attachWidget = function (index, widget) {
-        // Look up the next sibling reference node.
-        var ref = this.parent.node.children[index];
-        // Send a `'before-attach'` message if the parent is attached.
-        if (this.parent.isAttached) {
-            messaging_1.MessageLoop.sendMessage(widget, widget_1.Widget.Msg.BeforeAttach);
-        }
-        // Insert the widget's node before the sibling.
-        this.parent.node.insertBefore(widget.node, ref);
-        // Send an `'after-attach'` message if the parent is attached.
-        if (this.parent.isAttached) {
-            messaging_1.MessageLoop.sendMessage(widget, widget_1.Widget.Msg.AfterAttach);
-        }
-    };
-    /**
-     * Move a widget in the parent's DOM node.
-     *
-     * @param fromIndex - The previous index of the widget in the layout.
-     *
-     * @param toIndex - The current index of the widget in the layout.
-     *
-     * @param widget - The widget to move in the parent.
-     *
-     * #### Notes
-     * This method is called automatically by the panel layout at the
-     * appropriate time. It should not be called directly by user code.
-     *
-     * The default implementation moves the widget's node to the proper
-     * location in the parent's node and sends the appropriate attach and
-     * detach messages to the widget if the parent is attached to the DOM.
-     *
-     * Subclasses may reimplement this method to control how the widget's
-     * node is moved in the parent's node.
-     */
-    PanelLayout.prototype.moveWidget = function (fromIndex, toIndex, widget) {
-        // Send a `'before-detach'` message if the parent is attached.
-        if (this.parent.isAttached) {
-            messaging_1.MessageLoop.sendMessage(widget, widget_1.Widget.Msg.BeforeDetach);
-        }
-        // Remove the widget's node from the parent.
-        this.parent.node.removeChild(widget.node);
-        // Send an `'after-detach'` and  message if the parent is attached.
-        if (this.parent.isAttached) {
-            messaging_1.MessageLoop.sendMessage(widget, widget_1.Widget.Msg.AfterDetach);
-        }
-        // Look up the next sibling reference node.
-        var ref = this.parent.node.children[toIndex];
-        // Send a `'before-attach'` message if the parent is attached.
-        if (this.parent.isAttached) {
-            messaging_1.MessageLoop.sendMessage(widget, widget_1.Widget.Msg.BeforeAttach);
-        }
-        // Insert the widget's node before the sibling.
-        this.parent.node.insertBefore(widget.node, ref);
-        // Send an `'after-attach'` message if the parent is attached.
-        if (this.parent.isAttached) {
-            messaging_1.MessageLoop.sendMessage(widget, widget_1.Widget.Msg.AfterAttach);
-        }
-    };
-    /**
-     * Detach a widget from the parent's DOM node.
-     *
-     * @param index - The previous index of the widget in the layout.
-     *
-     * @param widget - The widget to detach from the parent.
-     *
-     * #### Notes
-     * This method is called automatically by the panel layout at the
-     * appropriate time. It should not be called directly by user code.
-     *
-     * The default implementation removes the widget's node from the
-     * parent's node, and sends the appropriate detach messages to the
-     * widget if the parent is attached to the DOM.
-     *
-     * Subclasses may reimplement this method to control how the widget's
-     * node is removed from the parent's node.
-     */
-    PanelLayout.prototype.detachWidget = function (index, widget) {
-        // Send a `'before-detach'` message if the parent is attached.
-        if (this.parent.isAttached) {
-            messaging_1.MessageLoop.sendMessage(widget, widget_1.Widget.Msg.BeforeDetach);
-        }
-        // Remove the widget's node from the parent.
-        this.parent.node.removeChild(widget.node);
-        // Send an `'after-detach'` message if the parent is attached.
-        if (this.parent.isAttached) {
-            messaging_1.MessageLoop.sendMessage(widget, widget_1.Widget.Msg.AfterDetach);
-        }
-    };
-    return PanelLayout;
-}(layout_1.Layout));
-exports.PanelLayout = PanelLayout;
-
-
-/***/ }),
-/* 24 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var asn1 = exports;
-
-asn1.bignum = __webpack_require__(4);
-
-asn1.define = __webpack_require__(142).define;
-asn1.base = __webpack_require__(25);
-asn1.constants = __webpack_require__(67);
-asn1.decoders = __webpack_require__(146);
-asn1.encoders = __webpack_require__(148);
-
-
-/***/ }),
-/* 25 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var base = exports;
-
-base.Reporter = __webpack_require__(144).Reporter;
-base.DecoderBuffer = __webpack_require__(66).DecoderBuffer;
-base.EncoderBuffer = __webpack_require__(66).EncoderBuffer;
-base.Node = __webpack_require__(143);
-
-
-/***/ }),
-/* 26 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/* WEBPACK VAR INJECTION */(function(Buffer) {module.exports = function xor (a, b) {
-  var length = Math.min(a.length, b.length)
-  var buffer = new Buffer(length)
-
-  for (var i = 0; i < length; ++i) {
-    buffer[i] = a[i] ^ b[i]
-  }
-
-  return buffer
-}
-
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2).Buffer))
-
-/***/ }),
-/* 27 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/* WEBPACK VAR INJECTION */(function(Buffer) {// Copyright Joyent, Inc. and other Node contributors.
-//
-// Permission is hereby granted, free of charge, to any person obtaining a
-// copy of this software and associated documentation files (the
-// "Software"), to deal in the Software without restriction, including
-// without limitation the rights to use, copy, modify, merge, publish,
-// distribute, sublicense, and/or sell copies of the Software, and to permit
-// persons to whom the Software is furnished to do so, subject to the
-// following conditions:
-//
-// The above copyright notice and this permission notice shall be included
-// in all copies or substantial portions of the Software.
-//
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
-// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
-// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
-// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
-// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
-// USE OR OTHER DEALINGS IN THE SOFTWARE.
-
-// NOTE: These type checking functions intentionally don't use `instanceof`
-// because it is fragile and can be easily faked with `Object.create()`.
-
-function isArray(arg) {
-  if (Array.isArray) {
-    return Array.isArray(arg);
-  }
-  return objectToString(arg) === '[object Array]';
-}
-exports.isArray = isArray;
-
-function isBoolean(arg) {
-  return typeof arg === 'boolean';
-}
-exports.isBoolean = isBoolean;
-
-function isNull(arg) {
-  return arg === null;
-}
-exports.isNull = isNull;
-
-function isNullOrUndefined(arg) {
-  return arg == null;
-}
-exports.isNullOrUndefined = isNullOrUndefined;
-
-function isNumber(arg) {
-  return typeof arg === 'number';
-}
-exports.isNumber = isNumber;
-
-function isString(arg) {
-  return typeof arg === 'string';
-}
-exports.isString = isString;
-
-function isSymbol(arg) {
-  return typeof arg === 'symbol';
-}
-exports.isSymbol = isSymbol;
-
-function isUndefined(arg) {
-  return arg === void 0;
-}
-exports.isUndefined = isUndefined;
-
-function isRegExp(re) {
-  return objectToString(re) === '[object RegExp]';
-}
-exports.isRegExp = isRegExp;
-
-function isObject(arg) {
-  return typeof arg === 'object' && arg !== null;
-}
-exports.isObject = isObject;
-
-function isDate(d) {
-  return objectToString(d) === '[object Date]';
-}
-exports.isDate = isDate;
-
-function isError(e) {
-  return (objectToString(e) === '[object Error]' || e instanceof Error);
-}
-exports.isError = isError;
-
-function isFunction(arg) {
-  return typeof arg === 'function';
-}
-exports.isFunction = isFunction;
-
-function isPrimitive(arg) {
-  return arg === null ||
-         typeof arg === 'boolean' ||
-         typeof arg === 'number' ||
-         typeof arg === 'string' ||
-         typeof arg === 'symbol' ||  // ES6 symbol
-         typeof arg === 'undefined';
-}
-exports.isPrimitive = isPrimitive;
-
-exports.isBuffer = Buffer.isBuffer;
-
-function objectToString(o) {
-  return Object.prototype.toString.call(o);
-}
-
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2).Buffer))
-
-/***/ }),
-/* 28 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var inherits = __webpack_require__(0)
-var MD5 = __webpack_require__(53)
-var RIPEMD160 = __webpack_require__(56)
-var sha = __webpack_require__(57)
-var Base = __webpack_require__(17)
-
-function Hash (hash) {
-  Base.call(this, 'digest')
-
-  this._hash = hash
-}
-
-inherits(Hash, Base)
-
-Hash.prototype._update = function (data) {
-  this._hash.update(data)
-}
-
-Hash.prototype._final = function () {
-  return this._hash.digest()
-}
-
-module.exports = function createHash (alg) {
-  alg = alg.toLowerCase()
-  if (alg === 'md5') return new MD5()
-  if (alg === 'rmd160' || alg === 'ripemd160') return new RIPEMD160()
-
-  return new Hash(sha(alg))
-}
-
-
-/***/ }),
-/* 29 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var utils = __webpack_require__(13);
-var assert = __webpack_require__(10);
-
-function BlockHash() {
-  this.pending = null;
-  this.pendingTotal = 0;
-  this.blockSize = this.constructor.blockSize;
-  this.outSize = this.constructor.outSize;
-  this.hmacStrength = this.constructor.hmacStrength;
-  this.padLength = this.constructor.padLength / 8;
-  this.endian = 'big';
-
-  this._delta8 = this.blockSize / 8;
-  this._delta32 = this.blockSize / 32;
-}
-exports.BlockHash = BlockHash;
-
-BlockHash.prototype.update = function update(msg, enc) {
-  // Convert message to array, pad it, and join into 32bit blocks
-  msg = utils.toArray(msg, enc);
-  if (!this.pending)
-    this.pending = msg;
-  else
-    this.pending = this.pending.concat(msg);
-  this.pendingTotal += msg.length;
-
-  // Enough data, try updating
-  if (this.pending.length >= this._delta8) {
-    msg = this.pending;
-
-    // Process pending data in blocks
-    var r = msg.length % this._delta8;
-    this.pending = msg.slice(msg.length - r, msg.length);
-    if (this.pending.length === 0)
-      this.pending = null;
-
-    msg = utils.join32(msg, 0, msg.length - r, this.endian);
-    for (var i = 0; i < msg.length; i += this._delta32)
-      this._update(msg, i, i + this._delta32);
-  }
-
-  return this;
-};
-
-BlockHash.prototype.digest = function digest(enc) {
-  this.update(this._pad());
-  assert(this.pending === null);
-
-  return this._digest(enc);
-};
-
-BlockHash.prototype._pad = function pad() {
-  var len = this.pendingTotal;
-  var bytes = this._delta8;
-  var k = bytes - ((len + this.padLength) % bytes);
-  var res = new Array(k + this.padLength);
-  res[0] = 0x80;
-  for (var i = 1; i < k; i++)
-    res[i] = 0;
-
-  // Append length
-  len <<= 3;
-  if (this.endian === 'big') {
-    for (var t = 8; t < this.padLength; t++)
-      res[i++] = 0;
-
-    res[i++] = 0;
-    res[i++] = 0;
-    res[i++] = 0;
-    res[i++] = 0;
-    res[i++] = (len >>> 24) & 0xff;
-    res[i++] = (len >>> 16) & 0xff;
-    res[i++] = (len >>> 8) & 0xff;
-    res[i++] = len & 0xff;
-  } else {
-    res[i++] = len & 0xff;
-    res[i++] = (len >>> 8) & 0xff;
-    res[i++] = (len >>> 16) & 0xff;
-    res[i++] = (len >>> 24) & 0xff;
-    res[i++] = 0;
-    res[i++] = 0;
-    res[i++] = 0;
-    res[i++] = 0;
-
-    for (t = 8; t < this.padLength; t++)
-      res[i++] = 0;
-  }
-
-  return res;
-};
-
-
-/***/ }),
-/* 30 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-function __export(m) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-}
-Object.defineProperty(exports, "__esModule", { value: true });
-/*-----------------------------------------------------------------------------
-| Copyright (c) 2014-2017, PhosphorJS Contributors
-|
-| Distributed under the terms of the BSD 3-Clause License.
-|
-| The full license is in the file LICENSE, distributed with this software.
-|----------------------------------------------------------------------------*/
-__export(__webpack_require__(123));
-__export(__webpack_require__(124));
-__export(__webpack_require__(125));
-__export(__webpack_require__(60));
-__export(__webpack_require__(126));
-__export(__webpack_require__(127));
-
-
-/***/ }),
-/* 31 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var disposable_1 = __webpack_require__(42);
+var disposable_1 = __webpack_require__(43);
 /**
  * An object which manages a drag-drop operation.
  *
@@ -11566,7 +10475,1141 @@ var Private;
 
 
 /***/ }),
+/* 23 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/*-----------------------------------------------------------------------------
+| Copyright (c) 2014-2017, PhosphorJS Contributors
+|
+| Distributed under the terms of the BSD 3-Clause License.
+|
+| The full license is in the file LICENSE, distributed with this software.
+|----------------------------------------------------------------------------*/
+Object.defineProperty(exports, "__esModule", { value: true });
+/**
+ * A sizer object for use with the box engine layout functions.
+ *
+ * #### Notes
+ * A box sizer holds the geometry information for an object along an
+ * arbitrary layout orientation.
+ *
+ * For best performance, this class should be treated as a raw data
+ * struct. It should not typically be subclassed.
+ */
+var BoxSizer = (function () {
+    function BoxSizer() {
+        /**
+         * The preferred size for the sizer.
+         *
+         * #### Notes
+         * The sizer will be given this initial size subject to its size
+         * bounds. The sizer will not deviate from this size unless such
+         * deviation is required to fit into the available layout space.
+         *
+         * There is no limit to this value, but it will be clamped to the
+         * bounds defined by [[minSize]] and [[maxSize]].
+         *
+         * The default value is `0`.
+         */
+        this.sizeHint = 0;
+        /**
+         * The minimum size of the sizer.
+         *
+         * #### Notes
+         * The sizer will never be sized less than this value, even if
+         * it means the sizer will overflow the available layout space.
+         *
+         * It is assumed that this value lies in the range `[0, Infinity)`
+         * and that it is `<=` to [[maxSize]]. Failure to adhere to this
+         * constraint will yield undefined results.
+         *
+         * The default value is `0`.
+         */
+        this.minSize = 0;
+        /**
+         * The maximum size of the sizer.
+         *
+         * #### Notes
+         * The sizer will never be sized greater than this value, even if
+         * it means the sizer will underflow the available layout space.
+         *
+         * It is assumed that this value lies in the range `[0, Infinity]`
+         * and that it is `>=` to [[minSize]]. Failure to adhere to this
+         * constraint will yield undefined results.
+         *
+         * The default value is `Infinity`.
+         */
+        this.maxSize = Infinity;
+        /**
+         * The stretch factor for the sizer.
+         *
+         * #### Notes
+         * This controls how much the sizer stretches relative to its sibling
+         * sizers when layout space is distributed. A stretch factor of zero
+         * is special and will cause the sizer to only be resized after all
+         * other sizers with a stretch factor greater than zero have been
+         * resized to their limits.
+         *
+         * It is assumed that this value is an integer that lies in the range
+         * `[0, Infinity)`. Failure to adhere to this constraint will yield
+         * undefined results.
+         *
+         * The default value is `1`.
+         */
+        this.stretch = 1;
+        /**
+         * The computed size of the sizer.
+         *
+         * #### Notes
+         * This value is the output of a call to [[boxCalc]]. It represents
+         * the computed size for the object along the layout orientation,
+         * and will always lie in the range `[minSize, maxSize]`.
+         *
+         * This value is output only.
+         *
+         * Changing this value will have no effect.
+         */
+        this.size = 0;
+        /**
+         * An internal storage property for the layout algorithm.
+         *
+         * #### Notes
+         * This value is used as temporary storage by the layout algorithm.
+         *
+         * Changing this value will have no effect.
+         */
+        this.done = false;
+    }
+    return BoxSizer;
+}());
+exports.BoxSizer = BoxSizer;
+/**
+ * The namespace for the box engine layout functions.
+ */
+var BoxEngine;
+(function (BoxEngine) {
+    /**
+     * Calculate the optimal layout sizes for a sequence of box sizers.
+     *
+     * This distributes the available layout space among the box sizers
+     * according to the following algorithm:
+     *
+     * 1. Initialize the sizers's size to its size hint and compute the
+     *    sums for each of size hint, min size, and max size.
+     *
+     * 2. If the total size hint equals the available space, return.
+     *
+     * 3. If the available space is less than the total min size, set all
+     *    sizers to their min size and return.
+     *
+     * 4. If the available space is greater than the total max size, set
+     *    all sizers to their max size and return.
+     *
+     * 5. If the layout space is less than the total size hint, distribute
+     *    the negative delta as follows:
+     *
+     *    a. Shrink each sizer with a stretch factor greater than zero by
+     *       an amount proportional to the negative space and the sum of
+     *       stretch factors. If the sizer reaches its min size, remove
+     *       it and its stretch factor from the computation.
+     *
+     *    b. If after adjusting all stretch sizers there remains negative
+     *       space, distribute the space equally among the sizers with a
+     *       stretch factor of zero. If a sizer reaches its min size,
+     *       remove it from the computation.
+     *
+     * 6. If the layout space is greater than the total size hint,
+     *    distribute the positive delta as follows:
+     *
+     *    a. Expand each sizer with a stretch factor greater than zero by
+     *       an amount proportional to the postive space and the sum of
+     *       stretch factors. If the sizer reaches its max size, remove
+     *       it and its stretch factor from the computation.
+     *
+     *    b. If after adjusting all stretch sizers there remains positive
+     *       space, distribute the space equally among the sizers with a
+     *       stretch factor of zero. If a sizer reaches its max size,
+     *       remove it from the computation.
+     *
+     * 7. return
+     *
+     * @param sizers - The sizers for a particular layout line.
+     *
+     * @param space - The available layout space for the sizers.
+     *
+     * @returns The delta between the provided available space and the
+     *   actual consumed space. This value will be zero if the sizers
+     *   can be adjusted to fit, negative if the available space is too
+     *   small, and positive if the available space is too large.
+     *
+     * #### Notes
+     * The [[size]] of each sizer is updated with the computed size.
+     *
+     * This function can be called at any time to recompute the layout for
+     * an existing sequence of sizers. The previously computed results will
+     * have no effect on the new output. It is therefore not necessary to
+     * create new sizer objects on each resize event.
+     */
+    function calc(sizers, space) {
+        // Bail early if there is nothing to do.
+        var count = sizers.length;
+        if (count === 0) {
+            return space;
+        }
+        // Setup the size and stretch counters.
+        var totalMin = 0;
+        var totalMax = 0;
+        var totalSize = 0;
+        var totalStretch = 0;
+        var stretchCount = 0;
+        // Setup the sizers and compute the totals.
+        for (var i = 0; i < count; ++i) {
+            var sizer = sizers[i];
+            var min = sizer.minSize;
+            var max = sizer.maxSize;
+            var hint = sizer.sizeHint;
+            sizer.done = false;
+            sizer.size = Math.max(min, Math.min(hint, max));
+            totalSize += sizer.size;
+            totalMin += min;
+            totalMax += max;
+            if (sizer.stretch > 0) {
+                totalStretch += sizer.stretch;
+                stretchCount++;
+            }
+        }
+        // If the space is equal to the total size, return early.
+        if (space === totalSize) {
+            return 0;
+        }
+        // If the space is less than the total min, minimize each sizer.
+        if (space <= totalMin) {
+            for (var i = 0; i < count; ++i) {
+                var sizer = sizers[i];
+                sizer.size = sizer.minSize;
+            }
+            return space - totalMin;
+        }
+        // If the space is greater than the total max, maximize each sizer.
+        if (space >= totalMax) {
+            for (var i = 0; i < count; ++i) {
+                var sizer = sizers[i];
+                sizer.size = sizer.maxSize;
+            }
+            return space - totalMax;
+        }
+        // The loops below perform sub-pixel precision sizing. A near zero
+        // value is used for compares instead of zero to ensure that the
+        // loop terminates when the subdivided space is reasonably small.
+        var nearZero = 0.01;
+        // A counter which is decremented each time a sizer is resized to
+        // its limit. This ensures the loops terminate even if there is
+        // space remaining to distribute.
+        var notDoneCount = count;
+        // Distribute negative delta space.
+        if (space < totalSize) {
+            // Shrink each stretchable sizer by an amount proportional to its
+            // stretch factor. If a sizer reaches its min size it's marked as
+            // done. The loop progresses in phases where each sizer is given
+            // a chance to consume its fair share for the pass, regardless of
+            // whether a sizer before it reached its limit. This continues
+            // until the stretchable sizers or the free space is exhausted.
+            var freeSpace = totalSize - space;
+            while (stretchCount > 0 && freeSpace > nearZero) {
+                var distSpace = freeSpace;
+                var distStretch = totalStretch;
+                for (var i = 0; i < count; ++i) {
+                    var sizer = sizers[i];
+                    if (sizer.done || sizer.stretch === 0) {
+                        continue;
+                    }
+                    var amt = sizer.stretch * distSpace / distStretch;
+                    if (sizer.size - amt <= sizer.minSize) {
+                        freeSpace -= sizer.size - sizer.minSize;
+                        totalStretch -= sizer.stretch;
+                        sizer.size = sizer.minSize;
+                        sizer.done = true;
+                        notDoneCount--;
+                        stretchCount--;
+                    }
+                    else {
+                        freeSpace -= amt;
+                        sizer.size -= amt;
+                    }
+                }
+            }
+            // Distribute any remaining space evenly among the non-stretchable
+            // sizers. This progresses in phases in the same manner as above.
+            while (notDoneCount > 0 && freeSpace > nearZero) {
+                var amt = freeSpace / notDoneCount;
+                for (var i = 0; i < count; ++i) {
+                    var sizer = sizers[i];
+                    if (sizer.done) {
+                        continue;
+                    }
+                    if (sizer.size - amt <= sizer.minSize) {
+                        freeSpace -= sizer.size - sizer.minSize;
+                        sizer.size = sizer.minSize;
+                        sizer.done = true;
+                        notDoneCount--;
+                    }
+                    else {
+                        freeSpace -= amt;
+                        sizer.size -= amt;
+                    }
+                }
+            }
+        }
+        else {
+            // Expand each stretchable sizer by an amount proportional to its
+            // stretch factor. If a sizer reaches its max size it's marked as
+            // done. The loop progresses in phases where each sizer is given
+            // a chance to consume its fair share for the pass, regardless of
+            // whether a sizer before it reached its limit. This continues
+            // until the stretchable sizers or the free space is exhausted.
+            var freeSpace = space - totalSize;
+            while (stretchCount > 0 && freeSpace > nearZero) {
+                var distSpace = freeSpace;
+                var distStretch = totalStretch;
+                for (var i = 0; i < count; ++i) {
+                    var sizer = sizers[i];
+                    if (sizer.done || sizer.stretch === 0) {
+                        continue;
+                    }
+                    var amt = sizer.stretch * distSpace / distStretch;
+                    if (sizer.size + amt >= sizer.maxSize) {
+                        freeSpace -= sizer.maxSize - sizer.size;
+                        totalStretch -= sizer.stretch;
+                        sizer.size = sizer.maxSize;
+                        sizer.done = true;
+                        notDoneCount--;
+                        stretchCount--;
+                    }
+                    else {
+                        freeSpace -= amt;
+                        sizer.size += amt;
+                    }
+                }
+            }
+            // Distribute any remaining space evenly among the non-stretchable
+            // sizers. This progresses in phases in the same manner as above.
+            while (notDoneCount > 0 && freeSpace > nearZero) {
+                var amt = freeSpace / notDoneCount;
+                for (var i = 0; i < count; ++i) {
+                    var sizer = sizers[i];
+                    if (sizer.done) {
+                        continue;
+                    }
+                    if (sizer.size + amt >= sizer.maxSize) {
+                        freeSpace -= sizer.maxSize - sizer.size;
+                        sizer.size = sizer.maxSize;
+                        sizer.done = true;
+                        notDoneCount--;
+                    }
+                    else {
+                        freeSpace -= amt;
+                        sizer.size += amt;
+                    }
+                }
+            }
+        }
+        // Indicate that the consumed space equals the available space.
+        return 0;
+    }
+    BoxEngine.calc = calc;
+    /**
+     * Adjust a sizer by a delta and update its neighbors accordingly.
+     *
+     * @param sizers - The sizers which should be adjusted.
+     *
+     * @param index - The index of the sizer to grow.
+     *
+     * @param delta - The amount to adjust the sizer, positive or negative.
+     *
+     * #### Notes
+     * This will adjust the indicated sizer by the specified amount, along
+     * with the sizes of the appropriate neighbors, subject to the limits
+     * specified by each of the sizers.
+     *
+     * This is useful when implementing box layouts where the boundaries
+     * between the sizers are interactively adjustable by the user.
+     */
+    function adjust(sizers, index, delta) {
+        // Bail early when there is nothing to do.
+        if (sizers.length === 0 || delta === 0) {
+            return;
+        }
+        // Dispatch to the proper implementation.
+        if (delta > 0) {
+            growSizer(sizers, index, delta);
+        }
+        else {
+            shrinkSizer(sizers, index, -delta);
+        }
+    }
+    BoxEngine.adjust = adjust;
+    /**
+     * Grow a sizer by a positive delta and adjust neighbors.
+     */
+    function growSizer(sizers, index, delta) {
+        // Compute how much the items to the left can expand.
+        var growLimit = 0;
+        for (var i = 0; i <= index; ++i) {
+            var sizer = sizers[i];
+            growLimit += sizer.maxSize - sizer.size;
+        }
+        // Compute how much the items to the right can shrink.
+        var shrinkLimit = 0;
+        for (var i = index + 1, n = sizers.length; i < n; ++i) {
+            var sizer = sizers[i];
+            shrinkLimit += sizer.size - sizer.minSize;
+        }
+        // Clamp the delta adjustment to the limits.
+        delta = Math.min(delta, growLimit, shrinkLimit);
+        // Grow the sizers to the left by the delta.
+        var grow = delta;
+        for (var i = index; i >= 0 && grow > 0; --i) {
+            var sizer = sizers[i];
+            var limit = sizer.maxSize - sizer.size;
+            if (limit >= grow) {
+                sizer.sizeHint = sizer.size + grow;
+                grow = 0;
+            }
+            else {
+                sizer.sizeHint = sizer.size + limit;
+                grow -= limit;
+            }
+        }
+        // Shrink the sizers to the right by the delta.
+        var shrink = delta;
+        for (var i = index + 1, n = sizers.length; i < n && shrink > 0; ++i) {
+            var sizer = sizers[i];
+            var limit = sizer.size - sizer.minSize;
+            if (limit >= shrink) {
+                sizer.sizeHint = sizer.size - shrink;
+                shrink = 0;
+            }
+            else {
+                sizer.sizeHint = sizer.size - limit;
+                shrink -= limit;
+            }
+        }
+    }
+    /**
+     * Shrink a sizer by a positive delta and adjust neighbors.
+     */
+    function shrinkSizer(sizers, index, delta) {
+        // Compute how much the items to the right can expand.
+        var growLimit = 0;
+        for (var i = index + 1, n = sizers.length; i < n; ++i) {
+            var sizer = sizers[i];
+            growLimit += sizer.maxSize - sizer.size;
+        }
+        // Compute how much the items to the left can shrink.
+        var shrinkLimit = 0;
+        for (var i = 0; i <= index; ++i) {
+            var sizer = sizers[i];
+            shrinkLimit += sizer.size - sizer.minSize;
+        }
+        // Clamp the delta adjustment to the limits.
+        delta = Math.min(delta, growLimit, shrinkLimit);
+        // Grow the sizers to the right by the delta.
+        var grow = delta;
+        for (var i = index + 1, n = sizers.length; i < n && grow > 0; ++i) {
+            var sizer = sizers[i];
+            var limit = sizer.maxSize - sizer.size;
+            if (limit >= grow) {
+                sizer.sizeHint = sizer.size + grow;
+                grow = 0;
+            }
+            else {
+                sizer.sizeHint = sizer.size + limit;
+                grow -= limit;
+            }
+        }
+        // Shrink the sizers to the left by the delta.
+        var shrink = delta;
+        for (var i = index; i >= 0 && shrink > 0; --i) {
+            var sizer = sizers[i];
+            var limit = sizer.size - sizer.minSize;
+            if (limit >= shrink) {
+                sizer.sizeHint = sizer.size - shrink;
+                shrink = 0;
+            }
+            else {
+                sizer.sizeHint = sizer.size - limit;
+                shrink -= limit;
+            }
+        }
+    }
+})(BoxEngine = exports.BoxEngine || (exports.BoxEngine = {}));
+
+
+/***/ }),
+/* 24 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
+/*-----------------------------------------------------------------------------
+| Copyright (c) 2014-2017, PhosphorJS Contributors
+|
+| Distributed under the terms of the BSD 3-Clause License.
+|
+| The full license is in the file LICENSE, distributed with this software.
+|----------------------------------------------------------------------------*/
+var algorithm_1 = __webpack_require__(2);
+var messaging_1 = __webpack_require__(8);
+var layout_1 = __webpack_require__(16);
+var widget_1 = __webpack_require__(6);
+/**
+ * A concrete layout implementation suitable for many use cases.
+ *
+ * #### Notes
+ * This class is suitable as a base class for implementing a variety of
+ * layouts, but can also be used directly with standard CSS to layout a
+ * collection of widgets.
+ */
+var PanelLayout = (function (_super) {
+    __extends(PanelLayout, _super);
+    function PanelLayout() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this._widgets = [];
+        return _this;
+    }
+    /**
+     * Dispose of the resources held by the layout.
+     *
+     * #### Notes
+     * This will clear and dispose all widgets in the layout.
+     *
+     * All reimplementations should call the superclass method.
+     *
+     * This method is called automatically when the parent is disposed.
+     */
+    PanelLayout.prototype.dispose = function () {
+        while (this._widgets.length > 0) {
+            this._widgets.pop().dispose();
+        }
+        _super.prototype.dispose.call(this);
+    };
+    Object.defineProperty(PanelLayout.prototype, "widgets", {
+        /**
+         * A read-only array of the widgets in the layout.
+         */
+        get: function () {
+            return this._widgets;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    /**
+     * Create an iterator over the widgets in the layout.
+     *
+     * @returns A new iterator over the widgets in the layout.
+     */
+    PanelLayout.prototype.iter = function () {
+        return algorithm_1.iter(this._widgets);
+    };
+    /**
+     * Add a widget to the end of the layout.
+     *
+     * @param widget - The widget to add to the layout.
+     *
+     * #### Notes
+     * If the widget is already contained in the layout, it will be moved.
+     */
+    PanelLayout.prototype.addWidget = function (widget) {
+        this.insertWidget(this._widgets.length, widget);
+    };
+    /**
+     * Insert a widget into the layout at the specified index.
+     *
+     * @param index - The index at which to insert the widget.
+     *
+     * @param widget - The widget to insert into the layout.
+     *
+     * #### Notes
+     * The index will be clamped to the bounds of the widgets.
+     *
+     * If the widget is already added to the layout, it will be moved.
+     *
+     * #### Undefined Behavior
+     * An `index` which is non-integral.
+     */
+    PanelLayout.prototype.insertWidget = function (index, widget) {
+        // Remove the widget from its current parent. This is a no-op
+        // if the widget's parent is already the layout parent widget.
+        widget.parent = this.parent;
+        // Look up the current index of the widget.
+        var i = this._widgets.indexOf(widget);
+        // Clamp the insert index to the array bounds.
+        var j = Math.max(0, Math.min(index, this._widgets.length));
+        // If the widget is not in the array, insert it.
+        if (i === -1) {
+            // Insert the widget into the array.
+            algorithm_1.ArrayExt.insert(this._widgets, j, widget);
+            // If the layout is parented, attach the widget to the DOM.
+            if (this.parent) {
+                this.attachWidget(j, widget);
+            }
+            // There is nothing more to do.
+            return;
+        }
+        // Otherwise, the widget exists in the array and should be moved.
+        // Adjust the index if the location is at the end of the array.
+        if (j === this._widgets.length) {
+            j--;
+        }
+        // Bail if there is no effective move.
+        if (i === j) {
+            return;
+        }
+        // Move the widget to the new location.
+        algorithm_1.ArrayExt.move(this._widgets, i, j);
+        // If the layout is parented, move the widget in the DOM.
+        if (this.parent) {
+            this.moveWidget(i, j, widget);
+        }
+    };
+    /**
+     * Remove a widget from the layout.
+     *
+     * @param widget - The widget to remove from the layout.
+     *
+     * #### Notes
+     * A widget is automatically removed from the layout when its `parent`
+     * is set to `null`. This method should only be invoked directly when
+     * removing a widget from a layout which has yet to be installed on a
+     * parent widget.
+     *
+     * This method does *not* modify the widget's `parent`.
+     */
+    PanelLayout.prototype.removeWidget = function (widget) {
+        this.removeWidgetAt(this._widgets.indexOf(widget));
+    };
+    /**
+     * Remove the widget at a given index from the layout.
+     *
+     * @param index - The index of the widget to remove.
+     *
+     * #### Notes
+     * A widget is automatically removed from the layout when its `parent`
+     * is set to `null`. This method should only be invoked directly when
+     * removing a widget from a layout which has yet to be installed on a
+     * parent widget.
+     *
+     * This method does *not* modify the widget's `parent`.
+     *
+     * #### Undefined Behavior
+     * An `index` which is non-integral.
+     */
+    PanelLayout.prototype.removeWidgetAt = function (index) {
+        // Remove the widget from the array.
+        var widget = algorithm_1.ArrayExt.removeAt(this._widgets, index);
+        // If the layout is parented, detach the widget from the DOM.
+        if (widget && this.parent) {
+            this.detachWidget(index, widget);
+        }
+    };
+    /**
+     * Perform layout initialization which requires the parent widget.
+     */
+    PanelLayout.prototype.init = function () {
+        var _this = this;
+        _super.prototype.init.call(this);
+        algorithm_1.each(this, function (widget, index) {
+            _this.attachWidget(index, widget);
+        });
+    };
+    /**
+     * Attach a widget to the parent's DOM node.
+     *
+     * @param index - The current index of the widget in the layout.
+     *
+     * @param widget - The widget to attach to the parent.
+     *
+     * #### Notes
+     * This method is called automatically by the panel layout at the
+     * appropriate time. It should not be called directly by user code.
+     *
+     * The default implementation adds the widgets's node to the parent's
+     * node at the proper location, and sends the appropriate attach
+     * messages to the widget if the parent is attached to the DOM.
+     *
+     * Subclasses may reimplement this method to control how the widget's
+     * node is added to the parent's node.
+     */
+    PanelLayout.prototype.attachWidget = function (index, widget) {
+        // Look up the next sibling reference node.
+        var ref = this.parent.node.children[index];
+        // Send a `'before-attach'` message if the parent is attached.
+        if (this.parent.isAttached) {
+            messaging_1.MessageLoop.sendMessage(widget, widget_1.Widget.Msg.BeforeAttach);
+        }
+        // Insert the widget's node before the sibling.
+        this.parent.node.insertBefore(widget.node, ref);
+        // Send an `'after-attach'` message if the parent is attached.
+        if (this.parent.isAttached) {
+            messaging_1.MessageLoop.sendMessage(widget, widget_1.Widget.Msg.AfterAttach);
+        }
+    };
+    /**
+     * Move a widget in the parent's DOM node.
+     *
+     * @param fromIndex - The previous index of the widget in the layout.
+     *
+     * @param toIndex - The current index of the widget in the layout.
+     *
+     * @param widget - The widget to move in the parent.
+     *
+     * #### Notes
+     * This method is called automatically by the panel layout at the
+     * appropriate time. It should not be called directly by user code.
+     *
+     * The default implementation moves the widget's node to the proper
+     * location in the parent's node and sends the appropriate attach and
+     * detach messages to the widget if the parent is attached to the DOM.
+     *
+     * Subclasses may reimplement this method to control how the widget's
+     * node is moved in the parent's node.
+     */
+    PanelLayout.prototype.moveWidget = function (fromIndex, toIndex, widget) {
+        // Send a `'before-detach'` message if the parent is attached.
+        if (this.parent.isAttached) {
+            messaging_1.MessageLoop.sendMessage(widget, widget_1.Widget.Msg.BeforeDetach);
+        }
+        // Remove the widget's node from the parent.
+        this.parent.node.removeChild(widget.node);
+        // Send an `'after-detach'` and  message if the parent is attached.
+        if (this.parent.isAttached) {
+            messaging_1.MessageLoop.sendMessage(widget, widget_1.Widget.Msg.AfterDetach);
+        }
+        // Look up the next sibling reference node.
+        var ref = this.parent.node.children[toIndex];
+        // Send a `'before-attach'` message if the parent is attached.
+        if (this.parent.isAttached) {
+            messaging_1.MessageLoop.sendMessage(widget, widget_1.Widget.Msg.BeforeAttach);
+        }
+        // Insert the widget's node before the sibling.
+        this.parent.node.insertBefore(widget.node, ref);
+        // Send an `'after-attach'` message if the parent is attached.
+        if (this.parent.isAttached) {
+            messaging_1.MessageLoop.sendMessage(widget, widget_1.Widget.Msg.AfterAttach);
+        }
+    };
+    /**
+     * Detach a widget from the parent's DOM node.
+     *
+     * @param index - The previous index of the widget in the layout.
+     *
+     * @param widget - The widget to detach from the parent.
+     *
+     * #### Notes
+     * This method is called automatically by the panel layout at the
+     * appropriate time. It should not be called directly by user code.
+     *
+     * The default implementation removes the widget's node from the
+     * parent's node, and sends the appropriate detach messages to the
+     * widget if the parent is attached to the DOM.
+     *
+     * Subclasses may reimplement this method to control how the widget's
+     * node is removed from the parent's node.
+     */
+    PanelLayout.prototype.detachWidget = function (index, widget) {
+        // Send a `'before-detach'` message if the parent is attached.
+        if (this.parent.isAttached) {
+            messaging_1.MessageLoop.sendMessage(widget, widget_1.Widget.Msg.BeforeDetach);
+        }
+        // Remove the widget's node from the parent.
+        this.parent.node.removeChild(widget.node);
+        // Send an `'after-detach'` message if the parent is attached.
+        if (this.parent.isAttached) {
+            messaging_1.MessageLoop.sendMessage(widget, widget_1.Widget.Msg.AfterDetach);
+        }
+    };
+    return PanelLayout;
+}(layout_1.Layout));
+exports.PanelLayout = PanelLayout;
+
+
+/***/ }),
+/* 25 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var asn1 = exports;
+
+asn1.bignum = __webpack_require__(5);
+
+asn1.define = __webpack_require__(151).define;
+asn1.base = __webpack_require__(26);
+asn1.constants = __webpack_require__(72);
+asn1.decoders = __webpack_require__(155);
+asn1.encoders = __webpack_require__(157);
+
+
+/***/ }),
+/* 26 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var base = exports;
+
+base.Reporter = __webpack_require__(153).Reporter;
+base.DecoderBuffer = __webpack_require__(71).DecoderBuffer;
+base.EncoderBuffer = __webpack_require__(71).EncoderBuffer;
+base.Node = __webpack_require__(152);
+
+
+/***/ }),
+/* 27 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(Buffer) {module.exports = function xor (a, b) {
+  var length = Math.min(a.length, b.length)
+  var buffer = new Buffer(length)
+
+  for (var i = 0; i < length; ++i) {
+    buffer[i] = a[i] ^ b[i]
+  }
+
+  return buffer
+}
+
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3).Buffer))
+
+/***/ }),
+/* 28 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(Buffer) {// Copyright Joyent, Inc. and other Node contributors.
+//
+// Permission is hereby granted, free of charge, to any person obtaining a
+// copy of this software and associated documentation files (the
+// "Software"), to deal in the Software without restriction, including
+// without limitation the rights to use, copy, modify, merge, publish,
+// distribute, sublicense, and/or sell copies of the Software, and to permit
+// persons to whom the Software is furnished to do so, subject to the
+// following conditions:
+//
+// The above copyright notice and this permission notice shall be included
+// in all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
+// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+// USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+// NOTE: These type checking functions intentionally don't use `instanceof`
+// because it is fragile and can be easily faked with `Object.create()`.
+
+function isArray(arg) {
+  if (Array.isArray) {
+    return Array.isArray(arg);
+  }
+  return objectToString(arg) === '[object Array]';
+}
+exports.isArray = isArray;
+
+function isBoolean(arg) {
+  return typeof arg === 'boolean';
+}
+exports.isBoolean = isBoolean;
+
+function isNull(arg) {
+  return arg === null;
+}
+exports.isNull = isNull;
+
+function isNullOrUndefined(arg) {
+  return arg == null;
+}
+exports.isNullOrUndefined = isNullOrUndefined;
+
+function isNumber(arg) {
+  return typeof arg === 'number';
+}
+exports.isNumber = isNumber;
+
+function isString(arg) {
+  return typeof arg === 'string';
+}
+exports.isString = isString;
+
+function isSymbol(arg) {
+  return typeof arg === 'symbol';
+}
+exports.isSymbol = isSymbol;
+
+function isUndefined(arg) {
+  return arg === void 0;
+}
+exports.isUndefined = isUndefined;
+
+function isRegExp(re) {
+  return objectToString(re) === '[object RegExp]';
+}
+exports.isRegExp = isRegExp;
+
+function isObject(arg) {
+  return typeof arg === 'object' && arg !== null;
+}
+exports.isObject = isObject;
+
+function isDate(d) {
+  return objectToString(d) === '[object Date]';
+}
+exports.isDate = isDate;
+
+function isError(e) {
+  return (objectToString(e) === '[object Error]' || e instanceof Error);
+}
+exports.isError = isError;
+
+function isFunction(arg) {
+  return typeof arg === 'function';
+}
+exports.isFunction = isFunction;
+
+function isPrimitive(arg) {
+  return arg === null ||
+         typeof arg === 'boolean' ||
+         typeof arg === 'number' ||
+         typeof arg === 'string' ||
+         typeof arg === 'symbol' ||  // ES6 symbol
+         typeof arg === 'undefined';
+}
+exports.isPrimitive = isPrimitive;
+
+exports.isBuffer = Buffer.isBuffer;
+
+function objectToString(o) {
+  return Object.prototype.toString.call(o);
+}
+
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3).Buffer))
+
+/***/ }),
+/* 29 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var inherits = __webpack_require__(0)
+var MD5 = __webpack_require__(54)
+var RIPEMD160 = __webpack_require__(57)
+var sha = __webpack_require__(58)
+var Base = __webpack_require__(17)
+
+function Hash (hash) {
+  Base.call(this, 'digest')
+
+  this._hash = hash
+}
+
+inherits(Hash, Base)
+
+Hash.prototype._update = function (data) {
+  this._hash.update(data)
+}
+
+Hash.prototype._final = function () {
+  return this._hash.digest()
+}
+
+module.exports = function createHash (alg) {
+  alg = alg.toLowerCase()
+  if (alg === 'md5') return new MD5()
+  if (alg === 'rmd160' || alg === 'ripemd160') return new RIPEMD160()
+
+  return new Hash(sha(alg))
+}
+
+
+/***/ }),
+/* 30 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var utils = __webpack_require__(13);
+var assert = __webpack_require__(11);
+
+function BlockHash() {
+  this.pending = null;
+  this.pendingTotal = 0;
+  this.blockSize = this.constructor.blockSize;
+  this.outSize = this.constructor.outSize;
+  this.hmacStrength = this.constructor.hmacStrength;
+  this.padLength = this.constructor.padLength / 8;
+  this.endian = 'big';
+
+  this._delta8 = this.blockSize / 8;
+  this._delta32 = this.blockSize / 32;
+}
+exports.BlockHash = BlockHash;
+
+BlockHash.prototype.update = function update(msg, enc) {
+  // Convert message to array, pad it, and join into 32bit blocks
+  msg = utils.toArray(msg, enc);
+  if (!this.pending)
+    this.pending = msg;
+  else
+    this.pending = this.pending.concat(msg);
+  this.pendingTotal += msg.length;
+
+  // Enough data, try updating
+  if (this.pending.length >= this._delta8) {
+    msg = this.pending;
+
+    // Process pending data in blocks
+    var r = msg.length % this._delta8;
+    this.pending = msg.slice(msg.length - r, msg.length);
+    if (this.pending.length === 0)
+      this.pending = null;
+
+    msg = utils.join32(msg, 0, msg.length - r, this.endian);
+    for (var i = 0; i < msg.length; i += this._delta32)
+      this._update(msg, i, i + this._delta32);
+  }
+
+  return this;
+};
+
+BlockHash.prototype.digest = function digest(enc) {
+  this.update(this._pad());
+  assert(this.pending === null);
+
+  return this._digest(enc);
+};
+
+BlockHash.prototype._pad = function pad() {
+  var len = this.pendingTotal;
+  var bytes = this._delta8;
+  var k = bytes - ((len + this.padLength) % bytes);
+  var res = new Array(k + this.padLength);
+  res[0] = 0x80;
+  for (var i = 1; i < k; i++)
+    res[i] = 0;
+
+  // Append length
+  len <<= 3;
+  if (this.endian === 'big') {
+    for (var t = 8; t < this.padLength; t++)
+      res[i++] = 0;
+
+    res[i++] = 0;
+    res[i++] = 0;
+    res[i++] = 0;
+    res[i++] = 0;
+    res[i++] = (len >>> 24) & 0xff;
+    res[i++] = (len >>> 16) & 0xff;
+    res[i++] = (len >>> 8) & 0xff;
+    res[i++] = len & 0xff;
+  } else {
+    res[i++] = len & 0xff;
+    res[i++] = (len >>> 8) & 0xff;
+    res[i++] = (len >>> 16) & 0xff;
+    res[i++] = (len >>> 24) & 0xff;
+    res[i++] = 0;
+    res[i++] = 0;
+    res[i++] = 0;
+    res[i++] = 0;
+
+    for (t = 8; t < this.padLength; t++)
+      res[i++] = 0;
+  }
+
+  return res;
+};
+
+
+/***/ }),
+/* 31 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+Object.defineProperty(exports, "__esModule", { value: true });
+/*-----------------------------------------------------------------------------
+| Copyright (c) 2014-2017, PhosphorJS Contributors
+|
+| Distributed under the terms of the BSD 3-Clause License.
+|
+| The full license is in the file LICENSE, distributed with this software.
+|----------------------------------------------------------------------------*/
+__export(__webpack_require__(23));
+__export(__webpack_require__(45));
+__export(__webpack_require__(140));
+__export(__webpack_require__(141));
+__export(__webpack_require__(142));
+__export(__webpack_require__(66));
+__export(__webpack_require__(143));
+__export(__webpack_require__(144));
+__export(__webpack_require__(145));
+__export(__webpack_require__(16));
+__export(__webpack_require__(67));
+__export(__webpack_require__(146));
+__export(__webpack_require__(34));
+__export(__webpack_require__(24));
+__export(__webpack_require__(147));
+__export(__webpack_require__(148));
+__export(__webpack_require__(68));
+__export(__webpack_require__(149));
+__export(__webpack_require__(69));
+__export(__webpack_require__(70));
+__export(__webpack_require__(46));
+__export(__webpack_require__(150));
+__export(__webpack_require__(47));
+__export(__webpack_require__(6));
+
+
+/***/ }),
 /* 32 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+Object.defineProperty(exports, "__esModule", { value: true });
+/*-----------------------------------------------------------------------------
+| Copyright (c) 2014-2017, PhosphorJS Contributors
+|
+| Distributed under the terms of the BSD 3-Clause License.
+|
+| The full license is in the file LICENSE, distributed with this software.
+|----------------------------------------------------------------------------*/
+__export(__webpack_require__(128));
+__export(__webpack_require__(129));
+__export(__webpack_require__(130));
+__export(__webpack_require__(61));
+__export(__webpack_require__(131));
+__export(__webpack_require__(132));
+
+
+/***/ }),
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11579,7 +11622,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 |
 | The full license is in the file LICENSE, distributed with this software.
 |----------------------------------------------------------------------------*/
-var algorithm_1 = __webpack_require__(3);
+var algorithm_1 = __webpack_require__(2);
 /**
  * A virtual node which represents plain text content.
  *
@@ -12134,7 +12177,7 @@ var Private;
 
 
 /***/ }),
-/* 33 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12157,7 +12200,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 |
 | The full license is in the file LICENSE, distributed with this software.
 |----------------------------------------------------------------------------*/
-var panellayout_1 = __webpack_require__(23);
+var panellayout_1 = __webpack_require__(24);
 var widget_1 = __webpack_require__(6);
 /**
  * A simple and convenient panel widget class.
@@ -12236,7 +12279,7 @@ var Private;
 
 
 /***/ }),
-/* 34 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // based on the aes implimentation in triple sec
@@ -12470,7 +12513,7 @@ module.exports.AES = AES
 
 
 /***/ }),
-/* 35 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12478,18 +12521,18 @@ module.exports.AES = AES
 
 var curve = exports;
 
-curve.base = __webpack_require__(198);
-curve.short = __webpack_require__(201);
-curve.mont = __webpack_require__(200);
-curve.edwards = __webpack_require__(199);
+curve.base = __webpack_require__(209);
+curve.short = __webpack_require__(212);
+curve.mont = __webpack_require__(211);
+curve.edwards = __webpack_require__(210);
 
 
 /***/ }),
-/* 36 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Buffer = __webpack_require__(1).Buffer
-var MD5 = __webpack_require__(53)
+var MD5 = __webpack_require__(54)
 
 /* eslint-disable camelcase */
 function EVP_BytesToKey (password, salt, keyBits, ivLen) {
@@ -12536,14 +12579,14 @@ module.exports = EVP_BytesToKey
 
 
 /***/ }),
-/* 37 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(Buffer) {var asn1 = __webpack_require__(223)
-var aesid = __webpack_require__(222)
-var fixProc = __webpack_require__(225)
-var ciphers = __webpack_require__(47)
-var compat = __webpack_require__(88)
+/* WEBPACK VAR INJECTION */(function(Buffer) {var asn1 = __webpack_require__(234)
+var aesid = __webpack_require__(233)
+var fixProc = __webpack_require__(236)
+var ciphers = __webpack_require__(48)
+var compat = __webpack_require__(93)
 module.exports = parseKeys
 
 function parseKeys (buffer) {
@@ -12646,10 +12689,10 @@ function decrypt (data, password) {
   return Buffer.concat(out)
 }
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2).Buffer))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3).Buffer))
 
 /***/ }),
-/* 38 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12701,7 +12744,7 @@ function nextTick(fn, arg1, arg2, arg3) {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(15)))
 
 /***/ }),
-/* 39 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global) {var scope = (typeof global !== "undefined" && global) ||
@@ -12757,7 +12800,7 @@ exports._unrefActive = exports.active = function(item) {
 };
 
 // setimmediate attaches itself to the global object
-__webpack_require__(237);
+__webpack_require__(248);
 // On some exotic environments, it's not clear which object `setimmediate` was
 // able to install onto.  Search each possibility in the same order as the
 // `setimmediate` library.
@@ -12771,7 +12814,7 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(14)))
 
 /***/ }),
-/* 40 */
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12784,12 +12827,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 |
 | The full license is in the file LICENSE, distributed with this software.
 |----------------------------------------------------------------------------*/
-var algorithm_1 = __webpack_require__(3);
-var coreutils_1 = __webpack_require__(30);
-var disposable_1 = __webpack_require__(42);
+var algorithm_1 = __webpack_require__(2);
+var coreutils_1 = __webpack_require__(32);
+var disposable_1 = __webpack_require__(43);
 var domutils_1 = __webpack_require__(7);
-var keyboard_1 = __webpack_require__(43);
-var signaling_1 = __webpack_require__(11);
+var keyboard_1 = __webpack_require__(44);
+var signaling_1 = __webpack_require__(10);
 /**
  * An object which manages a collection of commands.
  *
@@ -13660,49 +13703,6 @@ var Private;
 
 
 /***/ }),
-/* 41 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-function __export(m) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-}
-Object.defineProperty(exports, "__esModule", { value: true });
-/*-----------------------------------------------------------------------------
-| Copyright (c) 2014-2017, PhosphorJS Contributors
-|
-| Distributed under the terms of the BSD 3-Clause License.
-|
-| The full license is in the file LICENSE, distributed with this software.
-|----------------------------------------------------------------------------*/
-__export(__webpack_require__(22));
-__export(__webpack_require__(44));
-__export(__webpack_require__(131));
-__export(__webpack_require__(132));
-__export(__webpack_require__(133));
-__export(__webpack_require__(61));
-__export(__webpack_require__(134));
-__export(__webpack_require__(135));
-__export(__webpack_require__(136));
-__export(__webpack_require__(16));
-__export(__webpack_require__(62));
-__export(__webpack_require__(137));
-__export(__webpack_require__(33));
-__export(__webpack_require__(23));
-__export(__webpack_require__(138));
-__export(__webpack_require__(139));
-__export(__webpack_require__(63));
-__export(__webpack_require__(140));
-__export(__webpack_require__(64));
-__export(__webpack_require__(65));
-__export(__webpack_require__(45));
-__export(__webpack_require__(141));
-__export(__webpack_require__(46));
-__export(__webpack_require__(6));
-
-
-/***/ }),
 /* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -13716,7 +13716,93 @@ Object.defineProperty(exports, "__esModule", { value: true });
 |
 | The full license is in the file LICENSE, distributed with this software.
 |----------------------------------------------------------------------------*/
-var algorithm_1 = __webpack_require__(3);
+var signaling_1 = __webpack_require__(10);
+/**
+ * An object which provides the data for a data grid.
+ *
+ * #### Notes
+ * If the predefined data models are insufficient for a particular use
+ * case, a custom model can be defined which derives from this class.
+ */
+var DataModel = (function () {
+    function DataModel() {
+        this._changed = new signaling_1.Signal(this);
+    }
+    Object.defineProperty(DataModel.prototype, "changed", {
+        /**
+         * A signal emitted when the data model has changed.
+         */
+        get: function () {
+            return this._changed;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    /**
+     * Get the metadata for a column in the data model.
+     *
+     * @param region - The cell region of interest.
+     *
+     * @param column - The index of the column of interest.
+     *
+     * @returns The metadata for the column.
+     *
+     * #### Notes
+     * The returned metadata should be treated as immutable.
+     *
+     * Models which support columnar data may reimplement this method to
+     * return the metadata for a column.
+     *
+     * The metadata can be used by custom cell renderers and cell editors
+     * to customize handling of specific cell data types.
+     *
+     * This method is called often, and so should be efficient.
+     *
+     * The default implementation returns `{}`.
+     */
+    DataModel.prototype.metadata = function (region, column) {
+        return DataModel.emptyMetadata;
+    };
+    /**
+     * Emit the `changed` signal for the data model.
+     *
+     * #### Notes
+     * Subclass should call this method whenever the data model has
+     * changed so that attached data grids can update themselves.
+     */
+    DataModel.prototype.emitChanged = function (args) {
+        this._changed.emit(args);
+    };
+    return DataModel;
+}());
+exports.DataModel = DataModel;
+/**
+ * The namespace for the `DataModel` class statics.
+ */
+(function (DataModel) {
+    /**
+     * A singleton empty metadata object.
+     */
+    DataModel.emptyMetadata = Object.freeze({});
+})(DataModel = exports.DataModel || (exports.DataModel = {}));
+exports.DataModel = DataModel;
+
+
+/***/ }),
+/* 43 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+/*-----------------------------------------------------------------------------
+| Copyright (c) 2014-2017, PhosphorJS Contributors
+|
+| Distributed under the terms of the BSD 3-Clause License.
+|
+| The full license is in the file LICENSE, distributed with this software.
+|----------------------------------------------------------------------------*/
+var algorithm_1 = __webpack_require__(2);
 /**
  * A disposable object which delegates to a callback function.
  */
@@ -13851,7 +13937,7 @@ exports.DisposableSet = DisposableSet;
 
 
 /***/ }),
-/* 43 */
+/* 44 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14096,7 +14182,7 @@ var Private;
 
 
 /***/ }),
-/* 44 */
+/* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14119,13 +14205,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 |
 | The full license is in the file LICENSE, distributed with this software.
 |----------------------------------------------------------------------------*/
-var algorithm_1 = __webpack_require__(3);
+var algorithm_1 = __webpack_require__(2);
 var domutils_1 = __webpack_require__(7);
 var messaging_1 = __webpack_require__(8);
 var properties_1 = __webpack_require__(19);
-var boxengine_1 = __webpack_require__(22);
+var boxengine_1 = __webpack_require__(23);
 var layout_1 = __webpack_require__(16);
-var panellayout_1 = __webpack_require__(23);
+var panellayout_1 = __webpack_require__(24);
 var widget_1 = __webpack_require__(6);
 /**
  * A layout which arranges its widgets in a single row or column.
@@ -14670,7 +14756,7 @@ var Private;
 
 
 /***/ }),
-/* 45 */
+/* 46 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14693,13 +14779,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 |
 | The full license is in the file LICENSE, distributed with this software.
 |----------------------------------------------------------------------------*/
-var algorithm_1 = __webpack_require__(3);
+var algorithm_1 = __webpack_require__(2);
 var domutils_1 = __webpack_require__(7);
-var dragdrop_1 = __webpack_require__(31);
+var dragdrop_1 = __webpack_require__(22);
 var messaging_1 = __webpack_require__(8);
-var signaling_1 = __webpack_require__(11);
-var virtualdom_1 = __webpack_require__(32);
-var title_1 = __webpack_require__(46);
+var signaling_1 = __webpack_require__(10);
+var virtualdom_1 = __webpack_require__(33);
+var title_1 = __webpack_require__(47);
 var widget_1 = __webpack_require__(6);
 /**
  * A widget which displays titles as a single row or column of tabs.
@@ -15905,7 +15991,7 @@ var Private;
 
 
 /***/ }),
-/* 46 */
+/* 47 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15918,7 +16004,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 |
 | The full license is in the file LICENSE, distributed with this software.
 |----------------------------------------------------------------------------*/
-var signaling_1 = __webpack_require__(11);
+var signaling_1 = __webpack_require__(10);
 /**
  * An object which holds data related to an object's title.
  *
@@ -16200,12 +16286,12 @@ exports.Title = Title;
 
 
 /***/ }),
-/* 47 */
+/* 48 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var ciphers = __webpack_require__(152)
-var deciphers = __webpack_require__(151)
-var modes = __webpack_require__(74)
+var ciphers = __webpack_require__(161)
+var deciphers = __webpack_require__(160)
+var modes = __webpack_require__(79)
 
 function getCiphers () {
   return Object.keys(modes)
@@ -16219,21 +16305,21 @@ exports.listCiphers = exports.getCiphers = getCiphers
 
 
 /***/ }),
-/* 48 */
+/* 49 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var modeModules = {
-  ECB: __webpack_require__(158),
-  CBC: __webpack_require__(154),
-  CFB: __webpack_require__(155),
-  CFB8: __webpack_require__(157),
-  CFB1: __webpack_require__(156),
-  OFB: __webpack_require__(159),
-  CTR: __webpack_require__(73),
-  GCM: __webpack_require__(73)
+  ECB: __webpack_require__(167),
+  CBC: __webpack_require__(163),
+  CFB: __webpack_require__(164),
+  CFB8: __webpack_require__(166),
+  CFB1: __webpack_require__(165),
+  OFB: __webpack_require__(168),
+  CTR: __webpack_require__(78),
+  GCM: __webpack_require__(78)
 }
 
-var modes = __webpack_require__(74)
+var modes = __webpack_require__(79)
 
 for (var key in modes) {
   modes[key].module = modeModules[modes[key].mode]
@@ -16243,10 +16329,10 @@ module.exports = modes
 
 
 /***/ }),
-/* 49 */
+/* 50 */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(Buffer) {var bn = __webpack_require__(4);
+/* WEBPACK VAR INJECTION */(function(Buffer) {var bn = __webpack_require__(5);
 var randomBytes = __webpack_require__(20);
 module.exports = crt;
 function blind(priv) {
@@ -16287,24 +16373,24 @@ function getr(priv) {
   return r;
 }
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2).Buffer))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3).Buffer))
 
 /***/ }),
-/* 50 */
+/* 51 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-exports.utils = __webpack_require__(194);
-exports.Cipher = __webpack_require__(191);
-exports.DES = __webpack_require__(192);
-exports.CBC = __webpack_require__(190);
-exports.EDE = __webpack_require__(193);
+exports.utils = __webpack_require__(205);
+exports.Cipher = __webpack_require__(202);
+exports.DES = __webpack_require__(203);
+exports.CBC = __webpack_require__(201);
+exports.EDE = __webpack_require__(204);
 
 
 /***/ }),
-/* 51 */
+/* 52 */
 /***/ (function(module, exports) {
 
 // Copyright Joyent, Inc. and other Node contributors.
@@ -16612,16 +16698,16 @@ function isUndefined(arg) {
 
 
 /***/ }),
-/* 52 */
+/* 53 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var hash = exports;
 
 hash.utils = __webpack_require__(13);
-hash.common = __webpack_require__(29);
-hash.sha = __webpack_require__(215);
-hash.ripemd = __webpack_require__(214);
-hash.hmac = __webpack_require__(213);
+hash.common = __webpack_require__(30);
+hash.sha = __webpack_require__(226);
+hash.ripemd = __webpack_require__(225);
+hash.hmac = __webpack_require__(224);
 
 // Proxy hash functions to the main object
 hash.sha1 = hash.sha.sha1;
@@ -16633,13 +16719,13 @@ hash.ripemd160 = hash.ripemd.ripemd160;
 
 
 /***/ }),
-/* 53 */
+/* 54 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(Buffer) {
 var inherits = __webpack_require__(0)
-var HashBase = __webpack_require__(81)
+var HashBase = __webpack_require__(86)
 
 var ARRAY16 = new Array(16)
 
@@ -16783,10 +16869,10 @@ function fnI (a, b, c, d, m, k, s) {
 
 module.exports = MD5
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2).Buffer))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3).Buffer))
 
 /***/ }),
-/* 54 */
+/* 55 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16819,7 +16905,7 @@ module.exports = MD5
 
 /*<replacement>*/
 
-var pna = __webpack_require__(38);
+var pna = __webpack_require__(39);
 /*</replacement>*/
 
 module.exports = Writable;
@@ -16856,18 +16942,18 @@ var Duplex;
 Writable.WritableState = WritableState;
 
 /*<replacement>*/
-var util = __webpack_require__(27);
+var util = __webpack_require__(28);
 util.inherits = __webpack_require__(0);
 /*</replacement>*/
 
 /*<replacement>*/
 var internalUtil = {
-  deprecate: __webpack_require__(242)
+  deprecate: __webpack_require__(253)
 };
 /*</replacement>*/
 
 /*<replacement>*/
-var Stream = __webpack_require__(98);
+var Stream = __webpack_require__(103);
 /*</replacement>*/
 
 /*<replacement>*/
@@ -16883,7 +16969,7 @@ function _isUint8Array(obj) {
 
 /*</replacement>*/
 
-var destroyImpl = __webpack_require__(97);
+var destroyImpl = __webpack_require__(102);
 
 util.inherits(Writable, Stream);
 
@@ -17477,30 +17563,30 @@ Writable.prototype._destroy = function (err, cb) {
   this.end();
   cb(err);
 };
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(15), __webpack_require__(39).setImmediate, __webpack_require__(14)))
-
-/***/ }),
-/* 55 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(95);
-exports.Stream = exports;
-exports.Readable = exports;
-exports.Writable = __webpack_require__(54);
-exports.Duplex = __webpack_require__(18);
-exports.Transform = __webpack_require__(96);
-exports.PassThrough = __webpack_require__(232);
-
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(15), __webpack_require__(40).setImmediate, __webpack_require__(14)))
 
 /***/ }),
 /* 56 */
 /***/ (function(module, exports, __webpack_require__) {
 
+exports = module.exports = __webpack_require__(100);
+exports.Stream = exports;
+exports.Readable = exports;
+exports.Writable = __webpack_require__(55);
+exports.Duplex = __webpack_require__(18);
+exports.Transform = __webpack_require__(101);
+exports.PassThrough = __webpack_require__(243);
+
+
+/***/ }),
+/* 57 */
+/***/ (function(module, exports, __webpack_require__) {
+
 "use strict";
 
-var Buffer = __webpack_require__(2).Buffer
+var Buffer = __webpack_require__(3).Buffer
 var inherits = __webpack_require__(0)
-var HashBase = __webpack_require__(81)
+var HashBase = __webpack_require__(86)
 
 var ARRAY16 = new Array(16)
 
@@ -17663,7 +17749,7 @@ module.exports = RIPEMD160
 
 
 /***/ }),
-/* 57 */
+/* 58 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var exports = module.exports = function SHA (algorithm) {
@@ -17675,16 +17761,16 @@ var exports = module.exports = function SHA (algorithm) {
   return new Algorithm()
 }
 
-exports.sha = __webpack_require__(238)
-exports.sha1 = __webpack_require__(239)
-exports.sha224 = __webpack_require__(240)
-exports.sha256 = __webpack_require__(99)
-exports.sha384 = __webpack_require__(241)
-exports.sha512 = __webpack_require__(100)
+exports.sha = __webpack_require__(249)
+exports.sha1 = __webpack_require__(250)
+exports.sha224 = __webpack_require__(251)
+exports.sha256 = __webpack_require__(104)
+exports.sha384 = __webpack_require__(252)
+exports.sha512 = __webpack_require__(105)
 
 
 /***/ }),
-/* 58 */
+/* 59 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // Copyright Joyent, Inc. and other Node contributors.
@@ -17710,15 +17796,15 @@ exports.sha512 = __webpack_require__(100)
 
 module.exports = Stream;
 
-var EE = __webpack_require__(51).EventEmitter;
+var EE = __webpack_require__(52).EventEmitter;
 var inherits = __webpack_require__(0);
 
 inherits(Stream, EE);
-Stream.Readable = __webpack_require__(55);
-Stream.Writable = __webpack_require__(236);
-Stream.Duplex = __webpack_require__(231);
-Stream.Transform = __webpack_require__(235);
-Stream.PassThrough = __webpack_require__(234);
+Stream.Readable = __webpack_require__(56);
+Stream.Writable = __webpack_require__(247);
+Stream.Duplex = __webpack_require__(242);
+Stream.Transform = __webpack_require__(246);
+Stream.PassThrough = __webpack_require__(245);
 
 // Backwards-compat with node 0.4.x
 Stream.Stream = Stream;
@@ -17817,7 +17903,7 @@ Stream.prototype.pipe = function(dest, options) {
 
 
 /***/ }),
-/* 59 */
+/* 60 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18119,7 +18205,7 @@ function simpleEnd(buf) {
 }
 
 /***/ }),
-/* 60 */
+/* 61 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18157,7 +18243,7 @@ var Random;
     Random.getRandomValues = (function () {
         // Look up the crypto module if available.
         var crypto = ((typeof window !== 'undefined' && (window.crypto || window.msCrypto)) ||
-            ("function" !== 'undefined' && __webpack_require__(169)) || null);
+            ("function" !== 'undefined' && __webpack_require__(178)) || null);
         // Modern browsers and IE 11
         if (crypto && typeof crypto.getRandomValues === 'function') {
             return function getRandomValues(buffer) {
@@ -18195,7 +18281,888 @@ var Random;
 
 
 /***/ }),
-/* 61 */
+/* 62 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+/**
+ * An object which renders the cells of a data grid.
+ *
+ * #### Notes
+ * If the predefined cell renderers are insufficient for a particular
+ * use case, a custom cell renderer can be defined which derives from
+ * this class.
+ *
+ * The data grid renders cells in column-major order, by region. The
+ * region order is: body, row header, column header, corner header.
+ */
+var CellRenderer = (function () {
+    function CellRenderer() {
+    }
+    /**
+     * Prepare the graphics context for drawing a column of cells.
+     *
+     * @param gc - The graphics context to prepare.
+     *
+     * @param config - The configuration data for the column.
+     *
+     * #### Notes
+     * This method is called just before the grid renders the cells in
+     * a column. It allows the renderer an opportunity to set defaults
+     * on the `gc` or pre-compute column render state. This can reduce
+     * the need for costly `gc` state changes when painting each cell.
+     *
+     * The renderer **must not** draw to the `gc` in this method.
+     *
+     * The default implementation is a no-op.
+     */
+    CellRenderer.prototype.prepare = function (gc, config) { };
+    return CellRenderer;
+}());
+exports.CellRenderer = CellRenderer;
+/**
+ * The namespace for the `CellRenderer` class statics.
+ */
+(function (CellRenderer) {
+    /**
+     * Resolve a config option for a cell renderer.
+     *
+     * @param option - The config option to resolve.
+     *
+     * @param config - The cell config object.
+     *
+     * @returns The resolved value for the option.
+     */
+    function resolveOption(option, config) {
+        return typeof option === 'function' ? option(config) : option;
+    }
+    CellRenderer.resolveOption = resolveOption;
+})(CellRenderer = exports.CellRenderer || (exports.CellRenderer = {}));
+exports.CellRenderer = CellRenderer;
+
+
+/***/ }),
+/* 63 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+/**
+ * A thin caching wrapper around a 2D canvas rendering context.
+ *
+ * #### Notes
+ * This class is mostly a transparent wrapper around a canvas rendering
+ * context which improves performance when writing context state.
+ *
+ * For best performance, avoid reading state from the `gc`. Writes are
+ * cached based on the previously written value.
+ *
+ * Unless otherwise specified, the API and semantics of this class are
+ * identical to the builtin 2D canvas rendering context:
+ * https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D
+ *
+ * The wrapped canvas context should not be manipulated externally
+ * until the wrapping `GraphicsContext` object is disposed.
+ */
+var GraphicsContext = (function () {
+    /**
+     * Create a new graphics context object.
+     *
+     * @param context - The 2D canvas rendering context to wrap.
+     */
+    function GraphicsContext(context) {
+        this._disposed = false;
+        this._context = context;
+        this._state = Private.State.create(context);
+    }
+    GraphicsContext.prototype.dispose = function () {
+        // Bail if the gc is already disposed.
+        if (this._disposed) {
+            return;
+        }
+        // Mark the gc as disposed.
+        this._disposed = true;
+        // Pop any unrestored saves.
+        while (this._state.next) {
+            this._state = this._state.next;
+            this._context.restore();
+        }
+    };
+    Object.defineProperty(GraphicsContext.prototype, "isDisposed", {
+        get: function () {
+            return !this._disposed;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(GraphicsContext.prototype, "fillStyle", {
+        get: function () {
+            return this._context.fillStyle;
+        },
+        set: function (value) {
+            if (this._state.fillStyle !== value) {
+                this._state.fillStyle = value;
+                this._context.fillStyle = value;
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(GraphicsContext.prototype, "strokeStyle", {
+        get: function () {
+            return this._context.strokeStyle;
+        },
+        set: function (value) {
+            if (this._state.strokeStyle !== value) {
+                this._state.strokeStyle = value;
+                this._context.strokeStyle = value;
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(GraphicsContext.prototype, "font", {
+        get: function () {
+            return this._context.font;
+        },
+        set: function (value) {
+            if (this._state.font !== value) {
+                this._state.font = value;
+                this._context.font = value;
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(GraphicsContext.prototype, "textAlign", {
+        get: function () {
+            return this._context.textAlign;
+        },
+        set: function (value) {
+            if (this._state.textAlign !== value) {
+                this._state.textAlign = value;
+                this._context.textAlign = value;
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(GraphicsContext.prototype, "textBaseline", {
+        get: function () {
+            return this._context.textBaseline;
+        },
+        set: function (value) {
+            if (this._state.textBaseline !== value) {
+                this._state.textBaseline = value;
+                this._context.textBaseline = value;
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(GraphicsContext.prototype, "lineCap", {
+        get: function () {
+            return this._context.lineCap;
+        },
+        set: function (value) {
+            if (this._state.lineCap !== value) {
+                this._state.lineCap = value;
+                this._context.lineCap = value;
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(GraphicsContext.prototype, "lineDashOffset", {
+        get: function () {
+            return this._context.lineDashOffset;
+        },
+        set: function (value) {
+            if (this._state.lineDashOffset !== value) {
+                this._state.lineDashOffset = value;
+                this._context.lineDashOffset = value;
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(GraphicsContext.prototype, "lineJoin", {
+        get: function () {
+            return this._context.lineJoin;
+        },
+        set: function (value) {
+            if (this._state.lineJoin !== value) {
+                this._state.lineJoin = value;
+                this._context.lineJoin = value;
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(GraphicsContext.prototype, "lineWidth", {
+        get: function () {
+            return this._context.lineWidth;
+        },
+        set: function (value) {
+            if (this._state.lineWidth !== value) {
+                this._state.lineWidth = value;
+                this._context.lineWidth = value;
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(GraphicsContext.prototype, "miterLimit", {
+        get: function () {
+            return this._context.miterLimit;
+        },
+        set: function (value) {
+            if (this._state.miterLimit !== value) {
+                this._state.miterLimit = value;
+                this._context.miterLimit = value;
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(GraphicsContext.prototype, "shadowBlur", {
+        get: function () {
+            return this._context.shadowBlur;
+        },
+        set: function (value) {
+            if (this._state.shadowBlur !== value) {
+                this._state.shadowBlur = value;
+                this._context.shadowBlur = value;
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(GraphicsContext.prototype, "shadowColor", {
+        get: function () {
+            return this._context.shadowColor;
+        },
+        set: function (value) {
+            if (this._state.shadowColor !== value) {
+                this._state.shadowColor = value;
+                this._context.shadowColor = value;
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(GraphicsContext.prototype, "shadowOffsetX", {
+        get: function () {
+            return this._context.shadowOffsetX;
+        },
+        set: function (value) {
+            if (this._state.shadowOffsetX !== value) {
+                this._state.shadowOffsetX = value;
+                this._context.shadowOffsetX = value;
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(GraphicsContext.prototype, "shadowOffsetY", {
+        get: function () {
+            return this._context.shadowOffsetY;
+        },
+        set: function (value) {
+            if (this._state.shadowOffsetY !== value) {
+                this._state.shadowOffsetY = value;
+                this._context.shadowOffsetY = value;
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(GraphicsContext.prototype, "imageSmoothingEnabled", {
+        get: function () {
+            return this._context.imageSmoothingEnabled;
+        },
+        set: function (value) {
+            if (this._state.imageSmoothingEnabled !== value) {
+                this._state.imageSmoothingEnabled = value;
+                this._context.imageSmoothingEnabled = value;
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(GraphicsContext.prototype, "globalAlpha", {
+        get: function () {
+            return this._context.globalAlpha;
+        },
+        set: function (value) {
+            if (this._state.globalAlpha !== value) {
+                this._state.globalAlpha = value;
+                this._context.globalAlpha = value;
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(GraphicsContext.prototype, "globalCompositeOperation", {
+        get: function () {
+            return this._context.globalCompositeOperation;
+        },
+        set: function (value) {
+            if (this._state.globalCompositeOperation !== value) {
+                this._state.globalCompositeOperation = value;
+                this._context.globalCompositeOperation = value;
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    GraphicsContext.prototype.getLineDash = function () {
+        return this._context.getLineDash();
+    };
+    GraphicsContext.prototype.setLineDash = function (segments) {
+        this._context.setLineDash(segments);
+    };
+    GraphicsContext.prototype.rotate = function (angle) {
+        this._context.rotate(angle);
+    };
+    GraphicsContext.prototype.scale = function (x, y) {
+        this._context.scale(x, y);
+    };
+    GraphicsContext.prototype.transform = function (m11, m12, m21, m22, dx, dy) {
+        this._context.transform(m11, m12, m21, m22, dx, dy);
+    };
+    GraphicsContext.prototype.translate = function (x, y) {
+        this._context.translate(x, y);
+    };
+    GraphicsContext.prototype.setTransform = function (m11, m12, m21, m22, dx, dy) {
+        this._context.setTransform(m11, m12, m21, m22, dx, dy);
+    };
+    GraphicsContext.prototype.save = function () {
+        // Clone an push the current state to the stack.
+        this._state = Private.State.push(this._state);
+        // Save the wrapped context state.
+        this._context.save();
+    };
+    GraphicsContext.prototype.restore = function () {
+        // Bail if there is no state to restore.
+        if (!this._state.next) {
+            return;
+        }
+        // Pop the saved state from the stack.
+        this._state = Private.State.pop(this._state);
+        // Restore the wrapped context state.
+        this._context.restore();
+    };
+    GraphicsContext.prototype.beginPath = function () {
+        return this._context.beginPath();
+    };
+    GraphicsContext.prototype.closePath = function () {
+        this._context.closePath();
+    };
+    GraphicsContext.prototype.isPointInPath = function (x, y, fillRule) {
+        var result;
+        if (arguments.length === 2) {
+            result = this._context.isPointInPath(x, y);
+        }
+        else {
+            result = this._context.isPointInPath(x, y, fillRule);
+        }
+        return result;
+    };
+    GraphicsContext.prototype.arc = function (x, y, radius, startAngle, endAngle, anticlockwise) {
+        if (arguments.length === 5) {
+            this._context.arc(x, y, radius, startAngle, endAngle);
+        }
+        else {
+            this._context.arc(x, y, radius, startAngle, endAngle, anticlockwise);
+        }
+    };
+    GraphicsContext.prototype.arcTo = function (x1, y1, x2, y2, radius) {
+        this._context.arcTo(x1, y1, x2, y2, radius);
+    };
+    GraphicsContext.prototype.bezierCurveTo = function (cp1x, cp1y, cp2x, cp2y, x, y) {
+        this._context.bezierCurveTo(cp1x, cp1y, cp2x, cp2y, x, y);
+    };
+    GraphicsContext.prototype.ellipse = function (x, y, radiusX, radiusY, rotation, startAngle, endAngle, anticlockwise) {
+        if (arguments.length === 7) {
+            this._context.ellipse(x, y, radiusX, radiusY, rotation, startAngle, endAngle);
+        }
+        else {
+            this._context.ellipse(x, y, radiusX, radiusY, rotation, startAngle, endAngle, anticlockwise);
+        }
+    };
+    GraphicsContext.prototype.lineTo = function (x, y) {
+        this._context.lineTo(x, y);
+    };
+    GraphicsContext.prototype.moveTo = function (x, y) {
+        this._context.moveTo(x, y);
+    };
+    GraphicsContext.prototype.quadraticCurveTo = function (cpx, cpy, x, y) {
+        this._context.quadraticCurveTo(cpx, cpy, x, y);
+    };
+    GraphicsContext.prototype.rect = function (x, y, w, h) {
+        this._context.rect(x, y, w, h);
+    };
+    GraphicsContext.prototype.clip = function (fillRule) {
+        if (arguments.length === 0) {
+            this._context.clip();
+        }
+        else {
+            this._context.clip(fillRule);
+        }
+    };
+    GraphicsContext.prototype.fill = function (fillRule) {
+        if (arguments.length === 0) {
+            this._context.fill();
+        }
+        else {
+            this._context.fill(fillRule);
+        }
+    };
+    GraphicsContext.prototype.stroke = function () {
+        this._context.stroke();
+    };
+    GraphicsContext.prototype.clearRect = function (x, y, w, h) {
+        return this._context.clearRect(x, y, w, h);
+    };
+    GraphicsContext.prototype.fillRect = function (x, y, w, h) {
+        this._context.fillRect(x, y, w, h);
+    };
+    GraphicsContext.prototype.fillText = function (text, x, y, maxWidth) {
+        if (arguments.length === 3) {
+            this._context.fillText(text, x, y);
+        }
+        else {
+            this._context.fillText(text, x, y, maxWidth);
+        }
+    };
+    GraphicsContext.prototype.strokeRect = function (x, y, w, h) {
+        this._context.strokeRect(x, y, w, h);
+    };
+    GraphicsContext.prototype.strokeText = function (text, x, y, maxWidth) {
+        if (arguments.length === 3) {
+            this._context.strokeText(text, x, y);
+        }
+        else {
+            this._context.strokeText(text, x, y, maxWidth);
+        }
+    };
+    GraphicsContext.prototype.measureText = function (text) {
+        return this._context.measureText(text);
+    };
+    GraphicsContext.prototype.createLinearGradient = function (x0, y0, x1, y1) {
+        return this._context.createLinearGradient(x0, y0, x1, y1);
+    };
+    GraphicsContext.prototype.createRadialGradient = function (x0, y0, r0, x1, y1, r1) {
+        return this._context.createRadialGradient(x0, y0, r0, x1, y1, r1);
+    };
+    GraphicsContext.prototype.createPattern = function (image, repetition) {
+        return this._context.createPattern(image, repetition);
+    };
+    GraphicsContext.prototype.createImageData = function () {
+        return this._context.createImageData.apply(this._context, arguments);
+    };
+    GraphicsContext.prototype.getImageData = function (sx, sy, sw, sh) {
+        return this._context.getImageData(sx, sy, sw, sh);
+    };
+    GraphicsContext.prototype.putImageData = function () {
+        this._context.putImageData.apply(this._context, arguments);
+    };
+    GraphicsContext.prototype.drawImage = function () {
+        this._context.drawImage.apply(this._context, arguments);
+    };
+    GraphicsContext.prototype.drawFocusIfNeeded = function (element) {
+        this._context.drawFocusIfNeeded(element);
+    };
+    return GraphicsContext;
+}());
+exports.GraphicsContext = GraphicsContext;
+/**
+ * The namespace for the module implementation details.
+ */
+var Private;
+(function (Private) {
+    /**
+     * The index of next valid pool object.
+     */
+    var pi = -1;
+    /**
+     * A state object allocation pool.
+     */
+    var pool = [];
+    /**
+     * An object which holds the state for a gc.
+     */
+    var State = (function () {
+        function State() {
+        }
+        /**
+         * Create a gc state object from a 2D canvas context.
+         */
+        State.create = function (context) {
+            var state = pi < 0 ? new State() : pool[pi--];
+            state.next = null;
+            state.fillStyle = context.fillStyle;
+            state.font = context.font;
+            state.globalAlpha = context.globalAlpha;
+            state.globalCompositeOperation = context.globalCompositeOperation;
+            state.imageSmoothingEnabled = context.imageSmoothingEnabled;
+            state.lineCap = context.lineCap;
+            state.lineDashOffset = context.lineDashOffset;
+            state.lineJoin = context.lineJoin;
+            state.lineWidth = context.lineWidth;
+            state.miterLimit = context.miterLimit;
+            state.shadowBlur = context.shadowBlur;
+            state.shadowColor = context.shadowColor;
+            state.shadowOffsetX = context.shadowOffsetX;
+            state.shadowOffsetY = context.shadowOffsetY;
+            state.strokeStyle = context.strokeStyle;
+            state.textAlign = context.textAlign;
+            state.textBaseline = context.textBaseline;
+            return state;
+        };
+        /**
+         * Clone an existing gc state object and add it to the state stack.
+         */
+        State.push = function (other) {
+            var state = pi < 0 ? new State() : pool[pi--];
+            state.next = other;
+            state.fillStyle = other.fillStyle;
+            state.font = other.font;
+            state.globalAlpha = other.globalAlpha;
+            state.globalCompositeOperation = other.globalCompositeOperation;
+            state.imageSmoothingEnabled = other.imageSmoothingEnabled;
+            state.lineCap = other.lineCap;
+            state.lineDashOffset = other.lineDashOffset;
+            state.lineJoin = other.lineJoin;
+            state.lineWidth = other.lineWidth;
+            state.miterLimit = other.miterLimit;
+            state.shadowBlur = other.shadowBlur;
+            state.shadowColor = other.shadowColor;
+            state.shadowOffsetX = other.shadowOffsetX;
+            state.shadowOffsetY = other.shadowOffsetY;
+            state.strokeStyle = other.strokeStyle;
+            state.textAlign = other.textAlign;
+            state.textBaseline = other.textBaseline;
+            return state;
+        };
+        /**
+         * Pop the next state object and return the current to the pool
+         */
+        State.pop = function (state) {
+            state.fillStyle = '';
+            state.strokeStyle = '';
+            pool[++pi] = state;
+            return state.next;
+        };
+        return State;
+    }());
+    Private.State = State;
+})(Private || (Private = {}));
+
+
+/***/ }),
+/* 64 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+/*-----------------------------------------------------------------------------
+| Copyright (c) 2014-2017, PhosphorJS Contributors
+|
+| Distributed under the terms of the BSD 3-Clause License.
+|
+| The full license is in the file LICENSE, distributed with this software.
+|----------------------------------------------------------------------------*/
+var algorithm_1 = __webpack_require__(2);
+var signaling_1 = __webpack_require__(10);
+/**
+ * An object which manages a mapping of cell renderers.
+ *
+ * #### Notes
+ * This class is used to configure cell renderers for a data grid.
+ */
+var RendererMap = (function () {
+    /**
+     * Construct a new renderer map.
+     *
+     * @param options - The options for initializing the map.
+     */
+    function RendererMap(options) {
+        if (options === void 0) { options = {}; }
+        this._entries = [];
+        this._changed = new signaling_1.Signal(this);
+        this._renderers = Object.create(null);
+        this._ranks = Private.createRankMap(options.priority || []);
+    }
+    Object.defineProperty(RendererMap.prototype, "changed", {
+        /**
+         * A signal emitted when the map contents are changed.
+         */
+        get: function () {
+            return this._changed;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    /**
+     * Get the cell renderer to use for the given region and metadata.
+     *
+     * @param region - The cell region of interest.
+     *
+     * @param metadata - The data model metadata for the region.
+     *
+     * @returns The best matching cell renderer, or `undefined`.
+     *
+     * #### Notes
+     * Non-string metadata values are ignored.
+     */
+    RendererMap.prototype.get = function (region, metadata) {
+        // Iterate through the map entries to find the best cell renderer.
+        for (var i = 0, n = this._entries.length; i < n; ++i) {
+            // Create the key for the current entry.
+            var key = this._entries[i].createKey(metadata);
+            // Skip the entry if no key could be generated.
+            if (key === undefined) {
+                continue;
+            }
+            // Prepend the region to the key.
+            key = region + "|" + key;
+            // Look up the renderer for the generated key.
+            var renderer = this._renderers[key];
+            // If the renderer exists, it is the best match.
+            if (renderer !== undefined) {
+                return renderer;
+            }
+        }
+        // Return `undefined` to indicate no match.
+        return undefined;
+    };
+    /**
+     * Set the cell renderer for a particular region and metadata.
+     *
+     * @param region - The cell region of interest.
+     *
+     * @param metadata - The metadata to match against the model.
+     *
+     * @param renderer - The cell renderer to set in the map.
+     *
+     * #### Notes
+     * The keys and values in the supplied metadata are matched against
+     * the metadata supplied by the data model. The given metadata must
+     * be an exact matching subset of the model metadata in order for
+     * there to be a match.
+     *
+     * Matches are ranked according the number of matched values, with
+     * ties broken based on the priorty order given to the constructor.
+     *
+     * Non-string metadata values are ignored.
+     */
+    RendererMap.prototype.set = function (region, metadata, renderer) {
+        var _this = this;
+        // Create a new map entry for the metadata.
+        var entry = Private.MapEntry.create(metadata, this._ranks);
+        // Find the insert location for the entry.
+        var i = algorithm_1.ArrayExt.lowerBound(this._entries, entry, function (a, b) {
+            return Private.MapEntry.cmp(a, b, _this._ranks);
+        });
+        // Add the entry to the array if needed.
+        if (i === this._entries.length) {
+            this._entries.push(entry);
+        }
+        else if (!Private.MapEntry.equal(entry, this._entries[i])) {
+            algorithm_1.ArrayExt.insert(this._entries, i, entry);
+        }
+        // Create the key for the entry.
+        var key = entry.createKey(metadata);
+        // Prepend the region to the key.
+        key = region + "|" + key;
+        // Add the new renderer to the map.
+        this._renderers[key] = renderer;
+        // Emit the changed signal.
+        this._changed.emit(undefined);
+    };
+    /**
+     * Remove all custom cell renderers from the map.
+     */
+    RendererMap.prototype.clear = function () {
+        this._entries = [];
+        this._renderers = Object.create(null);
+        this._changed.emit(undefined);
+    };
+    return RendererMap;
+}());
+exports.RendererMap = RendererMap;
+/**
+ * The namespace for the module implementation details.
+ */
+var Private;
+(function (Private) {
+    /**
+     * Create a rank map from a priority key array.
+     */
+    function createRankMap(priority) {
+        var ranks = Object.create(null);
+        for (var i = 0, n = priority.length; i < n; ++i) {
+            ranks[priority[i]] = i;
+        }
+        return ranks;
+    }
+    Private.createRankMap = createRankMap;
+    /**
+     * An entry in a cell renderer map.
+     */
+    var MapEntry = (function () {
+        /**
+         * Construct a new map entry from ordered key names.
+         */
+        function MapEntry(keys) {
+            this._keys = keys;
+        }
+        /**
+         * Create a new map entry.
+         *
+         * @param metadata - The metadata which will be used as the key
+         *  for matching against the model metadata.
+         *
+         * @param ranks - The priority ranks for the metadata keys.
+         *
+         * @returns A new map entry for the given metadata key.
+         */
+        MapEntry.create = function (metadata, ranks) {
+            // Extra the string-valued keys from the metadata.
+            var keys = [];
+            for (var key in metadata) {
+                if (typeof metadata[key] === 'string') {
+                    keys.push(key);
+                }
+            }
+            // Sort the keys based on rank and locale.
+            keys.sort(function (k1, k2) {
+                var r1 = ranks[k1];
+                var r2 = ranks[k2];
+                if (r1 !== undefined && r2 !== undefined) {
+                    return r1 - r2;
+                }
+                if (r2 === undefined) {
+                    return -1;
+                }
+                if (r1 === undefined) {
+                    return 1;
+                }
+                return k1.localeCompare(k2);
+            });
+            // Create an return a new map entry.
+            return new MapEntry(keys);
+        };
+        /**
+         * Compare two map entries for relative ordering.
+         *
+         * @param a - The LHS map entry.
+         *
+         * @param b - The RHS map entry.
+         *
+         * @param ranks - The priority ranks for the metadata keys.
+         *
+         * @returns `< 0` if `a < b`, `> 0` if `a > b`, or `0` if `a = b`.
+         */
+        MapEntry.cmp = function (a, b, ranks) {
+            // Compare first based on key length.
+            var n1 = a._keys.length;
+            var n2 = b._keys.length;
+            if (n1 !== n2) {
+                return n2 - n1;
+            }
+            // Compare next based on key content.
+            for (var i = 0; i < n1; ++i) {
+                // Look up the current keys.
+                var k1 = a._keys[i];
+                var k2 = b._keys[i];
+                // Skip if the keys are equal.
+                if (k1 === k2) {
+                    continue;
+                }
+                // Look up the current ranks.
+                var r1 = ranks[k1];
+                var r2 = ranks[k2];
+                // Use rank order if possible.
+                if (r1 !== undefined && r2 !== undefined) {
+                    return r1 - r2;
+                }
+                // Handle the case of one key having rank.
+                if (r2 === undefined) {
+                    return -1;
+                }
+                if (r1 === undefined) {
+                    return 1;
+                }
+                // Fall back to locale order.
+                return k1.localeCompare(k2);
+            }
+            // Otherwise, the map entries are equivalent.
+            return 0;
+        };
+        /**
+         * Compare two map entries for equality.
+         *
+         * @param a - The LHS map entry.
+         *
+         * @param b - The RHS map entry.
+         *
+         * @returns Whether the two entries are functionally equivalent.
+         */
+        MapEntry.equal = function (a, b) {
+            // Bail early if the keys have different length.
+            if (a._keys.length !== b._keys.length) {
+                return false;
+            }
+            // Test each key for equality.
+            for (var i = 0, n = a._keys.length; i < n; ++i) {
+                if (a._keys[i] !== b._keys[i]) {
+                    return false;
+                }
+            }
+            // Otherwise, the entries are equivalent.
+            return true;
+        };
+        /**
+         * Create the renderer map key for a metadata object.
+         *
+         * @param metadata - The metadata supplied by the data model.
+         *
+         * @returns The key for the metadata object, or `undefined` if the
+         *   metadata is not a valid candidate match for the entry.
+         */
+        MapEntry.prototype.createKey = function (metadata) {
+            // Set up the result variable.
+            var result = '';
+            // Loop over each key and create the value pairs.
+            for (var i = 0, n = this._keys.length; i < n; ++i) {
+                // Look up metadata value for the key.
+                var key = this._keys[i];
+                var value = metadata[key];
+                // Bail if the metadata value is not a string.
+                if (typeof value !== 'string') {
+                    return undefined;
+                }
+                // Add the key/value pair to the result.
+                result += "{" + key + ": " + value + "}";
+            }
+            // Return the final key.
+            return result;
+        };
+        return MapEntry;
+    }());
+    Private.MapEntry = MapEntry;
+})(Private || (Private = {}));
+
+
+/***/ }),
+/* 65 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18218,10 +19185,556 @@ Object.defineProperty(exports, "__esModule", { value: true });
 |
 | The full license is in the file LICENSE, distributed with this software.
 |----------------------------------------------------------------------------*/
-var algorithm_1 = __webpack_require__(3);
+var cellrenderer_1 = __webpack_require__(62);
+/**
+ * A cell renderer which renders data values as text.
+ */
+var TextRenderer = (function (_super) {
+    __extends(TextRenderer, _super);
+    /**
+     * Construct a new text renderer.
+     *
+     * @param options - The options for initializing the renderer.
+     */
+    function TextRenderer(options) {
+        if (options === void 0) { options = {}; }
+        var _this = _super.call(this) || this;
+        _this.font = options.font || '12px sans-serif';
+        _this.textColor = options.textColor || '#000000';
+        _this.backgroundColor = options.backgroundColor || '';
+        _this.verticalAlignment = options.verticalAlignment || 'center';
+        _this.horizontalAlignment = options.horizontalAlignment || 'left';
+        _this.format = options.format || TextRenderer.formatGeneric();
+        return _this;
+    }
+    /**
+     * Paint the content for a cell.
+     *
+     * @param gc - The graphics context to use for drawing.
+     *
+     * @param config - The configuration data for the cell.
+     */
+    TextRenderer.prototype.paint = function (gc, config) {
+        this.drawBackground(gc, config);
+        this.drawText(gc, config);
+    };
+    /**
+     * Prepare the graphics context for drawing a column of cells.
+     *
+     * @param gc - The graphics context to prepare.
+     *
+     * @param row - The index of the first row to be rendered.
+     *
+     * @param col - The index of the column to be rendered.
+     *
+     * @param field - The field descriptor for the column, or `null`.
+     */
+    TextRenderer.prototype.prepare = function (gc, config) {
+        // Look up the default state from the renderer.
+        var _a = this, font = _a.font, textColor = _a.textColor, backgroundColor = _a.backgroundColor, horizontalAlignment = _a.horizontalAlignment;
+        // Set up the default font.
+        if (font && typeof font === 'string') {
+            gc.font = font;
+        }
+        // Set up the default fill style.
+        if (backgroundColor && typeof backgroundColor === 'string') {
+            gc.fillStyle = backgroundColor;
+        }
+        else if (textColor && typeof textColor === 'string') {
+            gc.fillStyle = textColor;
+        }
+        // Set up the default text alignment.
+        if (typeof horizontalAlignment === 'string') {
+            gc.textAlign = horizontalAlignment;
+        }
+        else {
+            gc.textAlign = 'left';
+        }
+        // Set up the default text baseline.
+        gc.textBaseline = 'bottom';
+    };
+    /**
+     * Draw the background for the cell.
+     *
+     * @param gc - The graphics context to use for drawing.
+     *
+     * @param config - The configuration data for the cell.
+     */
+    TextRenderer.prototype.drawBackground = function (gc, config) {
+        // Resolve the background color for the cell.
+        var color = cellrenderer_1.CellRenderer.resolveOption(this.backgroundColor, config);
+        // Bail if there is no background color to draw.
+        if (!color) {
+            return;
+        }
+        // Fill the cell with the background color.
+        gc.fillStyle = color;
+        gc.fillRect(config.x, config.y, config.width, config.height);
+    };
+    /**
+     * Draw the text for the cell.
+     *
+     * @param gc - The graphics context to use for drawing.
+     *
+     * @param config - The configuration data for the cell.
+     */
+    TextRenderer.prototype.drawText = function (gc, config) {
+        // Resolve the font for the cell.
+        var font = cellrenderer_1.CellRenderer.resolveOption(this.font, config);
+        // Bail if there is no font to draw.
+        if (!font) {
+            return;
+        }
+        // Resolve the text color for the cell.
+        var color = cellrenderer_1.CellRenderer.resolveOption(this.textColor, config);
+        // Bail if there is no text color to draw.
+        if (!color) {
+            return;
+        }
+        // Format the cell value to text.
+        var format = this.format;
+        var text = format(config);
+        // Bail if there is no text to draw.
+        if (!text) {
+            return;
+        }
+        // Resolve the vertical and horizontal alignment.
+        var vAlign = cellrenderer_1.CellRenderer.resolveOption(this.verticalAlignment, config);
+        var hAlign = cellrenderer_1.CellRenderer.resolveOption(this.horizontalAlignment, config);
+        // Compute the padded text box height for the specified alignment.
+        var boxHeight = config.height - (vAlign === 'center' ? 1 : 2);
+        // Bail if the text box has no effective size.
+        if (boxHeight <= 0) {
+            return;
+        }
+        // Compute the text height for the gc font.
+        var textHeight = TextRenderer.measureFontHeight(font);
+        // Set up the text position variables.
+        var textX;
+        var textY;
+        // Compute the Y position for the text.
+        switch (vAlign) {
+            case 'top':
+                textY = config.y + 2 + textHeight;
+                break;
+            case 'center':
+                textY = config.y + config.height / 2 + textHeight / 2;
+                break;
+            case 'bottom':
+                textY = config.y + config.height - 2;
+                break;
+            default:
+                throw 'unreachable';
+        }
+        // Compute the X position for the text.
+        switch (hAlign) {
+            case 'left':
+                textX = config.x + 2;
+                break;
+            case 'center':
+                textX = config.x + config.width / 2;
+                break;
+            case 'right':
+                textX = config.x + config.width - 3;
+                break;
+            default:
+                throw 'unreachable';
+        }
+        // Clip the cell if the text is taller than the text box height.
+        if (textHeight > boxHeight) {
+            gc.beginPath();
+            gc.rect(config.x, config.y, config.width, config.height - 1);
+            gc.clip();
+        }
+        // Set the gc state.
+        gc.font = font;
+        gc.fillStyle = color;
+        gc.textAlign = hAlign;
+        gc.textBaseline = 'bottom';
+        // Draw the text for the cell.
+        gc.fillText(text, textX, textY);
+    };
+    return TextRenderer;
+}(cellrenderer_1.CellRenderer));
+exports.TextRenderer = TextRenderer;
+/**
+ * The namespace for the `TextRenderer` class statics.
+ */
+(function (TextRenderer) {
+    /**
+     * Create a generic text format function.
+     *
+     * @param options - The options for creating the format function.
+     *
+     * @returns A new generic text format function.
+     *
+     * #### Notes
+     * This formatter uses the builtin `String()` to coerce any value
+     * to a string.
+     */
+    function formatGeneric(options) {
+        if (options === void 0) { options = {}; }
+        var missing = options.missing || '';
+        return function (_a) {
+            var value = _a.value;
+            if (value === null || value === undefined) {
+                return missing;
+            }
+            return String(value);
+        };
+    }
+    TextRenderer.formatGeneric = formatGeneric;
+    /**
+     * Create a fixed decimal format function.
+     *
+     * @param options - The options for creating the format function.
+     *
+     * @returns A new fixed decimal format function.
+     *
+     * #### Notes
+     * This formatter uses the builtin `Number()` and `toFixed()` to
+     * coerce values.
+     *
+     * The `formatIntlNumber()` formatter is more flexible, but slower.
+     */
+    function formatFixed(options) {
+        if (options === void 0) { options = {}; }
+        var digits = options.digits;
+        var missing = options.missing || '';
+        return function (_a) {
+            var value = _a.value;
+            if (value === null || value === undefined) {
+                return missing;
+            }
+            return Number(value).toFixed(digits);
+        };
+    }
+    TextRenderer.formatFixed = formatFixed;
+    /**
+     * Create a significant figure format function.
+     *
+     * @param options - The options for creating the format function.
+     *
+     * @returns A new significant figure format function.
+     *
+     * #### Notes
+     * This formatter uses the builtin `Number()` and `toPrecision()`
+     * to coerce values.
+     *
+     * The `formatIntlNumber()` formatter is more flexible, but slower.
+     */
+    function formatPrecision(options) {
+        if (options === void 0) { options = {}; }
+        var digits = options.digits;
+        var missing = options.missing || '';
+        return function (_a) {
+            var value = _a.value;
+            if (value === null || value === undefined) {
+                return missing;
+            }
+            return Number(value).toPrecision(digits);
+        };
+    }
+    TextRenderer.formatPrecision = formatPrecision;
+    /**
+     * Create a scientific notation format function.
+     *
+     * @param options - The options for creating the format function.
+     *
+     * @returns A new scientific notation format function.
+     *
+     * #### Notes
+     * This formatter uses the builtin `Number()` and `toExponential()`
+     * to coerce values.
+     *
+     * The `formatIntlNumber()` formatter is more flexible, but slower.
+     */
+    function formatExponential(options) {
+        if (options === void 0) { options = {}; }
+        var digits = options.digits;
+        var missing = options.missing || '';
+        return function (_a) {
+            var value = _a.value;
+            if (value === null || value === undefined) {
+                return missing;
+            }
+            return Number(value).toExponential(digits);
+        };
+    }
+    TextRenderer.formatExponential = formatExponential;
+    /**
+     * Create an international number format function.
+     *
+     * @param options - The options for creating the format function.
+     *
+     * @returns A new international number format function.
+     *
+     * #### Notes
+     * This formatter uses the builtin `Intl.NumberFormat` object to
+     * coerce values.
+     *
+     * This is the most flexible (but slowest) number formatter.
+     */
+    function formatIntlNumber(options) {
+        if (options === void 0) { options = {}; }
+        var missing = options.missing || '';
+        var nft = new Intl.NumberFormat(options.locales, options.options);
+        return function (_a) {
+            var value = _a.value;
+            if (value === null || value === undefined) {
+                return missing;
+            }
+            return nft.format(value);
+        };
+    }
+    TextRenderer.formatIntlNumber = formatIntlNumber;
+    /**
+     * Create a date format function.
+     *
+     * @param options - The options for creating the format function.
+     *
+     * @returns A new date format function.
+     *
+     * #### Notes
+     * This formatter uses `Date.toDateString()` to format the values.
+     *
+     * If a value is not a `Date` object, `new Date(value)` is used to
+     * coerce the value to a date.
+     *
+     * The `formatIntlDateTime()` formatter is more flexible, but slower.
+     */
+    function formatDate(options) {
+        if (options === void 0) { options = {}; }
+        var missing = options.missing || '';
+        return function (_a) {
+            var value = _a.value;
+            if (value === null || value === undefined) {
+                return missing;
+            }
+            if (value instanceof Date) {
+                return value.toDateString();
+            }
+            return (new Date(value)).toDateString();
+        };
+    }
+    TextRenderer.formatDate = formatDate;
+    /**
+     * Create a time format function.
+     *
+     * @param options - The options for creating the format function.
+     *
+     * @returns A new time format function.
+     *
+     * #### Notes
+     * This formatter uses `Date.toTimeString()` to format the values.
+     *
+     * If a value is not a `Date` object, `new Date(value)` is used to
+     * coerce the value to a date.
+     *
+     * The `formatIntlDateTime()` formatter is more flexible, but slower.
+     */
+    function formatTime(options) {
+        if (options === void 0) { options = {}; }
+        var missing = options.missing || '';
+        return function (_a) {
+            var value = _a.value;
+            if (value === null || value === undefined) {
+                return missing;
+            }
+            if (value instanceof Date) {
+                return value.toTimeString();
+            }
+            return (new Date(value)).toTimeString();
+        };
+    }
+    TextRenderer.formatTime = formatTime;
+    /**
+     * Create an ISO datetime format function.
+     *
+     * @param options - The options for creating the format function.
+     *
+     * @returns A new ISO datetime format function.
+     *
+     * #### Notes
+     * This formatter uses `Date.toISOString()` to format the values.
+     *
+     * If a value is not a `Date` object, `new Date(value)` is used to
+     * coerce the value to a date.
+     *
+     * The `formatIntlDateTime()` formatter is more flexible, but slower.
+     */
+    function formatISODateTime(options) {
+        if (options === void 0) { options = {}; }
+        var missing = options.missing || '';
+        return function (_a) {
+            var value = _a.value;
+            if (value === null || value === undefined) {
+                return missing;
+            }
+            if (value instanceof Date) {
+                return value.toISOString();
+            }
+            return (new Date(value)).toISOString();
+        };
+    }
+    TextRenderer.formatISODateTime = formatISODateTime;
+    /**
+     * Create a UTC datetime format function.
+     *
+     * @param options - The options for creating the format function.
+     *
+     * @returns A new UTC datetime format function.
+     *
+     * #### Notes
+     * This formatter uses `Date.toUTCString()` to format the values.
+     *
+     * If a value is not a `Date` object, `new Date(value)` is used to
+     * coerce the value to a date.
+     *
+     * The `formatIntlDateTime()` formatter is more flexible, but slower.
+     */
+    function formatUTCDateTime(options) {
+        if (options === void 0) { options = {}; }
+        var missing = options.missing || '';
+        return function (_a) {
+            var value = _a.value;
+            if (value === null || value === undefined) {
+                return missing;
+            }
+            if (value instanceof Date) {
+                return value.toUTCString();
+            }
+            return (new Date(value)).toUTCString();
+        };
+    }
+    TextRenderer.formatUTCDateTime = formatUTCDateTime;
+    /**
+     * Create an international datetime format function.
+     *
+     * @param options - The options for creating the format function.
+     *
+     * @returns A new international datetime format function.
+     *
+     * #### Notes
+     * This formatter uses the builtin `Intl.DateTimeFormat` object to
+     * coerce values.
+     *
+     * This is the most flexible (but slowest) datetime formatter.
+     */
+    function formatIntlDateTime(options) {
+        if (options === void 0) { options = {}; }
+        var missing = options.missing || '';
+        var dtf = new Intl.DateTimeFormat(options.locales, options.options);
+        return function (_a) {
+            var value = _a.value;
+            if (value === null || value === undefined) {
+                return missing;
+            }
+            return dtf.format(value);
+        };
+    }
+    TextRenderer.formatIntlDateTime = formatIntlDateTime;
+    /**
+     * Measure the height of a font.
+     *
+     * @param font - The CSS font string of interest.
+     *
+     * @returns The height of the font bounding box.
+     *
+     * #### Notes
+     * This function uses a temporary DOM node to measure the text box
+     * height for the specified font. The first call for a given font
+     * will incur a DOM reflow, but the return value is cached, so any
+     * subsequent call for the same font will return the cached value.
+     */
+    function measureFontHeight(font) {
+        // Look up the cached font height.
+        var height = Private.fontHeightCache[font];
+        // Return the cached font height if it exists.
+        if (height !== undefined) {
+            return height;
+        }
+        // Normalize the font.
+        Private.fontMeasurementGC.font = font;
+        var normFont = Private.fontMeasurementGC.font;
+        // Set the font on the measurement node.
+        Private.fontMeasurementNode.style.font = normFont;
+        // Add the measurement node to the document.
+        document.body.appendChild(Private.fontMeasurementNode);
+        // Measure the node height.
+        height = Private.fontMeasurementNode.offsetHeight;
+        // Remove the measurement node from the document.
+        document.body.removeChild(Private.fontMeasurementNode);
+        // Cache the measured height for the font and norm font.
+        Private.fontHeightCache[font] = height;
+        Private.fontHeightCache[normFont] = height;
+        // Return the measured height.
+        return height;
+    }
+    TextRenderer.measureFontHeight = measureFontHeight;
+})(TextRenderer = exports.TextRenderer || (exports.TextRenderer = {}));
+exports.TextRenderer = TextRenderer;
+/**
+ * The namespace for the module implementation details.
+ */
+var Private;
+(function (Private) {
+    /**
+     * A cache of measured font heights.
+     */
+    Private.fontHeightCache = Object.create(null);
+    /**
+     * The DOM node used for font height measurement.
+     */
+    Private.fontMeasurementNode = (function () {
+        var node = document.createElement('div');
+        node.style.position = 'absolute';
+        node.style.top = '-99999px';
+        node.style.left = '-99999px';
+        node.style.visibility = 'hidden';
+        node.textContent = 'M';
+        return node;
+    })();
+    /**
+     * The GC used for font measurement.
+     */
+    Private.fontMeasurementGC = (function () {
+        var canvas = document.createElement('canvas');
+        canvas.width = 0;
+        canvas.height = 0;
+        return canvas.getContext('2d');
+    })();
+})(Private || (Private = {}));
+
+
+/***/ }),
+/* 66 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
+/*-----------------------------------------------------------------------------
+| Copyright (c) 2014-2017, PhosphorJS Contributors
+|
+| Distributed under the terms of the BSD 3-Clause License.
+|
+| The full license is in the file LICENSE, distributed with this software.
+|----------------------------------------------------------------------------*/
+var algorithm_1 = __webpack_require__(2);
 var domutils_1 = __webpack_require__(7);
 var messaging_1 = __webpack_require__(8);
-var boxengine_1 = __webpack_require__(22);
+var boxengine_1 = __webpack_require__(23);
 var layout_1 = __webpack_require__(16);
 var widget_1 = __webpack_require__(6);
 /**
@@ -19772,7 +21285,7 @@ var Private;
 
 
 /***/ }),
-/* 62 */
+/* 67 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19803,14 +21316,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
 |
 | The full license is in the file LICENSE, distributed with this software.
 |----------------------------------------------------------------------------*/
-var algorithm_1 = __webpack_require__(3);
-var commands_1 = __webpack_require__(40);
-var coreutils_1 = __webpack_require__(30);
+var algorithm_1 = __webpack_require__(2);
+var commands_1 = __webpack_require__(41);
+var coreutils_1 = __webpack_require__(32);
 var domutils_1 = __webpack_require__(7);
-var keyboard_1 = __webpack_require__(43);
+var keyboard_1 = __webpack_require__(44);
 var messaging_1 = __webpack_require__(8);
-var signaling_1 = __webpack_require__(11);
-var virtualdom_1 = __webpack_require__(32);
+var signaling_1 = __webpack_require__(10);
+var virtualdom_1 = __webpack_require__(33);
 var widget_1 = __webpack_require__(6);
 /**
  * A widget which displays items as a canonical menu.
@@ -21277,7 +22790,7 @@ var Private;
 
 
 /***/ }),
-/* 63 */
+/* 68 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -21300,13 +22813,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 |
 | The full license is in the file LICENSE, distributed with this software.
 |----------------------------------------------------------------------------*/
-var algorithm_1 = __webpack_require__(3);
+var algorithm_1 = __webpack_require__(2);
 var domutils_1 = __webpack_require__(7);
 var messaging_1 = __webpack_require__(8);
 var properties_1 = __webpack_require__(19);
-var boxengine_1 = __webpack_require__(22);
+var boxengine_1 = __webpack_require__(23);
 var layout_1 = __webpack_require__(16);
-var panellayout_1 = __webpack_require__(23);
+var panellayout_1 = __webpack_require__(24);
 var widget_1 = __webpack_require__(6);
 /**
  * A layout which arranges its widgets into resizable sections.
@@ -21975,7 +23488,7 @@ var Private;
 
 
 /***/ }),
-/* 64 */
+/* 69 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -21998,11 +23511,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 |
 | The full license is in the file LICENSE, distributed with this software.
 |----------------------------------------------------------------------------*/
-var algorithm_1 = __webpack_require__(3);
+var algorithm_1 = __webpack_require__(2);
 var domutils_1 = __webpack_require__(7);
 var messaging_1 = __webpack_require__(8);
 var layout_1 = __webpack_require__(16);
-var panellayout_1 = __webpack_require__(23);
+var panellayout_1 = __webpack_require__(24);
 var widget_1 = __webpack_require__(6);
 /**
  * A layout where visible widgets are stacked atop one another.
@@ -22250,7 +23763,7 @@ exports.StackedLayout = StackedLayout;
 
 
 /***/ }),
-/* 65 */
+/* 70 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22273,9 +23786,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 |
 | The full license is in the file LICENSE, distributed with this software.
 |----------------------------------------------------------------------------*/
-var signaling_1 = __webpack_require__(11);
-var panel_1 = __webpack_require__(33);
-var stackedlayout_1 = __webpack_require__(64);
+var signaling_1 = __webpack_require__(10);
+var panel_1 = __webpack_require__(34);
+var stackedlayout_1 = __webpack_require__(69);
 /**
  * A panel where visible widgets are stacked atop one another.
  *
@@ -22338,12 +23851,12 @@ var Private;
 
 
 /***/ }),
-/* 66 */
+/* 71 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var inherits = __webpack_require__(0);
-var Reporter = __webpack_require__(25).Reporter;
-var Buffer = __webpack_require__(2).Buffer;
+var Reporter = __webpack_require__(26).Reporter;
+var Buffer = __webpack_require__(3).Buffer;
 
 function DecoderBuffer(base, options) {
   Reporter.call(this, options);
@@ -22460,7 +23973,7 @@ EncoderBuffer.prototype.join = function join(out, offset) {
 
 
 /***/ }),
-/* 67 */
+/* 72 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var constants = exports;
@@ -22481,16 +23994,16 @@ constants._reverse = function reverse(map) {
   return res;
 };
 
-constants.der = __webpack_require__(145);
+constants.der = __webpack_require__(154);
 
 
 /***/ }),
-/* 68 */
+/* 73 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var inherits = __webpack_require__(0);
 
-var asn1 = __webpack_require__(24);
+var asn1 = __webpack_require__(25);
 var base = asn1.base;
 var bignum = asn1.bignum;
 
@@ -22815,13 +24328,13 @@ function derDecodeLen(buf, primitive, fail) {
 
 
 /***/ }),
-/* 69 */
+/* 74 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var inherits = __webpack_require__(0);
-var Buffer = __webpack_require__(2).Buffer;
+var Buffer = __webpack_require__(3).Buffer;
 
-var asn1 = __webpack_require__(24);
+var asn1 = __webpack_require__(25);
 var base = asn1.base;
 
 // Import DER constants
@@ -23116,7 +24629,7 @@ function encodeTag(tag, primitive, cls, reporter) {
 
 
 /***/ }),
-/* 70 */
+/* 75 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var r;
@@ -23174,7 +24687,7 @@ if (typeof self === 'object') {
 } else {
   // Node.js or Web worker with no crypto support
   try {
-    var crypto = __webpack_require__(249);
+    var crypto = __webpack_require__(260);
     if (typeof crypto.randomBytes !== 'function')
       throw new Error('Not supported');
 
@@ -23187,16 +24700,16 @@ if (typeof self === 'object') {
 
 
 /***/ }),
-/* 71 */
+/* 76 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var aes = __webpack_require__(34)
+var aes = __webpack_require__(35)
 var Buffer = __webpack_require__(1).Buffer
 var Transform = __webpack_require__(17)
 var inherits = __webpack_require__(0)
-var GHASH = __webpack_require__(153)
-var xor = __webpack_require__(26)
-var incr32 = __webpack_require__(72)
+var GHASH = __webpack_require__(162)
+var xor = __webpack_require__(27)
+var incr32 = __webpack_require__(77)
 
 function xorTest (a, b) {
   var out = 0
@@ -23310,7 +24823,7 @@ module.exports = StreamCipher
 
 
 /***/ }),
-/* 72 */
+/* 77 */
 /***/ (function(module, exports) {
 
 function incr32 (iv) {
@@ -23331,12 +24844,12 @@ module.exports = incr32
 
 
 /***/ }),
-/* 73 */
+/* 78 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var xor = __webpack_require__(26)
+var xor = __webpack_require__(27)
 var Buffer = __webpack_require__(1).Buffer
-var incr32 = __webpack_require__(72)
+var incr32 = __webpack_require__(77)
 
 function getBlock (self) {
   var out = self._cipher.encryptBlockRaw(self._prev)
@@ -23367,16 +24880,16 @@ exports.encrypt = function (self, chunk) {
 
 
 /***/ }),
-/* 74 */
+/* 79 */
 /***/ (function(module, exports) {
 
 module.exports = {"aes-128-ecb":{"cipher":"AES","key":128,"iv":0,"mode":"ECB","type":"block"},"aes-192-ecb":{"cipher":"AES","key":192,"iv":0,"mode":"ECB","type":"block"},"aes-256-ecb":{"cipher":"AES","key":256,"iv":0,"mode":"ECB","type":"block"},"aes-128-cbc":{"cipher":"AES","key":128,"iv":16,"mode":"CBC","type":"block"},"aes-192-cbc":{"cipher":"AES","key":192,"iv":16,"mode":"CBC","type":"block"},"aes-256-cbc":{"cipher":"AES","key":256,"iv":16,"mode":"CBC","type":"block"},"aes128":{"cipher":"AES","key":128,"iv":16,"mode":"CBC","type":"block"},"aes192":{"cipher":"AES","key":192,"iv":16,"mode":"CBC","type":"block"},"aes256":{"cipher":"AES","key":256,"iv":16,"mode":"CBC","type":"block"},"aes-128-cfb":{"cipher":"AES","key":128,"iv":16,"mode":"CFB","type":"stream"},"aes-192-cfb":{"cipher":"AES","key":192,"iv":16,"mode":"CFB","type":"stream"},"aes-256-cfb":{"cipher":"AES","key":256,"iv":16,"mode":"CFB","type":"stream"},"aes-128-cfb8":{"cipher":"AES","key":128,"iv":16,"mode":"CFB8","type":"stream"},"aes-192-cfb8":{"cipher":"AES","key":192,"iv":16,"mode":"CFB8","type":"stream"},"aes-256-cfb8":{"cipher":"AES","key":256,"iv":16,"mode":"CFB8","type":"stream"},"aes-128-cfb1":{"cipher":"AES","key":128,"iv":16,"mode":"CFB1","type":"stream"},"aes-192-cfb1":{"cipher":"AES","key":192,"iv":16,"mode":"CFB1","type":"stream"},"aes-256-cfb1":{"cipher":"AES","key":256,"iv":16,"mode":"CFB1","type":"stream"},"aes-128-ofb":{"cipher":"AES","key":128,"iv":16,"mode":"OFB","type":"stream"},"aes-192-ofb":{"cipher":"AES","key":192,"iv":16,"mode":"OFB","type":"stream"},"aes-256-ofb":{"cipher":"AES","key":256,"iv":16,"mode":"OFB","type":"stream"},"aes-128-ctr":{"cipher":"AES","key":128,"iv":16,"mode":"CTR","type":"stream"},"aes-192-ctr":{"cipher":"AES","key":192,"iv":16,"mode":"CTR","type":"stream"},"aes-256-ctr":{"cipher":"AES","key":256,"iv":16,"mode":"CTR","type":"stream"},"aes-128-gcm":{"cipher":"AES","key":128,"iv":12,"mode":"GCM","type":"auth"},"aes-192-gcm":{"cipher":"AES","key":192,"iv":12,"mode":"GCM","type":"auth"},"aes-256-gcm":{"cipher":"AES","key":256,"iv":12,"mode":"GCM","type":"auth"}}
 
 /***/ }),
-/* 75 */
+/* 80 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var aes = __webpack_require__(34)
+var aes = __webpack_require__(35)
 var Buffer = __webpack_require__(1).Buffer
 var Transform = __webpack_require__(17)
 var inherits = __webpack_require__(0)
@@ -23406,22 +24919,22 @@ module.exports = StreamCipher
 
 
 /***/ }),
-/* 76 */
+/* 81 */
 /***/ (function(module, exports) {
 
 module.exports = {"sha224WithRSAEncryption":{"sign":"rsa","hash":"sha224","id":"302d300d06096086480165030402040500041c"},"RSA-SHA224":{"sign":"ecdsa/rsa","hash":"sha224","id":"302d300d06096086480165030402040500041c"},"sha256WithRSAEncryption":{"sign":"rsa","hash":"sha256","id":"3031300d060960864801650304020105000420"},"RSA-SHA256":{"sign":"ecdsa/rsa","hash":"sha256","id":"3031300d060960864801650304020105000420"},"sha384WithRSAEncryption":{"sign":"rsa","hash":"sha384","id":"3041300d060960864801650304020205000430"},"RSA-SHA384":{"sign":"ecdsa/rsa","hash":"sha384","id":"3041300d060960864801650304020205000430"},"sha512WithRSAEncryption":{"sign":"rsa","hash":"sha512","id":"3051300d060960864801650304020305000440"},"RSA-SHA512":{"sign":"ecdsa/rsa","hash":"sha512","id":"3051300d060960864801650304020305000440"},"RSA-SHA1":{"sign":"rsa","hash":"sha1","id":"3021300906052b0e03021a05000414"},"ecdsa-with-SHA1":{"sign":"ecdsa","hash":"sha1","id":""},"sha256":{"sign":"ecdsa","hash":"sha256","id":""},"sha224":{"sign":"ecdsa","hash":"sha224","id":""},"sha384":{"sign":"ecdsa","hash":"sha384","id":""},"sha512":{"sign":"ecdsa","hash":"sha512","id":""},"DSA-SHA":{"sign":"dsa","hash":"sha1","id":""},"DSA-SHA1":{"sign":"dsa","hash":"sha1","id":""},"DSA":{"sign":"dsa","hash":"sha1","id":""},"DSA-WITH-SHA224":{"sign":"dsa","hash":"sha224","id":""},"DSA-SHA224":{"sign":"dsa","hash":"sha224","id":""},"DSA-WITH-SHA256":{"sign":"dsa","hash":"sha256","id":""},"DSA-SHA256":{"sign":"dsa","hash":"sha256","id":""},"DSA-WITH-SHA384":{"sign":"dsa","hash":"sha384","id":""},"DSA-SHA384":{"sign":"dsa","hash":"sha384","id":""},"DSA-WITH-SHA512":{"sign":"dsa","hash":"sha512","id":""},"DSA-SHA512":{"sign":"dsa","hash":"sha512","id":""},"DSA-RIPEMD160":{"sign":"dsa","hash":"rmd160","id":""},"ripemd160WithRSA":{"sign":"rsa","hash":"rmd160","id":"3021300906052b2403020105000414"},"RSA-RIPEMD160":{"sign":"rsa","hash":"rmd160","id":"3021300906052b2403020105000414"},"md5WithRSAEncryption":{"sign":"rsa","hash":"md5","id":"3020300c06082a864886f70d020505000410"},"RSA-MD5":{"sign":"rsa","hash":"md5","id":"3020300c06082a864886f70d020505000410"}}
 
 /***/ }),
-/* 77 */
+/* 82 */
 /***/ (function(module, exports) {
 
 module.exports = {"1.3.132.0.10":"secp256k1","1.3.132.0.33":"p224","1.2.840.10045.3.1.1":"p192","1.2.840.10045.3.1.7":"p256","1.3.132.0.34":"p384","1.3.132.0.35":"p521"}
 
 /***/ }),
-/* 78 */
+/* 83 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var MD5 = __webpack_require__(53)
+var MD5 = __webpack_require__(54)
 
 module.exports = function (buffer) {
   return new MD5().update(buffer).digest()
@@ -23429,19 +24942,19 @@ module.exports = function (buffer) {
 
 
 /***/ }),
-/* 79 */
+/* 84 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var inherits = __webpack_require__(0)
-var Legacy = __webpack_require__(168)
+var Legacy = __webpack_require__(177)
 var Base = __webpack_require__(17)
 var Buffer = __webpack_require__(1).Buffer
-var md5 = __webpack_require__(78)
-var RIPEMD160 = __webpack_require__(56)
+var md5 = __webpack_require__(83)
+var RIPEMD160 = __webpack_require__(57)
 
-var sha = __webpack_require__(57)
+var sha = __webpack_require__(58)
 
 var ZEROS = Buffer.alloc(128)
 
@@ -23498,16 +25011,16 @@ module.exports = function createHmac (alg, key) {
 
 
 /***/ }),
-/* 80 */
+/* 85 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var randomBytes = __webpack_require__(20);
 module.exports = findPrime;
 findPrime.simpleSieve = simpleSieve;
 findPrime.fermatTest = fermatTest;
-var BN = __webpack_require__(4);
+var BN = __webpack_require__(5);
 var TWENTYFOUR = new BN(24);
-var MillerRabin = __webpack_require__(86);
+var MillerRabin = __webpack_require__(91);
 var millerRabin = new MillerRabin();
 var ONE = new BN(1);
 var TWO = new BN(2);
@@ -23609,13 +25122,13 @@ function findPrime(bits, gen) {
 
 
 /***/ }),
-/* 81 */
+/* 86 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var Buffer = __webpack_require__(1).Buffer
-var Transform = __webpack_require__(58).Transform
+var Transform = __webpack_require__(59).Transform
 var inherits = __webpack_require__(0)
 
 function throwIfNotStringOrBuffer (val, prefix) {
@@ -23711,16 +25224,16 @@ module.exports = HashBase
 
 
 /***/ }),
-/* 82 */
+/* 87 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var utils = __webpack_require__(13);
-var common = __webpack_require__(29);
-var shaCommon = __webpack_require__(84);
-var assert = __webpack_require__(10);
+var common = __webpack_require__(30);
+var shaCommon = __webpack_require__(89);
+var assert = __webpack_require__(11);
 
 var sum32 = utils.sum32;
 var sum32_4 = utils.sum32_4;
@@ -23823,15 +25336,15 @@ SHA256.prototype._digest = function digest(enc) {
 
 
 /***/ }),
-/* 83 */
+/* 88 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var utils = __webpack_require__(13);
-var common = __webpack_require__(29);
-var assert = __webpack_require__(10);
+var common = __webpack_require__(30);
+var assert = __webpack_require__(11);
 
 var rotr64_hi = utils.rotr64_hi;
 var rotr64_lo = utils.rotr64_lo;
@@ -24160,7 +25673,7 @@ function g1_512_lo(xh, xl) {
 
 
 /***/ }),
-/* 84 */
+/* 89 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -24216,7 +25729,7 @@ exports.g1_256 = g1_256;
 
 
 /***/ }),
-/* 85 */
+/* 90 */
 /***/ (function(module, exports) {
 
 var toString = {}.toString;
@@ -24227,11 +25740,11 @@ module.exports = Array.isArray || function (arr) {
 
 
 /***/ }),
-/* 86 */
+/* 91 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var bn = __webpack_require__(4);
-var brorand = __webpack_require__(70);
+var bn = __webpack_require__(5);
+var brorand = __webpack_require__(75);
 
 function MillerRabin(rand) {
   this.rand = rand || new brorand.Rand();
@@ -24348,7 +25861,7 @@ MillerRabin.prototype.getDivisor = function getDivisor(n, k) {
 
 
 /***/ }),
-/* 87 */
+/* 92 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -24413,15 +25926,15 @@ utils.encode = function encode(arr, enc) {
 
 
 /***/ }),
-/* 88 */
+/* 93 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports.pbkdf2 = __webpack_require__(226)
-exports.pbkdf2Sync = __webpack_require__(91)
+exports.pbkdf2 = __webpack_require__(237)
+exports.pbkdf2Sync = __webpack_require__(96)
 
 
 /***/ }),
-/* 89 */
+/* 94 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(process) {var defaultEncoding
@@ -24438,7 +25951,7 @@ module.exports = defaultEncoding
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(15)))
 
 /***/ }),
-/* 90 */
+/* 95 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(Buffer) {var MAX_ALLOC = Math.pow(2, 30) - 1 // default in iojs
@@ -24470,18 +25983,18 @@ module.exports = function (password, salt, iterations, keylen) {
   }
 }
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2).Buffer))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3).Buffer))
 
 /***/ }),
-/* 91 */
+/* 96 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var md5 = __webpack_require__(78)
-var rmd160 = __webpack_require__(56)
-var sha = __webpack_require__(57)
+var md5 = __webpack_require__(83)
+var rmd160 = __webpack_require__(57)
+var sha = __webpack_require__(58)
 
-var checkParameters = __webpack_require__(90)
-var defaultEncoding = __webpack_require__(89)
+var checkParameters = __webpack_require__(95)
+var defaultEncoding = __webpack_require__(94)
 var Buffer = __webpack_require__(1).Buffer
 var ZEROS = Buffer.alloc(128)
 var sizes = {
@@ -24580,10 +26093,10 @@ module.exports = pbkdf2
 
 
 /***/ }),
-/* 92 */
+/* 97 */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(Buffer) {var createHash = __webpack_require__(28);
+/* WEBPACK VAR INJECTION */(function(Buffer) {var createHash = __webpack_require__(29);
 module.exports = function (seed, len) {
   var t = new Buffer('');
   var  i = 0, c;
@@ -24599,13 +26112,13 @@ function i2ops(c) {
   out.writeUInt32BE(c,0);
   return out;
 }
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2).Buffer))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3).Buffer))
 
 /***/ }),
-/* 93 */
+/* 98 */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(Buffer) {var bn = __webpack_require__(4);
+/* WEBPACK VAR INJECTION */(function(Buffer) {var bn = __webpack_require__(5);
 function withPublic(paddedMsg, key) {
   return new Buffer(paddedMsg
     .toRed(bn.mont(key.modulus))
@@ -24615,10 +26128,10 @@ function withPublic(paddedMsg, key) {
 }
 
 module.exports = withPublic;
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2).Buffer))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3).Buffer))
 
 /***/ }),
-/* 94 */
+/* 99 */
 /***/ (function(module, exports) {
 
 module.exports = function xor(a, b) {
@@ -24631,7 +26144,7 @@ module.exports = function xor(a, b) {
 };
 
 /***/ }),
-/* 95 */
+/* 100 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -24660,13 +26173,13 @@ module.exports = function xor(a, b) {
 
 /*<replacement>*/
 
-var pna = __webpack_require__(38);
+var pna = __webpack_require__(39);
 /*</replacement>*/
 
 module.exports = Readable;
 
 /*<replacement>*/
-var isArray = __webpack_require__(85);
+var isArray = __webpack_require__(90);
 /*</replacement>*/
 
 /*<replacement>*/
@@ -24676,7 +26189,7 @@ var Duplex;
 Readable.ReadableState = ReadableState;
 
 /*<replacement>*/
-var EE = __webpack_require__(51).EventEmitter;
+var EE = __webpack_require__(52).EventEmitter;
 
 var EElistenerCount = function (emitter, type) {
   return emitter.listeners(type).length;
@@ -24684,7 +26197,7 @@ var EElistenerCount = function (emitter, type) {
 /*</replacement>*/
 
 /*<replacement>*/
-var Stream = __webpack_require__(98);
+var Stream = __webpack_require__(103);
 /*</replacement>*/
 
 /*<replacement>*/
@@ -24701,12 +26214,12 @@ function _isUint8Array(obj) {
 /*</replacement>*/
 
 /*<replacement>*/
-var util = __webpack_require__(27);
+var util = __webpack_require__(28);
 util.inherits = __webpack_require__(0);
 /*</replacement>*/
 
 /*<replacement>*/
-var debugUtil = __webpack_require__(250);
+var debugUtil = __webpack_require__(261);
 var debug = void 0;
 if (debugUtil && debugUtil.debuglog) {
   debug = debugUtil.debuglog('stream');
@@ -24715,8 +26228,8 @@ if (debugUtil && debugUtil.debuglog) {
 }
 /*</replacement>*/
 
-var BufferList = __webpack_require__(233);
-var destroyImpl = __webpack_require__(97);
+var BufferList = __webpack_require__(244);
+var destroyImpl = __webpack_require__(102);
 var StringDecoder;
 
 util.inherits(Readable, Stream);
@@ -24806,7 +26319,7 @@ function ReadableState(options, stream) {
   this.decoder = null;
   this.encoding = null;
   if (options.encoding) {
-    if (!StringDecoder) StringDecoder = __webpack_require__(59).StringDecoder;
+    if (!StringDecoder) StringDecoder = __webpack_require__(60).StringDecoder;
     this.decoder = new StringDecoder(options.encoding);
     this.encoding = options.encoding;
   }
@@ -24962,7 +26475,7 @@ Readable.prototype.isPaused = function () {
 
 // backwards compatibility.
 Readable.prototype.setEncoding = function (enc) {
-  if (!StringDecoder) StringDecoder = __webpack_require__(59).StringDecoder;
+  if (!StringDecoder) StringDecoder = __webpack_require__(60).StringDecoder;
   this._readableState.decoder = new StringDecoder(enc);
   this._readableState.encoding = enc;
   return this;
@@ -25657,7 +27170,7 @@ function indexOf(xs, x) {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(14), __webpack_require__(15)))
 
 /***/ }),
-/* 96 */
+/* 101 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -25731,7 +27244,7 @@ module.exports = Transform;
 var Duplex = __webpack_require__(18);
 
 /*<replacement>*/
-var util = __webpack_require__(27);
+var util = __webpack_require__(28);
 util.inherits = __webpack_require__(0);
 /*</replacement>*/
 
@@ -25877,7 +27390,7 @@ function done(stream, er, data) {
 }
 
 /***/ }),
-/* 97 */
+/* 102 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -25885,7 +27398,7 @@ function done(stream, er, data) {
 
 /*<replacement>*/
 
-var pna = __webpack_require__(38);
+var pna = __webpack_require__(39);
 /*</replacement>*/
 
 // undocumented cb() API, needed for core, not for public API
@@ -25957,14 +27470,14 @@ module.exports = {
 };
 
 /***/ }),
-/* 98 */
+/* 103 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(51).EventEmitter;
+module.exports = __webpack_require__(52).EventEmitter;
 
 
 /***/ }),
-/* 99 */
+/* 104 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -26105,7 +27618,7 @@ module.exports = Sha256
 
 
 /***/ }),
-/* 100 */
+/* 105 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var inherits = __webpack_require__(0)
@@ -26371,7 +27884,7 @@ module.exports = Sha512
 
 
 /***/ }),
-/* 101 */
+/* 106 */
 /***/ (function(module, exports) {
 
 /*
@@ -26623,16 +28136,16 @@ function updateLink(linkElement, obj) {
 
 
 /***/ }),
-/* 102 */
+/* 107 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(181);
+var content = __webpack_require__(192);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // add the styles to the DOM
-var update = __webpack_require__(101)(content, {});
+var update = __webpack_require__(106)(content, {});
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -26649,27 +28162,27 @@ if(false) {
 }
 
 /***/ }),
-/* 103 */
+/* 108 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 // This file can be required in Browserify and Node.js for automatic polyfill
 // To use it:  require('es6-promise/auto');
 
-module.exports = __webpack_require__(212).polyfill();
+module.exports = __webpack_require__(223).polyfill();
 
 
 /***/ }),
-/* 104 */
+/* 109 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(186);
+var content = __webpack_require__(197);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // add the styles to the DOM
-var update = __webpack_require__(101)(content, {});
+var update = __webpack_require__(106)(content, {});
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -26686,7 +28199,7 @@ if(false) {
 }
 
 /***/ }),
-/* 105 */
+/* 110 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -26695,12 +28208,12 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(245));
-__export(__webpack_require__(246));
+__export(__webpack_require__(256));
+__export(__webpack_require__(257));
 
 
 /***/ }),
-/* 106 */
+/* 111 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -27985,7 +29498,7 @@ var ArrayExt;
 
 
 /***/ }),
-/* 107 */
+/* 112 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28087,7 +29600,7 @@ exports.ChainIterator = ChainIterator;
 
 
 /***/ }),
-/* 108 */
+/* 113 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28150,7 +29663,7 @@ exports.EmptyIterator = EmptyIterator;
 
 
 /***/ }),
-/* 109 */
+/* 114 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28244,7 +29757,7 @@ exports.FilterIterator = FilterIterator;
 
 
 /***/ }),
-/* 110 */
+/* 115 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28438,7 +29951,7 @@ exports.minmax = minmax;
 
 
 /***/ }),
-/* 111 */
+/* 116 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28528,7 +30041,7 @@ exports.MapIterator = MapIterator;
 
 
 /***/ }),
-/* 112 */
+/* 117 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28647,7 +30160,7 @@ var Private;
 
 
 /***/ }),
-/* 113 */
+/* 118 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28705,7 +30218,7 @@ exports.reduce = reduce;
 
 
 /***/ }),
-/* 114 */
+/* 119 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28802,7 +30315,7 @@ exports.RepeatIterator = RepeatIterator;
 
 
 /***/ }),
-/* 115 */
+/* 120 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28888,7 +30401,7 @@ exports.RetroArrayIterator = RetroArrayIterator;
 
 
 /***/ }),
-/* 116 */
+/* 121 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28966,7 +30479,7 @@ exports.topologicSort = topologicSort;
 
 
 /***/ }),
-/* 117 */
+/* 122 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -29055,7 +30568,7 @@ exports.StrideIterator = StrideIterator;
 
 
 /***/ }),
-/* 118 */
+/* 123 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -29233,7 +30746,7 @@ var StringExt;
 
 
 /***/ }),
-/* 119 */
+/* 124 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -29318,7 +30831,7 @@ exports.TakeIterator = TakeIterator;
 
 
 /***/ }),
-/* 120 */
+/* 125 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -29411,7 +30924,7 @@ exports.ZipIterator = ZipIterator;
 
 
 /***/ }),
-/* 121 */
+/* 126 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -29427,11 +30940,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 |
 | The full license is in the file LICENSE, distributed with this software.
 |----------------------------------------------------------------------------*/
-__export(__webpack_require__(122));
+__export(__webpack_require__(127));
 
 
 /***/ }),
-/* 122 */
+/* 127 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -29444,7 +30957,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 |
 | The full license is in the file LICENSE, distributed with this software.
 |----------------------------------------------------------------------------*/
-var algorithm_1 = __webpack_require__(3);
+var algorithm_1 = __webpack_require__(2);
 /**
  * A generic doubly-linked list.
  */
@@ -30048,7 +31561,7 @@ var Private;
 
 
 /***/ }),
-/* 123 */
+/* 128 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -30223,7 +31736,7 @@ var JSONExt;
 
 
 /***/ }),
-/* 124 */
+/* 129 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -30324,7 +31837,7 @@ exports.MimeData = MimeData;
 
 
 /***/ }),
-/* 125 */
+/* 130 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -30379,7 +31892,7 @@ exports.PromiseDelegate = PromiseDelegate;
 
 
 /***/ }),
-/* 126 */
+/* 131 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -30415,7 +31928,7 @@ exports.Token = Token;
 
 
 /***/ }),
-/* 127 */
+/* 132 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -30428,7 +31941,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 |
 | The full license is in the file LICENSE, distributed with this software.
 |----------------------------------------------------------------------------*/
-var random_1 = __webpack_require__(60);
+var random_1 = __webpack_require__(61);
 /**
  * The namespace for UUID related functionality.
  */
@@ -30494,7 +32007,3788 @@ var UUID;
 
 
 /***/ }),
-/* 128 */
+/* 133 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
+var domutils_1 = __webpack_require__(7);
+var dragdrop_1 = __webpack_require__(22);
+var messaging_1 = __webpack_require__(8);
+var widgets_1 = __webpack_require__(31);
+var datamodel_1 = __webpack_require__(42);
+var graphicscontext_1 = __webpack_require__(63);
+var renderermap_1 = __webpack_require__(64);
+var sectionlist_1 = __webpack_require__(136);
+var textrenderer_1 = __webpack_require__(65);
+/**
+ * A widget which implements a high-performance tabular data grid.
+ *
+ * #### Notes
+ * A data grid is implemented as a composition of child widgets. These
+ * child widgets are considered an implementation detail. Manipulating
+ * the child widgets of a data grid directly is undefined behavior.
+ *
+ * This class is not designed to be subclassed.
+ */
+var DataGrid = (function (_super) {
+    __extends(DataGrid, _super);
+    /**
+     * Construct a new data grid.
+     *
+     * @param options - The options for initializing the data grid.
+     */
+    function DataGrid(options) {
+        if (options === void 0) { options = {}; }
+        var _this = _super.call(this) || this;
+        _this._inPaint = false;
+        _this._paintPending = false; // TODO: would like to get rid of this flag
+        _this._pressData = null;
+        _this._dpiRatio = Math.ceil(window.devicePixelRatio);
+        _this._scrollX = 0;
+        _this._scrollY = 0;
+        _this._viewportWidth = 0;
+        _this._viewportHeight = 0;
+        _this._vScrollBarMinWidth = 0;
+        _this._hScrollBarMinHeight = 0;
+        _this._model = null;
+        _this.addClass('p-DataGrid');
+        // Parse the simple options.
+        _this._style = options.style || DataGrid.defaultStyle;
+        _this._headerVisibility = options.headerVisibility || 'all';
+        _this._cellRenderers = options.cellRenderers || new renderermap_1.RendererMap();
+        _this._defaultRenderer = options.defaultRenderer || new textrenderer_1.TextRenderer();
+        // Connect to the renderer map changed signal
+        _this._cellRenderers.changed.connect(_this._onRenderersChanged, _this);
+        // Parse the base section sizes.
+        var brs = 20;
+        var bcs = 64;
+        var brhs = 64;
+        var bchs = 20;
+        if (options.baseRowSize !== undefined) {
+            brs = options.baseRowSize;
+        }
+        if (options.baseColumnSize !== undefined) {
+            bcs = options.baseColumnSize;
+        }
+        if (options.baseRowHeaderSize !== undefined) {
+            brhs = options.baseRowHeaderSize;
+        }
+        if (options.baseColumnHeaderSize !== undefined) {
+            bchs = options.baseColumnHeaderSize;
+        }
+        // Set up the sections lists.
+        _this._rowSections = new sectionlist_1.SectionList({ baseSize: brs });
+        _this._columnSections = new sectionlist_1.SectionList({ baseSize: bcs });
+        _this._rowHeaderSections = new sectionlist_1.SectionList({ baseSize: brhs });
+        _this._columnHeaderSections = new sectionlist_1.SectionList({ baseSize: bchs });
+        // Create the canvas and buffer objects.
+        _this._canvas = Private.createCanvas();
+        _this._buffer = Private.createCanvas();
+        // Get the graphics contexts for the canvases.
+        _this._canvasGC = _this._canvas.getContext('2d');
+        _this._bufferGC = _this._buffer.getContext('2d');
+        // Set up the on-screen canvas.
+        _this._canvas.style.position = 'absolute';
+        _this._canvas.style.top = '0px';
+        _this._canvas.style.left = '0px';
+        _this._canvas.style.width = '0px';
+        _this._canvas.style.height = '0px';
+        // Create the internal widgets for the data grid.
+        // TODO - support custom scroll bars and scroll corner?
+        _this._viewport = new widgets_1.Widget();
+        _this._vScrollBar = new widgets_1.ScrollBar({ orientation: 'vertical' });
+        _this._hScrollBar = new widgets_1.ScrollBar({ orientation: 'horizontal' });
+        _this._scrollCorner = new widgets_1.Widget();
+        // Add the extra class names to the child widgets.
+        _this._viewport.addClass('p-DataGrid-viewport');
+        _this._vScrollBar.addClass('p-DataGrid-scrollBar');
+        _this._hScrollBar.addClass('p-DataGrid-scrollBar');
+        _this._scrollCorner.addClass('p-DataGrid-scrollCorner');
+        // Add the on-screen canvas to the viewport node.
+        _this._viewport.node.appendChild(_this._canvas);
+        // Install the message hook for the viewport.
+        messaging_1.MessageLoop.installMessageHook(_this._viewport, _this);
+        // Hide the scroll bars and corner from the outset.
+        _this._vScrollBar.hide();
+        _this._hScrollBar.hide();
+        _this._scrollCorner.hide();
+        // Connect to the scroll bar signals.
+        _this._vScrollBar.thumbMoved.connect(_this._onThumbMoved, _this);
+        _this._hScrollBar.thumbMoved.connect(_this._onThumbMoved, _this);
+        _this._vScrollBar.pageRequested.connect(_this._onPageRequested, _this);
+        _this._hScrollBar.pageRequested.connect(_this._onPageRequested, _this);
+        _this._vScrollBar.stepRequested.connect(_this._onStepRequested, _this);
+        _this._hScrollBar.stepRequested.connect(_this._onStepRequested, _this);
+        // Set the layout cell config for the child widgets.
+        widgets_1.GridLayout.setCellConfig(_this._viewport, { row: 0, column: 0 });
+        widgets_1.GridLayout.setCellConfig(_this._vScrollBar, { row: 0, column: 1 });
+        widgets_1.GridLayout.setCellConfig(_this._hScrollBar, { row: 1, column: 0 });
+        widgets_1.GridLayout.setCellConfig(_this._scrollCorner, { row: 1, column: 1 });
+        // Create the layout for the data grid.
+        var layout = new widgets_1.GridLayout({
+            rowCount: 2,
+            columnCount: 2,
+            rowSpacing: 0,
+            columnSpacing: 0,
+            fitPolicy: 'set-no-constraint'
+        });
+        // Set the stretch factors for the grid.
+        layout.setRowStretch(0, 1);
+        layout.setRowStretch(1, 0);
+        layout.setColumnStretch(0, 1);
+        layout.setColumnStretch(1, 0);
+        // Add the child widgets to the layout.
+        layout.addWidget(_this._viewport);
+        layout.addWidget(_this._vScrollBar);
+        layout.addWidget(_this._hScrollBar);
+        layout.addWidget(_this._scrollCorner);
+        // Install the layout on the data grid.
+        _this.layout = layout;
+        return _this;
+    }
+    /**
+     * Dispose of the resources held by the widgets.
+     */
+    DataGrid.prototype.dispose = function () {
+        this._releaseMouse();
+        this._model = null;
+        this._rowSections.clear();
+        this._columnSections.clear();
+        this._rowHeaderSections.clear();
+        this._columnHeaderSections.clear();
+        _super.prototype.dispose.call(this);
+    };
+    Object.defineProperty(DataGrid.prototype, "model", {
+        /**
+         * Get the data model for the data grid.
+         */
+        get: function () {
+            return this._model;
+        },
+        /**
+         * Set the data model for the data grid.
+         */
+        set: function (value) {
+            // Do nothing if the model does not change.
+            if (this._model === value) {
+                return;
+            }
+            // Disconnect the change handler from the old model.
+            if (this._model) {
+                this._model.changed.disconnect(this._onModelChanged, this);
+            }
+            // Connect the change handler for the new model.
+            if (value) {
+                value.changed.connect(this._onModelChanged, this);
+            }
+            // Update the internal model reference.
+            this._model = value;
+            // Clear the section lists.
+            this._rowSections.clear();
+            this._columnSections.clear();
+            this._rowHeaderSections.clear();
+            this._columnHeaderSections.clear();
+            // Populate the section lists.
+            if (value) {
+                this._rowSections.insertSections(0, value.rowCount('body'));
+                this._columnSections.insertSections(0, value.columnCount('body'));
+                this._rowHeaderSections.insertSections(0, value.columnCount('row-header'));
+                this._columnHeaderSections.insertSections(0, value.rowCount('column-header'));
+            }
+            // Reset the scroll position.
+            this._scrollX = 0;
+            this._scrollY = 0;
+            // Sync the viewport.
+            this._syncViewport();
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(DataGrid.prototype, "style", {
+        /**
+         * Get the style for the data grid.
+         */
+        get: function () {
+            return this._style;
+        },
+        /**
+         * Set the style for the data grid.
+         */
+        set: function (value) {
+            // Bail if the style does not change.
+            if (this._style === value) {
+                return;
+            }
+            // Update the internal style.
+            this._style = value;
+            // Schedule a full repaint of the grid.
+            this.repaint();
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(DataGrid.prototype, "cellRenderers", {
+        /**
+         * Get the cell renderer map for the data grid.
+         */
+        get: function () {
+            return this._cellRenderers;
+        },
+        /**
+         * Set the cell renderer map for the data grid.
+         */
+        set: function (value) {
+            // Bail if the renderer map does not change.
+            if (this._cellRenderers === value) {
+                return;
+            }
+            // Disconnect the old map.
+            this._cellRenderers.changed.disconnect(this._onRenderersChanged, this);
+            // Connect the new map.
+            value.changed.connect(this._onRenderersChanged, this);
+            // Update the internal renderer map.
+            this._cellRenderers = value;
+            // Schedule a full repaint of the grid.
+            this.repaint();
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(DataGrid.prototype, "defaultRenderer", {
+        /**
+         * Get the default cell renderer for the data grid.
+         */
+        get: function () {
+            return this._defaultRenderer;
+        },
+        /**
+         * Set the default cell renderer for the data grid.
+         */
+        set: function (value) {
+            // Bail if the renderer does not change.
+            if (this._defaultRenderer === value) {
+                return;
+            }
+            // Update the internal renderer.
+            this._defaultRenderer = value;
+            // Schedule a full repaint of the grid.
+            this.repaint();
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(DataGrid.prototype, "headerVisibility", {
+        /**
+         * Get the header visibility for the data grid.
+         */
+        get: function () {
+            return this._headerVisibility;
+        },
+        /**
+         * Set the header visibility for the data grid.
+         */
+        set: function (value) {
+            // Bail if the visibility does not change.
+            if (this._headerVisibility === value) {
+                return;
+            }
+            // Update the internal visibility.
+            this._headerVisibility = value;
+            // Sync the viewport.
+            this._syncViewport();
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(DataGrid.prototype, "scrollX", {
+        /**
+         * The scroll X offset of the viewport.
+         */
+        get: function () {
+            return this._scrollX;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(DataGrid.prototype, "scrollY", {
+        /**
+         * The scroll Y offset of the viewport.
+         */
+        get: function () {
+            return this._scrollY;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(DataGrid.prototype, "maxScrollX", {
+        /**
+         * The maximum scroll X position for the current grid dimensions.
+         *
+         * #### Notes
+         * This value is `1px` less than the theoretical maximum to allow the
+         * the right-most grid line to be clipped when the vertical scroll bar
+         * is visible.
+         */
+        get: function () {
+            return Math.max(0, this.bodyWidth - this.pageWidth - 1);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(DataGrid.prototype, "maxScrollY", {
+        /**
+         * The maximum scroll Y position for the current grid dimensions.
+         *
+         * #### Notes
+         * This value is `1px` less than the theoretical maximum to allow the
+         * the bottom-most grid line to be clipped when the horizontal scroll
+         * bar is visible.
+         */
+        get: function () {
+            return Math.max(0, this.bodyHeight - this.pageHeight - 1);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(DataGrid.prototype, "bodyWidth", {
+        /**
+         * The virtual width of the grid body.
+         *
+         * #### Notes
+         * This value does not include the width of the row headers.
+         */
+        get: function () {
+            return this._columnSections.totalSize;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(DataGrid.prototype, "bodyHeight", {
+        /**
+         * The virtual height of the grid body.
+         *
+         * #### Notes
+         * This value does not include the height of the column headers.
+         */
+        get: function () {
+            return this._rowSections.totalSize;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(DataGrid.prototype, "headerWidth", {
+        /**
+         * The virtual width of the row headers.
+         *
+         * #### Notes
+         * This will be `0` if the row headers are hidden.
+         */
+        get: function () {
+            if (this._headerVisibility === 'none') {
+                return 0;
+            }
+            if (this._headerVisibility === 'column') {
+                return 0;
+            }
+            return this._rowHeaderSections.totalSize;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(DataGrid.prototype, "headerHeight", {
+        /**
+         * The virtual height of the column headers.
+         *
+         * #### Notes
+         * This will be `0` if the column headers are hidden.
+         */
+        get: function () {
+            if (this._headerVisibility === 'none') {
+                return 0;
+            }
+            if (this._headerVisibility === 'row') {
+                return 0;
+            }
+            return this._columnHeaderSections.totalSize;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(DataGrid.prototype, "totalWidth", {
+        /**
+         * The total virtual width of the grid.
+         *
+         * #### Notes
+         * If the grid widget is sized larger than this width, a horizontal
+         * scroll bar will not be shown.
+         */
+        get: function () {
+            return this.headerWidth + this.bodyWidth;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(DataGrid.prototype, "totalHeight", {
+        /**
+         * The total virtual height of the grid.
+         *
+         * #### Notes
+         * If the grid widget is sized larger than this height, a vertical
+         * scroll bar will not be shown.
+         */
+        get: function () {
+            return this.headerHeight + this.bodyHeight;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(DataGrid.prototype, "viewportWidth", {
+        /**
+         * The width of the visible portion of the data grid.
+         *
+         * #### Notes
+         * This value does not include the width of the scroll bar.
+         */
+        get: function () {
+            return this._viewportWidth;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(DataGrid.prototype, "viewportHeight", {
+        /**
+         * The height of the visible portion of the data grid.
+         *
+         * #### Notes
+         * This value does not include the height of the scroll bar.
+         */
+        get: function () {
+            return this._viewportHeight;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(DataGrid.prototype, "pageWidth", {
+        /**
+         * The width of the visible portion of the body cells.
+         *
+         * #### Notes
+         * This value does not include the width of the row headers.
+         */
+        get: function () {
+            return Math.max(0, this._viewportWidth - this.headerWidth);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(DataGrid.prototype, "pageHeight", {
+        /**
+         * The height of the visible portion of the body cells.
+         *
+         * #### Notes
+         * This value does not include the height of the column headers.
+         */
+        get: function () {
+            return Math.max(0, this._viewportHeight - this.headerHeight);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(DataGrid.prototype, "baseRowSize", {
+        /**
+         * Get the base size of the body rows.
+         *
+         * #### Notes
+         * This is the size of rows which have not been resized.
+         */
+        get: function () {
+            return this._rowSections.baseSize;
+        },
+        /**
+         * Set the base size of the body rows.
+         *
+         * #### Notes
+         * This is the size of rows which have not been resized.
+         */
+        set: function (value) {
+            this._setBaseSize(this._rowSections, value);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(DataGrid.prototype, "baseColumnSize", {
+        /**
+         * Get the base size of the body columns.
+         *
+         * #### Notes
+         * This is the size of columns which have not been resized.
+         */
+        get: function () {
+            return this._columnSections.baseSize;
+        },
+        /**
+         * Set the base size of the body columns.
+         *
+         * #### Notes
+         * This is the size of columns which have not been resized.
+         */
+        set: function (value) {
+            this._setBaseSize(this._columnSections, value);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(DataGrid.prototype, "baseRowHeaderSize", {
+        /**
+         * Get the base size of the row headers.
+         *
+         * #### Notes
+         * This is the size of row headers which have not been resized.
+         */
+        get: function () {
+            return this._rowHeaderSections.baseSize;
+        },
+        /**
+         * Set the base size of the row headers.
+         *
+         * #### Notes
+         * This is the size of row headers which have not been resized.
+         */
+        set: function (value) {
+            this._setBaseSize(this._rowHeaderSections, value);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(DataGrid.prototype, "baseColumnHeaderSize", {
+        /**
+         * Get the base size of the column headers.
+         *
+         * #### Notes
+         * This is the size of column headers which have not been resized.
+         */
+        get: function () {
+            return this._columnHeaderSections.baseSize;
+        },
+        /**
+         * Set the base size of the column headers.
+         *
+         * #### Notes
+         * This is the size of column headers which have not been resized.
+         */
+        set: function (value) {
+            this._setBaseSize(this._columnHeaderSections, value);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    /**
+     * Get the size of a section in the data grid.
+     *
+     * @param area - The grid area for the section of interest.
+     *
+     * @param index - The index of the section of interest.
+     *
+     * @return The size of the section, or `-1` if `index` is invalid.
+     */
+    DataGrid.prototype.sectionSize = function (area, index) {
+        return this._getSectionList(area).sectionSize(index);
+    };
+    /**
+     * Resize a section in the data grid.
+     *
+     * @param area - The grid area for the section of interest.
+     *
+     * @param index - The index of the section of interest.
+     *
+     * @param size - The new size for the section.
+     *
+     * #### Notes
+     * This is a no-op if `index` is invalid.
+     */
+    DataGrid.prototype.resizeSection = function (area, index, size) {
+        this._resizeSection(this._getSectionList(area), index, size);
+    };
+    /**
+     * Reset sections in the data grid to their base size.
+     *
+     * @param area - The grid area for the sections of interest.
+     */
+    DataGrid.prototype.resetSections = function (area) {
+        this._getSectionList(area).reset();
+        this._syncViewport();
+    };
+    /**
+     * Scroll the viewport by one page.
+     *
+     * @param - The desired direction of the scroll.
+     */
+    DataGrid.prototype.scrollByPage = function (dir) {
+        var dx = 0;
+        var dy = 0;
+        switch (dir) {
+            case 'up':
+                dy = -this.pageHeight;
+                break;
+            case 'down':
+                dy = this.pageHeight;
+                break;
+            case 'left':
+                dx = -this.pageWidth;
+                break;
+            case 'right':
+                dx = this.pageWidth;
+                break;
+            default:
+                throw 'unreachable';
+        }
+        this.scrollBy(dx, dy);
+    };
+    /**
+     * Scroll the viewport by one cell-aligned step.
+     *
+     * @param - The desired direction of the scroll.
+     */
+    DataGrid.prototype.scrollByStep = function (dir) {
+        var r;
+        var c;
+        var x = this._scrollX;
+        var y = this._scrollY;
+        var rows = this._rowSections;
+        var columns = this._columnSections;
+        switch (dir) {
+            case 'up':
+                r = rows.sectionIndex(y - 1);
+                y = r < 0 ? y : rows.sectionOffset(r);
+                break;
+            case 'down':
+                r = rows.sectionIndex(y);
+                y = r < 0 ? y : rows.sectionOffset(r) + rows.sectionSize(r);
+                break;
+            case 'left':
+                c = columns.sectionIndex(x - 1);
+                x = c < 0 ? x : columns.sectionOffset(c);
+                break;
+            case 'right':
+                c = columns.sectionIndex(x);
+                x = c < 0 ? x : columns.sectionOffset(c) + columns.sectionSize(c);
+                break;
+            default:
+                throw 'unreachable';
+        }
+        this.scrollTo(x, y);
+    };
+    /**
+     * Scroll the viewport by the specified delta.
+     *
+     * @param dx - The scroll X delta, in pixels.
+     *
+     * @param dy - The scroll Y delta, in pixels.
+     */
+    DataGrid.prototype.scrollBy = function (dx, dy) {
+        this.scrollTo(this._scrollX + dx, this._scrollY + dy);
+    };
+    /**
+     * Scroll to the specified offset position.
+     *
+     * @param x - The scroll X offset, in pixels.
+     *
+     * @param y - The scroll Y offset, in pixels.
+     *
+     * #### Notes
+     * The scroll position will be clamped to the allowable range.
+     *
+     * Fractional values will be rounded to the nearest integer.
+     */
+    DataGrid.prototype.scrollTo = function (x, y) {
+        // Floor and clamp the position to the allowable range.
+        x = Math.max(0, Math.min(Math.floor(x), this.maxScrollX));
+        y = Math.max(0, Math.min(Math.floor(y), this.maxScrollY));
+        // Always synchronize the scroll bar values.
+        this._hScrollBar.value = x;
+        this._vScrollBar.value = y;
+        // Compute the delta scroll amount.
+        var dx = x - this._scrollX;
+        var dy = y - this._scrollY;
+        // Bail early if there is no effective scroll.
+        if (dx === 0 && dy === 0) {
+            return;
+        }
+        // If there is a paint pending, ensure it paints everything.
+        if (this._paintPending) {
+            this._scrollX = x;
+            this._scrollY = y;
+            this.repaint();
+            return;
+        }
+        // Bail early if the viewport is not visible.
+        if (!this._viewport.isVisible) {
+            this._scrollX = x;
+            this._scrollY = y;
+            return;
+        }
+        // Get the current size of the viewport.
+        var width = this._viewportWidth;
+        var height = this._viewportHeight;
+        // Bail early if the viewport is empty.
+        if (width === 0 || height === 0) {
+            this._scrollX = x;
+            this._scrollY = y;
+            return;
+        }
+        // Get the visible content origin.
+        var contentX = this.headerWidth;
+        var contentY = this.headerHeight;
+        // Get the visible content dimensions.
+        var contentWidth = width - contentX;
+        var contentHeight = height - contentY;
+        // Bail early if there is no content to draw.
+        if (contentWidth <= 0 && contentHeight <= 0) {
+            this._scrollX = x;
+            this._scrollY = y;
+            return;
+        }
+        // Compute the area which needs painting for the `dx` scroll.
+        var dxArea = 0;
+        if (dx !== 0 && contentWidth > 0) {
+            if (Math.abs(dx) >= contentWidth) {
+                dxArea = contentWidth * height;
+            }
+            else {
+                dxArea = Math.abs(dx) * height;
+            }
+        }
+        // Compute the area which needs painting for the `dy` scroll.
+        var dyArea = 0;
+        if (dy !== 0 && contentHeight > 0) {
+            if (Math.abs(dy) >= contentHeight) {
+                dyArea = width * contentHeight;
+            }
+            else {
+                dyArea = width * Math.abs(dy);
+            }
+        }
+        // If the area sum is larger than the total, paint everything.
+        if ((dxArea + dyArea) >= (width * height)) {
+            this._scrollX = x;
+            this._scrollY = y;
+            this._paint(0, 0, width, height);
+            return;
+        }
+        // Update the internal Y scroll position.
+        this._scrollY = y;
+        // Scroll the Y axis if needed. If the scroll distance exceeds
+        // the visible height, paint everything. Otherwise, blit the
+        // valid content and paint the dirty region.
+        if (dy !== 0 && contentHeight > 0) {
+            if (Math.abs(dy) >= contentHeight) {
+                this._paint(0, contentY, width, contentHeight);
+            }
+            else {
+                var x_1 = 0;
+                var y_1 = dy < 0 ? contentY : contentY + dy;
+                var w = width;
+                var h = contentHeight - Math.abs(dy);
+                this._blit(this._canvas, x_1, y_1, w, h, x_1, y_1 - dy);
+                this._paint(0, dy < 0 ? contentY : height - dy, width, Math.abs(dy));
+            }
+        }
+        // Update the internal X scroll position.
+        this._scrollX = x;
+        // Scroll the X axis if needed. If the scroll distance exceeds
+        // the visible width, paint everything. Otherwise, blit the
+        // valid content and paint the dirty region.
+        if (dx !== 0 && contentWidth > 0) {
+            if (Math.abs(dx) >= contentWidth) {
+                this._paint(contentX, 0, contentWidth, height);
+            }
+            else {
+                var x_2 = dx < 0 ? contentX : contentX + dx;
+                var y_2 = 0;
+                var w = contentWidth - Math.abs(dx);
+                var h = height;
+                this._blit(this._canvas, x_2, y_2, w, h, x_2 - dx, y_2);
+                this._paint(dx < 0 ? contentX : width - dx, 0, Math.abs(dx), height);
+            }
+        }
+    };
+    DataGrid.prototype.repaint = function () {
+        // Parse the arguments.
+        var x;
+        var y;
+        var w;
+        var h;
+        switch (arguments.length) {
+            case 0:
+                x = 0;
+                y = 0;
+                w = this._viewportWidth;
+                h = this._viewportHeight;
+                break;
+            case 4:
+                x = Math.floor(arguments[0]);
+                y = Math.floor(arguments[1]);
+                w = Math.floor(arguments[2]);
+                h = Math.floor(arguments[3]);
+                break;
+            default:
+                throw 'unreachable';
+        }
+        // Bail early if there is nothing to paint.
+        if (w <= 0 || h <= 0) {
+            return;
+        }
+        // Set the paint pending flag.
+        this._paintPending = true;
+        // Create the paint request message.
+        var msg = new Private.PaintRequest(x, y, x + w - 1, y + h - 1);
+        // Post the paint request to the viewport.
+        messaging_1.MessageLoop.postMessage(this._viewport, msg);
+    };
+    /**
+     * Process a message sent to the widget.
+     *
+     * @param msg - The message sent to the widget.
+     */
+    DataGrid.prototype.processMessage = function (msg) {
+        // Ignore child show/hide messages. The data grid controls the
+        // visibility of its children, and will manually dispatch the
+        // fit-request messages as a result of visibility change.
+        if (msg.type === 'child-shown' || msg.type === 'child-hidden') {
+            return;
+        }
+        // Recompute the scroll bar minimums before the layout refits.
+        if (msg.type === 'fit-request') {
+            var vsbLimits = domutils_1.ElementExt.sizeLimits(this._vScrollBar.node);
+            var hsbLimits = domutils_1.ElementExt.sizeLimits(this._hScrollBar.node);
+            this._vScrollBarMinWidth = vsbLimits.minWidth;
+            this._hScrollBarMinHeight = hsbLimits.minHeight;
+        }
+        // Process all other messages as normal.
+        _super.prototype.processMessage.call(this, msg);
+    };
+    /**
+     * Intercept a message sent to a message handler.
+     *
+     * @param handler - The target handler of the message.
+     *
+     * @param msg - The message to be sent to the handler.
+     *
+     * @returns `true` if the message should continue to be processed
+     *   as normal, or `false` if processing should cease immediately.
+     */
+    DataGrid.prototype.messageHook = function (handler, msg) {
+        if (handler === this._viewport) {
+            this._processViewportMessage(msg);
+        }
+        return true;
+    };
+    /**
+     * Handle the DOM events for the data grid.
+     *
+     * @param event - The DOM event sent to the data grid.
+     *
+     * #### Notes
+     * This method implements the DOM `EventListener` interface and is
+     * called in response to events on the data grid's DOM node. It
+     * should not be called directly by user code.
+     */
+    DataGrid.prototype.handleEvent = function (event) {
+        switch (event.type) {
+            case 'mousedown':
+                this._evtMouseDown(event);
+                break;
+            case 'mousemove':
+                this._evtMouseMove(event);
+                break;
+            case 'mouseup':
+                this._evtMouseUp(event);
+                break;
+            case 'wheel':
+                this._evtWheel(event);
+                break;
+            case 'keydown':
+                this._evtKeyDown(event);
+                break;
+            case 'contextmenu':
+                event.preventDefault();
+                event.stopPropagation();
+                break;
+            case 'resize':
+                this._refreshDPI();
+                break;
+        }
+    };
+    /**
+     * A message handler invoked on a `'before-attach'` message.
+     */
+    DataGrid.prototype.onBeforeAttach = function (msg) {
+        window.addEventListener('resize', this);
+        this.node.addEventListener('wheel', this);
+        this.node.addEventListener('mousedown', this);
+        this._viewport.node.addEventListener('mousemove', this);
+        this.repaint(); // TODO actually need to fit the viewport ?
+    };
+    /**
+     * A message handler invoked on an `'after-detach'` message.
+     */
+    DataGrid.prototype.onAfterDetach = function (msg) {
+        window.removeEventListener('resize', this);
+        this.node.removeEventListener('wheel', this);
+        this.node.removeEventListener('mousedown', this);
+        this._viewport.node.removeEventListener('mousemove', this);
+        this._releaseMouse();
+    };
+    /**
+     * A message handler invoked on a `'before-show'` message.
+     */
+    DataGrid.prototype.onBeforeShow = function (msg) {
+        this.repaint(); // TODO actually need to fit the viewport ?
+    };
+    /**
+     * A message handler invoked on a `'resize'` message.
+     */
+    DataGrid.prototype.onResize = function (msg) {
+        this._syncScrollState();
+    };
+    /**
+     * Refresh the internal dpi ratio.
+     *
+     * This will update the canvas size and schedule a repaint if needed.
+     */
+    DataGrid.prototype._refreshDPI = function () {
+        // Get the best integral value for the dpi ratio.
+        var dpiRatio = Math.ceil(window.devicePixelRatio);
+        // Bail early if the computed dpi ratio has not changed.
+        if (this._dpiRatio === dpiRatio) {
+            return;
+        }
+        // Update the internal dpi ratio.
+        this._dpiRatio = dpiRatio;
+        // Schedule a full repaint of the grid.
+        this.repaint();
+        // Update the canvas size for the new dpi ratio.
+        this._resizeCanvasIfNeeded(this._viewportWidth, this._viewportHeight);
+        // Ensure the canvas style is scaled for the new ratio.
+        this._canvas.style.width = this._canvas.width / this._dpiRatio + "px";
+        this._canvas.style.height = this._canvas.height / this._dpiRatio + "px";
+    };
+    /**
+     * Ensure the canvas is at least the specified size.
+     *
+     * This method will retain the valid canvas content.
+     */
+    DataGrid.prototype._resizeCanvasIfNeeded = function (width, height) {
+        // Scale the size by the dpi ratio.
+        width = width * this._dpiRatio;
+        height = height * this._dpiRatio;
+        // Compute the maximum canvas size for the given width.
+        var maxW = (Math.ceil((width + 1) / 512) + 1) * 512;
+        var maxH = (Math.ceil((height + 1) / 512) + 1) * 512;
+        // Get the current size of the canvas.
+        var curW = this._canvas.width;
+        var curH = this._canvas.height;
+        // Bail early if the canvas size is within bounds.
+        if (curW >= width && curH >= height && curW <= maxW && curH <= maxH) {
+            return;
+        }
+        // Compute the expanded canvas size.
+        var expW = maxW - 512;
+        var expH = maxH - 512;
+        // Set the transforms to the identity matrix.
+        this._canvasGC.setTransform(1, 0, 0, 1, 0, 0);
+        this._bufferGC.setTransform(1, 0, 0, 1, 0, 0);
+        // Resize the buffer width if needed.
+        if (curW < width) {
+            this._buffer.width = expW;
+        }
+        else if (curW > maxW) {
+            this._buffer.width = maxW;
+        }
+        // Resize the buffer height if needed.
+        if (curH < height) {
+            this._buffer.height = expH;
+        }
+        else if (curH > maxH) {
+            this._buffer.height = maxH;
+        }
+        // Test whether there is content to blit.
+        var needBlit = curH > 0 && curH > 0 && width > 0 && height > 0;
+        // Copy the valid content into the buffer if needed.
+        if (needBlit) {
+            this._bufferGC.drawImage(this._canvas, 0, 0);
+        }
+        // Resize the canvas width if needed.
+        if (curW < width) {
+            this._canvas.width = expW;
+            this._canvas.style.width = expW / this._dpiRatio + "px";
+        }
+        else if (curW > maxW) {
+            this._canvas.width = maxW;
+            this._canvas.style.width = maxW / this._dpiRatio + "px";
+        }
+        // Resize the canvas height if needed.
+        if (curH < height) {
+            this._canvas.height = expH;
+            this._canvas.style.height = expH / this._dpiRatio + "px";
+        }
+        else if (curH > maxH) {
+            this._canvas.height = maxH;
+            this._canvas.style.height = maxH / this._dpiRatio + "px";
+        }
+        // Copy the valid content from the buffer if needed.
+        if (needBlit) {
+            this._canvasGC.drawImage(this._buffer, 0, 0);
+        }
+    };
+    /**
+     * Sync the scroll bars and scroll state with the viewport.
+     *
+     * #### Notes
+     * If the visibility of either scroll bar changes, a synchronous
+     * fit-request will be dispatched to the data grid to immediately
+     * resize the viewport.
+     */
+    DataGrid.prototype._syncScrollState = function () {
+        // Fetch the viewport dimensions.
+        var bw = this.bodyWidth;
+        var bh = this.bodyHeight;
+        var pw = this.pageWidth;
+        var ph = this.pageHeight;
+        // Get the current scroll bar visibility.
+        var hasVScroll = !this._vScrollBar.isHidden;
+        var hasHScroll = !this._hScrollBar.isHidden;
+        // Get the minimum sizes of the scroll bars.
+        var vsw = this._vScrollBarMinWidth;
+        var hsh = this._hScrollBarMinHeight;
+        // Get the page size as if no scroll bars are visible.
+        var apw = pw + (hasVScroll ? vsw : 0);
+        var aph = ph + (hasHScroll ? hsh : 0);
+        // Test whether scroll bars are needed for the adjusted size.
+        var needVScroll = aph < bh - 1;
+        var needHScroll = apw < bw - 1;
+        // Re-test the horizontal scroll if a vertical scroll is needed.
+        if (needVScroll && !needHScroll) {
+            needHScroll = (apw - vsw) < bw - 1;
+        }
+        // Re-test the vertical scroll if a horizontal scroll is needed.
+        if (needHScroll && !needVScroll) {
+            needVScroll = (aph - hsh) < bh - 1;
+        }
+        // If the visibility changes, immediately refit the grid.
+        if (needVScroll !== hasVScroll || needHScroll !== hasHScroll) {
+            this._vScrollBar.setHidden(!needVScroll);
+            this._hScrollBar.setHidden(!needHScroll);
+            this._scrollCorner.setHidden(!needVScroll || !needHScroll);
+            messaging_1.MessageLoop.sendMessage(this, widgets_1.Widget.Msg.FitRequest);
+        }
+        // Update the scroll bar limits.
+        this._vScrollBar.maximum = this.maxScrollY;
+        this._vScrollBar.page = this.pageHeight;
+        this._hScrollBar.maximum = this.maxScrollX;
+        this._hScrollBar.page = this.pageWidth;
+        // Re-clamp the scroll position.
+        this.scrollTo(this._scrollX, this._scrollY);
+    };
+    /**
+     * Sync the viewport to the given scroll position.
+     *
+     * #### Notes
+     * This schedules a full repaint and syncs the scroll state.
+     */
+    DataGrid.prototype._syncViewport = function () {
+        // Schedule a full repaint of the viewport.
+        this.repaint();
+        // Sync the scroll state after requesting the repaint.
+        this._syncScrollState();
+    };
+    /**
+     * Get the section list for the specified grid area.
+     */
+    DataGrid.prototype._getSectionList = function (area) {
+        var list;
+        switch (area) {
+            case 'row':
+                list = this._rowSections;
+                break;
+            case 'column':
+                list = this._columnSections;
+                break;
+            case 'row-header':
+                list = this._rowHeaderSections;
+                break;
+            case 'column-header':
+                list = this._columnHeaderSections;
+                break;
+            default:
+                throw 'unreachable';
+        }
+        return list;
+    };
+    /**
+     * Set the base size for the given section list.
+     *
+     * #### Notes
+     * This will update the scroll bars and repaint as needed.
+     */
+    DataGrid.prototype._setBaseSize = function (list, size) {
+        // Normalize the size.
+        size = Math.max(0, Math.floor(size));
+        // Bail early if the size does not change.
+        if (list.baseSize === size) {
+            return;
+        }
+        // Update the list base size.
+        list.baseSize = size;
+        // Sync the viewport
+        this._syncViewport();
+    };
+    /**
+     * Resize a section in the given section list.
+     *
+     * #### Notes
+     * This will update the scroll bars and repaint as needed.
+     */
+    DataGrid.prototype._resizeSection = function (list, index, size) {
+        // Bail early if the index is out of range.
+        if (index < 0 || index >= list.sectionCount) {
+            return;
+        }
+        // Look up the old size of the section.
+        var oldSize = list.sectionSize(index);
+        // Normalize the new size of the section.
+        var newSize = Math.max(0, Math.floor(size));
+        // Bail early if the size does not change.
+        if (oldSize === newSize) {
+            return;
+        }
+        // Resize the section in the list.
+        list.resizeSection(index, newSize);
+        // Get the current size of the viewport.
+        var vpWidth = this._viewportWidth;
+        var vpHeight = this._viewportHeight;
+        // If there is nothing to paint, sync the scroll state.
+        if (!this._viewport.isVisible || vpWidth === 0 || vpHeight === 0) {
+            this._syncScrollState();
+            return;
+        }
+        // If a paint is already pending, sync the viewport.
+        if (this._paintPending) {
+            this._syncViewport();
+            return;
+        }
+        // Compute the size delta.
+        var delta = newSize - oldSize;
+        // Paint the relevant dirty regions.
+        switch (list) {
+            case this._rowSections:
+                {
+                    // Look up the column header height.
+                    var hh = this.headerHeight;
+                    // Compute the viewport offset of the section.
+                    var offset = list.sectionOffset(index) + hh - this._scrollY;
+                    // Bail early if there is nothing to paint.
+                    if (hh >= vpHeight || offset > vpHeight) {
+                        break;
+                    }
+                    // Update the scroll position if the section is not visible.
+                    if (offset + oldSize <= hh) {
+                        this._scrollY += delta;
+                        break;
+                    }
+                    // Compute the paint origin of the section.
+                    var pos = Math.max(hh, offset);
+                    // Paint from the section onward if it spans the viewport.
+                    if (offset + oldSize >= vpHeight || offset + newSize >= vpHeight) {
+                        this._paint(0, pos, vpWidth, vpHeight - pos);
+                        break;
+                    }
+                    // Compute the X blit dimensions.
+                    var sx = 0;
+                    var sw = vpWidth;
+                    var dx = 0;
+                    // Compute the Y blit dimensions.
+                    var sy = void 0;
+                    var sh = void 0;
+                    var dy = void 0;
+                    if (offset + newSize <= hh) {
+                        sy = hh - delta;
+                        sh = vpHeight - sy;
+                        dy = hh;
+                    }
+                    else {
+                        sy = offset + oldSize;
+                        sh = vpHeight - sy;
+                        dy = sy + delta;
+                    }
+                    // Blit the valid content to the destination.
+                    this._blit(this._canvas, sx, sy, sw, sh, dx, dy);
+                    // Repaint the section if needed.
+                    if (newSize > 0 && offset + newSize > hh) {
+                        this._paint(0, pos, vpWidth, offset + newSize - pos);
+                    }
+                    // Paint the trailing space if needed.
+                    if (delta < 0) {
+                        this._paint(0, vpHeight + delta, vpWidth, -delta);
+                    }
+                    // Done.
+                    break;
+                }
+            case this._columnSections:
+                {
+                    // Look up the row header width.
+                    var hw = this.headerWidth;
+                    // Compute the viewport offset of the section.
+                    var offset = list.sectionOffset(index) + hw - this._scrollX;
+                    // Bail early if there is nothing to paint.
+                    if (hw >= vpWidth || offset > vpWidth) {
+                        break;
+                    }
+                    // Update the scroll position if the section is not visible.
+                    if (offset + oldSize <= hw) {
+                        this._scrollX += delta;
+                        break;
+                    }
+                    // Compute the paint origin of the section.
+                    var pos = Math.max(hw, offset);
+                    // Paint from the section onward if it spans the viewport.
+                    if (offset + oldSize >= vpWidth || offset + newSize >= vpWidth) {
+                        this._paint(pos, 0, vpWidth - pos, vpHeight);
+                        break;
+                    }
+                    // Compute the Y blit dimensions.
+                    var sy = 0;
+                    var sh = vpHeight;
+                    var dy = 0;
+                    // Compute the X blit dimensions.
+                    var sx = void 0;
+                    var sw = void 0;
+                    var dx = void 0;
+                    if (offset + newSize <= hw) {
+                        sx = hw - delta;
+                        sw = vpWidth - sx;
+                        dx = hw;
+                    }
+                    else {
+                        sx = offset + oldSize;
+                        sw = vpWidth - sx;
+                        dx = sx + delta;
+                    }
+                    // Blit the valid content to the destination.
+                    this._blit(this._canvas, sx, sy, sw, sh, dx, dy);
+                    // Repaint the section if needed.
+                    if (newSize > 0 && offset + newSize > hw) {
+                        this._paint(pos, 0, offset + newSize - pos, vpHeight);
+                    }
+                    // Paint the trailing space if needed.
+                    if (delta < 0) {
+                        this._paint(vpWidth + delta, 0, -delta, vpHeight);
+                    }
+                    // Done.
+                    break;
+                }
+            case this._rowHeaderSections:
+                {
+                    // Look up the offset of the section.
+                    var offset = list.sectionOffset(index);
+                    // Bail early if the section is fully outside the viewport.
+                    if (offset >= vpWidth) {
+                        break;
+                    }
+                    // Paint the entire tail if the section spans the viewport.
+                    if (offset + oldSize >= vpWidth || offset + newSize >= vpWidth) {
+                        this._paint(offset, 0, vpWidth - offset, vpHeight);
+                        break;
+                    }
+                    // Compute the blit content dimensions.
+                    var sx = offset + oldSize;
+                    var sy = 0;
+                    var sw = vpWidth - sx;
+                    var sh = vpHeight;
+                    var dx = sx + delta;
+                    var dy = 0;
+                    // Blit the valid contents to the destination.
+                    this._blit(this._canvas, sx, sy, sw, sh, dx, dy);
+                    // Repaint the header section if needed.
+                    if (newSize > 0) {
+                        this._paint(offset, 0, newSize, vpHeight);
+                    }
+                    // Paint the trailing space if needed.
+                    if (delta < 0) {
+                        this._paint(vpWidth + delta, 0, -delta, vpHeight);
+                    }
+                    // Done
+                    break;
+                }
+            case this._columnHeaderSections:
+                {
+                    // Look up the offset of the section.
+                    var offset = list.sectionOffset(index);
+                    // Bail early if the section is fully outside the viewport.
+                    if (offset >= vpHeight) {
+                        break;
+                    }
+                    // Paint the entire tail if the section spans the viewport.
+                    if (offset + oldSize >= vpHeight || offset + newSize >= vpHeight) {
+                        this._paint(0, offset, vpWidth, vpHeight - offset);
+                        break;
+                    }
+                    // Compute the blit content dimensions.
+                    var sx = 0;
+                    var sy = offset + oldSize;
+                    var sw = vpWidth;
+                    var sh = vpHeight - sy;
+                    var dx = 0;
+                    var dy = sy + delta;
+                    // Blit the valid contents to the destination.
+                    this._blit(this._canvas, sx, sy, sw, sh, dx, dy);
+                    // Repaint the header section if needed.
+                    if (newSize > 0) {
+                        this._paint(0, offset, vpWidth, newSize);
+                    }
+                    // Paint the trailing space if needed.
+                    if (delta < 0) {
+                        this._paint(0, vpHeight + delta, vpWidth, -delta);
+                    }
+                    // Done
+                    break;
+                }
+            default:
+                throw 'unreachable';
+        }
+        // Sync the scroll state after painting.
+        this._syncScrollState();
+    };
+    /**
+     * Hit test the grid headers for a resize handle.
+     */
+    DataGrid.prototype._hitTestResizeHandles = function (clientX, clientY) {
+        // Look up the header dimensions.
+        var hw = this.headerWidth;
+        var hh = this.headerHeight;
+        // Convert the mouse position into local coordinates.
+        var rect = this._viewport.node.getBoundingClientRect();
+        var x = clientX - rect.left;
+        var y = clientY - rect.top;
+        // Bail early if the mouse is not over a grid header.
+        if (x >= hw && y >= hh) {
+            return null;
+        }
+        // Test for a match in the corner header first.
+        if (x <= hw + 2 && y <= hh + 2) {
+            // Set up the resize index data.
+            var data = null;
+            // Check for a column match if applicable.
+            if (y <= hh) {
+                data = Private.findResizeIndex(this._rowHeaderSections, x);
+            }
+            // Return the column match if found.
+            if (data) {
+                return { type: 'header-column', index: data.index, delta: data.delta };
+            }
+            // Check for a row match if applicable.
+            if (x <= hw) {
+                data = Private.findResizeIndex(this._columnHeaderSections, y);
+            }
+            // Return the row match if found.
+            if (data) {
+                return { type: 'header-row', index: data.index, delta: data.delta };
+            }
+            // Otherwise, there was no match.
+            return null;
+        }
+        // Test for a match in the column header second.
+        if (y <= hh) {
+            // Convert the position into unscrolled coordinates.
+            var pos = x + this._scrollX - hw;
+            // Check for a match.
+            var data = Private.findResizeIndex(this._columnSections, pos);
+            // Return the column match if found.
+            if (data) {
+                return { type: 'body-column', index: data.index, delta: data.delta };
+            }
+            // Otherwise, there was no match.
+            return null;
+        }
+        // Test for a match in the row header last.
+        if (x <= hw) {
+            // Convert the position into unscrolled coordinates.
+            var pos = y + this._scrollY - hh;
+            // Check for a match.
+            var data = Private.findResizeIndex(this._rowSections, pos);
+            // Return the row match if found.
+            if (data) {
+                return { type: 'body-row', index: data.index, delta: data.delta };
+            }
+            // Otherwise, there was no match.
+            return null;
+        }
+        // Otherwise, there was no match.
+        return null;
+    };
+    /**
+     * Handle the `'keydown'` event for the data grid.
+     */
+    DataGrid.prototype._evtKeyDown = function (event) {
+        // Stop input events during drag.
+        event.preventDefault();
+        event.stopPropagation();
+        // Release the mouse if `Escape` is pressed.
+        if (event.keyCode === 27) {
+            this._releaseMouse();
+        }
+    };
+    /**
+     * Handle the `'mousedown'` event for the data grid.
+     */
+    DataGrid.prototype._evtMouseDown = function (event) {
+        // Do nothing if the left mouse button is not pressed.
+        if (event.button !== 0) {
+            return;
+        }
+        // Extract the client position.
+        var clientX = event.clientX, clientY = event.clientY;
+        // Hit test the grid headers for a resize handle.
+        var handle = this._hitTestResizeHandles(clientX, clientY);
+        // Bail early if no resize handle is pressed.
+        if (!handle) {
+            return;
+        }
+        // Stop the event when a resize handle is pressed.
+        event.preventDefault();
+        event.stopPropagation();
+        // Look up the cursor for the handle.
+        var cursor = Private.cursorForHandle(handle);
+        // Override the document cursor.
+        var override = dragdrop_1.Drag.overrideCursor(cursor);
+        // Set up the press data.
+        this._pressData = { handle: handle, clientX: clientX, clientY: clientY, override: override };
+        // Add the extra document listeners.
+        document.addEventListener('mousemove', this, true);
+        document.addEventListener('mouseup', this, true);
+        document.addEventListener('keydown', this, true);
+        document.addEventListener('contextmenu', this, true);
+    };
+    /**
+     * Handle the `mousemove` event for the data grid.
+     */
+    DataGrid.prototype._evtMouseMove = function (event) {
+        // If a drag is not in progress, the event is for the viewport.
+        if (!this._pressData) {
+            // Hit test the grid headers for a resize handle.
+            var handle = this._hitTestResizeHandles(event.clientX, event.clientY);
+            // Update the viewport cursor.
+            this._viewport.node.style.cursor = Private.cursorForHandle(handle);
+            // Done.
+            return;
+        }
+        // Otherwise, the event is for the drag in progress.
+        // Stop the event.
+        event.preventDefault();
+        event.stopPropagation();
+        // Update the press data with the current mouse position.
+        this._pressData.clientX = event.clientX;
+        this._pressData.clientY = event.clientY;
+        // Post a section resize request message to the viewport.
+        messaging_1.MessageLoop.postMessage(this._viewport, Private.SectionResizeRequest);
+    };
+    /**
+     * Handle the `mouseup` event for the data grid.
+     */
+    DataGrid.prototype._evtMouseUp = function (event) {
+        // Do nothing if the left mouse button is not released.
+        if (event.button !== 0) {
+            return;
+        }
+        // Stop the event when releasing the mouse.
+        event.preventDefault();
+        event.stopPropagation();
+        // Finalize the mouse release.
+        this._releaseMouse();
+    };
+    /**
+     * Handle the `'wheel'` event for the data grid.
+     */
+    DataGrid.prototype._evtWheel = function (event) {
+        // Do nothing if a drag is in progress.
+        if (this._pressData) {
+            return;
+        }
+        // Do nothing if the `Ctrl` key is held.
+        if (event.ctrlKey) {
+            return;
+        }
+        // Extract the delta X and Y movement.
+        var dx = event.deltaX;
+        var dy = event.deltaY;
+        // Convert the delta values to pixel values.
+        switch (event.deltaMode) {
+            case 0:
+                break;
+            case 1:
+                dx *= this._columnSections.baseSize;
+                dy *= this._rowSections.baseSize;
+                break;
+            case 2:
+                dx *= this.pageWidth;
+                dy *= this.pageHeight;
+                break;
+            default:
+                throw 'unreachable';
+        }
+        // Test whether X scroll is needed.
+        var needScrollX = ((dx < 0 && this.scrollX > 0) ||
+            (dx > 0 && this.scrollX < this.maxScrollX));
+        // Test whether Y scroll is needed.
+        var needScrollY = ((dy < 0 && this.scrollY > 0) ||
+            (dy > 0 && this.scrollY < this.maxScrollY));
+        // Bail if no scrolling is needed.
+        if (!needScrollX && !needScrollY) {
+            return;
+        }
+        // Cancel the event if the grid is handling scrolling.
+        event.preventDefault();
+        event.stopPropagation();
+        // Compute the desired scroll position.
+        var x = Math.max(0, Math.min(this.scrollX + dx, this.maxScrollX));
+        var y = Math.max(0, Math.min(this.scrollY + dy, this.maxScrollY));
+        // Update the scroll bar values with the desired position.
+        this._hScrollBar.value = x;
+        this._vScrollBar.value = y;
+        // Post a scroll request message to the viewport.
+        messaging_1.MessageLoop.postMessage(this._viewport, Private.ScrollRequest);
+    };
+    /**
+     * Release the mouse grab for the data grid.
+     */
+    DataGrid.prototype._releaseMouse = function () {
+        // Bail early if no drag is in progress.
+        if (!this._pressData) {
+            return;
+        }
+        // Clear the press data and cursor override.
+        this._pressData.override.dispose();
+        this._pressData = null;
+        // Remove the extra document listeners.
+        document.removeEventListener('mousemove', this, true);
+        document.removeEventListener('mouseup', this, true);
+        document.removeEventListener('keydown', this, true);
+        document.removeEventListener('contextmenu', this, true);
+    };
+    /**
+     * Process a message sent to the viewport
+     */
+    DataGrid.prototype._processViewportMessage = function (msg) {
+        switch (msg.type) {
+            case 'scroll-request':
+                this._onViewportScrollRequest(msg);
+                break;
+            case 'section-resize-request':
+                this._onViewportSectionResizeRequest(msg);
+                break;
+            case 'resize':
+                this._onViewportResize(msg);
+                break;
+            case 'paint-request':
+                this._onViewportPaintRequest(msg);
+                break;
+            default:
+                break;
+        }
+    };
+    /**
+     * A message hook invoked on a viewport `'scroll-request'` message.
+     */
+    DataGrid.prototype._onViewportScrollRequest = function (msg) {
+        this.scrollTo(this._hScrollBar.value, this._vScrollBar.value);
+    };
+    /**
+     * A message hook invoked on a `'section-resize-request'` message.
+     */
+    DataGrid.prototype._onViewportSectionResizeRequest = function (msg) {
+        // Bail early if a drag is not in progress.
+        if (!this._pressData) {
+            return;
+        }
+        // Extract the relevant press data.
+        var _a = this._pressData, handle = _a.handle, clientX = _a.clientX, clientY = _a.clientY;
+        // Convert the client position to viewport coordinates.
+        var rect = this._viewport.node.getBoundingClientRect();
+        var x = clientX - rect.left;
+        var y = clientY - rect.top;
+        // Look up the section list and convert to section position.
+        var pos;
+        var list;
+        switch (handle.type) {
+            case 'body-row':
+                pos = y + this._scrollY - this.headerHeight;
+                list = this._rowSections;
+                break;
+            case 'body-column':
+                pos = x + this._scrollX - this.headerWidth;
+                list = this._columnSections;
+                break;
+            case 'header-row':
+                pos = y;
+                list = this._columnHeaderSections;
+                break;
+            case 'header-column':
+                pos = x;
+                list = this._rowHeaderSections;
+                break;
+            default:
+                throw 'unreachable';
+        }
+        // Look up the offset for the handle.
+        var offset = list.sectionOffset(handle.index);
+        // Bail if the handle no longer exists.
+        if (offset < 0) {
+            return;
+        }
+        // Compute the new size for the section.
+        var size = Math.max(4, pos - handle.delta - offset);
+        // Resize the section to the computed size.
+        this._resizeSection(list, handle.index, size);
+    };
+    /**
+     * A message hook invoked on a viewport `'resize'` message.
+     */
+    DataGrid.prototype._onViewportResize = function (msg) {
+        // Bail early if the viewport is not visible.
+        if (!this._viewport.isVisible) {
+            return;
+        }
+        // Unpack the message data.
+        var width = msg.width, height = msg.height;
+        // Measure the viewport node if the dimensions are unknown.
+        if (width === -1) {
+            width = this._viewport.node.offsetWidth;
+        }
+        if (height === -1) {
+            height = this._viewport.node.offsetHeight;
+        }
+        // Round the dimensions to the nearest pixel.
+        width = Math.round(width);
+        height = Math.round(height);
+        // Get the current size of the viewport.
+        var oldWidth = this._viewportWidth;
+        var oldHeight = this._viewportHeight;
+        // Updated internal viewport size.
+        this._viewportWidth = width;
+        this._viewportHeight = height;
+        // Resize the canvas if needed.
+        this._resizeCanvasIfNeeded(width, height);
+        // Compute the sizes of the dirty regions.
+        var right = width - oldWidth;
+        var bottom = height - oldHeight;
+        // Bail if nothing needs to be painted.
+        if (right <= 0 && bottom <= 0) {
+            return;
+        }
+        // If there is a paint pending, ensure it paints everything.
+        if (this._paintPending) {
+            this.repaint();
+            return;
+        }
+        // Paint the whole viewport if the old size was zero.
+        if (oldWidth === 0 || oldHeight === 0) {
+            this._paint(0, 0, width, height);
+            return;
+        }
+        // Paint the dirty region to the right, if needed.
+        if (right > 0) {
+            this._paint(oldWidth, 0, right, height);
+        }
+        // Paint the dirty region to the bottom, if needed.
+        if (bottom > 0 && width > right) {
+            this._paint(0, oldHeight, width - right, bottom);
+        }
+    };
+    /**
+     * A message hook invoked on a viewport `'paint-request'` message.
+     */
+    DataGrid.prototype._onViewportPaintRequest = function (msg) {
+        // Clear the paint pending flag.
+        this._paintPending = false;
+        // Bail early if the viewport is not visible.
+        if (!this._viewport.isVisible) {
+            return;
+        }
+        // Bail early if the viewport has zero area.
+        if (this._viewportWidth === 0 || this._viewportHeight === 0) {
+            return;
+        }
+        // Compute the paint bounds.
+        var xMin = 0;
+        var yMin = 0;
+        var xMax = this._viewportWidth - 1;
+        var yMax = this._viewportHeight - 1;
+        // Unpack the message data.
+        var x1 = msg.x1, y1 = msg.y1, x2 = msg.x2, y2 = msg.y2;
+        // Bail early if the dirty rect is outside the bounds.
+        if (x2 < xMin || y2 < yMin || x1 > xMax || y1 > yMax) {
+            return;
+        }
+        // Clamp the dirty rect to the paint bounds.
+        x1 = Math.max(xMin, Math.min(x1, xMax));
+        y1 = Math.max(yMin, Math.min(y1, yMax));
+        x2 = Math.max(xMin, Math.min(x2, xMax));
+        y2 = Math.max(yMin, Math.min(y2, yMax));
+        // Paint the dirty rect.
+        this._paint(x1, y1, x2 - x1 + 1, y2 - y1 + 1);
+    };
+    /**
+     * Handle the `thumbMoved` signal from a scroll bar.
+     */
+    DataGrid.prototype._onThumbMoved = function (sender) {
+        messaging_1.MessageLoop.postMessage(this._viewport, Private.ScrollRequest);
+    };
+    /**
+     * Handle the `pageRequested` signal from a scroll bar.
+     */
+    DataGrid.prototype._onPageRequested = function (sender, dir) {
+        if (sender === this._vScrollBar) {
+            this.scrollByPage(dir === 'decrement' ? 'up' : 'down');
+        }
+        else {
+            this.scrollByPage(dir === 'decrement' ? 'left' : 'right');
+        }
+    };
+    /**
+     * Handle the `stepRequested` signal from a scroll bar.
+     */
+    DataGrid.prototype._onStepRequested = function (sender, dir) {
+        if (sender === this._vScrollBar) {
+            this.scrollByStep(dir === 'decrement' ? 'up' : 'down');
+        }
+        else {
+            this.scrollByStep(dir === 'decrement' ? 'left' : 'right');
+        }
+    };
+    /**
+     * A signal handler for the data model `changed` signal.
+     */
+    DataGrid.prototype._onModelChanged = function (sender, args) {
+        switch (args.type) {
+            case 'rows-removed':
+            case 'rows-inserted':
+            case 'columns-removed':
+            case 'columns-inserted':
+                this._onSectionsChanged(args);
+                break;
+            case 'rows-moved':
+            case 'columns-moved':
+                this._onSectionsMoved(args);
+                break;
+            case 'cells-changed':
+                this._onCellsChanged(args);
+                break;
+            case 'model-reset':
+                this._onModelReset(args);
+                break;
+            default:
+                throw 'unreachable';
+        }
+    };
+    /**
+     * Handle sections changing in the data model.
+     */
+    DataGrid.prototype._onSectionsChanged = function (args) {
+        // TODO clean up this method. It's ugly.
+        // Unpack the arg data.
+        var region = args.region, type = args.type, index = args.index, span = args.span;
+        // Bail early if there are no sections to insert.
+        if (span <= 0) {
+            return;
+        }
+        // Determine the behavior of the change type.
+        var isRows = type === 'rows-inserted' || type === 'rows-removed';
+        var isRemove = type === 'rows-removed' || type === 'columns-removed';
+        // Look up the relevant section list.
+        var list;
+        if (region === 'body') {
+            list = isRows ? this._rowSections : this._columnSections;
+        }
+        else {
+            list = isRows ? this._columnHeaderSections : this._rowHeaderSections;
+        }
+        // Bail if the index is out of range.
+        if (isRemove && (index < 0 || index >= list.sectionCount)) {
+            return;
+        }
+        // Compute the paint offset and handle region-specific behavior.
+        var offset;
+        if (region !== 'body') {
+            // Compute the paint offset.
+            if (index >= list.sectionCount) {
+                offset = list.totalSize;
+            }
+            else {
+                offset = list.sectionOffset(index);
+            }
+            // Remove or insert the sections as needed.
+            if (isRemove) {
+                list.removeSections(index, span);
+            }
+            else {
+                list.insertSections(index, span);
+            }
+        }
+        else {
+            // Look up the initial scroll geometry.
+            var scrollPos1 = void 0;
+            var maxScrollPos1 = void 0;
+            if (isRows) {
+                scrollPos1 = this._scrollY;
+                maxScrollPos1 = this.maxScrollY;
+            }
+            else {
+                scrollPos1 = this._scrollX;
+                maxScrollPos1 = this.maxScrollX;
+            }
+            // Look up the target position.
+            var targetPos = void 0;
+            if (index >= list.sectionCount) {
+                targetPos = list.totalSize;
+            }
+            else {
+                targetPos = list.sectionOffset(index);
+            }
+            // Remove or Insert the sections and save the pre- and post- size.
+            var size1 = list.totalSize;
+            if (isRemove) {
+                list.removeSections(index, span);
+            }
+            else {
+                list.insertSections(index, span);
+            }
+            var size2 = list.totalSize;
+            // Fetch the new max scroll position.
+            var maxScrollPos2 = void 0;
+            if (isRows) {
+                maxScrollPos2 = this.maxScrollY;
+            }
+            else {
+                maxScrollPos2 = this.maxScrollX;
+            }
+            // Adjust the scroll position as needed.
+            var scrollPos2 = void 0;
+            if (scrollPos1 === 0) {
+                scrollPos2 = 0;
+            }
+            else if (scrollPos1 === maxScrollPos1) {
+                scrollPos2 = maxScrollPos2;
+            }
+            else if (isRemove && targetPos <= scrollPos1) {
+                var delta = Math.min(scrollPos1 - targetPos, size1 - size2);
+                scrollPos2 = Math.min(scrollPos1 - delta, maxScrollPos2);
+            }
+            else if (targetPos <= scrollPos1) {
+                scrollPos2 = Math.min(scrollPos1 + size2 - size1, maxScrollPos2);
+            }
+            else {
+                scrollPos2 = scrollPos1;
+            }
+            // Update the scroll position and compute the paint offset.
+            if (isRows) {
+                this._scrollY = scrollPos2;
+                offset = this.headerHeight;
+            }
+            else {
+                this._scrollX = scrollPos2;
+                offset = this.headerWidth;
+            }
+            // Adjust the paint offset if the scroll position did not change.
+            if (scrollPos1 === scrollPos2) {
+                offset = Math.max(offset, offset + targetPos - scrollPos1);
+            }
+        }
+        // Compute the dirty area.
+        var x = isRows ? 0 : offset;
+        var y = isRows ? offset : 0;
+        var w = this._viewportWidth - x;
+        var h = this._viewportHeight - y;
+        // Schedule a repaint of the dirty area, if needed.
+        if (w > 0 && h > 0) {
+            this.repaint(x, y, w, h);
+        }
+        // Sync the scroll state after queueing the repaint.
+        this._syncScrollState();
+    };
+    /**
+     * Handle sections moving in the data model.
+     */
+    DataGrid.prototype._onSectionsMoved = function (args) {
+        // Unpack the arg data.
+        var region = args.region, type = args.type, index = args.index, span = args.span, destination = args.destination;
+        // Bail early if there are no sections to move.
+        if (span <= 0) {
+            return;
+        }
+        // Determine the behavior of the change type.
+        var isRows = type === 'rows-moved';
+        // Look up the relevant section list.
+        var list;
+        if (region === 'body') {
+            list = isRows ? this._rowSections : this._columnSections;
+        }
+        else {
+            list = isRows ? this._columnHeaderSections : this._rowHeaderSections;
+        }
+        // Bail early if the index is out of range.
+        if (index < 0 || index >= list.sectionCount) {
+            return;
+        }
+        // Clamp the move span to the limit.
+        span = Math.min(span, list.sectionCount - index);
+        // Clamp the destination index to the limit.
+        destination = Math.min(Math.max(0, destination), list.sectionCount - span);
+        // Bail early if there is no effective move.
+        if (index === destination) {
+            return;
+        }
+        // Compute the first affected index.
+        var i1 = Math.min(index, destination);
+        // Compute the last affected index.
+        var i2 = Math.max(index + span - 1, destination + span - 1);
+        // Compute the first paint boundary.
+        var p1 = list.sectionOffset(i1);
+        // Compute the last paint boundary.
+        var p2;
+        if (i2 >= list.sectionCount - 1) {
+            p2 = list.totalSize - 1;
+        }
+        else {
+            p2 = list.sectionOffset(i2 + 1) - 1;
+        }
+        // Move the sections in the list.
+        list.moveSections(index, span, destination);
+        // Fetch the row header and column header sizes.
+        var hw = this.headerWidth;
+        var hh = this.headerHeight;
+        // Set up the initial paint limits.
+        var xMin = 0;
+        var yMin = 0;
+        var xMax = this._viewportWidth - 1;
+        var yMax = this._viewportHeight - 1;
+        // Set up the initial paint region.
+        var x1 = xMin;
+        var y1 = yMin;
+        var x2 = xMax;
+        var y2 = yMax;
+        // Adjust the limits and paint region.
+        switch (region) {
+            case 'body':
+                if (isRows) {
+                    yMin = hh;
+                    y1 = hh + p1 - this._scrollY;
+                    y2 = hh + p2 - this._scrollY;
+                }
+                else {
+                    xMin = hw;
+                    x1 = hw + p1 - this._scrollX;
+                    x2 = hw + p2 - this._scrollX;
+                }
+                break;
+            case 'row-header':
+                xMax = Math.min(hw - 1, xMax);
+                x1 = p1;
+                x2 = p2;
+                break;
+            case 'column-header':
+                yMax = Math.min(hh - 1, yMax);
+                y1 = p1;
+                y2 = p2;
+                break;
+            default:
+                throw 'unreachable';
+        }
+        // Bail early if the paint limits are empty.
+        if (xMax < xMin || yMax < yMin) {
+            return;
+        }
+        // Bail early if the dirty region is out of range.
+        if (x2 < xMin || x1 > xMax || y2 < yMin || y1 > yMax) {
+            return;
+        }
+        // Compute the dirty area.
+        var x = Math.max(xMin, x1);
+        var y = Math.max(yMin, y1);
+        var w = Math.min(x2, xMax) - x + 1;
+        var h = Math.min(y2, yMax) - y + 1;
+        // Schedule a repaint of the dirty area, if needed.
+        if (w > 0 && h > 0) {
+            this.repaint(x, y, w, h);
+        }
+    };
+    /**
+     * Handle cells changing in the data model.
+     */
+    DataGrid.prototype._onCellsChanged = function (args) {
+        // Unpack the arg data.
+        var region = args.region, rowIndex = args.rowIndex, columnIndex = args.columnIndex, rowSpan = args.rowSpan, columnSpan = args.columnSpan;
+        // Bail early if there are no cells to modify.
+        if (rowSpan <= 0 && columnSpan <= 0) {
+            return;
+        }
+        // Look up the relevant row and column lists.
+        var rList;
+        var cList;
+        switch (region) {
+            case 'body':
+                rList = this._rowSections;
+                cList = this._columnSections;
+                break;
+            case 'row-header':
+                rList = this._rowSections;
+                cList = this._rowHeaderSections;
+                break;
+            case 'column-header':
+                rList = this._columnHeaderSections;
+                cList = this._columnSections;
+                break;
+            case 'corner-header':
+                rList = this._columnHeaderSections;
+                cList = this._rowHeaderSections;
+                break;
+            default:
+                throw 'unreachable';
+        }
+        // Bail early if the changed cells are out of range.
+        if (rowIndex >= rList.sectionCount || columnIndex >= cList.sectionCount) {
+            return;
+        }
+        // Look up the unscrolled top-left corner of the range.
+        var x1 = cList.sectionOffset(columnIndex);
+        var y1 = rList.sectionOffset(rowIndex);
+        // Look up the unscrolled bottom-right corner of the range.
+        var x2;
+        var y2;
+        if (columnIndex + columnSpan >= cList.sectionCount) {
+            x2 = cList.totalSize - 1;
+        }
+        else {
+            x2 = cList.sectionOffset(columnIndex + columnSpan) - 1;
+        }
+        if (rowIndex + rowSpan >= rList.sectionCount) {
+            y2 = rList.totalSize - 1;
+        }
+        else {
+            y2 = rList.sectionOffset(rowIndex + rowSpan) - 1;
+        }
+        // Fetch the row header and column header sizes.
+        var hw = this.headerWidth;
+        var hh = this.headerHeight;
+        // Set up the initial paint limits.
+        var xMin = 0;
+        var yMin = 0;
+        var xMax = this._viewportWidth - 1;
+        var yMax = this._viewportHeight - 1;
+        // Adjust the limits and paint region.
+        switch (region) {
+            case 'body':
+                xMin = hw;
+                yMin = hh;
+                x1 += hw - this._scrollX;
+                x2 += hw - this._scrollX;
+                y1 += hh - this._scrollY;
+                y2 += hh - this._scrollY;
+                break;
+            case 'row-header':
+                yMin = hh;
+                xMax = Math.min(hw - 1, xMax);
+                y1 += hh - this._scrollY;
+                y2 += hh - this._scrollY;
+                break;
+            case 'column-header':
+                xMin = hw;
+                yMax = Math.min(hh - 1, yMax);
+                x1 += hw - this._scrollX;
+                x2 += hw - this._scrollX;
+                break;
+            case 'corner-header':
+                xMax = Math.min(hw - 1, xMax);
+                yMax = Math.min(hh - 1, yMax);
+                break;
+            default:
+                throw 'unreachable';
+        }
+        // Bail early if the paint limits are empty.
+        if (xMax < xMin || yMax < yMin) {
+            return;
+        }
+        // Bail early if the dirty region is out of range.
+        if (x2 < xMin || x1 > xMax || y2 < yMin || y1 > yMax) {
+            return;
+        }
+        // Compute the dirty area.
+        var x = Math.max(xMin, x1);
+        var y = Math.max(yMin, y1);
+        var w = Math.min(x2, xMax) - x + 1;
+        var h = Math.min(y2, yMax) - y + 1;
+        // Schedule a repaint of the dirty area, if needed.
+        if (w > 0 && h > 0) {
+            this.repaint(x, y, w, h);
+        }
+    };
+    /**
+     * Handle a full data model reset.
+     */
+    DataGrid.prototype._onModelReset = function (args) {
+        // Look up the various current section counts.
+        var nr = this._rowSections.sectionCount;
+        var nc = this._columnSections.sectionCount;
+        var nrh = this._rowHeaderSections.sectionCount;
+        var nch = this._columnHeaderSections.sectionCount;
+        // Compute the delta count for each region.
+        var dr = this._model.rowCount('body') - nr;
+        var dc = this._model.columnCount('body') - nc;
+        var drh = this._model.columnCount('row-header') - nrh;
+        var dch = this._model.rowCount('column-header') - nch;
+        // Update the row sections, if needed.
+        if (dr > 0) {
+            this._rowSections.insertSections(nr, dr);
+        }
+        else if (dr < 0) {
+            this._rowSections.removeSections(nr + dr, -dr);
+        }
+        // Update the column sections, if needed.
+        if (dc > 0) {
+            this._columnSections.insertSections(nc, dc);
+        }
+        else if (dc < 0) {
+            this._columnSections.removeSections(nc + dc, -dc);
+        }
+        // Update the row header sections, if needed.
+        if (drh > 0) {
+            this._rowHeaderSections.insertSections(nrh, drh);
+        }
+        else if (drh < 0) {
+            this._rowHeaderSections.removeSections(nrh + drh, -drh);
+        }
+        // Update the column header sections, if needed.
+        if (dch > 0) {
+            this._columnHeaderSections.insertSections(nch, dch);
+        }
+        else if (dch < 0) {
+            this._columnHeaderSections.removeSections(nch + dch, -dch);
+        }
+        // Sync the viewport.
+        this._syncViewport();
+    };
+    /**
+     * A signal handler for the renderer map `changed` signal.
+     */
+    DataGrid.prototype._onRenderersChanged = function () {
+        this.repaint();
+    };
+    /**
+     * Blit content into the on-screen canvas.
+     *
+     * The rect should be expressed in viewport coordinates.
+     *
+     * This automatically accounts for the dpi ratio.
+     */
+    DataGrid.prototype._blit = function (source, x, y, w, h, dx, dy) {
+        // Scale the blit coordinates by the dpi ratio.
+        x *= this._dpiRatio;
+        y *= this._dpiRatio;
+        w *= this._dpiRatio;
+        h *= this._dpiRatio;
+        dx *= this._dpiRatio;
+        dy *= this._dpiRatio;
+        // Save the current gc state.
+        this._canvasGC.save();
+        // Set the transform to the identity matrix.
+        this._canvasGC.setTransform(1, 0, 0, 1, 0, 0);
+        // Draw the specified content.
+        this._canvasGC.drawImage(source, x, y, w, h, dx, dy, w, h);
+        // Restore the gc state.
+        this._canvasGC.restore();
+    };
+    /**
+     * Paint the grid content for the given dirty rect.
+     *
+     * The rect should be expressed in viewport coordinates.
+     *
+     * This is the primary paint entry point. The individual `_draw*`
+     * methods should not be invoked directly. This method dispatches
+     * to the drawing methods in the correct order.
+     */
+    DataGrid.prototype._paint = function (rx, ry, rw, rh) {
+        // Warn and bail if recursive painting is detected.
+        if (this._inPaint) {
+            console.warn('Recursive paint detected.');
+            return;
+        }
+        // Execute the actual drawing logic.
+        try {
+            this._inPaint = true;
+            this._draw(rx, ry, rw, rh);
+        }
+        finally {
+            this._inPaint = false;
+        }
+    };
+    /**
+     * Draw the grid content for the given dirty rect.
+     *
+     * This method dispatches to the relevant `_draw*` methods.
+     */
+    DataGrid.prototype._draw = function (rx, ry, rw, rh) {
+        // Scale the canvas and buffer GC for the dpi ratio.
+        this._canvasGC.setTransform(this._dpiRatio, 0, 0, this._dpiRatio, 0, 0);
+        this._bufferGC.setTransform(this._dpiRatio, 0, 0, this._dpiRatio, 0, 0);
+        // Clear the dirty rect of all content.
+        this._canvasGC.clearRect(rx, ry, rw, rh);
+        // Draw the void region.
+        this._drawVoidRegion(rx, ry, rw, rh);
+        // Draw the body region.
+        this._drawBodyRegion(rx, ry, rw, rh);
+        // Draw the row header region.
+        this._drawRowHeaderRegion(rx, ry, rw, rh);
+        // Draw the column header region.
+        this._drawColumnHeaderRegion(rx, ry, rw, rh);
+        // Draw the corner header region.
+        this._drawCornerHeaderRegion(rx, ry, rw, rh);
+    };
+    /**
+     * Draw the void region for the dirty rect.
+     */
+    DataGrid.prototype._drawVoidRegion = function (rx, ry, rw, rh) {
+        // Look up the void color.
+        var color = this._style.voidColor;
+        // Bail if there is no void color.
+        if (!color) {
+            return;
+        }
+        // Fill the dirty rect with the void color.
+        this._canvasGC.fillStyle = color;
+        this._canvasGC.fillRect(rx, ry, rw, rh);
+    };
+    /**
+     * Draw the body region which intersects the dirty rect.
+     */
+    DataGrid.prototype._drawBodyRegion = function (rx, ry, rw, rh) {
+        // Get the visible content dimensions.
+        var contentW = this._columnSections.totalSize - this._scrollX;
+        var contentH = this._rowSections.totalSize - this._scrollY;
+        // Bail if there is no content to draw.
+        if (contentW <= 0 || contentH <= 0) {
+            return;
+        }
+        // Get the visible content origin.
+        var contentX = this.headerWidth;
+        var contentY = this.headerHeight;
+        // Bail if the dirty rect does not intersect the content area.
+        if (rx + rw <= contentX) {
+            return;
+        }
+        if (ry + rh <= contentY) {
+            return;
+        }
+        if (rx >= contentX + contentW) {
+            return;
+        }
+        if (ry >= contentY + contentH) {
+            return;
+        }
+        // Get the upper and lower bounds of the dirty content area.
+        var x1 = Math.max(rx, contentX);
+        var y1 = Math.max(ry, contentY);
+        var x2 = Math.min(rx + rw - 1, contentX + contentW - 1);
+        var y2 = Math.min(ry + rh - 1, contentY + contentH - 1);
+        // Convert the dirty content bounds into cell bounds.
+        var r1 = this._rowSections.sectionIndex(y1 - contentY + this._scrollY);
+        var c1 = this._columnSections.sectionIndex(x1 - contentX + this._scrollX);
+        var r2 = this._rowSections.sectionIndex(y2 - contentY + this._scrollY);
+        var c2 = this._columnSections.sectionIndex(x2 - contentX + this._scrollX);
+        // Handle a dirty content area larger than the cell count.
+        if (r2 < 0) {
+            r2 = this._rowSections.sectionCount - 1;
+        }
+        if (c2 < 0) {
+            c2 = this._columnSections.sectionCount - 1;
+        }
+        // Convert the cell bounds back to visible coordinates.
+        var x = this._columnSections.sectionOffset(c1) + contentX - this._scrollX;
+        var y = this._rowSections.sectionOffset(r1) + contentY - this._scrollY;
+        // Set up the paint region size variables.
+        var width = 0;
+        var height = 0;
+        // Allocate the section sizes arrays.
+        var rowSizes = new Array(r2 - r1 + 1);
+        var columnSizes = new Array(c2 - c1 + 1);
+        // Get the row sizes for the region.
+        for (var j = r1; j <= r2; ++j) {
+            var size = this._rowSections.sectionSize(j);
+            rowSizes[j - r1] = size;
+            height += size;
+        }
+        // Get the column sizes for the region.
+        for (var i = c1; i <= c2; ++i) {
+            var size = this._columnSections.sectionSize(i);
+            columnSizes[i - c1] = size;
+            width += size;
+        }
+        // Create the paint region object.
+        var rgn = {
+            region: 'body',
+            xMin: x1, yMin: y1,
+            xMax: x2, yMax: y2,
+            x: x, y: y, width: width, height: height,
+            row: r1, column: c1,
+            rowSizes: rowSizes, columnSizes: columnSizes
+        };
+        // Draw the background.
+        this._drawBackground(rgn, this._style.backgroundColor);
+        // Draw the row background.
+        this._drawRowBackground(rgn, this._style.rowBackgroundColor);
+        // Draw the column background.
+        this._drawColumnBackground(rgn, this._style.columnBackgroundColor);
+        // Draw the cell content for the paint region.
+        this._drawCells(rgn);
+        // Draw the horizontal grid lines.
+        this._drawHorizontalGridLines(rgn, this._style.horizontalGridLineColor ||
+            this._style.gridLineColor);
+        // Draw the vertical grid lines.
+        this._drawVerticalGridLines(rgn, this._style.verticalGridLineColor ||
+            this._style.gridLineColor);
+    };
+    /**
+     * Draw the row header region which intersects the dirty rect.
+     */
+    DataGrid.prototype._drawRowHeaderRegion = function (rx, ry, rw, rh) {
+        // Get the visible content dimensions.
+        var contentW = this.headerWidth;
+        var contentH = this._rowSections.totalSize - this._scrollY;
+        // Bail if there is no content to draw.
+        if (contentW <= 0 || contentH <= 0) {
+            return;
+        }
+        // Get the visible content origin.
+        var contentX = 0;
+        var contentY = this.headerHeight;
+        // Bail if the dirty rect does not intersect the content area.
+        if (rx + rw <= contentX) {
+            return;
+        }
+        if (ry + rh <= contentY) {
+            return;
+        }
+        if (rx >= contentX + contentW) {
+            return;
+        }
+        if (ry >= contentY + contentH) {
+            return;
+        }
+        // Get the upper and lower bounds of the dirty content area.
+        var x1 = rx;
+        var y1 = Math.max(ry, contentY);
+        var x2 = Math.min(rx + rw - 1, contentX + contentW - 1);
+        var y2 = Math.min(ry + rh - 1, contentY + contentH - 1);
+        // Convert the dirty content bounds into cell bounds.
+        var r1 = this._rowSections.sectionIndex(y1 - contentY + this._scrollY);
+        var c1 = this._rowHeaderSections.sectionIndex(x1);
+        var r2 = this._rowSections.sectionIndex(y2 - contentY + this._scrollY);
+        var c2 = this._rowHeaderSections.sectionIndex(x2);
+        // Handle a dirty content area larger than the cell count.
+        if (r2 < 0) {
+            r2 = this._rowSections.sectionCount - 1;
+        }
+        if (c2 < 0) {
+            c2 = this._rowHeaderSections.sectionCount - 1;
+        }
+        // Convert the cell bounds back to visible coordinates.
+        var x = this._rowHeaderSections.sectionOffset(c1);
+        var y = this._rowSections.sectionOffset(r1) + contentY - this._scrollY;
+        // Set up the paint region size variables.
+        var width = 0;
+        var height = 0;
+        // Allocate the section sizes arrays.
+        var rowSizes = new Array(r2 - r1 + 1);
+        var columnSizes = new Array(c2 - c1 + 1);
+        // Get the row sizes for the region.
+        for (var j = r1; j <= r2; ++j) {
+            var size = this._rowSections.sectionSize(j);
+            rowSizes[j - r1] = size;
+            height += size;
+        }
+        // Get the column sizes for the region.
+        for (var i = c1; i <= c2; ++i) {
+            var size = this._rowHeaderSections.sectionSize(i);
+            columnSizes[i - c1] = size;
+            width += size;
+        }
+        // Create the paint region object.
+        var rgn = {
+            region: 'row-header',
+            xMin: x1, yMin: y1,
+            xMax: x2, yMax: y2,
+            x: x, y: y, width: width, height: height,
+            row: r1, column: c1,
+            rowSizes: rowSizes, columnSizes: columnSizes
+        };
+        // Draw the background.
+        this._drawBackground(rgn, this._style.headerBackgroundColor);
+        // Draw the cell content for the paint region.
+        this._drawCells(rgn);
+        // Draw the horizontal grid lines.
+        this._drawHorizontalGridLines(rgn, this._style.headerHorizontalGridLineColor ||
+            this._style.headerGridLineColor);
+        // Draw the vertical grid lines.
+        this._drawVerticalGridLines(rgn, this._style.headerVerticalGridLineColor ||
+            this._style.headerGridLineColor);
+    };
+    /**
+     * Draw the column header region which intersects the dirty rect.
+     */
+    DataGrid.prototype._drawColumnHeaderRegion = function (rx, ry, rw, rh) {
+        // Get the visible content dimensions.
+        var contentW = this._columnSections.totalSize - this._scrollX;
+        var contentH = this.headerHeight;
+        // Bail if there is no content to draw.
+        if (contentW <= 0 || contentH <= 0) {
+            return;
+        }
+        // Get the visible content origin.
+        var contentX = this.headerWidth;
+        var contentY = 0;
+        // Bail if the dirty rect does not intersect the content area.
+        if (rx + rw <= contentX) {
+            return;
+        }
+        if (ry + rh <= contentY) {
+            return;
+        }
+        if (rx >= contentX + contentW) {
+            return;
+        }
+        if (ry >= contentY + contentH) {
+            return;
+        }
+        // Get the upper and lower bounds of the dirty content area.
+        var x1 = Math.max(rx, contentX);
+        var y1 = ry;
+        var x2 = Math.min(rx + rw - 1, contentX + contentW - 1);
+        var y2 = Math.min(ry + rh - 1, contentY + contentH - 1);
+        // Convert the dirty content bounds into cell bounds.
+        var r1 = this._columnHeaderSections.sectionIndex(y1);
+        var c1 = this._columnSections.sectionIndex(x1 - contentX + this._scrollX);
+        var r2 = this._columnHeaderSections.sectionIndex(y2);
+        var c2 = this._columnSections.sectionIndex(x2 - contentX + this._scrollX);
+        // Handle a dirty content area larger than the cell count.
+        if (r2 < 0) {
+            r2 = this._columnHeaderSections.sectionCount - 1;
+        }
+        if (c2 < 0) {
+            c2 = this._columnSections.sectionCount - 1;
+        }
+        // Convert the cell bounds back to visible coordinates.
+        var x = this._columnSections.sectionOffset(c1) + contentX - this._scrollX;
+        var y = this._columnHeaderSections.sectionOffset(r1);
+        // Set up the paint region size variables.
+        var width = 0;
+        var height = 0;
+        // Allocate the section sizes arrays.
+        var rowSizes = new Array(r2 - r1 + 1);
+        var columnSizes = new Array(c2 - c1 + 1);
+        // Get the row sizes for the region.
+        for (var j = r1; j <= r2; ++j) {
+            var size = this._columnHeaderSections.sectionSize(j);
+            rowSizes[j - r1] = size;
+            height += size;
+        }
+        // Get the column sizes for the region.
+        for (var i = c1; i <= c2; ++i) {
+            var size = this._columnSections.sectionSize(i);
+            columnSizes[i - c1] = size;
+            width += size;
+        }
+        // Create the paint region object.
+        var rgn = {
+            region: 'column-header',
+            xMin: x1, yMin: y1,
+            xMax: x2, yMax: y2,
+            x: x, y: y, width: width, height: height,
+            row: r1, column: c1,
+            rowSizes: rowSizes, columnSizes: columnSizes
+        };
+        // Draw the background.
+        this._drawBackground(rgn, this._style.headerBackgroundColor);
+        // Draw the cell content for the paint region.
+        this._drawCells(rgn);
+        // Draw the horizontal grid lines.
+        this._drawHorizontalGridLines(rgn, this._style.headerHorizontalGridLineColor ||
+            this._style.headerGridLineColor);
+        // Draw the vertical grid lines.
+        this._drawVerticalGridLines(rgn, this._style.headerVerticalGridLineColor ||
+            this._style.headerGridLineColor);
+    };
+    /**
+     * Draw the corner header region which intersects the dirty rect.
+     */
+    DataGrid.prototype._drawCornerHeaderRegion = function (rx, ry, rw, rh) {
+        // Get the visible content dimensions.
+        var contentW = this.headerWidth;
+        var contentH = this.headerHeight;
+        // Bail if there is no content to draw.
+        if (contentW <= 0 || contentH <= 0) {
+            return;
+        }
+        // Get the visible content origin.
+        var contentX = 0;
+        var contentY = 0;
+        // Bail if the dirty rect does not intersect the content area.
+        if (rx + rw <= contentX) {
+            return;
+        }
+        if (ry + rh <= contentY) {
+            return;
+        }
+        if (rx >= contentX + contentW) {
+            return;
+        }
+        if (ry >= contentY + contentH) {
+            return;
+        }
+        // Get the upper and lower bounds of the dirty content area.
+        var x1 = rx;
+        var y1 = ry;
+        var x2 = Math.min(rx + rw - 1, contentX + contentW - 1);
+        var y2 = Math.min(ry + rh - 1, contentY + contentH - 1);
+        // Convert the dirty content bounds into cell bounds.
+        var r1 = this._columnHeaderSections.sectionIndex(y1);
+        var c1 = this._rowHeaderSections.sectionIndex(x1);
+        var r2 = this._columnHeaderSections.sectionIndex(y2);
+        var c2 = this._rowHeaderSections.sectionIndex(x2);
+        // Handle a dirty content area larger than the cell count.
+        if (r2 < 0) {
+            r2 = this._columnHeaderSections.sectionCount - 1;
+        }
+        if (c2 < 0) {
+            c2 = this._rowHeaderSections.sectionCount - 1;
+        }
+        // Convert the cell bounds back to visible coordinates.
+        var x = this._rowHeaderSections.sectionOffset(c1);
+        var y = this._columnHeaderSections.sectionOffset(r1);
+        // Set up the paint region size variables.
+        var width = 0;
+        var height = 0;
+        // Allocate the section sizes arrays.
+        var rowSizes = new Array(r2 - r1 + 1);
+        var columnSizes = new Array(c2 - c1 + 1);
+        // Get the row sizes for the region.
+        for (var j = r1; j <= r2; ++j) {
+            var size = this._columnHeaderSections.sectionSize(j);
+            rowSizes[j - r1] = size;
+            height += size;
+        }
+        // Get the column sizes for the region.
+        for (var i = c1; i <= c2; ++i) {
+            var size = this._rowHeaderSections.sectionSize(i);
+            columnSizes[i - c1] = size;
+            width += size;
+        }
+        // Create the paint region object.
+        var rgn = {
+            region: 'corner-header',
+            xMin: x1, yMin: y1,
+            xMax: x2, yMax: y2,
+            x: x, y: y, width: width, height: height,
+            row: r1, column: c1,
+            rowSizes: rowSizes, columnSizes: columnSizes
+        };
+        // Draw the background.
+        this._drawBackground(rgn, this._style.headerBackgroundColor);
+        // Draw the cell content for the paint region.
+        this._drawCells(rgn);
+        // Draw the horizontal grid lines.
+        this._drawHorizontalGridLines(rgn, this._style.headerHorizontalGridLineColor ||
+            this._style.headerGridLineColor);
+        // Draw the vertical grid lines.
+        this._drawVerticalGridLines(rgn, this._style.headerVerticalGridLineColor ||
+            this._style.headerGridLineColor);
+    };
+    /**
+     * Draw the background for the given paint region.
+     */
+    DataGrid.prototype._drawBackground = function (rgn, color) {
+        // Bail if there is no color to draw.
+        if (!color) {
+            return;
+        }
+        // Unpack the region.
+        var xMin = rgn.xMin, yMin = rgn.yMin, xMax = rgn.xMax, yMax = rgn.yMax;
+        // Fill the region with the specified color.
+        this._canvasGC.fillStyle = color;
+        this._canvasGC.fillRect(xMin, yMin, xMax - xMin + 1, yMax - yMin + 1);
+    };
+    /**
+     * Draw the row background for the given paint region.
+     */
+    DataGrid.prototype._drawRowBackground = function (rgn, colorFn) {
+        // Bail if there is no color function.
+        if (!colorFn) {
+            return;
+        }
+        // Compute the X bounds for the row.
+        var x1 = Math.max(rgn.xMin, rgn.x);
+        var x2 = Math.min(rgn.x + rgn.width - 1, rgn.xMax);
+        // Draw the background for the rows in the region.
+        for (var y = rgn.y, j = 0, n = rgn.rowSizes.length; j < n; ++j) {
+            // Fetch the size of the row.
+            var size = rgn.rowSizes[j];
+            // Skip zero sized rows.
+            if (size === 0) {
+                continue;
+            }
+            // Get the background color for the row.
+            var color = colorFn(rgn.row + j);
+            // Fill the row with the background color if needed.
+            if (color) {
+                var y1 = Math.max(rgn.yMin, y);
+                var y2 = Math.min(y + size - 1, rgn.yMax);
+                this._canvasGC.fillStyle = color;
+                this._canvasGC.fillRect(x1, y1, x2 - x1 + 1, y2 - y1 + 1);
+            }
+            // Increment the running Y coordinate.
+            y += size;
+        }
+    };
+    /**
+     * Draw the column background for the given paint region.
+     */
+    DataGrid.prototype._drawColumnBackground = function (rgn, colorFn) {
+        // Bail if there is no color function.
+        if (!colorFn) {
+            return;
+        }
+        // Compute the Y bounds for the column.
+        var y1 = Math.max(rgn.yMin, rgn.y);
+        var y2 = Math.min(rgn.y + rgn.height - 1, rgn.yMax);
+        // Draw the background for the columns in the region.
+        for (var x = rgn.x, i = 0, n = rgn.columnSizes.length; i < n; ++i) {
+            // Fetch the size of the column.
+            var size = rgn.columnSizes[i];
+            // Skip zero sized columns.
+            if (size === 0) {
+                continue;
+            }
+            // Get the background color for the column.
+            var color = colorFn(rgn.column + i);
+            // Fill the column with the background color if needed.
+            if (color) {
+                var x1 = Math.max(rgn.xMin, x);
+                var x2 = Math.min(x + size - 1, rgn.xMax);
+                this._canvasGC.fillStyle = color;
+                this._canvasGC.fillRect(x1, y1, x2 - x1 + 1, y2 - y1 + 1);
+            }
+            // Increment the running X coordinate.
+            x += size;
+        }
+    };
+    /**
+     * Draw the cells for the given paint region.
+     */
+    DataGrid.prototype._drawCells = function (rgn) {
+        // Bail if there is no data model.
+        if (!this._model) {
+            return;
+        }
+        // Set up the cell config object for rendering.
+        var config = {
+            x: 0, y: 0, width: 0, height: 0,
+            region: rgn.region, row: 0, column: 0,
+            metadata: datamodel_1.DataModel.emptyMetadata, value: null
+        };
+        // Save the buffer gc before wrapping.
+        this._bufferGC.save();
+        // Wrap the buffer gc for painting the cells.
+        var gc = new graphicscontext_1.GraphicsContext(this._bufferGC);
+        // Compute the actual Y bounds for the cell range.
+        var y1 = Math.max(rgn.yMin, rgn.y);
+        var y2 = Math.min(rgn.y + rgn.height - 1, rgn.yMax);
+        // Loop over the columns in the region.
+        for (var x = rgn.x, i = 0, n = rgn.columnSizes.length; i < n; ++i) {
+            // Fetch the size of the column.
+            var width = rgn.columnSizes[i];
+            // Skip zero sized columns.
+            if (width === 0) {
+                continue;
+            }
+            // Compute the column index.
+            var column = rgn.column + i;
+            // Get the metadata for the column.
+            var metadata = void 0;
+            try {
+                metadata = this._model.metadata(rgn.region, column);
+            }
+            catch (err) {
+                metadata = datamodel_1.DataModel.emptyMetadata;
+                console.error(err);
+            }
+            // Update the config for the current column.
+            config.x = x;
+            config.width = width;
+            config.column = column;
+            config.metadata = metadata;
+            // Clear the buffer rect for the column.
+            gc.clearRect(x, rgn.y, width, rgn.height);
+            // Save the GC state.
+            gc.save();
+            // Look up the renderer for the column.
+            var renderer = (this._cellRenderers.get(rgn.region, metadata) || this._defaultRenderer);
+            // Prepare the cell renderer for drawing the column.
+            try {
+                renderer.prepare(gc, config);
+            }
+            catch (err) {
+                console.error(err);
+            }
+            // Loop over the rows in the column.
+            for (var y = rgn.y, j = 0, n_1 = rgn.rowSizes.length; j < n_1; ++j) {
+                // Fetch the size of the row.
+                var height = rgn.rowSizes[j];
+                // Skip zero sized rows.
+                if (height === 0) {
+                    continue;
+                }
+                // Compute the row index.
+                var row = rgn.row + j;
+                // Get the data value for the cell.
+                var value = void 0;
+                try {
+                    value = this._model.data(rgn.region, row, column);
+                }
+                catch (err) {
+                    value = undefined;
+                    console.error(err);
+                }
+                // Update the config for the current cell.
+                config.y = y;
+                config.height = height;
+                config.row = row;
+                config.value = value;
+                // Save the GC state.
+                gc.save();
+                // Paint the cell into the off-screen buffer.
+                try {
+                    renderer.paint(gc, config);
+                }
+                catch (err) {
+                    console.error(err);
+                }
+                // Restore the GC state.
+                gc.restore();
+                // Increment the running Y coordinate.
+                y += height;
+            }
+            // Restore the GC state.
+            gc.restore();
+            // Compute the actual X bounds for the column.
+            var x1 = Math.max(rgn.xMin, x);
+            var x2 = Math.min(x + width - 1, rgn.xMax);
+            // Blit the off-screen buffer column into the on-screen canvas.
+            //
+            // This is *much* faster than drawing directly into the on-screen
+            // canvas with a clip rect on the column. Managed column clipping
+            // is required to prevent cell renderers from needing to set up a
+            // clip rect for handling horizontal overflow text (slow!).
+            this._blit(this._buffer, x1, y1, x2 - x1 + 1, y2 - y1 + 1, x1, y1);
+            // Increment the running X coordinate.
+            x += width;
+        }
+        // Dispose of the wrapped gc.
+        gc.dispose();
+        // Restore the final buffer gc state.
+        this._bufferGC.restore();
+    };
+    /**
+     * Draw the horizontal grid lines for the given paint region.
+     */
+    DataGrid.prototype._drawHorizontalGridLines = function (rgn, color) {
+        // Bail if there is no color to draw.
+        if (!color) {
+            return;
+        }
+        // Compute the X bounds for the horizontal lines.
+        var x1 = Math.max(rgn.xMin, rgn.x);
+        var x2 = Math.min(rgn.x + rgn.width, rgn.xMax + 1);
+        // Begin the path for the grid lines.
+        this._canvasGC.beginPath();
+        // Set the line width for the grid lines.
+        this._canvasGC.lineWidth = 1;
+        // Draw the horizontal grid lines.
+        for (var y = rgn.y, j = 0, n = rgn.rowSizes.length; j < n; ++j) {
+            // Fetch the size of the row.
+            var size = rgn.rowSizes[j];
+            // Skip zero sized rows.
+            if (size === 0) {
+                continue;
+            }
+            // Compute the Y position of the line.
+            var pos = y + size - 1;
+            // Draw the line if it's in range of the dirty rect.
+            if (pos >= rgn.yMin && pos <= rgn.yMax) {
+                this._canvasGC.moveTo(x1, pos + 0.5);
+                this._canvasGC.lineTo(x2, pos + 0.5);
+            }
+            // Increment the running Y coordinate.
+            y += size;
+        }
+        // Stroke the lines with the specified color.
+        this._canvasGC.strokeStyle = color;
+        this._canvasGC.stroke();
+    };
+    /**
+     * Draw the vertical grid lines for the given paint region.
+     */
+    DataGrid.prototype._drawVerticalGridLines = function (rgn, color) {
+        // Bail if there is no color to draw.
+        if (!color) {
+            return;
+        }
+        // Compute the Y bounds for the vertical lines.
+        var y1 = Math.max(rgn.yMin, rgn.y);
+        var y2 = Math.min(rgn.y + rgn.height, rgn.yMax + 1);
+        // Begin the path for the grid lines
+        this._canvasGC.beginPath();
+        // Set the line width for the grid lines.
+        this._canvasGC.lineWidth = 1;
+        // Draw the vertical grid lines.
+        for (var x = rgn.x, i = 0, n = rgn.columnSizes.length; i < n; ++i) {
+            // Fetch the size of the column.
+            var size = rgn.columnSizes[i];
+            // Skip zero sized columns.
+            if (size === 0) {
+                continue;
+            }
+            // Compute the X position of the line.
+            var pos = x + size - 1;
+            // Draw the line if it's in range of the dirty rect.
+            if (pos >= rgn.xMin && pos <= rgn.xMax) {
+                this._canvasGC.moveTo(pos + 0.5, y1);
+                this._canvasGC.lineTo(pos + 0.5, y2);
+            }
+            // Increment the running X coordinate.
+            x += size;
+        }
+        // Stroke the lines with the specified color.
+        this._canvasGC.strokeStyle = color;
+        this._canvasGC.stroke();
+    };
+    return DataGrid;
+}(widgets_1.Widget));
+exports.DataGrid = DataGrid;
+/**
+ * The namespace for the `DataGrid` class statics.
+ */
+(function (DataGrid) {
+    /**
+     * The default theme for a data grid.
+     */
+    DataGrid.defaultStyle = {
+        voidColor: '#F3F3F3',
+        backgroundColor: '#FFFFFF',
+        gridLineColor: 'rgba(20, 20, 20, 0.15)',
+        headerBackgroundColor: '#F3F3F3',
+        headerGridLineColor: 'rgba(20, 20, 20, 0.25)'
+    };
+})(DataGrid = exports.DataGrid || (exports.DataGrid = {}));
+exports.DataGrid = DataGrid;
+/**
+ * The namespace for the module implementation details.
+ */
+var Private;
+(function (Private) {
+    /**
+     * A singleton `scroll-request` conflatable message.
+     */
+    Private.ScrollRequest = new messaging_1.ConflatableMessage('scroll-request');
+    /**
+     * A singleton `section-resize-request` conflatable message.
+     */
+    Private.SectionResizeRequest = new messaging_1.ConflatableMessage('section-resize-request');
+    /**
+     * Create a new zero-sized canvas element.
+     */
+    function createCanvas() {
+        var canvas = document.createElement('canvas');
+        canvas.width = 0;
+        canvas.height = 0;
+        return canvas;
+    }
+    Private.createCanvas = createCanvas;
+    /**
+     * A conflatable message which merges dirty paint rects.
+     */
+    var PaintRequest = (function (_super) {
+        __extends(PaintRequest, _super);
+        /**
+         * Construct a new paint request messages.
+         *
+         * @param x1 - The top-left X coordinate of the rect.
+         *
+         * @param y1 - The top-left Y coordinate of the rect.
+         *
+         * @param x2 - The bottom-right X coordinate of the rect.
+         *
+         * @param y2 - The bottom-right Y coordinate of the rect.
+         */
+        function PaintRequest(x1, y1, x2, y2) {
+            var _this = _super.call(this, 'paint-request') || this;
+            _this._x1 = x1;
+            _this._y1 = y1;
+            _this._x2 = Math.max(x1, x2);
+            _this._y2 = Math.max(y1, y2);
+            return _this;
+        }
+        Object.defineProperty(PaintRequest.prototype, "x1", {
+            /**
+             * The top-left X coordinate of the rect.
+             */
+            get: function () {
+                return this._x1;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(PaintRequest.prototype, "y1", {
+            /**
+             * The top-left Y coordinate of the rect.
+             */
+            get: function () {
+                return this._y1;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(PaintRequest.prototype, "x2", {
+            /**
+             * The bottom-right X coordinate of the rect.
+             */
+            get: function () {
+                return this._x2;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(PaintRequest.prototype, "y2", {
+            /**
+             * The bottom-right Y coordinate of the rect.
+             */
+            get: function () {
+                return this._y2;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        /**
+         * Conflate this message with another paint request.
+         */
+        PaintRequest.prototype.conflate = function (other) {
+            this._x1 = Math.min(this._x1, other._x1);
+            this._y1 = Math.min(this._y1, other._y1);
+            this._x2 = Math.max(this._x2, other._x2);
+            this._y2 = Math.max(this._y2, other._y2);
+            return true;
+        };
+        return PaintRequest;
+    }(messaging_1.ConflatableMessage));
+    Private.PaintRequest = PaintRequest;
+    /**
+     * Find the index of the resize handle at the given position.
+     *
+     * This accounts for `3px` of space on either side of a grid line,
+     * for a total of `7px` handle width.
+     *
+     * Returns the `{ index, delta }` match or `null`.
+     */
+    function findResizeIndex(list, pos) {
+        // Bail early if the list is empty or the position is invalid.
+        if (list.sectionCount === 0 || pos < 0) {
+            return null;
+        }
+        // Compute the delta from the end of the list.
+        var d1 = pos - (list.totalSize - 1);
+        // Bail if the position is out of range.
+        if (d1 > 3) {
+            return null;
+        }
+        // Test whether the hover is just past the last section.
+        if (d1 >= 0) {
+            return { index: list.sectionCount - 1, delta: d1 };
+        }
+        // Find the section at the given position.
+        var i = list.sectionIndex(pos);
+        // Look up the offset for the section.
+        var offset = list.sectionOffset(i);
+        // Compute the delta to the previous border.
+        var d2 = pos - (offset - 1);
+        // Test whether the position hovers the previous border.
+        if (i > 0 && d2 <= 3) {
+            return { index: i - 1, delta: d2 };
+        }
+        // Look up the size of the section.
+        var size = list.sectionSize(i);
+        // Compute the delta to the next border.
+        var d3 = (size + offset - 1) - pos;
+        // Test whether the position hovers the section border.
+        if (d3 <= 3) {
+            return { index: i, delta: -d3 };
+        }
+        // Otherwise, no resize border is hovered.
+        return null;
+    }
+    Private.findResizeIndex = findResizeIndex;
+    /**
+     * Get the cursor to use for a resize handle.
+     */
+    function cursorForHandle(handle) {
+        return handle ? cursorMap[handle.type] : '';
+    }
+    Private.cursorForHandle = cursorForHandle;
+    /**
+     * A mapping of resize handle types to cursor values.
+     */
+    var cursorMap = {
+        'body-row': 'ns-resize',
+        'body-column': 'ew-resize',
+        'header-row': 'ns-resize',
+        'header-column': 'ew-resize'
+    };
+})(Private || (Private = {}));
+
+
+/***/ }),
+/* 134 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+Object.defineProperty(exports, "__esModule", { value: true });
+/*-----------------------------------------------------------------------------
+| Copyright (c) 2014-2017, PhosphorJS Contributors
+|
+| Distributed under the terms of the BSD 3-Clause License.
+|
+| The full license is in the file LICENSE, distributed with this software.
+|----------------------------------------------------------------------------*/
+__export(__webpack_require__(62));
+__export(__webpack_require__(133));
+__export(__webpack_require__(42));
+__export(__webpack_require__(63));
+__export(__webpack_require__(135));
+__export(__webpack_require__(64));
+__export(__webpack_require__(65));
+
+
+/***/ }),
+/* 135 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
+var datamodel_1 = __webpack_require__(42);
+/**
+ * A data model implementation for in-memory JSON data.
+ */
+var JSONModel = (function (_super) {
+    __extends(JSONModel, _super);
+    /**
+     * Create a data model with static JSON data.
+     *
+     * @param options - The options for initializing the data model.
+     */
+    function JSONModel(options) {
+        var _this = _super.call(this) || this;
+        var split = Private.splitFields(options.schema);
+        _this._data = options.data;
+        _this._bodyFields = split.bodyFields;
+        _this._headerFields = split.headerFields;
+        _this._missingValues = Private.createMissingMap(options.schema);
+        return _this;
+    }
+    /**
+     * Get the row count for a region in the data model.
+     *
+     * @param region - The row region of interest.
+     *
+     * @returns - The row count for the region.
+     */
+    JSONModel.prototype.rowCount = function (region) {
+        if (region === 'body') {
+            return this._data.length;
+        }
+        return 1; // TODO multiple column-header rows?
+    };
+    /**
+     * Get the column count for a region in the data model.
+     *
+     * @param region - The column region of interest.
+     *
+     * @returns - The column count for the region.
+     */
+    JSONModel.prototype.columnCount = function (region) {
+        if (region === 'body') {
+            return this._bodyFields.length;
+        }
+        return this._headerFields.length;
+    };
+    /**
+     * Get the metadata for a column in the data model.
+     *
+     * @param region - The cell region of interest.
+     *
+     * @param column - The index of the column of interest.
+     *
+     * @returns The metadata for the column.
+     */
+    JSONModel.prototype.metadata = function (region, column) {
+        if (region === 'body' || region === 'column-header') {
+            return this._bodyFields[column];
+        }
+        return this._headerFields[column];
+    };
+    /**
+     * Get the data value for a cell in the data model.
+     *
+     * @param region - The cell region of interest.
+     *
+     * @param row - The row index of the cell of interest.
+     *
+     * @param column - The column index of the cell of interest.
+     *
+     * @param returns - The data value for the specified cell.
+     *
+     * #### Notes
+     * A `missingValue` as defined by the schema is converted to `null`.
+     */
+    JSONModel.prototype.data = function (region, row, column) {
+        // Set up the field and value variables.
+        var field;
+        var value;
+        // Look up the field and value for the region.
+        switch (region) {
+            case 'body':
+                field = this._bodyFields[column];
+                value = this._data[row][field.name];
+                break;
+            case 'column-header':
+                field = this._bodyFields[column];
+                value = field.title || field.name;
+                break;
+            case 'row-header':
+                field = this._headerFields[column];
+                value = this._data[row][field.name];
+                break;
+            case 'corner-header':
+                field = this._headerFields[column];
+                value = field.title || field.name;
+                break;
+            default:
+                throw 'unreachable';
+        }
+        // Test whether the value is a missing value.
+        var missing = (this._missingValues !== null &&
+            typeof value === 'string' &&
+            this._missingValues[value] === true);
+        // Return the final value.
+        return missing ? null : value;
+    };
+    return JSONModel;
+}(datamodel_1.DataModel));
+exports.JSONModel = JSONModel;
+/**
+ * The namespace for the module implementation details.
+ */
+var Private;
+(function (Private) {
+    /**
+     * Split the schema fields into header and body fields.
+     */
+    function splitFields(schema) {
+        // Normalize the primary keys.
+        var primaryKeys;
+        if (schema.primaryKey === undefined) {
+            primaryKeys = [];
+        }
+        else if (typeof schema.primaryKey === 'string') {
+            primaryKeys = [schema.primaryKey];
+        }
+        else {
+            primaryKeys = schema.primaryKey;
+        }
+        // Separate the fields for the body and header.
+        var bodyFields = [];
+        var headerFields = [];
+        for (var _i = 0, _a = schema.fields; _i < _a.length; _i++) {
+            var field = _a[_i];
+            if (primaryKeys.indexOf(field.name) === -1) {
+                bodyFields.push(field);
+            }
+            else {
+                headerFields.push(field);
+            }
+        }
+        // Return the separated fields.
+        return { bodyFields: bodyFields, headerFields: headerFields };
+    }
+    Private.splitFields = splitFields;
+    /**
+     * Create a missing values map for a schema.
+     *
+     * This returns `null` if there are no missing values.
+     */
+    function createMissingMap(schema) {
+        // Bail early if there are no missing values.
+        if (!schema.missingValues || schema.missingValues.length === 0) {
+            return null;
+        }
+        // Collect the missing values into a map.
+        var result = Object.create(null);
+        for (var _i = 0, _a = schema.missingValues; _i < _a.length; _i++) {
+            var value = _a[_i];
+            result[value] = true;
+        }
+        // Return the populated map.
+        return result;
+    }
+    Private.createMissingMap = createMissingMap;
+})(Private || (Private = {}));
+
+
+/***/ }),
+/* 136 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+/*-----------------------------------------------------------------------------
+| Copyright (c) 2014-2017, PhosphorJS Contributors
+|
+| Distributed under the terms of the BSD 3-Clause License.
+|
+| The full license is in the file LICENSE, distributed with this software.
+|----------------------------------------------------------------------------*/
+var algorithm_1 = __webpack_require__(2);
+/**
+ * An object which manages a collection of variable sized sections.
+ *
+ * #### Notes
+ * This class is an implementation detail. It is designed to manage
+ * the variable row and column sizes for a data grid. User code will
+ * not interact with this class directly.
+ */
+var SectionList = (function () {
+    /**
+     * Construct a new section list.
+     *
+     * @param options - The options for initializing the list.
+     */
+    function SectionList(options) {
+        this._totalSize = 0;
+        this._sectionCount = 0;
+        this._sections = [];
+        this._baseSize = Math.max(0, Math.floor(options.baseSize));
+    }
+    Object.defineProperty(SectionList.prototype, "totalSize", {
+        /**
+         * The total size of all sections in the list.
+         *
+         * #### Complexity
+         * Constant.
+         */
+        get: function () {
+            return this._totalSize;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(SectionList.prototype, "sectionCount", {
+        /**
+         * The total number of sections in the list.
+         *
+         * #### Complexity
+         * Constant.
+         */
+        get: function () {
+            return this._sectionCount;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(SectionList.prototype, "baseSize", {
+        /**
+         * Get the base size of sections in the list.
+         *
+         * #### Complexity
+         * Constant.
+         */
+        get: function () {
+            return this._baseSize;
+        },
+        /**
+         * Set the base size of sections in the list.
+         *
+         * #### Complexity
+         * Linear on the number of resized sections.
+         */
+        set: function (value) {
+            // Normalize the value.
+            value = Math.max(0, Math.floor(value));
+            // Bail early if the value does not change.
+            if (this._baseSize === value) {
+                return;
+            }
+            // Compute the delta base size.
+            var delta = value - this._baseSize;
+            // Update the internal base size.
+            this._baseSize = value;
+            // Update the total size.
+            this._totalSize += delta * (this._sectionCount - this._sections.length);
+            // Bail early if there are no modified sections.
+            if (this._sections.length === 0) {
+                return;
+            }
+            // Recompute the offsets of the modified sections.
+            for (var i = 0, n = this._sections.length; i < n; ++i) {
+                // Look up the previous and current modified sections.
+                var prev = this._sections[i - 1];
+                var curr = this._sections[i];
+                // Adjust the offset for the current section.
+                if (prev) {
+                    var count = curr.index - prev.index - 1;
+                    curr.offset = prev.offset + prev.size + count * value;
+                }
+                else {
+                    curr.offset = curr.index * value;
+                }
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    /**
+     * Find the index of the section which covers the given offset.
+     *
+     * @param offset - The offset of the section of interest.
+     *
+     * @returns The index of the section which covers the given offset,
+     *   or `-1` if the offset is out of range.
+     *
+     * #### Complexity
+     * Logarithmic on the number of resized sections.
+     */
+    SectionList.prototype.sectionIndex = function (offset) {
+        // Bail early if the offset is out of range.
+        if (offset < 0 || offset >= this._totalSize || this._sectionCount === 0) {
+            return -1;
+        }
+        // Handle the simple case of no modified sections.
+        if (this._sections.length === 0) {
+            return Math.floor(offset / this._baseSize);
+        }
+        // Find the modified section for the given offset.
+        var i = algorithm_1.ArrayExt.lowerBound(this._sections, offset, Private.offsetCmp);
+        // Return the index of an exact match.
+        if (i < this._sections.length && this._sections[i].offset <= offset) {
+            return this._sections[i].index;
+        }
+        // Handle the case of no modified sections before the offset.
+        if (i === 0) {
+            return Math.floor(offset / this._baseSize);
+        }
+        // Compute the index from the previous modified section.
+        var section = this._sections[i - 1];
+        var span = offset - (section.offset + section.size);
+        return section.index + Math.floor(span / this._baseSize) + 1;
+    };
+    /**
+     * Find the offset of the section at the given index.
+     *
+     * @param index - The index of the section of interest.
+     *
+     * @returns The offset of the section at the given index, or `-1`
+     *   if the index is out of range.
+     *
+     * #### Undefined Behavior
+     * An `index` which is non-integral.
+     *
+     * #### Complexity
+     * Logarithmic on the number of resized sections.
+     */
+    SectionList.prototype.sectionOffset = function (index) {
+        // Bail early if the index is out of range.
+        if (index < 0 || index >= this._sectionCount) {
+            return -1;
+        }
+        // Handle the simple case of no modified sections.
+        if (this._sections.length === 0) {
+            return index * this._baseSize;
+        }
+        // Find the modified section for the given index.
+        var i = algorithm_1.ArrayExt.lowerBound(this._sections, index, Private.indexCmp);
+        // Return the offset of an exact match.
+        if (i < this._sections.length && this._sections[i].index === index) {
+            return this._sections[i].offset;
+        }
+        // Handle the case of no modified sections before the index.
+        if (i === 0) {
+            return index * this._baseSize;
+        }
+        // Compute the offset from the previous modified section.
+        var section = this._sections[i - 1];
+        var span = index - section.index - 1;
+        return section.offset + section.size + span * this._baseSize;
+    };
+    /**
+     * Find the size of the section at the given index.
+     *
+     * @param index - The index of the section of interest.
+     *
+     * @returns The size of the section at the given index, or `-1`
+     *   if the index is out of range.
+     *
+     * #### Undefined Behavior
+     * An `index` which is non-integral.
+     *
+     * #### Complexity
+     * Logarithmic on the number of resized sections.
+     */
+    SectionList.prototype.sectionSize = function (index) {
+        // Bail early if the index is out of range.
+        if (index < 0 || index >= this._sectionCount) {
+            return -1;
+        }
+        // Handle the simple case of no modified sections.
+        if (this._sections.length === 0) {
+            return this._baseSize;
+        }
+        // Find the modified section for the given index.
+        var i = algorithm_1.ArrayExt.lowerBound(this._sections, index, Private.indexCmp);
+        // Return the size of an exact match.
+        if (i < this._sections.length && this._sections[i].index === index) {
+            return this._sections[i].size;
+        }
+        // Return the base size for all other cases.
+        return this._baseSize;
+    };
+    /**
+     * Resize a section in the list.
+     *
+     * @param index - The index of the section to resize. This method
+     *   is a no-op if this value is out of range.
+     *
+     * @param size - The new size of the section. This value will be
+     *   clamped to an integer `>= 0`.
+     *
+     * #### Undefined Behavior
+     * An `index` which is non-integral.
+     *
+     * #### Complexity
+     * Linear on the number of resized sections.
+     */
+    SectionList.prototype.resizeSection = function (index, size) {
+        // Bail early if the index is out of range.
+        if (index < 0 || index >= this._sectionCount) {
+            return;
+        }
+        // Clamp the size to an integer >= 0.
+        size = Math.max(0, Math.floor(size));
+        // Find the modified section for the given index.
+        var i = algorithm_1.ArrayExt.lowerBound(this._sections, index, Private.indexCmp);
+        // Update or create the modified section as needed.
+        var delta;
+        if (i < this._sections.length && this._sections[i].index === index) {
+            var section = this._sections[i];
+            delta = size - section.size;
+            section.size = size;
+        }
+        else if (i === 0) {
+            var offset = index * this._baseSize;
+            algorithm_1.ArrayExt.insert(this._sections, i, { index: index, offset: offset, size: size });
+            delta = size - this._baseSize;
+        }
+        else {
+            var section = this._sections[i - 1];
+            var span = index - section.index - 1;
+            var offset = section.offset + section.size + span * this._baseSize;
+            algorithm_1.ArrayExt.insert(this._sections, i, { index: index, offset: offset, size: size });
+            delta = size - this._baseSize;
+        }
+        // Adjust the totals.
+        this._totalSize += delta;
+        // Update all modified sections after the resized section.
+        for (var j = i + 1, n = this._sections.length; j < n; ++j) {
+            this._sections[j].offset += delta;
+        }
+    };
+    /**
+     * Insert sections into the list.
+     *
+     * @param index - The index at which to insert the sections. This
+     *   value will be clamped to the bounds of the list.
+     *
+     * @param count - The number of sections to insert. This method
+     *   is a no-op if this value is `<= 0`.
+     *
+     * #### Undefined Behavior
+     * An `index` or `count` which is non-integral.
+     *
+     * #### Complexity
+     * Linear on the number of resized sections.
+     */
+    SectionList.prototype.insertSections = function (index, count) {
+        // Bail early if there are no sections to insert.
+        if (count <= 0) {
+            return;
+        }
+        // Clamp the index to the bounds of the list.
+        index = Math.max(0, Math.min(index, this._sectionCount));
+        // Add the new sections to the totals.
+        var span = count * this._baseSize;
+        this._sectionCount += count;
+        this._totalSize += span;
+        // Bail early if there are no modified sections to update.
+        if (this._sections.length === 0) {
+            return;
+        }
+        // Find the modified section for the given index.
+        var i = algorithm_1.ArrayExt.lowerBound(this._sections, index, Private.indexCmp);
+        // Update all modified sections after the insert location.
+        for (var n = this._sections.length; i < n; ++i) {
+            var section = this._sections[i];
+            section.index += count;
+            section.offset += span;
+        }
+    };
+    /**
+     * Remove sections from the list.
+     *
+     * @param index - The index of the first section to remove. This
+     *   method is a no-op if this value is out of range.
+     *
+     * @param count - The number of sections to remove. This method
+     *   is a no-op if this value is `<= 0`.
+     *
+     * #### Undefined Behavior
+     * An `index` or `count` which is non-integral.
+     *
+     * #### Complexity
+     * Linear on the number of resized sections.
+     */
+    SectionList.prototype.removeSections = function (index, count) {
+        // Bail early if there is nothing to remove.
+        if (index < 0 || index >= this._sectionCount || count <= 0) {
+            return;
+        }
+        // Clamp the count to the bounds of the list.
+        count = Math.min(this._sectionCount - index, count);
+        // Handle the simple case of no modified sections to update.
+        if (this._sections.length === 0) {
+            this._sectionCount -= count;
+            this._totalSize -= count * this._baseSize;
+            return;
+        }
+        // Handle the simple case of removing all sections.
+        if (count === this._sectionCount) {
+            this._totalSize = 0;
+            this._sectionCount = 0;
+            this._sections.length = 0;
+            return;
+        }
+        // Find the modified section for the start index.
+        var i = algorithm_1.ArrayExt.lowerBound(this._sections, index, Private.indexCmp);
+        // Find the modified section for the end index.
+        var j = algorithm_1.ArrayExt.lowerBound(this._sections, index + count, Private.indexCmp);
+        // Remove the relevant modified sections.
+        var removed = this._sections.splice(i, j - i);
+        // Compute the total removed span.
+        var span = (count - removed.length) * this._baseSize;
+        for (var k = 0, n = removed.length; k < n; ++k) {
+            span += removed[k].size;
+        }
+        // Adjust the totals.
+        this._sectionCount -= count;
+        this._totalSize -= span;
+        // Update all modified sections after the removed span.
+        for (var k = i, n = this._sections.length; k < n; ++k) {
+            var section = this._sections[k];
+            section.index -= count;
+            section.offset -= span;
+        }
+    };
+    /**
+     * Move sections within the list.
+     *
+     * @param index - The index of the first section to move. This method
+     *   is a no-op if this value is out of range.
+     *
+     * @param count - The number of sections to move. This method is a
+     *   no-op if this value is `<= 0`.
+     *
+     * @param destination - The destination index for the first section.
+     *   This value will be clamped to the allowable range.
+     *
+     * #### Undefined Behavior
+     * An `index`, `count`, or `destination` which is non-integral.
+     *
+     * #### Complexity
+     * Linear on the number of moved resized sections.
+     */
+    SectionList.prototype.moveSections = function (index, count, destination) {
+        // Bail early if there is nothing to move.
+        if (index < 0 || index >= this._sectionCount || count <= 0) {
+            return;
+        }
+        // Handle the simple case of no modified sections.
+        if (this._sections.length === 0) {
+            return;
+        }
+        // Clamp the move count to the limit.
+        count = Math.min(count, this._sectionCount - index);
+        // Clamp the destination index to the limit.
+        destination = Math.min(Math.max(0, destination), this._sectionCount - count);
+        // Bail early if there is no effective move.
+        if (index === destination) {
+            return;
+        }
+        // Compute the first affected index.
+        var i1 = Math.min(index, destination);
+        // Look up the first affected modified section.
+        var k1 = algorithm_1.ArrayExt.lowerBound(this._sections, i1, Private.indexCmp);
+        // Bail early if there are no affected modified sections.
+        if (k1 === this._sections.length) {
+            return;
+        }
+        // Compute the last affected index.
+        var i2 = Math.max(index + count - 1, destination + count - 1);
+        // Look up the last affected modified section.
+        var k2 = algorithm_1.ArrayExt.upperBound(this._sections, i2, Private.indexCmp) - 1;
+        // Bail early if there are no affected modified sections.
+        if (k2 < k1) {
+            return;
+        }
+        // Compute the pivot index.
+        var pivot = destination < index ? index : index + count;
+        // Compute the count for each side of the pivot.
+        var count1 = pivot - i1;
+        var count2 = i2 - pivot + 1;
+        // Compute the span for each side of the pivot.
+        var span1 = count1 * this._baseSize;
+        var span2 = count2 * this._baseSize;
+        // Adjust the spans for the modified sections.
+        for (var j = k1; j <= k2; ++j) {
+            var section = this._sections[j];
+            if (section.index < pivot) {
+                span1 += section.size - this._baseSize;
+            }
+            else {
+                span2 += section.size - this._baseSize;
+            }
+        }
+        // Look up the pivot section.
+        var k3 = algorithm_1.ArrayExt.lowerBound(this._sections, pivot, Private.indexCmp);
+        // Rotate the modified sections if needed.
+        if (k1 <= k3 && k3 <= k2) {
+            algorithm_1.ArrayExt.rotate(this._sections, k3 - k1, k1, k2);
+        }
+        // Adjust the modified section indices and offsets.
+        for (var j = k1; j <= k2; ++j) {
+            var section = this._sections[j];
+            if (section.index < pivot) {
+                section.index += count2;
+                section.offset += span2;
+            }
+            else {
+                section.index -= count1;
+                section.offset -= span1;
+            }
+        }
+    };
+    /**
+     * Reset all modified sections to the base size.
+     *
+     * #### Complexity
+     * Constant.
+     */
+    SectionList.prototype.reset = function () {
+        this._sections.length = 0;
+        this._totalSize = this._sectionCount * this._baseSize;
+    };
+    /**
+     * Remove all sections from the list.
+     *
+     * #### Complexity
+     * Constant.
+     */
+    SectionList.prototype.clear = function () {
+        this._totalSize = 0;
+        this._sectionCount = 0;
+        this._sections.length = 0;
+    };
+    return SectionList;
+}());
+exports.SectionList = SectionList;
+/**
+ * The namespace for the module implementation details.
+ */
+var Private;
+(function (Private) {
+    /**
+     * A comparison function for searching by offset.
+     */
+    function offsetCmp(section, offset) {
+        if (offset < section.offset) {
+            return 1;
+        }
+        if (section.offset + section.size <= offset) {
+            return -1;
+        }
+        return 0;
+    }
+    Private.offsetCmp = offsetCmp;
+    /**
+     * A comparison function for searching by index.
+     */
+    function indexCmp(section, index) {
+        return section.index - index;
+    }
+    Private.indexCmp = indexCmp;
+})(Private || (Private = {}));
+
+
+/***/ }),
+/* 137 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -30626,7 +35920,7 @@ var ElementExt;
 
 
 /***/ }),
-/* 129 */
+/* 138 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -30664,7 +35958,7 @@ var Platform;
 
 
 /***/ }),
-/* 130 */
+/* 139 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -30901,7 +36195,7 @@ var Private;
 
 
 /***/ }),
-/* 131 */
+/* 140 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -30924,8 +36218,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 |
 | The full license is in the file LICENSE, distributed with this software.
 |----------------------------------------------------------------------------*/
-var boxlayout_1 = __webpack_require__(44);
-var panel_1 = __webpack_require__(33);
+var boxlayout_1 = __webpack_require__(45);
+var panel_1 = __webpack_require__(34);
 /**
  * A panel which arranges its widgets in a single row or column.
  *
@@ -31086,7 +36380,7 @@ var Private;
 
 
 /***/ }),
-/* 132 */
+/* 141 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -31117,11 +36411,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 |
 | The full license is in the file LICENSE, distributed with this software.
 |----------------------------------------------------------------------------*/
-var algorithm_1 = __webpack_require__(3);
-var coreutils_1 = __webpack_require__(30);
-var commands_1 = __webpack_require__(40);
+var algorithm_1 = __webpack_require__(2);
+var coreutils_1 = __webpack_require__(32);
+var commands_1 = __webpack_require__(41);
 var domutils_1 = __webpack_require__(7);
-var virtualdom_1 = __webpack_require__(32);
+var virtualdom_1 = __webpack_require__(33);
 var widget_1 = __webpack_require__(6);
 /**
  * A widget which displays command items as a searchable palette.
@@ -32161,7 +37455,7 @@ var Private;
 
 
 /***/ }),
-/* 133 */
+/* 142 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -32182,10 +37476,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 |
 | The full license is in the file LICENSE, distributed with this software.
 |----------------------------------------------------------------------------*/
-var algorithm_1 = __webpack_require__(3);
-var disposable_1 = __webpack_require__(42);
+var algorithm_1 = __webpack_require__(2);
+var disposable_1 = __webpack_require__(43);
 var domutils_1 = __webpack_require__(7);
-var menu_1 = __webpack_require__(62);
+var menu_1 = __webpack_require__(67);
 /**
  * An object which implements a universal context menu.
  *
@@ -32382,7 +37676,7 @@ var Private;
 
 
 /***/ }),
-/* 134 */
+/* 143 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -32405,15 +37699,15 @@ Object.defineProperty(exports, "__esModule", { value: true });
 |
 | The full license is in the file LICENSE, distributed with this software.
 |----------------------------------------------------------------------------*/
-var algorithm_1 = __webpack_require__(3);
-var coreutils_1 = __webpack_require__(30);
+var algorithm_1 = __webpack_require__(2);
+var coreutils_1 = __webpack_require__(32);
 var domutils_1 = __webpack_require__(7);
-var dragdrop_1 = __webpack_require__(31);
+var dragdrop_1 = __webpack_require__(22);
 var messaging_1 = __webpack_require__(8);
 var properties_1 = __webpack_require__(19);
-var signaling_1 = __webpack_require__(11);
-var docklayout_1 = __webpack_require__(61);
-var tabbar_1 = __webpack_require__(45);
+var signaling_1 = __webpack_require__(10);
+var docklayout_1 = __webpack_require__(66);
+var tabbar_1 = __webpack_require__(46);
 var widget_1 = __webpack_require__(6);
 /**
  * A widget which provides a flexible docking area for widgets.
@@ -33489,7 +38783,7 @@ var Private;
 
 
 /***/ }),
-/* 135 */
+/* 144 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -33502,8 +38796,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 |
 | The full license is in the file LICENSE, distributed with this software.
 |----------------------------------------------------------------------------*/
-var algorithm_1 = __webpack_require__(3);
-var signaling_1 = __webpack_require__(11);
+var algorithm_1 = __webpack_require__(2);
+var signaling_1 = __webpack_require__(10);
 /**
  * A class which tracks focus among a set of widgets.
  *
@@ -33826,7 +39120,7 @@ exports.FocusTracker = FocusTracker;
 
 
 /***/ }),
-/* 136 */
+/* 145 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -33849,11 +39143,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 |
 | The full license is in the file LICENSE, distributed with this software.
 |----------------------------------------------------------------------------*/
-var algorithm_1 = __webpack_require__(3);
+var algorithm_1 = __webpack_require__(2);
 var domutils_1 = __webpack_require__(7);
 var messaging_1 = __webpack_require__(8);
 var properties_1 = __webpack_require__(19);
-var boxengine_1 = __webpack_require__(22);
+var boxengine_1 = __webpack_require__(23);
 var layout_1 = __webpack_require__(16);
 var widget_1 = __webpack_require__(6);
 /**
@@ -34552,7 +39846,7 @@ var Private;
 
 
 /***/ }),
-/* 137 */
+/* 146 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -34575,11 +39869,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 |
 | The full license is in the file LICENSE, distributed with this software.
 |----------------------------------------------------------------------------*/
-var algorithm_1 = __webpack_require__(3);
+var algorithm_1 = __webpack_require__(2);
 var domutils_1 = __webpack_require__(7);
-var keyboard_1 = __webpack_require__(43);
+var keyboard_1 = __webpack_require__(44);
 var messaging_1 = __webpack_require__(8);
-var virtualdom_1 = __webpack_require__(32);
+var virtualdom_1 = __webpack_require__(33);
 var widget_1 = __webpack_require__(6);
 /**
  * A widget which displays menus as a canonical menu bar.
@@ -35336,7 +40630,7 @@ var Private;
 
 
 /***/ }),
-/* 138 */
+/* 147 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -35353,8 +40647,8 @@ var __extends = (this && this.__extends) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 var domutils_1 = __webpack_require__(7);
-var dragdrop_1 = __webpack_require__(31);
-var signaling_1 = __webpack_require__(11);
+var dragdrop_1 = __webpack_require__(22);
+var signaling_1 = __webpack_require__(10);
 var widget_1 = __webpack_require__(6);
 /**
  * A widget which implements a canonical scroll bar.
@@ -36013,7 +41307,7 @@ var Private;
 
 
 /***/ }),
-/* 139 */
+/* 148 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -36036,7 +41330,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 |
 | The full license is in the file LICENSE, distributed with this software.
 |----------------------------------------------------------------------------*/
-var algorithm_1 = __webpack_require__(3);
+var algorithm_1 = __webpack_require__(2);
 var messaging_1 = __webpack_require__(8);
 var layout_1 = __webpack_require__(16);
 var widget_1 = __webpack_require__(6);
@@ -36204,7 +41498,7 @@ exports.SingletonLayout = SingletonLayout;
 
 
 /***/ }),
-/* 140 */
+/* 149 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -36227,10 +41521,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 |
 | The full license is in the file LICENSE, distributed with this software.
 |----------------------------------------------------------------------------*/
-var algorithm_1 = __webpack_require__(3);
-var dragdrop_1 = __webpack_require__(31);
-var panel_1 = __webpack_require__(33);
-var splitlayout_1 = __webpack_require__(63);
+var algorithm_1 = __webpack_require__(2);
+var dragdrop_1 = __webpack_require__(22);
+var panel_1 = __webpack_require__(34);
+var splitlayout_1 = __webpack_require__(68);
 /**
  * A panel which arranges its widgets into resizable sections.
  *
@@ -36600,7 +41894,7 @@ var Private;
 
 
 /***/ }),
-/* 141 */
+/* 150 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -36625,10 +41919,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 |----------------------------------------------------------------------------*/
 var domutils_1 = __webpack_require__(7);
 var messaging_1 = __webpack_require__(8);
-var signaling_1 = __webpack_require__(11);
-var boxlayout_1 = __webpack_require__(44);
-var stackedpanel_1 = __webpack_require__(65);
-var tabbar_1 = __webpack_require__(45);
+var signaling_1 = __webpack_require__(10);
+var boxlayout_1 = __webpack_require__(45);
+var stackedpanel_1 = __webpack_require__(70);
+var tabbar_1 = __webpack_require__(46);
 var widget_1 = __webpack_require__(6);
 /**
  * A widget which combines a `TabBar` and a `StackedPanel`.
@@ -36940,10 +42234,10 @@ var Private;
 
 
 /***/ }),
-/* 142 */
+/* 151 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var asn1 = __webpack_require__(24);
+var asn1 = __webpack_require__(25);
 var inherits = __webpack_require__(0);
 
 var api = exports;
@@ -36963,7 +42257,7 @@ function Entity(name, body) {
 Entity.prototype._createNamed = function createNamed(base) {
   var named;
   try {
-    named = __webpack_require__(243).runInThisContext(
+    named = __webpack_require__(254).runInThisContext(
       '(function ' + this.name + '(entity) {\n' +
       '  this._initNamed(entity);\n' +
       '})'
@@ -37007,13 +42301,13 @@ Entity.prototype.encode = function encode(data, enc, /* internal */ reporter) {
 
 
 /***/ }),
-/* 143 */
+/* 152 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Reporter = __webpack_require__(25).Reporter;
-var EncoderBuffer = __webpack_require__(25).EncoderBuffer;
-var DecoderBuffer = __webpack_require__(25).DecoderBuffer;
-var assert = __webpack_require__(10);
+var Reporter = __webpack_require__(26).Reporter;
+var EncoderBuffer = __webpack_require__(26).EncoderBuffer;
+var DecoderBuffer = __webpack_require__(26).DecoderBuffer;
+var assert = __webpack_require__(11);
 
 // Supported tags
 var tags = [
@@ -37647,7 +42941,7 @@ Node.prototype._isPrintstr = function isPrintstr(str) {
 
 
 /***/ }),
-/* 144 */
+/* 153 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var inherits = __webpack_require__(0);
@@ -37774,10 +43068,10 @@ ReporterError.prototype.rethrow = function rethrow(msg) {
 
 
 /***/ }),
-/* 145 */
+/* 154 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var constants = __webpack_require__(67);
+var constants = __webpack_require__(72);
 
 exports.tagClass = {
   0: 'universal',
@@ -37822,23 +43116,23 @@ exports.tagByName = constants._reverse(exports.tag);
 
 
 /***/ }),
-/* 146 */
+/* 155 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var decoders = exports;
 
-decoders.der = __webpack_require__(68);
-decoders.pem = __webpack_require__(147);
+decoders.der = __webpack_require__(73);
+decoders.pem = __webpack_require__(156);
 
 
 /***/ }),
-/* 147 */
+/* 156 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var inherits = __webpack_require__(0);
-var Buffer = __webpack_require__(2).Buffer;
+var Buffer = __webpack_require__(3).Buffer;
 
-var DERDecoder = __webpack_require__(68);
+var DERDecoder = __webpack_require__(73);
 
 function PEMDecoder(entity) {
   DERDecoder.call(this, entity);
@@ -37887,22 +43181,22 @@ PEMDecoder.prototype.decode = function decode(data, options) {
 
 
 /***/ }),
-/* 148 */
+/* 157 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var encoders = exports;
 
-encoders.der = __webpack_require__(69);
-encoders.pem = __webpack_require__(149);
+encoders.der = __webpack_require__(74);
+encoders.pem = __webpack_require__(158);
 
 
 /***/ }),
-/* 149 */
+/* 158 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var inherits = __webpack_require__(0);
 
-var DEREncoder = __webpack_require__(69);
+var DEREncoder = __webpack_require__(74);
 
 function PEMEncoder(entity) {
   DEREncoder.call(this, entity);
@@ -37924,7 +43218,7 @@ PEMEncoder.prototype.encode = function encode(data, options) {
 
 
 /***/ }),
-/* 150 */
+/* 159 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -38082,16 +43376,16 @@ function fromByteArray (uint8) {
 
 
 /***/ }),
-/* 151 */
+/* 160 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var AuthCipher = __webpack_require__(71)
+var AuthCipher = __webpack_require__(76)
 var Buffer = __webpack_require__(1).Buffer
-var MODES = __webpack_require__(48)
-var StreamCipher = __webpack_require__(75)
+var MODES = __webpack_require__(49)
+var StreamCipher = __webpack_require__(80)
 var Transform = __webpack_require__(17)
-var aes = __webpack_require__(34)
-var ebtk = __webpack_require__(36)
+var aes = __webpack_require__(35)
+var ebtk = __webpack_require__(37)
 var inherits = __webpack_require__(0)
 
 function Decipher (mode, key, iv) {
@@ -38212,16 +43506,16 @@ exports.createDecipheriv = createDecipheriv
 
 
 /***/ }),
-/* 152 */
+/* 161 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var MODES = __webpack_require__(48)
-var AuthCipher = __webpack_require__(71)
+var MODES = __webpack_require__(49)
+var AuthCipher = __webpack_require__(76)
 var Buffer = __webpack_require__(1).Buffer
-var StreamCipher = __webpack_require__(75)
+var StreamCipher = __webpack_require__(80)
 var Transform = __webpack_require__(17)
-var aes = __webpack_require__(34)
-var ebtk = __webpack_require__(36)
+var aes = __webpack_require__(35)
+var ebtk = __webpack_require__(37)
 var inherits = __webpack_require__(0)
 
 function Cipher (mode, key, iv) {
@@ -38332,7 +43626,7 @@ exports.createCipher = createCipher
 
 
 /***/ }),
-/* 153 */
+/* 162 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Buffer = __webpack_require__(1).Buffer
@@ -38427,10 +43721,10 @@ module.exports = GHASH
 
 
 /***/ }),
-/* 154 */
+/* 163 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var xor = __webpack_require__(26)
+var xor = __webpack_require__(27)
 
 exports.encrypt = function (self, block) {
   var data = xor(block, self._prev)
@@ -38450,11 +43744,11 @@ exports.decrypt = function (self, block) {
 
 
 /***/ }),
-/* 155 */
+/* 164 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Buffer = __webpack_require__(1).Buffer
-var xor = __webpack_require__(26)
+var xor = __webpack_require__(27)
 
 function encryptStart (self, data, decrypt) {
   var len = data.length
@@ -38489,7 +43783,7 @@ exports.encrypt = function (self, data, decrypt) {
 
 
 /***/ }),
-/* 156 */
+/* 165 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Buffer = __webpack_require__(1).Buffer
@@ -38537,7 +43831,7 @@ exports.encrypt = function (self, chunk, decrypt) {
 
 
 /***/ }),
-/* 157 */
+/* 166 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Buffer = __webpack_require__(1).Buffer
@@ -38568,7 +43862,7 @@ exports.encrypt = function (self, chunk, decrypt) {
 
 
 /***/ }),
-/* 158 */
+/* 167 */
 /***/ (function(module, exports) {
 
 exports.encrypt = function (self, block) {
@@ -38581,10 +43875,10 @@ exports.decrypt = function (self, block) {
 
 
 /***/ }),
-/* 159 */
+/* 168 */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(Buffer) {var xor = __webpack_require__(26)
+/* WEBPACK VAR INJECTION */(function(Buffer) {var xor = __webpack_require__(27)
 
 function getBlock (self) {
   self._prev = self._cipher.encryptBlock(self._prev)
@@ -38601,17 +43895,17 @@ exports.encrypt = function (self, chunk) {
   return xor(chunk, pad)
 }
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2).Buffer))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3).Buffer))
 
 /***/ }),
-/* 160 */
+/* 169 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var DES = __webpack_require__(161)
-var aes = __webpack_require__(47)
-var aesModes = __webpack_require__(48)
-var desModes = __webpack_require__(162)
-var ebtk = __webpack_require__(36)
+var DES = __webpack_require__(170)
+var aes = __webpack_require__(48)
+var aesModes = __webpack_require__(49)
+var desModes = __webpack_require__(171)
+var ebtk = __webpack_require__(37)
 
 function createCipher (suite, password) {
   suite = suite.toLowerCase()
@@ -38677,11 +43971,11 @@ exports.listCiphers = exports.getCiphers = getCiphers
 
 
 /***/ }),
-/* 161 */
+/* 170 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(Buffer) {var CipherBase = __webpack_require__(17)
-var des = __webpack_require__(50)
+var des = __webpack_require__(51)
 var inherits = __webpack_require__(0)
 
 var modes = {
@@ -38724,10 +44018,10 @@ DES.prototype._final = function () {
   return new Buffer(this._des.final())
 }
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2).Buffer))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3).Buffer))
 
 /***/ }),
-/* 162 */
+/* 171 */
 /***/ (function(module, exports) {
 
 exports['des-ecb'] = {
@@ -38757,23 +44051,23 @@ exports['des-ede'] = {
 
 
 /***/ }),
-/* 163 */
+/* 172 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(76)
+module.exports = __webpack_require__(81)
 
 
 /***/ }),
-/* 164 */
+/* 173 */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(Buffer) {var createHash = __webpack_require__(28)
-var stream = __webpack_require__(58)
+/* WEBPACK VAR INJECTION */(function(Buffer) {var createHash = __webpack_require__(29)
+var stream = __webpack_require__(59)
 var inherits = __webpack_require__(0)
-var sign = __webpack_require__(165)
-var verify = __webpack_require__(166)
+var sign = __webpack_require__(174)
+var verify = __webpack_require__(175)
 
-var algorithms = __webpack_require__(76)
+var algorithms = __webpack_require__(81)
 Object.keys(algorithms).forEach(function (key) {
   algorithms[key].id = new Buffer(algorithms[key].id, 'hex')
   algorithms[key.toLowerCase()] = algorithms[key]
@@ -38859,19 +44153,19 @@ module.exports = {
   createVerify: createVerify
 }
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2).Buffer))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3).Buffer))
 
 /***/ }),
-/* 165 */
+/* 174 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(Buffer) {// much of this based on https://github.com/indutny/self-signed/blob/gh-pages/lib/rsa.js
-var createHmac = __webpack_require__(79)
-var crt = __webpack_require__(49)
+var createHmac = __webpack_require__(84)
+var crt = __webpack_require__(50)
 var EC = __webpack_require__(9).ec
-var BN = __webpack_require__(4)
-var parseKeys = __webpack_require__(37)
-var curves = __webpack_require__(77)
+var BN = __webpack_require__(5)
+var parseKeys = __webpack_require__(38)
+var curves = __webpack_require__(82)
 
 function sign (hash, key, hashType, signType, tag) {
   var priv = parseKeys(key)
@@ -39011,17 +44305,17 @@ module.exports = sign
 module.exports.getKey = getKey
 module.exports.makeKey = makeKey
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2).Buffer))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3).Buffer))
 
 /***/ }),
-/* 166 */
+/* 175 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(Buffer) {// much of this based on https://github.com/indutny/self-signed/blob/gh-pages/lib/rsa.js
-var BN = __webpack_require__(4)
+var BN = __webpack_require__(5)
 var EC = __webpack_require__(9).ec
-var parseKeys = __webpack_require__(37)
-var curves = __webpack_require__(77)
+var parseKeys = __webpack_require__(38)
+var curves = __webpack_require__(82)
 
 function verify (sig, hash, key, signType, tag) {
   var pub = parseKeys(key)
@@ -39101,14 +44395,14 @@ function checkValue (b, q) {
 
 module.exports = verify
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2).Buffer))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3).Buffer))
 
 /***/ }),
-/* 167 */
+/* 176 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(Buffer) {var elliptic = __webpack_require__(9)
-var BN = __webpack_require__(4)
+var BN = __webpack_require__(5)
 
 module.exports = function createECDH (curve) {
   return new ECDH(curve)
@@ -39232,10 +44526,10 @@ function formatReturnValue (bn, enc, len) {
   }
 }
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2).Buffer))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3).Buffer))
 
 /***/ }),
-/* 168 */
+/* 177 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -39288,28 +44582,28 @@ module.exports = Hmac
 
 
 /***/ }),
-/* 169 */
+/* 178 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 exports.randomBytes = exports.rng = exports.pseudoRandomBytes = exports.prng = __webpack_require__(20)
-exports.createHash = exports.Hash = __webpack_require__(28)
-exports.createHmac = exports.Hmac = __webpack_require__(79)
+exports.createHash = exports.Hash = __webpack_require__(29)
+exports.createHmac = exports.Hmac = __webpack_require__(84)
 
-var algos = __webpack_require__(163)
+var algos = __webpack_require__(172)
 var algoKeys = Object.keys(algos)
 var hashes = ['sha1', 'sha224', 'sha256', 'sha384', 'sha512', 'md5', 'rmd160'].concat(algoKeys)
 exports.getHashes = function () {
   return hashes
 }
 
-var p = __webpack_require__(88)
+var p = __webpack_require__(93)
 exports.pbkdf2 = p.pbkdf2
 exports.pbkdf2Sync = p.pbkdf2Sync
 
-var aes = __webpack_require__(160)
+var aes = __webpack_require__(169)
 
 exports.Cipher = aes.Cipher
 exports.createCipher = aes.createCipher
@@ -39322,7 +44616,7 @@ exports.createDecipheriv = aes.createDecipheriv
 exports.getCiphers = aes.getCiphers
 exports.listCiphers = aes.listCiphers
 
-var dh = __webpack_require__(195)
+var dh = __webpack_require__(206)
 
 exports.DiffieHellmanGroup = dh.DiffieHellmanGroup
 exports.createDiffieHellmanGroup = dh.createDiffieHellmanGroup
@@ -39330,16 +44624,16 @@ exports.getDiffieHellman = dh.getDiffieHellman
 exports.createDiffieHellman = dh.createDiffieHellman
 exports.DiffieHellman = dh.DiffieHellman
 
-var sign = __webpack_require__(164)
+var sign = __webpack_require__(173)
 
 exports.createSign = sign.createSign
 exports.Sign = sign.Sign
 exports.createVerify = sign.createVerify
 exports.Verify = sign.Verify
 
-exports.createECDH = __webpack_require__(167)
+exports.createECDH = __webpack_require__(176)
 
-var publicEncrypt = __webpack_require__(227)
+var publicEncrypt = __webpack_require__(238)
 
 exports.publicEncrypt = publicEncrypt.publicEncrypt
 exports.privateEncrypt = publicEncrypt.privateEncrypt
@@ -39359,7 +44653,7 @@ exports.privateDecrypt = publicEncrypt.privateDecrypt
 //   }
 // })
 
-var rf = __webpack_require__(230)
+var rf = __webpack_require__(241)
 
 exports.randomFill = rf.randomFill
 exports.randomFillSync = rf.randomFillSync
@@ -39392,10 +44686,10 @@ exports.constants = {
 
 
 /***/ }),
-/* 170 */
+/* 179 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(5)();
+exports = module.exports = __webpack_require__(4)();
 // imports
 
 
@@ -39406,10 +44700,10 @@ exports.push([module.i, "/*-----------------------------------------------------
 
 
 /***/ }),
-/* 171 */
+/* 180 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(5)();
+exports = module.exports = __webpack_require__(4)();
 // imports
 
 
@@ -39420,10 +44714,10 @@ exports.push([module.i, "/*-----------------------------------------------------
 
 
 /***/ }),
-/* 172 */
+/* 181 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(5)();
+exports = module.exports = __webpack_require__(4)();
 // imports
 
 
@@ -39434,20 +44728,20 @@ exports.push([module.i, "/*-----------------------------------------------------
 
 
 /***/ }),
-/* 173 */
+/* 182 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(5)();
+exports = module.exports = __webpack_require__(4)();
 // imports
+exports.i(__webpack_require__(189), "");
 exports.i(__webpack_require__(180), "");
-exports.i(__webpack_require__(171), "");
-exports.i(__webpack_require__(172), "");
-exports.i(__webpack_require__(174), "");
-exports.i(__webpack_require__(175), "");
-exports.i(__webpack_require__(176), "");
-exports.i(__webpack_require__(177), "");
-exports.i(__webpack_require__(178), "");
-exports.i(__webpack_require__(179), "");
+exports.i(__webpack_require__(181), "");
+exports.i(__webpack_require__(183), "");
+exports.i(__webpack_require__(184), "");
+exports.i(__webpack_require__(185), "");
+exports.i(__webpack_require__(186), "");
+exports.i(__webpack_require__(187), "");
+exports.i(__webpack_require__(188), "");
 
 // module
 exports.push([module.i, "/*-----------------------------------------------------------------------------\r\n| Copyright (c) 2014-2017, PhosphorJS Contributors\r\n|\r\n| Distributed under the terms of the BSD 3-Clause License.\r\n|\r\n| The full license is in the file LICENSE, distributed with this software.\r\n|----------------------------------------------------------------------------*/\r\n", ""]);
@@ -39456,10 +44750,10 @@ exports.push([module.i, "/*-----------------------------------------------------
 
 
 /***/ }),
-/* 174 */
+/* 183 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(5)();
+exports = module.exports = __webpack_require__(4)();
 // imports
 
 
@@ -39470,10 +44764,10 @@ exports.push([module.i, "/*-----------------------------------------------------
 
 
 /***/ }),
-/* 175 */
+/* 184 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(5)();
+exports = module.exports = __webpack_require__(4)();
 // imports
 
 
@@ -39484,10 +44778,10 @@ exports.push([module.i, "/*-----------------------------------------------------
 
 
 /***/ }),
-/* 176 */
+/* 185 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(5)();
+exports = module.exports = __webpack_require__(4)();
 // imports
 
 
@@ -39498,10 +44792,10 @@ exports.push([module.i, "/*-----------------------------------------------------
 
 
 /***/ }),
-/* 177 */
+/* 186 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(5)();
+exports = module.exports = __webpack_require__(4)();
 // imports
 
 
@@ -39512,10 +44806,10 @@ exports.push([module.i, "/*-----------------------------------------------------
 
 
 /***/ }),
-/* 178 */
+/* 187 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(5)();
+exports = module.exports = __webpack_require__(4)();
 // imports
 
 
@@ -39526,10 +44820,10 @@ exports.push([module.i, "/*-----------------------------------------------------
 
 
 /***/ }),
-/* 179 */
+/* 188 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(5)();
+exports = module.exports = __webpack_require__(4)();
 // imports
 
 
@@ -39540,10 +44834,10 @@ exports.push([module.i, "/*-----------------------------------------------------
 
 
 /***/ }),
-/* 180 */
+/* 189 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(5)();
+exports = module.exports = __webpack_require__(4)();
 // imports
 
 
@@ -39554,24 +44848,53 @@ exports.push([module.i, "/*-----------------------------------------------------
 
 
 /***/ }),
-/* 181 */
+/* 190 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(5)();
+exports = module.exports = __webpack_require__(4)();
 // imports
 
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, "div.nano-annotate {\n    display: flex;\n    flex-direction: column;\n}\n\ndiv.nano-annotate div.nano-grid {\n    flex: 2;\n    background-color: magenta;\n}\n\ndiv.nano-annotate div.nano-io {\n    flex: 1;\n    background-color: cyan;\n}\n\n\n.p-DataGrid {\n  min-width: 64px;\n  min-height: 64px;\n  width:100%;\n  height:100%;\n  border: 1px solid #A0A0A0;\n}\n\n\n.p-DataGrid-scrollCorner {\n  background-color: #F0F0F0;\n}\n\n\n.p-DataGrid-scrollCorner::after {\n  content: '';\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 1px;\n  height: 1px;\n  background-color: #A0A0A0;\n}\n", ""]);
 
 // exports
 
 
 /***/ }),
-/* 182 */
+/* 191 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(5)();
+exports = module.exports = __webpack_require__(4)();
+// imports
+
+
+// module
+exports.push([module.i, "div.nano-controls div {\n    display: flex;\n    flex-direction: column;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 192 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(4)();
+// imports
+exports.i(__webpack_require__(191), "");
+exports.i(__webpack_require__(190), "");
+
+// module
+exports.push([module.i, "\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 193 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(4)();
 // imports
 
 
@@ -39582,10 +44905,10 @@ exports.push([module.i, "/*-----------------------------------------------------
 
 
 /***/ }),
-/* 183 */
+/* 194 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(5)();
+exports = module.exports = __webpack_require__(4)();
 // imports
 
 
@@ -39596,24 +44919,24 @@ exports.push([module.i, "/*-----------------------------------------------------
 
 
 /***/ }),
-/* 184 */
+/* 195 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(5)();
+exports = module.exports = __webpack_require__(4)();
 // imports
 
 
 // module
-exports.push([module.i, ".controls {\n  min-width: 50px;\n  min-height: 50px;\n  /*max-width: 350px;*/\n  display: flex;\n  flex-direction: column;\n  padding: 8px;\n  border: 1px solid #C0C0C0;\n  border-top: none;\n  background: white;\n  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);\n}\n\n\n.controls > div {\n  flex: 1 1 auto;\n  border: 1px solid #505050;\n  overflow: auto;\n}\n\n\n.controls  input {\n  margin: 8px;\n  width:90%;\n}\n\n\n.controls input::-webkit-outer-spin-button,\n.controls input::-webkit-inner-spin-button {\n    /* display: none; <- Crashes Chrome on hover */\n    -webkit-appearance: none;\n    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */\n}\n\n/* specifically hide the arrow on focus */\n.controls input::-webkit-calendar-picker-indicator {\n    display: none;\n}", ""]);
+exports.push([module.i, "div.nano-controls, \ndiv.nano-annotate {\n  min-width: 50px;\n  min-height: 50px;\n  /*max-width: 350px;*/\n  display: flex;\n  flex-direction: column;\n  padding: 8px;\n  border: 1px solid #C0C0C0;\n  border-top: none;\n  background: white;\n  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);\n}\n\n\ndiv.nano-controls > div {\n  flex: 1 1 auto;\n  border: 1px solid #505050;\n  overflow: auto;\n}\n\n\ndiv.nano-controls  input {\n  margin: 8px;\n  width:90%;\n}\n\n\ndiv.nano-controls input::-webkit-outer-spin-button,\ndiv.nano-controls input::-webkit-inner-spin-button {\n    /* display: none; <- Crashes Chrome on hover */\n    -webkit-appearance: none;\n    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */\n}\n\n/* specifically hide the arrow on focus */\ndiv.nano-controls input::-webkit-calendar-picker-indicator {\n    display: none;\n}\n\n", ""]);
 
 // exports
 
 
 /***/ }),
-/* 185 */
+/* 196 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(5)();
+exports = module.exports = __webpack_require__(4)();
 // imports
 
 
@@ -39624,32 +44947,32 @@ exports.push([module.i, "/*-----------------------------------------------------
 
 
 /***/ }),
-/* 186 */
+/* 197 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(5)();
+exports = module.exports = __webpack_require__(4)();
 // imports
-exports.i(__webpack_require__(170), "");
-exports.i(__webpack_require__(173), "");
+exports.i(__webpack_require__(179), "");
 exports.i(__webpack_require__(182), "");
-exports.i(__webpack_require__(183), "");
-exports.i(__webpack_require__(185), "");
-exports.i(__webpack_require__(187), "");
-exports.i(__webpack_require__(188), "");
-exports.i(__webpack_require__(189), "");
-exports.i(__webpack_require__(184), "");
+exports.i(__webpack_require__(193), "");
+exports.i(__webpack_require__(194), "");
+exports.i(__webpack_require__(196), "");
+exports.i(__webpack_require__(198), "");
+exports.i(__webpack_require__(199), "");
+exports.i(__webpack_require__(200), "");
+exports.i(__webpack_require__(195), "");
 
 // module
-exports.push([module.i, "/*-----------------------------------------------------------------------------\n| Copyright (c) 2014-2017, PhosphorJS Contributors\n|\n| Distributed under the terms of the BSD 3-Clause License.\n|\n| The full license is in the file LICENSE, distributed with this software.\n|----------------------------------------------------------------------------*/\n", ""]);
+exports.push([module.i, "/*-----------------------------------------------------------------------------\n| Copyright (c) 2014-2017, PhosphorJS Contributors\n|\n| Distributed under the terms of the BSD 3-Clause License.\n|\n| The full license is in the file LICENSE, distributed with this software.\n|----------------------------------------------------------------------------*/\n\nbody {\n  display: flex;\n  flex-direction: column;\n  position: absolute;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  margin: 0;\n  padding: 0;\n  overflow: hidden;\n}\n\n\n#menuBar {\n  flex: 0 0 auto;\n}\n\n\n#main {\n  flex: 1 1 auto;\n}\n\n\n#palette {\n  min-width: 300px;\n  border-right: 1px solid #DDDDDD;\n}\n\n\n#dock {\n  padding: 4px;\n}", ""]);
 
 // exports
 
 
 /***/ }),
-/* 187 */
+/* 198 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(5)();
+exports = module.exports = __webpack_require__(4)();
 // imports
 
 
@@ -39660,10 +44983,10 @@ exports.push([module.i, "/*-----------------------------------------------------
 
 
 /***/ }),
-/* 188 */
+/* 199 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(5)();
+exports = module.exports = __webpack_require__(4)();
 // imports
 
 
@@ -39674,10 +44997,10 @@ exports.push([module.i, "/*-----------------------------------------------------
 
 
 /***/ }),
-/* 189 */
+/* 200 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(5)();
+exports = module.exports = __webpack_require__(4)();
 // imports
 
 
@@ -39688,13 +45011,13 @@ exports.push([module.i, "/*-----------------------------------------------------
 
 
 /***/ }),
-/* 190 */
+/* 201 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var assert = __webpack_require__(10);
+var assert = __webpack_require__(11);
 var inherits = __webpack_require__(0);
 
 var proto = {};
@@ -39760,13 +45083,13 @@ proto._update = function _update(inp, inOff, out, outOff) {
 
 
 /***/ }),
-/* 191 */
+/* 202 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var assert = __webpack_require__(10);
+var assert = __webpack_require__(11);
 
 function Cipher(options) {
   this.options = options;
@@ -39908,16 +45231,16 @@ Cipher.prototype._finalDecrypt = function _finalDecrypt() {
 
 
 /***/ }),
-/* 192 */
+/* 203 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var assert = __webpack_require__(10);
+var assert = __webpack_require__(11);
 var inherits = __webpack_require__(0);
 
-var des = __webpack_require__(50);
+var des = __webpack_require__(51);
 var utils = des.utils;
 var Cipher = des.Cipher;
 
@@ -40058,16 +45381,16 @@ DES.prototype._decrypt = function _decrypt(state, lStart, rStart, out, off) {
 
 
 /***/ }),
-/* 193 */
+/* 204 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var assert = __webpack_require__(10);
+var assert = __webpack_require__(11);
 var inherits = __webpack_require__(0);
 
-var des = __webpack_require__(50);
+var des = __webpack_require__(51);
 var Cipher = des.Cipher;
 var DES = des.DES;
 
@@ -40120,7 +45443,7 @@ EDE.prototype._unpad = DES.prototype._unpad;
 
 
 /***/ }),
-/* 194 */
+/* 205 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -40383,13 +45706,13 @@ exports.padSplit = function padSplit(num, size, group) {
 
 
 /***/ }),
-/* 195 */
+/* 206 */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(Buffer) {var generatePrime = __webpack_require__(80)
-var primes = __webpack_require__(197)
+/* WEBPACK VAR INJECTION */(function(Buffer) {var generatePrime = __webpack_require__(85)
+var primes = __webpack_require__(208)
 
-var DH = __webpack_require__(196)
+var DH = __webpack_require__(207)
 
 function getDiffieHellman (mod) {
   var prime = new Buffer(primes[mod].prime, 'hex')
@@ -40429,21 +45752,21 @@ function createDiffieHellman (prime, enc, generator, genc) {
 exports.DiffieHellmanGroup = exports.createDiffieHellmanGroup = exports.getDiffieHellman = getDiffieHellman
 exports.createDiffieHellman = exports.DiffieHellman = createDiffieHellman
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2).Buffer))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3).Buffer))
 
 /***/ }),
-/* 196 */
+/* 207 */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(Buffer) {var BN = __webpack_require__(4);
-var MillerRabin = __webpack_require__(86);
+/* WEBPACK VAR INJECTION */(function(Buffer) {var BN = __webpack_require__(5);
+var MillerRabin = __webpack_require__(91);
 var millerRabin = new MillerRabin();
 var TWENTYFOUR = new BN(24);
 var ELEVEN = new BN(11);
 var TEN = new BN(10);
 var THREE = new BN(3);
 var SEVEN = new BN(7);
-var primes = __webpack_require__(80);
+var primes = __webpack_require__(85);
 var randomBytes = __webpack_require__(20);
 module.exports = DH;
 
@@ -40600,22 +45923,22 @@ function formatReturnValue(bn, enc) {
   }
 }
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2).Buffer))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3).Buffer))
 
 /***/ }),
-/* 197 */
+/* 208 */
 /***/ (function(module, exports) {
 
 module.exports = {"modp1":{"gen":"02","prime":"ffffffffffffffffc90fdaa22168c234c4c6628b80dc1cd129024e088a67cc74020bbea63b139b22514a08798e3404ddef9519b3cd3a431b302b0a6df25f14374fe1356d6d51c245e485b576625e7ec6f44c42e9a63a3620ffffffffffffffff"},"modp2":{"gen":"02","prime":"ffffffffffffffffc90fdaa22168c234c4c6628b80dc1cd129024e088a67cc74020bbea63b139b22514a08798e3404ddef9519b3cd3a431b302b0a6df25f14374fe1356d6d51c245e485b576625e7ec6f44c42e9a637ed6b0bff5cb6f406b7edee386bfb5a899fa5ae9f24117c4b1fe649286651ece65381ffffffffffffffff"},"modp5":{"gen":"02","prime":"ffffffffffffffffc90fdaa22168c234c4c6628b80dc1cd129024e088a67cc74020bbea63b139b22514a08798e3404ddef9519b3cd3a431b302b0a6df25f14374fe1356d6d51c245e485b576625e7ec6f44c42e9a637ed6b0bff5cb6f406b7edee386bfb5a899fa5ae9f24117c4b1fe649286651ece45b3dc2007cb8a163bf0598da48361c55d39a69163fa8fd24cf5f83655d23dca3ad961c62f356208552bb9ed529077096966d670c354e4abc9804f1746c08ca237327ffffffffffffffff"},"modp14":{"gen":"02","prime":"ffffffffffffffffc90fdaa22168c234c4c6628b80dc1cd129024e088a67cc74020bbea63b139b22514a08798e3404ddef9519b3cd3a431b302b0a6df25f14374fe1356d6d51c245e485b576625e7ec6f44c42e9a637ed6b0bff5cb6f406b7edee386bfb5a899fa5ae9f24117c4b1fe649286651ece45b3dc2007cb8a163bf0598da48361c55d39a69163fa8fd24cf5f83655d23dca3ad961c62f356208552bb9ed529077096966d670c354e4abc9804f1746c08ca18217c32905e462e36ce3be39e772c180e86039b2783a2ec07a28fb5c55df06f4c52c9de2bcbf6955817183995497cea956ae515d2261898fa051015728e5a8aacaa68ffffffffffffffff"},"modp15":{"gen":"02","prime":"ffffffffffffffffc90fdaa22168c234c4c6628b80dc1cd129024e088a67cc74020bbea63b139b22514a08798e3404ddef9519b3cd3a431b302b0a6df25f14374fe1356d6d51c245e485b576625e7ec6f44c42e9a637ed6b0bff5cb6f406b7edee386bfb5a899fa5ae9f24117c4b1fe649286651ece45b3dc2007cb8a163bf0598da48361c55d39a69163fa8fd24cf5f83655d23dca3ad961c62f356208552bb9ed529077096966d670c354e4abc9804f1746c08ca18217c32905e462e36ce3be39e772c180e86039b2783a2ec07a28fb5c55df06f4c52c9de2bcbf6955817183995497cea956ae515d2261898fa051015728e5a8aaac42dad33170d04507a33a85521abdf1cba64ecfb850458dbef0a8aea71575d060c7db3970f85a6e1e4c7abf5ae8cdb0933d71e8c94e04a25619dcee3d2261ad2ee6bf12ffa06d98a0864d87602733ec86a64521f2b18177b200cbbe117577a615d6c770988c0bad946e208e24fa074e5ab3143db5bfce0fd108e4b82d120a93ad2caffffffffffffffff"},"modp16":{"gen":"02","prime":"ffffffffffffffffc90fdaa22168c234c4c6628b80dc1cd129024e088a67cc74020bbea63b139b22514a08798e3404ddef9519b3cd3a431b302b0a6df25f14374fe1356d6d51c245e485b576625e7ec6f44c42e9a637ed6b0bff5cb6f406b7edee386bfb5a899fa5ae9f24117c4b1fe649286651ece45b3dc2007cb8a163bf0598da48361c55d39a69163fa8fd24cf5f83655d23dca3ad961c62f356208552bb9ed529077096966d670c354e4abc9804f1746c08ca18217c32905e462e36ce3be39e772c180e86039b2783a2ec07a28fb5c55df06f4c52c9de2bcbf6955817183995497cea956ae515d2261898fa051015728e5a8aaac42dad33170d04507a33a85521abdf1cba64ecfb850458dbef0a8aea71575d060c7db3970f85a6e1e4c7abf5ae8cdb0933d71e8c94e04a25619dcee3d2261ad2ee6bf12ffa06d98a0864d87602733ec86a64521f2b18177b200cbbe117577a615d6c770988c0bad946e208e24fa074e5ab3143db5bfce0fd108e4b82d120a92108011a723c12a787e6d788719a10bdba5b2699c327186af4e23c1a946834b6150bda2583e9ca2ad44ce8dbbbc2db04de8ef92e8efc141fbecaa6287c59474e6bc05d99b2964fa090c3a2233ba186515be7ed1f612970cee2d7afb81bdd762170481cd0069127d5b05aa993b4ea988d8fddc186ffb7dc90a6c08f4df435c934063199ffffffffffffffff"},"modp17":{"gen":"02","prime":"ffffffffffffffffc90fdaa22168c234c4c6628b80dc1cd129024e088a67cc74020bbea63b139b22514a08798e3404ddef9519b3cd3a431b302b0a6df25f14374fe1356d6d51c245e485b576625e7ec6f44c42e9a637ed6b0bff5cb6f406b7edee386bfb5a899fa5ae9f24117c4b1fe649286651ece45b3dc2007cb8a163bf0598da48361c55d39a69163fa8fd24cf5f83655d23dca3ad961c62f356208552bb9ed529077096966d670c354e4abc9804f1746c08ca18217c32905e462e36ce3be39e772c180e86039b2783a2ec07a28fb5c55df06f4c52c9de2bcbf6955817183995497cea956ae515d2261898fa051015728e5a8aaac42dad33170d04507a33a85521abdf1cba64ecfb850458dbef0a8aea71575d060c7db3970f85a6e1e4c7abf5ae8cdb0933d71e8c94e04a25619dcee3d2261ad2ee6bf12ffa06d98a0864d87602733ec86a64521f2b18177b200cbbe117577a615d6c770988c0bad946e208e24fa074e5ab3143db5bfce0fd108e4b82d120a92108011a723c12a787e6d788719a10bdba5b2699c327186af4e23c1a946834b6150bda2583e9ca2ad44ce8dbbbc2db04de8ef92e8efc141fbecaa6287c59474e6bc05d99b2964fa090c3a2233ba186515be7ed1f612970cee2d7afb81bdd762170481cd0069127d5b05aa993b4ea988d8fddc186ffb7dc90a6c08f4df435c93402849236c3fab4d27c7026c1d4dcb2602646dec9751e763dba37bdf8ff9406ad9e530ee5db382f413001aeb06a53ed9027d831179727b0865a8918da3edbebcf9b14ed44ce6cbaced4bb1bdb7f1447e6cc254b332051512bd7af426fb8f401378cd2bf5983ca01c64b92ecf032ea15d1721d03f482d7ce6e74fef6d55e702f46980c82b5a84031900b1c9e59e7c97fbec7e8f323a97a7e36cc88be0f1d45b7ff585ac54bd407b22b4154aacc8f6d7ebf48e1d814cc5ed20f8037e0a79715eef29be32806a1d58bb7c5da76f550aa3d8a1fbff0eb19ccb1a313d55cda56c9ec2ef29632387fe8d76e3c0468043e8f663f4860ee12bf2d5b0b7474d6e694f91e6dcc4024ffffffffffffffff"},"modp18":{"gen":"02","prime":"ffffffffffffffffc90fdaa22168c234c4c6628b80dc1cd129024e088a67cc74020bbea63b139b22514a08798e3404ddef9519b3cd3a431b302b0a6df25f14374fe1356d6d51c245e485b576625e7ec6f44c42e9a637ed6b0bff5cb6f406b7edee386bfb5a899fa5ae9f24117c4b1fe649286651ece45b3dc2007cb8a163bf0598da48361c55d39a69163fa8fd24cf5f83655d23dca3ad961c62f356208552bb9ed529077096966d670c354e4abc9804f1746c08ca18217c32905e462e36ce3be39e772c180e86039b2783a2ec07a28fb5c55df06f4c52c9de2bcbf6955817183995497cea956ae515d2261898fa051015728e5a8aaac42dad33170d04507a33a85521abdf1cba64ecfb850458dbef0a8aea71575d060c7db3970f85a6e1e4c7abf5ae8cdb0933d71e8c94e04a25619dcee3d2261ad2ee6bf12ffa06d98a0864d87602733ec86a64521f2b18177b200cbbe117577a615d6c770988c0bad946e208e24fa074e5ab3143db5bfce0fd108e4b82d120a92108011a723c12a787e6d788719a10bdba5b2699c327186af4e23c1a946834b6150bda2583e9ca2ad44ce8dbbbc2db04de8ef92e8efc141fbecaa6287c59474e6bc05d99b2964fa090c3a2233ba186515be7ed1f612970cee2d7afb81bdd762170481cd0069127d5b05aa993b4ea988d8fddc186ffb7dc90a6c08f4df435c93402849236c3fab4d27c7026c1d4dcb2602646dec9751e763dba37bdf8ff9406ad9e530ee5db382f413001aeb06a53ed9027d831179727b0865a8918da3edbebcf9b14ed44ce6cbaced4bb1bdb7f1447e6cc254b332051512bd7af426fb8f401378cd2bf5983ca01c64b92ecf032ea15d1721d03f482d7ce6e74fef6d55e702f46980c82b5a84031900b1c9e59e7c97fbec7e8f323a97a7e36cc88be0f1d45b7ff585ac54bd407b22b4154aacc8f6d7ebf48e1d814cc5ed20f8037e0a79715eef29be32806a1d58bb7c5da76f550aa3d8a1fbff0eb19ccb1a313d55cda56c9ec2ef29632387fe8d76e3c0468043e8f663f4860ee12bf2d5b0b7474d6e694f91e6dbe115974a3926f12fee5e438777cb6a932df8cd8bec4d073b931ba3bc832b68d9dd300741fa7bf8afc47ed2576f6936ba424663aab639c5ae4f5683423b4742bf1c978238f16cbe39d652de3fdb8befc848ad922222e04a4037c0713eb57a81a23f0c73473fc646cea306b4bcbc8862f8385ddfa9d4b7fa2c087e879683303ed5bdd3a062b3cf5b3a278a66d2a13f83f44f82ddf310ee074ab6a364597e899a0255dc164f31cc50846851df9ab48195ded7ea1b1d510bd7ee74d73faf36bc31ecfa268359046f4eb879f924009438b481c6cd7889a002ed5ee382bc9190da6fc026e479558e4475677e9aa9e3050e2765694dfc81f56e880b96e7160c980dd98edd3dfffffffffffffffff"}}
 
 /***/ }),
-/* 198 */
+/* 209 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var BN = __webpack_require__(4);
+var BN = __webpack_require__(5);
 var elliptic = __webpack_require__(9);
 var utils = elliptic.utils;
 var getNAF = utils.getNAF;
@@ -40991,15 +46314,15 @@ BasePoint.prototype.dblp = function dblp(k) {
 
 
 /***/ }),
-/* 199 */
+/* 210 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var curve = __webpack_require__(35);
+var curve = __webpack_require__(36);
 var elliptic = __webpack_require__(9);
-var BN = __webpack_require__(4);
+var BN = __webpack_require__(5);
 var inherits = __webpack_require__(0);
 var Base = curve.base;
 
@@ -41431,14 +46754,14 @@ Point.prototype.mixedAdd = Point.prototype.add;
 
 
 /***/ }),
-/* 200 */
+/* 211 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var curve = __webpack_require__(35);
-var BN = __webpack_require__(4);
+var curve = __webpack_require__(36);
+var BN = __webpack_require__(5);
 var inherits = __webpack_require__(0);
 var Base = curve.base;
 
@@ -41618,15 +46941,15 @@ Point.prototype.getX = function getX() {
 
 
 /***/ }),
-/* 201 */
+/* 212 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var curve = __webpack_require__(35);
+var curve = __webpack_require__(36);
 var elliptic = __webpack_require__(9);
-var BN = __webpack_require__(4);
+var BN = __webpack_require__(5);
 var inherits = __webpack_require__(0);
 var Base = curve.base;
 
@@ -42563,7 +47886,7 @@ JPoint.prototype.isInfinity = function isInfinity() {
 
 
 /***/ }),
-/* 202 */
+/* 213 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -42571,7 +47894,7 @@ JPoint.prototype.isInfinity = function isInfinity() {
 
 var curves = exports;
 
-var hash = __webpack_require__(52);
+var hash = __webpack_require__(53);
 var elliptic = __webpack_require__(9);
 
 var assert = elliptic.utils.assert;
@@ -42736,7 +48059,7 @@ defineCurve('ed25519', {
 
 var pre;
 try {
-  pre = __webpack_require__(209);
+  pre = __webpack_require__(220);
 } catch (e) {
   pre = undefined;
 }
@@ -42775,20 +48098,20 @@ defineCurve('secp256k1', {
 
 
 /***/ }),
-/* 203 */
+/* 214 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var BN = __webpack_require__(4);
-var HmacDRBG = __webpack_require__(219);
+var BN = __webpack_require__(5);
+var HmacDRBG = __webpack_require__(230);
 var elliptic = __webpack_require__(9);
 var utils = elliptic.utils;
 var assert = utils.assert;
 
-var KeyPair = __webpack_require__(204);
-var Signature = __webpack_require__(205);
+var KeyPair = __webpack_require__(215);
+var Signature = __webpack_require__(216);
 
 function EC(options) {
   if (!(this instanceof EC))
@@ -43022,13 +48345,13 @@ EC.prototype.getKeyRecoveryParam = function(e, signature, Q, enc) {
 
 
 /***/ }),
-/* 204 */
+/* 215 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var BN = __webpack_require__(4);
+var BN = __webpack_require__(5);
 var elliptic = __webpack_require__(9);
 var utils = elliptic.utils;
 var assert = utils.assert;
@@ -43148,13 +48471,13 @@ KeyPair.prototype.inspect = function inspect() {
 
 
 /***/ }),
-/* 205 */
+/* 216 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var BN = __webpack_require__(4);
+var BN = __webpack_require__(5);
 
 var elliptic = __webpack_require__(9);
 var utils = elliptic.utils;
@@ -43290,19 +48613,19 @@ Signature.prototype.toDER = function toDER(enc) {
 
 
 /***/ }),
-/* 206 */
+/* 217 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var hash = __webpack_require__(52);
+var hash = __webpack_require__(53);
 var elliptic = __webpack_require__(9);
 var utils = elliptic.utils;
 var assert = utils.assert;
 var parseBytes = utils.parseBytes;
-var KeyPair = __webpack_require__(207);
-var Signature = __webpack_require__(208);
+var KeyPair = __webpack_require__(218);
+var Signature = __webpack_require__(219);
 
 function EDDSA(curve) {
   assert(curve === 'ed25519', 'only tested with ed25519 so far');
@@ -43415,7 +48738,7 @@ EDDSA.prototype.isPoint = function isPoint(val) {
 
 
 /***/ }),
-/* 207 */
+/* 218 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -43518,13 +48841,13 @@ module.exports = KeyPair;
 
 
 /***/ }),
-/* 208 */
+/* 219 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var BN = __webpack_require__(4);
+var BN = __webpack_require__(5);
 var elliptic = __webpack_require__(9);
 var utils = elliptic.utils;
 var assert = utils.assert;
@@ -43591,7 +48914,7 @@ module.exports = Signature;
 
 
 /***/ }),
-/* 209 */
+/* 220 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -44377,16 +49700,16 @@ module.exports = {
 
 
 /***/ }),
-/* 210 */
+/* 221 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var utils = exports;
-var BN = __webpack_require__(4);
-var minAssert = __webpack_require__(10);
-var minUtils = __webpack_require__(87);
+var BN = __webpack_require__(5);
+var minAssert = __webpack_require__(11);
+var minUtils = __webpack_require__(92);
 
 utils.assert = minAssert;
 utils.toArray = minUtils.toArray;
@@ -44504,13 +49827,13 @@ utils.intFromLE = intFromLE;
 
 
 /***/ }),
-/* 211 */
+/* 222 */
 /***/ (function(module, exports) {
 
-module.exports = {"_args":[["elliptic@6.4.0","/Users/theocean154/Programs/projects/nannotate"]],"_from":"elliptic@6.4.0","_id":"elliptic@6.4.0","_inBundle":false,"_integrity":"sha1-ysmvh2LIWDYYcAPI3+GT5eLq5d8=","_location":"/elliptic","_phantomChildren":{},"_requested":{"type":"version","registry":true,"raw":"elliptic@6.4.0","name":"elliptic","escapedName":"elliptic","rawSpec":"6.4.0","saveSpec":null,"fetchSpec":"6.4.0"},"_requiredBy":["/browserify-sign","/create-ecdh"],"_resolved":"https://registry.npmjs.org/elliptic/-/elliptic-6.4.0.tgz","_spec":"6.4.0","_where":"/Users/theocean154/Programs/projects/nannotate","author":{"name":"Fedor Indutny","email":"fedor@indutny.com"},"bugs":{"url":"https://github.com/indutny/elliptic/issues"},"dependencies":{"bn.js":"^4.4.0","brorand":"^1.0.1","hash.js":"^1.0.0","hmac-drbg":"^1.0.0","inherits":"^2.0.1","minimalistic-assert":"^1.0.0","minimalistic-crypto-utils":"^1.0.0"},"description":"EC cryptography","devDependencies":{"brfs":"^1.4.3","coveralls":"^2.11.3","grunt":"^0.4.5","grunt-browserify":"^5.0.0","grunt-cli":"^1.2.0","grunt-contrib-connect":"^1.0.0","grunt-contrib-copy":"^1.0.0","grunt-contrib-uglify":"^1.0.1","grunt-mocha-istanbul":"^3.0.1","grunt-saucelabs":"^8.6.2","istanbul":"^0.4.2","jscs":"^2.9.0","jshint":"^2.6.0","mocha":"^2.1.0"},"files":["lib"],"homepage":"https://github.com/indutny/elliptic","keywords":["EC","Elliptic","curve","Cryptography"],"license":"MIT","main":"lib/elliptic.js","name":"elliptic","repository":{"type":"git","url":"git+ssh://git@github.com/indutny/elliptic.git"},"scripts":{"jscs":"jscs benchmarks/*.js lib/*.js lib/**/*.js lib/**/**/*.js test/index.js","jshint":"jscs benchmarks/*.js lib/*.js lib/**/*.js lib/**/**/*.js test/index.js","lint":"npm run jscs && npm run jshint","test":"npm run lint && npm run unit","unit":"istanbul test _mocha --reporter=spec test/index.js","version":"grunt dist && git add dist/"},"version":"6.4.0"}
+module.exports = {"_from":"elliptic@^6.0.0","_id":"elliptic@6.4.0","_inBundle":false,"_integrity":"sha1-ysmvh2LIWDYYcAPI3+GT5eLq5d8=","_location":"/elliptic","_phantomChildren":{},"_requested":{"type":"range","registry":true,"raw":"elliptic@^6.0.0","name":"elliptic","escapedName":"elliptic","rawSpec":"^6.0.0","saveSpec":null,"fetchSpec":"^6.0.0"},"_requiredBy":["/browserify-sign","/create-ecdh"],"_resolved":"https://registry.npmjs.org/elliptic/-/elliptic-6.4.0.tgz","_shasum":"cac9af8762c85836187003c8dfe193e5e2eae5df","_spec":"elliptic@^6.0.0","_where":"/Users/theocean154/Programs/projects/nannotate/node_modules/browserify-sign","author":{"name":"Fedor Indutny","email":"fedor@indutny.com"},"bugs":{"url":"https://github.com/indutny/elliptic/issues"},"bundleDependencies":false,"dependencies":{"bn.js":"^4.4.0","brorand":"^1.0.1","hash.js":"^1.0.0","hmac-drbg":"^1.0.0","inherits":"^2.0.1","minimalistic-assert":"^1.0.0","minimalistic-crypto-utils":"^1.0.0"},"deprecated":false,"description":"EC cryptography","devDependencies":{"brfs":"^1.4.3","coveralls":"^2.11.3","grunt":"^0.4.5","grunt-browserify":"^5.0.0","grunt-cli":"^1.2.0","grunt-contrib-connect":"^1.0.0","grunt-contrib-copy":"^1.0.0","grunt-contrib-uglify":"^1.0.1","grunt-mocha-istanbul":"^3.0.1","grunt-saucelabs":"^8.6.2","istanbul":"^0.4.2","jscs":"^2.9.0","jshint":"^2.6.0","mocha":"^2.1.0"},"files":["lib"],"homepage":"https://github.com/indutny/elliptic","keywords":["EC","Elliptic","curve","Cryptography"],"license":"MIT","main":"lib/elliptic.js","name":"elliptic","repository":{"type":"git","url":"git+ssh://git@github.com/indutny/elliptic.git"},"scripts":{"jscs":"jscs benchmarks/*.js lib/*.js lib/**/*.js lib/**/**/*.js test/index.js","jshint":"jscs benchmarks/*.js lib/*.js lib/**/*.js lib/**/**/*.js test/index.js","lint":"npm run jscs && npm run jshint","test":"npm run lint && npm run unit","unit":"istanbul test _mocha --reporter=spec test/index.js","version":"grunt dist && git add dist/"},"version":"6.4.0"}
 
 /***/ }),
-/* 212 */
+/* 223 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(process, global) {/*!
@@ -45696,14 +51019,14 @@ return Promise$1;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(15), __webpack_require__(14)))
 
 /***/ }),
-/* 213 */
+/* 224 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var utils = __webpack_require__(13);
-var assert = __webpack_require__(10);
+var assert = __webpack_require__(11);
 
 function Hmac(hash, key, enc) {
   if (!(this instanceof Hmac))
@@ -45750,14 +51073,14 @@ Hmac.prototype.digest = function digest(enc) {
 
 
 /***/ }),
-/* 214 */
+/* 225 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var utils = __webpack_require__(13);
-var common = __webpack_require__(29);
+var common = __webpack_require__(30);
 
 var rotl32 = utils.rotl32;
 var sum32 = utils.sum32;
@@ -45903,29 +51226,29 @@ var sh = [
 
 
 /***/ }),
-/* 215 */
+/* 226 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-exports.sha1 = __webpack_require__(216);
-exports.sha224 = __webpack_require__(217);
-exports.sha256 = __webpack_require__(82);
-exports.sha384 = __webpack_require__(218);
-exports.sha512 = __webpack_require__(83);
+exports.sha1 = __webpack_require__(227);
+exports.sha224 = __webpack_require__(228);
+exports.sha256 = __webpack_require__(87);
+exports.sha384 = __webpack_require__(229);
+exports.sha512 = __webpack_require__(88);
 
 
 /***/ }),
-/* 216 */
+/* 227 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var utils = __webpack_require__(13);
-var common = __webpack_require__(29);
-var shaCommon = __webpack_require__(84);
+var common = __webpack_require__(30);
+var shaCommon = __webpack_require__(89);
 
 var rotl32 = utils.rotl32;
 var sum32 = utils.sum32;
@@ -45998,14 +51321,14 @@ SHA1.prototype._digest = function digest(enc) {
 
 
 /***/ }),
-/* 217 */
+/* 228 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var utils = __webpack_require__(13);
-var SHA256 = __webpack_require__(82);
+var SHA256 = __webpack_require__(87);
 
 function SHA224() {
   if (!(this instanceof SHA224))
@@ -46035,7 +51358,7 @@ SHA224.prototype._digest = function digest(enc) {
 
 
 /***/ }),
-/* 218 */
+/* 229 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -46043,7 +51366,7 @@ SHA224.prototype._digest = function digest(enc) {
 
 var utils = __webpack_require__(13);
 
-var SHA512 = __webpack_require__(83);
+var SHA512 = __webpack_require__(88);
 
 function SHA384() {
   if (!(this instanceof SHA384))
@@ -46077,15 +51400,15 @@ SHA384.prototype._digest = function digest(enc) {
 
 
 /***/ }),
-/* 219 */
+/* 230 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var hash = __webpack_require__(52);
-var utils = __webpack_require__(87);
-var assert = __webpack_require__(10);
+var hash = __webpack_require__(53);
+var utils = __webpack_require__(92);
+var assert = __webpack_require__(11);
 
 function HmacDRBG(options) {
   if (!(this instanceof HmacDRBG))
@@ -46197,7 +51520,7 @@ HmacDRBG.prototype.generate = function generate(len, enc, add, addEnc) {
 
 
 /***/ }),
-/* 220 */
+/* 231 */
 /***/ (function(module, exports) {
 
 exports.read = function (buffer, offset, isLE, mLen, nBytes) {
@@ -46287,7 +51610,7 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
 
 
 /***/ }),
-/* 221 */
+/* 232 */
 /***/ (function(module, exports) {
 
 
@@ -46302,13 +51625,13 @@ module.exports = function(arr, obj){
 };
 
 /***/ }),
-/* 222 */
+/* 233 */
 /***/ (function(module, exports) {
 
 module.exports = {"2.16.840.1.101.3.4.1.1":"aes-128-ecb","2.16.840.1.101.3.4.1.2":"aes-128-cbc","2.16.840.1.101.3.4.1.3":"aes-128-ofb","2.16.840.1.101.3.4.1.4":"aes-128-cfb","2.16.840.1.101.3.4.1.21":"aes-192-ecb","2.16.840.1.101.3.4.1.22":"aes-192-cbc","2.16.840.1.101.3.4.1.23":"aes-192-ofb","2.16.840.1.101.3.4.1.24":"aes-192-cfb","2.16.840.1.101.3.4.1.41":"aes-256-ecb","2.16.840.1.101.3.4.1.42":"aes-256-cbc","2.16.840.1.101.3.4.1.43":"aes-256-ofb","2.16.840.1.101.3.4.1.44":"aes-256-cfb"}
 
 /***/ }),
-/* 223 */
+/* 234 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -46316,9 +51639,9 @@ module.exports = {"2.16.840.1.101.3.4.1.1":"aes-128-ecb","2.16.840.1.101.3.4.1.2
 // Fedor, you are amazing.
 
 
-var asn1 = __webpack_require__(24)
+var asn1 = __webpack_require__(25)
 
-exports.certificate = __webpack_require__(224)
+exports.certificate = __webpack_require__(235)
 
 var RSAPrivateKey = asn1.define('RSAPrivateKey', function () {
   this.seq().obj(
@@ -46437,7 +51760,7 @@ exports.signature = asn1.define('signature', function () {
 
 
 /***/ }),
-/* 224 */
+/* 235 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -46446,7 +51769,7 @@ exports.signature = asn1.define('signature', function () {
 
 
 
-var asn = __webpack_require__(24)
+var asn = __webpack_require__(25)
 
 var Time = asn.define('Time', function () {
   this.choice({
@@ -46532,15 +51855,15 @@ module.exports = X509Certificate
 
 
 /***/ }),
-/* 225 */
+/* 236 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(Buffer) {// adapted from https://github.com/apatil/pemstrip
 var findProc = /Proc-Type: 4,ENCRYPTED[\n\r]+DEK-Info: AES-((?:128)|(?:192)|(?:256))-CBC,([0-9A-H]+)[\n\r]+([0-9A-z\n\r\+\/\=]+)[\n\r]+/m
 var startRegex = /^-----BEGIN ((?:.* KEY)|CERTIFICATE)-----/m
 var fullRegex = /^-----BEGIN ((?:.* KEY)|CERTIFICATE)-----([0-9A-z\n\r\+\/\=]+)-----END \1-----$/m
-var evp = __webpack_require__(36)
-var ciphers = __webpack_require__(47)
+var evp = __webpack_require__(37)
+var ciphers = __webpack_require__(48)
 module.exports = function (okey, password) {
   var key = okey.toString()
   var match = key.match(findProc)
@@ -46566,15 +51889,15 @@ module.exports = function (okey, password) {
   }
 }
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2).Buffer))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3).Buffer))
 
 /***/ }),
-/* 226 */
+/* 237 */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(global, process) {var checkParameters = __webpack_require__(90)
-var defaultEncoding = __webpack_require__(89)
-var sync = __webpack_require__(91)
+/* WEBPACK VAR INJECTION */(function(global, process) {var checkParameters = __webpack_require__(95)
+var defaultEncoding = __webpack_require__(94)
+var sync = __webpack_require__(96)
 var Buffer = __webpack_require__(1).Buffer
 
 var ZERO_BUF
@@ -46676,11 +51999,11 @@ module.exports = function (password, salt, iterations, keylen, digest, callback)
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(14), __webpack_require__(15)))
 
 /***/ }),
-/* 227 */
+/* 238 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports.publicEncrypt = __webpack_require__(229);
-exports.privateDecrypt = __webpack_require__(228);
+exports.publicEncrypt = __webpack_require__(240);
+exports.privateDecrypt = __webpack_require__(239);
 
 exports.privateEncrypt = function privateEncrypt(key, buf) {
   return exports.publicEncrypt(key, buf, true);
@@ -46691,16 +52014,16 @@ exports.publicDecrypt = function publicDecrypt(key, buf) {
 };
 
 /***/ }),
-/* 228 */
+/* 239 */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(Buffer) {var parseKeys = __webpack_require__(37);
-var mgf = __webpack_require__(92);
-var xor = __webpack_require__(94);
-var bn = __webpack_require__(4);
-var crt = __webpack_require__(49);
-var createHash = __webpack_require__(28);
-var withPublic = __webpack_require__(93);
+/* WEBPACK VAR INJECTION */(function(Buffer) {var parseKeys = __webpack_require__(38);
+var mgf = __webpack_require__(97);
+var xor = __webpack_require__(99);
+var bn = __webpack_require__(5);
+var crt = __webpack_require__(50);
+var createHash = __webpack_require__(29);
+var withPublic = __webpack_require__(98);
 module.exports = function privateDecrypt(private_key, enc, reverse) {
   var padding;
   if (private_key.padding) {
@@ -46802,20 +52125,20 @@ function compare(a, b){
   }
   return dif;
 }
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2).Buffer))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3).Buffer))
 
 /***/ }),
-/* 229 */
+/* 240 */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(Buffer) {var parseKeys = __webpack_require__(37);
+/* WEBPACK VAR INJECTION */(function(Buffer) {var parseKeys = __webpack_require__(38);
 var randomBytes = __webpack_require__(20);
-var createHash = __webpack_require__(28);
-var mgf = __webpack_require__(92);
-var xor = __webpack_require__(94);
-var bn = __webpack_require__(4);
-var withPublic = __webpack_require__(93);
-var crt = __webpack_require__(49);
+var createHash = __webpack_require__(29);
+var mgf = __webpack_require__(97);
+var xor = __webpack_require__(99);
+var bn = __webpack_require__(5);
+var withPublic = __webpack_require__(98);
+var crt = __webpack_require__(50);
 
 var constants = {
   RSA_PKCS1_OAEP_PADDING: 4,
@@ -46903,10 +52226,10 @@ function nonZero(len, crypto) {
   }
   return out;
 }
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2).Buffer))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3).Buffer))
 
 /***/ }),
-/* 230 */
+/* 241 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -47022,14 +52345,14 @@ function randomFillSync (buf, offset, size) {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(14), __webpack_require__(15)))
 
 /***/ }),
-/* 231 */
+/* 242 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(18);
 
 
 /***/ }),
-/* 232 */
+/* 243 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -47062,10 +52385,10 @@ module.exports = __webpack_require__(18);
 
 module.exports = PassThrough;
 
-var Transform = __webpack_require__(96);
+var Transform = __webpack_require__(101);
 
 /*<replacement>*/
-var util = __webpack_require__(27);
+var util = __webpack_require__(28);
 util.inherits = __webpack_require__(0);
 /*</replacement>*/
 
@@ -47082,7 +52405,7 @@ PassThrough.prototype._transform = function (chunk, encoding, cb) {
 };
 
 /***/ }),
-/* 233 */
+/* 244 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -47091,7 +52414,7 @@ PassThrough.prototype._transform = function (chunk, encoding, cb) {
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var Buffer = __webpack_require__(1).Buffer;
-var util = __webpack_require__(251);
+var util = __webpack_require__(262);
 
 function copyBuffer(src, target, offset) {
   src.copy(target, offset);
@@ -47167,28 +52490,28 @@ if (util && util.inspect && util.inspect.custom) {
 }
 
 /***/ }),
-/* 234 */
+/* 245 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(55).PassThrough
+module.exports = __webpack_require__(56).PassThrough
 
 
 /***/ }),
-/* 235 */
+/* 246 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(55).Transform
+module.exports = __webpack_require__(56).Transform
 
 
 /***/ }),
-/* 236 */
+/* 247 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(54);
+module.exports = __webpack_require__(55);
 
 
 /***/ }),
-/* 237 */
+/* 248 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, process) {(function (global, undefined) {
@@ -47381,7 +52704,7 @@ module.exports = __webpack_require__(54);
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(14), __webpack_require__(15)))
 
 /***/ }),
-/* 238 */
+/* 249 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -47481,7 +52804,7 @@ module.exports = Sha
 
 
 /***/ }),
-/* 239 */
+/* 250 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -47586,7 +52909,7 @@ module.exports = Sha1
 
 
 /***/ }),
-/* 240 */
+/* 251 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -47598,7 +52921,7 @@ module.exports = Sha1
  */
 
 var inherits = __webpack_require__(0)
-var Sha256 = __webpack_require__(99)
+var Sha256 = __webpack_require__(104)
 var Hash = __webpack_require__(21)
 var Buffer = __webpack_require__(1).Buffer
 
@@ -47645,11 +52968,11 @@ module.exports = Sha224
 
 
 /***/ }),
-/* 241 */
+/* 252 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var inherits = __webpack_require__(0)
-var SHA512 = __webpack_require__(100)
+var SHA512 = __webpack_require__(105)
 var Hash = __webpack_require__(21)
 var Buffer = __webpack_require__(1).Buffer
 
@@ -47708,7 +53031,7 @@ module.exports = Sha384
 
 
 /***/ }),
-/* 242 */
+/* 253 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global) {
@@ -47782,10 +53105,10 @@ function config (name) {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(14)))
 
 /***/ }),
-/* 243 */
+/* 254 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var indexOf = __webpack_require__(221);
+var indexOf = __webpack_require__(232);
 
 var Object_keys = function (obj) {
     if (Object.keys) return Object.keys(obj)
@@ -47926,7 +53249,7 @@ exports.createContext = Script.createContext = function (context) {
 
 
 /***/ }),
-/* 244 */
+/* 255 */
 /***/ (function(module, exports) {
 
 module.exports = function(module) {
@@ -47954,7 +53277,7 @@ module.exports = function(module) {
 
 
 /***/ }),
-/* 245 */
+/* 256 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -47969,40 +53292,93 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __assign = (this && this.__assign) || Object.assign || function(t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+        s = arguments[i];
+        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+            t[p] = s[p];
+    }
+    return t;
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-var widgets_1 = __webpack_require__(41);
-__webpack_require__(102);
+var widgets_1 = __webpack_require__(31);
+var datagrid_1 = __webpack_require__(134);
+__webpack_require__(107);
 var AnnotateWidget = (function (_super) {
     __extends(AnnotateWidget, _super);
     function AnnotateWidget() {
-        var _this = _super.call(this, { node: AnnotateWidget.createNode() }) || this;
+        var _this = _super.call(this, { node: Private.createNode() }) || this;
         _this.setFlag(widgets_1.Widget.Flag.DisallowLayout);
-        _this.addClass('controls');
+        _this.addClass('nano-annotate');
         _this.title.label = 'Annotation';
         _this.title.closable = false;
         _this.title.caption = 'Annotation';
         _this.node.id = 'annotate';
         return _this;
     }
-    AnnotateWidget.createNode = function () {
-        var node = document.createElement('div');
-        var content = document.createElement('div');
-        node.appendChild(content);
-        return node;
+    Object.defineProperty(AnnotateWidget.prototype, "gridNode", {
+        get: function () {
+            return this.node.getElementsByClassName('nano-grid')[0];
+        },
+        enumerable: true,
+        configurable: true
+    });
+    AnnotateWidget.prototype.onAfterAttach = function (msg) {
+        var blueStripeStyle = __assign({}, datagrid_1.DataGrid.defaultStyle, { rowBackgroundColor: function (i) { return i % 2 === 0 ? 'rgba(138, 172, 200, 0.3)' : ''; }, columnBackgroundColor: function (i) { return i % 2 === 0 ? 'rgba(100, 100, 100, 0.1)' : ''; } });
+        var model1 = new LargeDataModel();
+        var grid1 = new datagrid_1.DataGrid({ style: blueStripeStyle });
+        grid1.model = model1;
+        widgets_1.Widget.attach(grid1, this.gridNode);
     };
-    // get inputNode(): HTMLInputElement {
-    //   return this.node.getElementsByTagName('input')[0] as HTMLInputElement;
-    // }
     AnnotateWidget.prototype.onActivateRequest = function (msg) {
         this.node.focus();
     };
     return AnnotateWidget;
 }(widgets_1.Widget));
 exports.AnnotateWidget = AnnotateWidget;
+var LargeDataModel = (function (_super) {
+    __extends(LargeDataModel, _super);
+    function LargeDataModel() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    LargeDataModel.prototype.rowCount = function (region) {
+        return region === 'body' ? 1000000000000 : 2;
+    };
+    LargeDataModel.prototype.columnCount = function (region) {
+        return region === 'body' ? 1000000000000 : 3;
+    };
+    LargeDataModel.prototype.data = function (region, row, column) {
+        if (region === 'row-header') {
+            return "R: " + row + ", " + column;
+        }
+        if (region === 'column-header') {
+            return "C: " + row + ", " + column;
+        }
+        if (region === 'corner-header') {
+            return "N: " + row + ", " + column;
+        }
+        return "(" + row + ", " + column + ")";
+    };
+    return LargeDataModel;
+}(datagrid_1.DataModel));
+var Private;
+(function (Private) {
+    function createNode() {
+        var div = document.createElement('div');
+        var grid_holder = document.createElement('div');
+        grid_holder.classList.add('nano-grid');
+        var io_holder = document.createElement('div');
+        io_holder.classList.add('nano-io');
+        div.appendChild(grid_holder);
+        div.appendChild(io_holder);
+        return div;
+    }
+    Private.createNode = createNode;
+})(Private || (Private = {}));
 
 
 /***/ }),
-/* 246 */
+/* 257 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -48018,14 +53394,14 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var widgets_1 = __webpack_require__(41);
-__webpack_require__(102);
+var widgets_1 = __webpack_require__(31);
+__webpack_require__(107);
 var ControlsWidget = (function (_super) {
     __extends(ControlsWidget, _super);
     function ControlsWidget() {
         var _this = _super.call(this, { node: Private.createNode() }) || this;
         _this.setFlag(widgets_1.Widget.Flag.DisallowLayout);
-        _this.addClass('controls');
+        _this.addClass('nano-controls');
         _this.title.label = 'Controls';
         _this.title.closable = true;
         _this.title.caption = 'Controls';
@@ -48045,7 +53421,6 @@ var Private;
 (function (Private) {
     function createNode() {
         var div = document.createElement('div');
-        div.classList.add('nano-controls');
         return div;
     }
     Private.createNode = createNode;
@@ -48053,7 +53428,7 @@ var Private;
 
 
 /***/ }),
-/* 247 */
+/* 258 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -48066,11 +53441,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 |
 | The full license is in the file LICENSE, distributed with this software.
 |----------------------------------------------------------------------------*/
-__webpack_require__(103); // polyfill Promise on IE
-var commands_1 = __webpack_require__(40);
-var widgets_1 = __webpack_require__(41);
-var core_1 = __webpack_require__(105);
-__webpack_require__(104);
+__webpack_require__(108); // polyfill Promise on IE
+var commands_1 = __webpack_require__(41);
+var widgets_1 = __webpack_require__(31);
+var core_1 = __webpack_require__(110);
+__webpack_require__(109);
 var commands = new commands_1.CommandRegistry();
 function main() {
     var bar = new widgets_1.MenuBar();
@@ -48152,25 +53527,25 @@ window.onload = main;
 
 
 /***/ }),
-/* 248 */
+/* 259 */
 /***/ (function(module, exports) {
 
 /* (ignored) */
 
 /***/ }),
-/* 249 */
+/* 260 */
 /***/ (function(module, exports) {
 
 /* (ignored) */
 
 /***/ }),
-/* 250 */
+/* 261 */
 /***/ (function(module, exports) {
 
 /* (ignored) */
 
 /***/ }),
-/* 251 */
+/* 262 */
 /***/ (function(module, exports) {
 
 /* (ignored) */

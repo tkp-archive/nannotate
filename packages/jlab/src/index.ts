@@ -1,5 +1,6 @@
 import {AnnotateWidget} from '@nannotate/core';
 import {Widget} from '@phosphor/widgets';
+
 import {Message} from '@phosphor/messaging';
 // import {Session} from '@jupyterlab/services';
 import {IRenderMime} from '@jupyterlab/rendermime-interfaces';

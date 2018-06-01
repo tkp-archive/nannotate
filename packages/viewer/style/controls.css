@@ -1,4 +1,5 @@
-.controls {
+div.nano-controls, 
+div.nano-annotate {
   min-width: 50px;
   min-height: 50px;
   /*max-width: 350px;*/
@@ -12,27 +13,28 @@
 }
 
 
-.controls > div {
+div.nano-controls > div {
   flex: 1 1 auto;
   border: 1px solid #505050;
   overflow: auto;
 }
 
 
-.controls  input {
+div.nano-controls  input {
   margin: 8px;
   width:90%;
 }
 
 
-.controls input::-webkit-outer-spin-button,
-.controls input::-webkit-inner-spin-button {
+div.nano-controls input::-webkit-outer-spin-button,
+div.nano-controls input::-webkit-inner-spin-button {
     /* display: none; <- Crashes Chrome on hover */
     -webkit-appearance: none;
     margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
 }
 
 /* specifically hide the arrow on focus */
-.controls input::-webkit-calendar-picker-indicator {
+div.nano-controls input::-webkit-calendar-picker-indicator {
     display: none;
 }
+

@@ -13,14 +13,12 @@ export
 class ControlsWidget extends Widget {
   constructor() {
     super({ node: Private.createNode() });
-    
     this.setFlag(Widget.Flag.DisallowLayout);
-    this.addClass('controls');
+    this.addClass('nano-controls');
 
     this.title.label = 'Controls';
     this.title.closable = true;
     this.title.caption = 'Controls';
-
     this.node.id = 'controls';
   }
 
@@ -38,8 +36,6 @@ class ControlsWidget extends Widget {
 namespace Private {
   export function createNode(): HTMLDivElement {
     let div = document.createElement('div');
-    div.classList.add('nano-controls');
-
     return div;
   }
 }
