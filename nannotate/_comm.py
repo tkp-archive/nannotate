@@ -1,50 +1,33 @@
-import time
 from IPython import get_ipython
+from IPython.display import display
 
 
 class CommHandler(object):
-    def __init__(self, q, channel, sleep=1, replay=True, replay_count=1000):
-        self.closed = False
-        self.q = q
-        self.channel = channel
-        self.target_name = 'lantern.live'
-        self.opened = False
-        self.sleep = sleep
+    def __init__(self, q_in, q_out):
+        self.q_in = q_in
+        self.q_out = q_out
 
-        self.replay = replay
-        self.replay_count = replay_count
-        self.replay_log = []
+        def on_msg(message):
+            print(message)
+            self.q_in.put(message)
+            msg = self.q_out.get()
+            print(msg)
+            self.comm.send(msg)
 
-        def on_close(msg):
-            self.opened = False
+        def on_close(message):
             print('comm closed')
 
-        def handle_open(comm, msg):
+        def handle_open(comm, message):
             print('comm open')
-            self.opened = True
-            comm.on_close = on_close
             self.comm = comm
+            comm.on_close = on_close
+            comm.on_msg = on_msg
 
-        get_ipython().kernel.comm_manager.register_target(self.target_name + '/' + str(channel), handle_open)
+            msg = self.q_out.get()
+            print('got msg ' + msg)
+            self.comm.send(msg)
+
+        get_ipython().kernel.comm_manager.register_target('nannotate', handle_open)
 
     def run(self):
-        # TODO wait until JS ready
-        while not self.opened:
-            time.sleep(self.sleep)
-
-        while self.opened:
-            message = self.q.get()
-            if message == 'q':
-            if messages:
-                # if self.replay:
-                #     # TODO only the first `self.replay_count`
-                #     self.replay_log.extend(messages)
-
-                self.comm.send(data=messages_to_json(messages))
-            time.sleep(self.sleep)
-
-
-def runComm(q, channel, sleep=1):
-    # print('adding handler %s%s' % ('lantern.live/', channel))
-    comm = CommHandler(q, channel, sleep)
-    comm.run()
+        return display({'application/nano+json': ''}, raw=True)

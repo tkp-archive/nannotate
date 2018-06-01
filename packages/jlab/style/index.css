@@ -1,16 +1,1 @@
-div.nano-annotate {
-    display: flex;
-    flex-direction: column;
-    height:100%;
-    width:100%;
-}
-
-div.nano-annotate div.nano-grid {
-    flex: 2;
-    background-color: magenta;
-}
-
-div.nano-annotate div.nano-io {
-    flex: 1;
-    background-color: cyan;
-}
+@import '~@nannotate/core/style/index.css';

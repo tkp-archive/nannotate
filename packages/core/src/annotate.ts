@@ -47,6 +47,7 @@ class AnnotateWidget extends Widget {
   }
 }
 
+
 class StreamingDataModel extends DataModel {
 
   static createRow(n: number): number[] {
@@ -67,7 +68,7 @@ class StreamingDataModel extends DataModel {
   }
 
   columnCount(region: DataModel.ColumnRegion): number {
-    return region === 'body' ? 50 : 1;
+    return region === 'body' ? 10 : 1;
   }
 
   data(region: DataModel.CellRegion, row: number, column: number): any {
@@ -105,10 +106,17 @@ class StreamingDataModel extends DataModel {
 namespace Private {
   export function createNode(): HTMLDivElement {
     let div = document.createElement('div');
+
     let grid_holder = document.createElement('div');
-    grid_holder.classList.add('nano-grid');
+    grid_holder.classList.add('nano-grid-holder');
+
+    grid_holder.innerHTML = '<div class="nano-grid"></div><div class="nano-grid-controls"><input type="button" value="+"></div>'
+
     let io_holder = document.createElement('div');
-    io_holder.classList.add('nano-io');
+    io_holder.classList.add('nano-io-holder');
+
+    io_holder.innerHTML = '<div><textarea></textarea></div><div class="nano-io-controls"><input type="button" value="Next"><input type="button" value="Previous"><input type="button" value="Skip"></div>'
+
     div.appendChild(grid_holder);
     div.appendChild(io_holder);
     return div;

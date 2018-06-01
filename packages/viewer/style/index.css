@@ -13,7 +13,7 @@
 @import './menu.css';
 @import './menubar.css';
 @import './tabbar.css';
-@import './controls.css';
+@import '~@nannotate/core/style/index.css';
 
 body {
   display: flex;
