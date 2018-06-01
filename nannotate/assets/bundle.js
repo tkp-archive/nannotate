@@ -44856,7 +44856,7 @@ exports = module.exports = __webpack_require__(4)();
 
 
 // module
-exports.push([module.i, "div.nano-annotate {\n    display: flex;\n    flex-direction: column;\n}\n\ndiv.nano-annotate div.nano-grid {\n    flex: 2;\n    background-color: magenta;\n}\n\ndiv.nano-annotate div.nano-io {\n    flex: 1;\n    background-color: cyan;\n}\n\n\n.p-DataGrid {\n  min-width: 64px;\n  min-height: 64px;\n  width:100%;\n  height:100%;\n  border: 1px solid #A0A0A0;\n}\n\n\n.p-DataGrid-scrollCorner {\n  background-color: #F0F0F0;\n}\n\n\n.p-DataGrid-scrollCorner::after {\n  content: '';\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 1px;\n  height: 1px;\n  background-color: #A0A0A0;\n}\n", ""]);
+exports.push([module.i, "div.nano-annotate {\n    display: flex;\n    flex-direction: column;\n    height:100%;\n    width:100%;\n}\n\ndiv.nano-annotate div.nano-grid {\n    flex: 2;\n    background-color: magenta;\n}\n\ndiv.nano-annotate div.nano-io {\n    flex: 1;\n    background-color: cyan;\n}\n\n\n.p-DataGrid {\n  min-width: 64px;\n  min-height: 64px;\n  width:100%;\n  height:100%;\n  border: 1px solid #A0A0A0;\n}\n\n\n.p-DataGrid-scrollCorner {\n  background-color: #F0F0F0;\n}\n\n\n.p-DataGrid-scrollCorner::after {\n  content: '';\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 1px;\n  height: 1px;\n  background-color: #A0A0A0;\n}\n", ""]);
 
 // exports
 
@@ -53325,7 +53325,7 @@ var AnnotateWidget = (function (_super) {
     });
     AnnotateWidget.prototype.onAfterAttach = function (msg) {
         var blueStripeStyle = __assign({}, datagrid_1.DataGrid.defaultStyle, { rowBackgroundColor: function (i) { return i % 2 === 0 ? 'rgba(138, 172, 200, 0.3)' : ''; }, columnBackgroundColor: function (i) { return i % 2 === 0 ? 'rgba(100, 100, 100, 0.1)' : ''; } });
-        var model1 = new LargeDataModel();
+        var model1 = new StreamingDataModel();
         var grid1 = new datagrid_1.DataGrid({ style: blueStripeStyle });
         grid1.model = model1;
         widgets_1.Widget.attach(grid1, this.gridNode);
@@ -53336,18 +53336,43 @@ var AnnotateWidget = (function (_super) {
     return AnnotateWidget;
 }(widgets_1.Widget));
 exports.AnnotateWidget = AnnotateWidget;
-var LargeDataModel = (function (_super) {
-    __extends(LargeDataModel, _super);
-    function LargeDataModel() {
-        return _super !== null && _super.apply(this, arguments) || this;
+var StreamingDataModel = (function (_super) {
+    __extends(StreamingDataModel, _super);
+    function StreamingDataModel() {
+        var _this = _super.call(this) || this;
+        _this._tick = function () {
+            var nr = _this.rowCount('body');
+            var nc = _this.columnCount('body');
+            var r1 = Math.random();
+            var r2 = Math.random();
+            var i = Math.floor(r2 * nr);
+            if ((r1 < 0.45 && nr > 4) || nr >= 500) {
+                _this._data.splice(i, 1);
+                _this.emitChanged({ type: 'rows-removed', region: 'body', index: i, span: 1 });
+            }
+            else {
+                _this._data.splice(i, 0, StreamingDataModel.createRow(nc));
+                _this.emitChanged({ type: 'rows-inserted', region: 'body', index: i, span: 1 });
+            }
+        };
+        _this._data = [];
+        setInterval(_this._tick, 250);
+        return _this;
     }
-    LargeDataModel.prototype.rowCount = function (region) {
-        return region === 'body' ? 1000000000000 : 2;
+    StreamingDataModel.createRow = function (n) {
+        var row = new Array(n);
+        for (var i = 0; i < n; ++i) {
+            row[i] = Math.random();
+        }
+        return row;
     };
-    LargeDataModel.prototype.columnCount = function (region) {
-        return region === 'body' ? 1000000000000 : 3;
+    StreamingDataModel.prototype.rowCount = function (region) {
+        return region === 'body' ? this._data.length : 1;
     };
-    LargeDataModel.prototype.data = function (region, row, column) {
+    StreamingDataModel.prototype.columnCount = function (region) {
+        return region === 'body' ? 50 : 1;
+    };
+    StreamingDataModel.prototype.data = function (region, row, column) {
         if (region === 'row-header') {
             return "R: " + row + ", " + column;
         }
@@ -53357,9 +53382,9 @@ var LargeDataModel = (function (_super) {
         if (region === 'corner-header') {
             return "N: " + row + ", " + column;
         }
-        return "(" + row + ", " + column + ")";
+        return this._data[row][column];
     };
-    return LargeDataModel;
+    return StreamingDataModel;
 }(datagrid_1.DataModel));
 var Private;
 (function (Private) {

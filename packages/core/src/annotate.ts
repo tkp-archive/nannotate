@@ -35,7 +35,7 @@ class AnnotateWidget extends Widget {
     rowBackgroundColor: i => i % 2 === 0 ? 'rgba(138, 172, 200, 0.3)' : '',
     columnBackgroundColor: i => i % 2 === 0 ? 'rgba(100, 100, 100, 0.1)' : ''};
     
-    let model1 = new LargeDataModel();
+    let model1 = new StreamingDataModel();
 
     let grid1 = new DataGrid({ style: blueStripeStyle });
     grid1.model = model1;
@@ -47,14 +47,27 @@ class AnnotateWidget extends Widget {
   }
 }
 
-class LargeDataModel extends DataModel {
+class StreamingDataModel extends DataModel {
+
+  static createRow(n: number): number[] {
+    let row = new Array(n);
+    for (let i = 0; i < n; ++i) {
+      row[i] = Math.random();
+    }
+    return row;
+  }
+
+  constructor() {
+    super();
+    setInterval(this._tick, 250);
+  }
 
   rowCount(region: DataModel.RowRegion): number {
-    return region === 'body' ? 1000000000000 : 2;
+    return region === 'body' ? this._data.length : 1;
   }
 
   columnCount(region: DataModel.ColumnRegion): number {
-    return region === 'body' ? 1000000000000 : 3;
+    return region === 'body' ? 50 : 1;
   }
 
   data(region: DataModel.CellRegion, row: number, column: number): any {
@@ -67,8 +80,25 @@ class LargeDataModel extends DataModel {
     if (region === 'corner-header') {
       return `N: ${row}, ${column}`;
     }
-    return `(${row}, ${column})`;
+    return this._data[row][column];
   }
+
+  private _tick = () => {
+    let nr = this.rowCount('body');
+    let nc = this.columnCount('body');
+    let r1 = Math.random();
+    let r2 = Math.random();
+    let i = Math.floor(r2 * nr);
+    if ((r1 < 0.45 && nr > 4) || nr >= 500) {
+      this._data.splice(i, 1);
+      this.emitChanged({ type: 'rows-removed', region: 'body', index: i, span: 1 });
+    } else {
+      this._data.splice(i, 0, StreamingDataModel.createRow(nc));
+      this.emitChanged({ type: 'rows-inserted', region: 'body', index: i, span: 1 });
+    }
+  };
+
+  private _data: number[][] = [];
 }
 
 
