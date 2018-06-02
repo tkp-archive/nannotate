@@ -23,6 +23,8 @@ def _msg_to_in_cs(msg):
 
 
 def _msg_to_out_cs(msg):
+    if isinstance(msg, pd.DataFrame) or isinstance(msg, pd.Series):
+        return msg
     if msg == 'nl':
         return '\n'
     else:
@@ -32,12 +34,11 @@ def _msg_to_out_cs(msg):
 # When running from a Jupyter notebook
 def comm_input(msg, q):
     # q.put(msg)
-    return q.get()
+    return q.get().strip()
 
 
 def comm_output(msg, q):
-    if isinstance(msg, pd.DataFrame):
-        msg = msg.reset_index().to_json(orient='records')
+    msg = _msg_to_out_cm(msg)
     q.put(msg)
 
 
@@ -46,19 +47,25 @@ def _msg_to_in_cm(msg):
 
 
 def _msg_to_out_cm(msg):
-    pass
+    if isinstance(msg, pd.DataFrame) or isinstance(msg, pd.Series):
+        # msg = msg.reset_index().to_json(orient='records')
+        msg = msg.reset_index().to_json()
+
+    if msg == 'nl':
+        return ''
+    elif msg == 'q':
+        return '{}'
+    return msg
 
 
 # When running as a standalone site'''
 def websocket_input(msg, q):
     # q.put(msg)
-    return q.get()
+    return q.get().strip()
 
 
 def websocket_output(msg, q):
-    if isinstance(msg, pd.DataFrame) or isinstance(msg, pd.Series):
-        msg = msg.reset_index().to_json(orient='records')
-    print('putting ' + msg)
+    msg = _msg_to_out_ws(msg)
     q.put(msg)
 
 
@@ -67,4 +74,12 @@ def _msg_to_in_ws(msg):
 
 
 def _msg_to_out_ws(msg):
-    pass
+    if isinstance(msg, pd.DataFrame) or isinstance(msg, pd.Series):
+        # msg = msg.reset_index().to_json(orient='records')
+        msg = msg.reset_index().to_json()
+
+    if msg == 'nl':
+        return ''
+    elif msg == 'q':
+        return '{}'
+    return msg

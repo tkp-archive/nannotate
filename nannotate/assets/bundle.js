@@ -53309,12 +53309,38 @@ var AnnotateWidget = (function (_super) {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(AnnotateWidget.prototype, "controlsNode", {
+        get: function () {
+            return this.node.getElementsByClassName('nano-controls')[0];
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(AnnotateWidget.prototype, "textAreaNode", {
+        get: function () {
+            return this.node.getElementsByClassName('nano-io-controls-input')[0];
+        },
+        enumerable: true,
+        configurable: true
+    });
     AnnotateWidget.prototype.onAfterAttach = function (msg) {
         var blueStripeStyle = __assign({}, datagrid_1.DataGrid.defaultStyle, { rowBackgroundColor: function (i) { return i % 2 === 0 ? 'rgba(138, 172, 200, 0.3)' : ''; }, columnBackgroundColor: function (i) { return i % 2 === 0 ? 'rgba(100, 100, 100, 0.1)' : ''; } });
         var model1 = new StreamingDataModel();
         var grid1 = new datagrid_1.DataGrid({ style: blueStripeStyle });
         grid1.model = model1;
         widgets_1.Widget.attach(grid1, this.gridNode);
+        var textarea = this.textAreaNode;
+        textarea.onkeyup = function (event) {
+            if (event.keyCode === 13) {
+                if (textarea.value === '' || textarea.value === '\n' || textarea.value === '\r\n') {
+                    grid1.model._ws.send('');
+                }
+                else {
+                    grid1.model._ws.send(textarea.value);
+                }
+                textarea.value = '';
+            }
+        };
     };
     AnnotateWidget.prototype.onActivateRequest = function (msg) {
         this.node.focus();
@@ -53326,37 +53352,76 @@ var StreamingDataModel = (function (_super) {
     __extends(StreamingDataModel, _super);
     function StreamingDataModel() {
         var _this = _super.call(this) || this;
-        _this._tick = function () {
+        _this._tick = function (event) {
             var nr = _this.rowCount('body');
-            var nc = _this.columnCount('body');
-            var r1 = Math.random();
-            var r2 = Math.random();
-            var i = Math.floor(r2 * nr);
-            if ((r1 < 0.45 && nr > 4) || nr >= 500) {
-                _this._data.splice(i, 1);
-                _this.emitChanged({ type: 'rows-removed', region: 'body', index: i, span: 1 });
+            // this._data.splice(i, 1);
+            // this.emitChanged({ type: 'rows-removed', region: 'body', index: i, span: 1 });
+            console.log(event.data);
+            if (!event.data) {
+                return;
+            }
+            var x = JSON.parse(event.data);
+            if (!x) {
+                _this._ws.close();
+                alert('Done!');
+                return;
+            }
+            var keys = Object.keys(x);
+            var row_s = x[keys[1]];
+            var row_k = Object.keys(row_s);
+            var new_row = new Array(row_k.length + 1);
+            var prev_col = _this.columnCount('body');
+            var i = 1;
+            for (var _i = 0, row_k_1 = row_k; _i < row_k_1.length; _i++) {
+                var key = row_k_1[_i];
+                new_row[i] = row_s[key];
+                i++;
+            }
+            new_row[0] = keys[1];
+            var row_num = nr;
+            for (var i_1 = 0; i_1 < _this.rowCount('body'); i_1++) {
+                if (new_row[0] === _this._data[i_1][0]) {
+                    row_num = i_1;
+                    break;
+                }
+            }
+            if (row_num == nr) {
+                //insert row
+                _this._data.splice(row_num, 0, new_row);
+                //emit new row
+                _this.emitChanged({ type: 'rows-inserted', region: 'body', index: row_num, span: 1 });
             }
             else {
-                _this._data.splice(i, 0, StreamingDataModel.createRow(nc));
-                _this.emitChanged({ type: 'rows-inserted', region: 'body', index: i, span: 1 });
+                //replace row
+                _this._data[row_num] = new_row;
+                for (var i_2 = 0; i_2 < new_row.length; i_2++) {
+                    //emit cell change
+                    _this.emitChanged({ type: 'cells-changed', region: 'body', rowIndex: row_num, columnIndex: i_2, rowSpan: 1, columnSpan: 1 });
+                }
+            }
+            if (new_row.length > prev_col) {
+                for (var j = 0; j < _this._data.length; j++) {
+                    if (_this._data[j].length < new_row.length) {
+                        for (var i_3 = _this._data[j].length; i_3 < new_row.length; i_3++) {
+                            _this._data[j].push(['']);
+                        }
+                    }
+                }
+                for (var i_4 = prev_col; i_4 < new_row.length; i_4++) {
+                    _this.emitChanged({ type: 'columns-inserted', region: 'body', index: i_4, span: 1 });
+                }
             }
         };
         _this._data = [];
-        setInterval(_this._tick, 250);
+        _this._ws = new WebSocket('ws://localhost:8991/api/ws');
+        _this._ws.onmessage = _this._tick;
         return _this;
     }
-    StreamingDataModel.createRow = function (n) {
-        var row = new Array(n);
-        for (var i = 0; i < n; ++i) {
-            row[i] = Math.random();
-        }
-        return row;
-    };
     StreamingDataModel.prototype.rowCount = function (region) {
         return region === 'body' ? this._data.length : 1;
     };
     StreamingDataModel.prototype.columnCount = function (region) {
-        return region === 'body' ? 10 : 1;
+        return region === 'body' ? (this._data[0] ? this._data[0].length : 1) : 1;
     };
     StreamingDataModel.prototype.data = function (region, row, column) {
         if (region === 'row-header') {
@@ -53381,7 +53446,7 @@ var Private;
         grid_holder.innerHTML = '<div class="nano-grid"></div><div class="nano-grid-controls"><input type="button" value="+"></div>';
         var io_holder = document.createElement('div');
         io_holder.classList.add('nano-io-holder');
-        io_holder.innerHTML = '<div><textarea></textarea></div><div class="nano-io-controls"><input type="button" value="Next"><input type="button" value="Previous"><input type="button" value="Skip"></div>';
+        io_holder.innerHTML = '<div class="nano-controls"><textarea class="nano-io-controls-input"></textarea></div><div class="nano-io-controls"><input type="button" value="Next"><input type="button" value="Previous"><input type="button" value="Skip"></div>';
         div.appendChild(grid_holder);
         div.appendChild(io_holder);
         return div;

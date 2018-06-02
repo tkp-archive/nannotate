@@ -35,21 +35,28 @@ def annotate(df, standalone=False):
 def _handle_msg(df, input, output, q_in, q_out):
     count = 0
     for i in range(df.shape[0]):
-        print('outputting')
+        # output 1
         output(df.iloc[i], q_out)
 
+        # input
         x = input('cp', q_in)
         while x:
             if x == 'q':
+                output('q', q_out)
                 return
             if x == '+':
                 df['annotate' + str(count)] = pd.Series()
                 count += 1
                 output(df.iloc[i], q_out)
+                output('nl', q_out)
+                x = input('cp', q_in)
             else:
+                # TODO
+                if 'annotate0' not in df.columns:
+                    df['annotate0'] = pd.Series()
+                    count += 1
                 df['annotate0'][df.index[i]] = x
                 output(df.iloc[i], q_out)
                 break
-            x = input('cp', q_in)
-
-        output('nl', q_out)
+        if x == '':
+            output('nl', q_out)
