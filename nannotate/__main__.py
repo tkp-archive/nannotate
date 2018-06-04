@@ -1,12 +1,23 @@
 import sys
+import faker
+import pandas as pd
 from .annotate import *
 
-import lantern as l
-df = l.bar.sample()
+f = faker.Faker()
+
+if 'text' in sys.argv:
+    print('annotating text')
+    dat = pd.DataFrame([{'text': f.text()} for i in range(10)])
+    options = {'schema': 'text'}
+else:
+    print('annotating grid')
+    import lantern as l
+    dat = l.bar.sample()
+    options = {'schema': 'grid'}
 
 try:
     while True:
-        annotate(df, True)
-        print(df)
+        annotate(dat, options, True)
+        print(dat)
 except KeyboardInterrupt:
     sys.exit(0)

@@ -7,13 +7,13 @@ from ._ws import WSHandler
 from ._comm import CommHandler
 
 
-def annotate(df, standalone=False):
+def annotate(df, options, standalone=False):
     if in_ipynb():
         input = comm_input
         output = comm_output
         q_in = Queue()
         q_out = Queue()
-        extra = CommHandler(q_in, q_out)
+        extra = CommHandler(options, q_in, q_out)
         extra.run()
 
     elif standalone:
@@ -21,7 +21,7 @@ def annotate(df, standalone=False):
         output = websocket_output
         q_in = Queue()
         q_out = Queue()
-        extra = WSHandler.run(q_in, q_out)
+        extra = WSHandler.run(options, q_in, q_out)
 
     else:
         input = console_input
@@ -58,5 +58,7 @@ def _handle_msg(df, input, output, q_in, q_out):
                 df['annotate0'][df.index[i]] = x
                 output(df.iloc[i], q_out)
                 break
-        if x == '':
+        if i == df.shape[0] - 1:
+            output('q', q_out)
+        elif x == '':
             output('nl', q_out)

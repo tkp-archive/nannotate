@@ -6,22 +6,22 @@ div.nano-annotate {
 }
 
 
-div.nano-annotate div.nano-grid-holder {
+div.nano-annotate div.nano-data-holder {
     flex: 2;
     background-color: magenta;
     display: flex;
     flex-direction: row;
 }
 
-div.nano-annotate div.nano-grid-holder div{
+div.nano-annotate div.nano-data-holder div{
     flex: 1;
 }
 
-div.nano-annotate div.nano-grid-holder div.nano-grid-controls {
+div.nano-annotate div.nano-data-holder div.nano-data-controls {
   max-width: 50px;
 }
 
-div.nano-annotate div.nano-grid-holder div.nano-grid-controls> * {
+div.nano-annotate div.nano-data-holder div.nano-data-controls> * {
   flex: 1;
   height: 100%;
   width: 100%;
@@ -58,19 +58,19 @@ div.nano-annotate div.nano-io-holder div.nano-io-controls {
 }
 
 
-div.nano-annotate div.nano-grid-holder div.p-DataGrid {
+div.nano-annotate div.nano-data-holder div.p-DataGrid {
     width: 100%;
     height: 100%;
     border: 1px solid #A0A0A0;
 }
 
 
-div.nano-annotate div.nano-grid div.p-DataGrid-scrollCorner {
+div.nano-annotate div.nano-data div.p-DataGrid-scrollCorner {
   background-color: #F0F0F0;
 }
 
 
-div.nano-annotate div.nano-grid div.p-DataGrid-scrollCorner::after {
+div.nano-annotate div.nano-data div.p-DataGrid-scrollCorner::after {
   content: '';
   position: absolute;
   top: 0;

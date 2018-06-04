@@ -3,7 +3,8 @@ from IPython.display import display
 
 
 class CommHandler(object):
-    def __init__(self, q_in, q_out):
+    def __init__(self, options, q_in, q_out):
+        self.options = options
         self.q_in = q_in
         self.q_out = q_out
 
@@ -11,6 +12,7 @@ class CommHandler(object):
             print(message)
             self.q_in.put(message)
             msg = self.q_out.get()
+
             print(msg)
             self.comm.send(msg)
 
@@ -22,6 +24,9 @@ class CommHandler(object):
             self.comm = comm
             comm.on_close = on_close
             comm.on_msg = on_msg
+
+            print('writing options ' + str(self.options))
+            self.write_message(self.options)
 
             msg = self.q_out.get()
             print('got msg ' + msg)
