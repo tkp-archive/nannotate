@@ -66,7 +66,7 @@ class DataManager{
 
     onResize(msg: Widget.ResizeMessage): void {
         if (this._type === 'grid'){
-            this._grid.repaint();
+            this._grid.update();
         }
     }
 
