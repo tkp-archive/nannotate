@@ -3,26 +3,26 @@ from pprint import pprint
 
 
 # When running from an interactive prompt, like the python default or IPython
-def console_input(msg, q):
-    return input(_msg_to_in_cs(msg))
+def console_input(msg, q, options):
+    return input(_msg_to_in_cs(msg, options))
 
 
-def console_output(msg, q):
-    msg = _msg_to_out_cs(msg)
+def console_output(msg, q, options):
+    msg = _msg_to_out_cs(msg, options)
     if isinstance(msg, str):
         print(msg)
     else:
         pprint(msg)
 
 
-def _msg_to_in_cs(msg):
+def _msg_to_in_cs(msg, options):
     if msg == 'cp':
         return '\nnano>>'
     else:
         return msg
 
 
-def _msg_to_out_cs(msg):
+def _msg_to_out_cs(msg, options):
     if isinstance(msg, pd.DataFrame) or isinstance(msg, pd.Series):
         return msg
     if msg == 'nl':
@@ -32,21 +32,21 @@ def _msg_to_out_cs(msg):
 
 
 # When running from a Jupyter notebook
-def comm_input(msg, q):
+def comm_input(msg, q, options):
     # q.put(msg)
     return q.get().strip()
 
 
-def comm_output(msg, q):
-    msg = _msg_to_out_cm(msg)
+def comm_output(msg, q, options):
+    msg = _msg_to_out_cm(msg, options)
     q.put(msg)
 
 
-def _msg_to_in_cm(msg):
+def _msg_to_in_cm(msg, options):
     pass
 
 
-def _msg_to_out_cm(msg):
+def _msg_to_out_cm(msg, options):
     if isinstance(msg, pd.DataFrame) or isinstance(msg, pd.Series):
         # msg = msg.reset_index().to_json(orient='records')
         msg = msg.reset_index().to_json()
@@ -59,21 +59,21 @@ def _msg_to_out_cm(msg):
 
 
 # When running as a standalone site'''
-def websocket_input(msg, q):
+def websocket_input(msg, q, options):
     # q.put(msg)
     return q.get().strip()
 
 
-def websocket_output(msg, q):
-    msg = _msg_to_out_ws(msg)
+def websocket_output(msg, q, options):
+    msg = _msg_to_out_ws(msg, options)
     q.put(msg)
 
 
-def _msg_to_in_ws(msg):
+def _msg_to_in_ws(msg, options):
     pass
 
 
-def _msg_to_out_ws(msg):
+def _msg_to_out_ws(msg, options):
     if isinstance(msg, pd.DataFrame) or isinstance(msg, pd.Series):
         # msg = msg.reset_index().to_json(orient='records')
         msg = msg.reset_index().to_json()
