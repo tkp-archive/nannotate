@@ -1,4 +1,3 @@
-import pandas as pd
 from queue import Queue
 from six.moves import range
 from .utils import in_ipynb
@@ -29,36 +28,39 @@ def annotate(df, options, standalone=False):
         q_in = None
         q_out = None
 
-    return _handle_msg(df, input, output, q_in, q_out)
+    return _handle_msg(df, options, input, output, q_in, q_out)
 
 
-def _handle_msg(df, input, output, q_in, q_out):
+def _handle_msg(df, options, input, output, q_in, q_out):
     count = 0
-    for i in range(df.shape[0]):
+
+    data = df.reset_index().to_dict(orient='records')
+
+    for i in range(len(data)):
         # output 1
-        output(df.iloc[i], q_out)
+        output(data[i], q_out, options)
 
         # input
-        x = input('cp', q_in)
+        x = input('cp', q_in, options)
         while x:
             if x == 'q':
-                output('q', q_out)
+                output('q', q_out, options)
                 return
             if x == '+':
-                df['annotate' + str(count)] = pd.Series()
+                data[i]['annotate' + str(count)] = ''
                 count += 1
-                output(df.iloc[i], q_out)
-                output('nl', q_out)
-                x = input('cp', q_in)
+                output(data[i], q_out, options)
+                output('nl', q_out, options)
+                x = input('cp', q_in, options)
             else:
                 # TODO
-                if 'annotate0' not in df.columns:
-                    df['annotate0'] = pd.Series()
+                if 'annotate0' not in data[i]:
+                    data[i]['annotate0'] = ''
                     count += 1
-                df['annotate0'][df.index[i]] = x
-                output(df.iloc[i], q_out)
+                data[i]['annotate0'] = x
+                output(data[i], q_out, options)
                 break
-        if i == df.shape[0] - 1:
-            output('q', q_out)
+        if i == len(data) - 1:
+            output('q', q_out, options)
         elif x == '':
-            output('nl', q_out)
+            output('nl', q_out, options)

@@ -1,6 +1,10 @@
 run:  ## clean and make target, run target
 	python3 -m nannotate 
 
+runt:  ## clean and make target, run target (text)
+	python3 -m nannotate text
+
+
 build: js  ## Build the repository
 	python3 setup.py build 
 

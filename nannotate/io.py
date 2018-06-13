@@ -1,4 +1,5 @@
 import pandas as pd
+import json
 from pprint import pprint
 
 
@@ -25,6 +26,8 @@ def _msg_to_in_cs(msg, options):
 def _msg_to_out_cs(msg, options):
     if isinstance(msg, pd.DataFrame) or isinstance(msg, pd.Series):
         return msg
+    elif isinstance(msg, dict):
+        return msg
     if msg == 'nl':
         return '\n'
     else:
@@ -50,7 +53,8 @@ def _msg_to_out_cm(msg, options):
     if isinstance(msg, pd.DataFrame) or isinstance(msg, pd.Series):
         # msg = msg.reset_index().to_json(orient='records')
         msg = msg.reset_index().to_json()
-
+    elif isinstance(msg, dict):
+        msg = json.dumps(msg, default=str)
     if msg == 'nl':
         return ''
     elif msg == 'q':
@@ -77,6 +81,8 @@ def _msg_to_out_ws(msg, options):
     if isinstance(msg, pd.DataFrame) or isinstance(msg, pd.Series):
         # msg = msg.reset_index().to_json(orient='records')
         msg = msg.reset_index().to_json()
+    elif isinstance(msg, dict):
+        msg = json.dumps(msg, default=str)
 
     if msg == 'nl':
         return ''

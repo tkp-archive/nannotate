@@ -64,6 +64,15 @@ div.nano-annotate div.nano-data-holder div.p-DataGrid {
     border: 1px solid #A0A0A0;
 }
 
+div.nano-annotate div.nano-data-holder div.TextData {
+  display: flex;
+  flex-direction: column;
+}
+
+div.nano-annotate div.nano-data-holder div.TextData table.TextTable tr,
+div.nano-annotate div.nano-data-holder div.TextData table.TextTable tr td {
+  height:15px;
+}
 
 div.nano-annotate div.nano-data div.p-DataGrid-scrollCorner {
   background-color: #F0F0F0;

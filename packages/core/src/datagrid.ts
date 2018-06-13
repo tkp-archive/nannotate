@@ -49,18 +49,15 @@ class GridHelper extends DataModel implements DataSource {
     }
 
     let keys = Object.keys(x);
-    let row_s = x[keys[1]];
-    let row_k = Object.keys(row_s);
-    let new_row = new Array(row_k.length+1);
+    let new_row = new Array(keys.length);
 
     let prev_col = this.columnCount('body');
 
-    let i = 1;
-    for(let key of row_k){
-        new_row[i] = row_s[key];
+    let i = 0;
+    for(let key of keys){
+        new_row[i] = x[key];
         i++;
     }
-    new_row[0] = keys[1];
 
     let row_num = nr;
 

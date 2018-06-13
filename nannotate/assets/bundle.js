@@ -44871,7 +44871,7 @@ exports = module.exports = __webpack_require__(4)();
 
 
 // module
-exports.push([module.i, "div.nano-annotate {\n    display: flex;\n    flex-direction: column;\n    height: 100%;\n    width: 100%;\n}\n\n\ndiv.nano-annotate div.nano-data-holder {\n    flex: 2;\n    background-color: magenta;\n    display: flex;\n    flex-direction: row;\n}\n\ndiv.nano-annotate div.nano-data-holder div{\n    flex: 1;\n}\n\ndiv.nano-annotate div.nano-data-holder div.nano-data-controls {\n  max-width: 50px;\n}\n\ndiv.nano-annotate div.nano-data-holder div.nano-data-controls> * {\n  flex: 1;\n  height: 100%;\n  width: 100%;\n}\n\ndiv.nano-annotate div.nano-io-holder {\n    flex: 1;\n    background-color: cyan;\n    display: flex;\n    flex-direction: column;\n}\n\n\ndiv.nano-annotate div.nano-io-holder div {\n    flex: 1;\n    background-color: green;\n    display: flex;\n    flex-direction: row;\n}\n\n\ndiv.nano-annotate div.nano-io-holder div > *{\n    flex: 1;\n}\n\n\ndiv.nano-annotate div.nano-io-holder div > textarea{\n    resize: none;\n}\n\n\ndiv.nano-annotate div.nano-io-holder div.nano-io-controls {\n    max-height: 50px;    \n}\n\n\ndiv.nano-annotate div.nano-data-holder div.p-DataGrid {\n    width: 100%;\n    height: 100%;\n    border: 1px solid #A0A0A0;\n}\n\n\ndiv.nano-annotate div.nano-data div.p-DataGrid-scrollCorner {\n  background-color: #F0F0F0;\n}\n\n\ndiv.nano-annotate div.nano-data div.p-DataGrid-scrollCorner::after {\n  content: '';\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 1px;\n  height: 1px;\n  background-color: #A0A0A0;\n}\n", ""]);
+exports.push([module.i, "div.nano-annotate {\n    display: flex;\n    flex-direction: column;\n    height: 100%;\n    width: 100%;\n}\n\n\ndiv.nano-annotate div.nano-data-holder {\n    flex: 2;\n    background-color: magenta;\n    display: flex;\n    flex-direction: row;\n}\n\ndiv.nano-annotate div.nano-data-holder div{\n    flex: 1;\n}\n\ndiv.nano-annotate div.nano-data-holder div.nano-data-controls {\n  max-width: 50px;\n}\n\ndiv.nano-annotate div.nano-data-holder div.nano-data-controls> * {\n  flex: 1;\n  height: 100%;\n  width: 100%;\n}\n\ndiv.nano-annotate div.nano-io-holder {\n    flex: 1;\n    background-color: cyan;\n    display: flex;\n    flex-direction: column;\n}\n\n\ndiv.nano-annotate div.nano-io-holder div {\n    flex: 1;\n    background-color: green;\n    display: flex;\n    flex-direction: row;\n}\n\n\ndiv.nano-annotate div.nano-io-holder div > *{\n    flex: 1;\n}\n\n\ndiv.nano-annotate div.nano-io-holder div > textarea{\n    resize: none;\n}\n\n\ndiv.nano-annotate div.nano-io-holder div.nano-io-controls {\n    max-height: 50px;    \n}\n\n\ndiv.nano-annotate div.nano-data-holder div.p-DataGrid {\n    width: 100%;\n    height: 100%;\n    border: 1px solid #A0A0A0;\n}\n\ndiv.nano-annotate div.nano-data-holder div.TextData {\n  display: flex;\n  flex-direction: column;\n}\n\ndiv.nano-annotate div.nano-data-holder div.TextData table.TextTable tr,\ndiv.nano-annotate div.nano-data-holder div.TextData table.TextTable tr td {\n  height:15px;\n}\n\ndiv.nano-annotate div.nano-data div.p-DataGrid-scrollCorner {\n  background-color: #F0F0F0;\n}\n\n\ndiv.nano-annotate div.nano-data div.p-DataGrid-scrollCorner::after {\n  content: '';\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 1px;\n  height: 1px;\n  background-color: #A0A0A0;\n}\n", ""]);
 
 // exports
 
@@ -49816,7 +49816,7 @@ utils.intFromLE = intFromLE;
 /* 221 */
 /***/ (function(module, exports) {
 
-module.exports = {"_args":[["elliptic@6.4.0","/Users/theocean154/Programs/projects/nannotate"]],"_from":"elliptic@6.4.0","_id":"elliptic@6.4.0","_inBundle":false,"_integrity":"sha1-ysmvh2LIWDYYcAPI3+GT5eLq5d8=","_location":"/elliptic","_phantomChildren":{},"_requested":{"type":"version","registry":true,"raw":"elliptic@6.4.0","name":"elliptic","escapedName":"elliptic","rawSpec":"6.4.0","saveSpec":null,"fetchSpec":"6.4.0"},"_requiredBy":["/browserify-sign","/create-ecdh"],"_resolved":"https://registry.npmjs.org/elliptic/-/elliptic-6.4.0.tgz","_spec":"6.4.0","_where":"/Users/theocean154/Programs/projects/nannotate","author":{"name":"Fedor Indutny","email":"fedor@indutny.com"},"bugs":{"url":"https://github.com/indutny/elliptic/issues"},"dependencies":{"bn.js":"^4.4.0","brorand":"^1.0.1","hash.js":"^1.0.0","hmac-drbg":"^1.0.0","inherits":"^2.0.1","minimalistic-assert":"^1.0.0","minimalistic-crypto-utils":"^1.0.0"},"description":"EC cryptography","devDependencies":{"brfs":"^1.4.3","coveralls":"^2.11.3","grunt":"^0.4.5","grunt-browserify":"^5.0.0","grunt-cli":"^1.2.0","grunt-contrib-connect":"^1.0.0","grunt-contrib-copy":"^1.0.0","grunt-contrib-uglify":"^1.0.1","grunt-mocha-istanbul":"^3.0.1","grunt-saucelabs":"^8.6.2","istanbul":"^0.4.2","jscs":"^2.9.0","jshint":"^2.6.0","mocha":"^2.1.0"},"files":["lib"],"homepage":"https://github.com/indutny/elliptic","keywords":["EC","Elliptic","curve","Cryptography"],"license":"MIT","main":"lib/elliptic.js","name":"elliptic","repository":{"type":"git","url":"git+ssh://git@github.com/indutny/elliptic.git"},"scripts":{"jscs":"jscs benchmarks/*.js lib/*.js lib/**/*.js lib/**/**/*.js test/index.js","jshint":"jscs benchmarks/*.js lib/*.js lib/**/*.js lib/**/**/*.js test/index.js","lint":"npm run jscs && npm run jshint","test":"npm run lint && npm run unit","unit":"istanbul test _mocha --reporter=spec test/index.js","version":"grunt dist && git add dist/"},"version":"6.4.0"}
+module.exports = {"_from":"elliptic@^6.0.0","_id":"elliptic@6.4.0","_inBundle":false,"_integrity":"sha1-ysmvh2LIWDYYcAPI3+GT5eLq5d8=","_location":"/elliptic","_phantomChildren":{},"_requested":{"type":"range","registry":true,"raw":"elliptic@^6.0.0","name":"elliptic","escapedName":"elliptic","rawSpec":"^6.0.0","saveSpec":null,"fetchSpec":"^6.0.0"},"_requiredBy":["/browserify-sign","/create-ecdh"],"_resolved":"https://registry.npmjs.org/elliptic/-/elliptic-6.4.0.tgz","_shasum":"cac9af8762c85836187003c8dfe193e5e2eae5df","_spec":"elliptic@^6.0.0","_where":"/Users/theocean154/Programs/projects/nannotate/node_modules/browserify-sign","author":{"name":"Fedor Indutny","email":"fedor@indutny.com"},"bugs":{"url":"https://github.com/indutny/elliptic/issues"},"bundleDependencies":false,"dependencies":{"bn.js":"^4.4.0","brorand":"^1.0.1","hash.js":"^1.0.0","hmac-drbg":"^1.0.0","inherits":"^2.0.1","minimalistic-assert":"^1.0.0","minimalistic-crypto-utils":"^1.0.0"},"deprecated":false,"description":"EC cryptography","devDependencies":{"brfs":"^1.4.3","coveralls":"^2.11.3","grunt":"^0.4.5","grunt-browserify":"^5.0.0","grunt-cli":"^1.2.0","grunt-contrib-connect":"^1.0.0","grunt-contrib-copy":"^1.0.0","grunt-contrib-uglify":"^1.0.1","grunt-mocha-istanbul":"^3.0.1","grunt-saucelabs":"^8.6.2","istanbul":"^0.4.2","jscs":"^2.9.0","jshint":"^2.6.0","mocha":"^2.1.0"},"files":["lib"],"homepage":"https://github.com/indutny/elliptic","keywords":["EC","Elliptic","curve","Cryptography"],"license":"MIT","main":"lib/elliptic.js","name":"elliptic","repository":{"type":"git","url":"git+ssh://git@github.com/indutny/elliptic.git"},"scripts":{"jscs":"jscs benchmarks/*.js lib/*.js lib/**/*.js lib/**/**/*.js test/index.js","jshint":"jscs benchmarks/*.js lib/*.js lib/**/*.js lib/**/**/*.js test/index.js","lint":"npm run jscs && npm run jshint","test":"npm run lint && npm run unit","unit":"istanbul test _mocha --reporter=spec test/index.js","version":"grunt dist && git add dist/"},"version":"6.4.0"}
 
 /***/ }),
 /* 222 */
@@ -53468,17 +53468,14 @@ var GridHelper = (function (_super) {
             return;
         }
         var keys = Object.keys(x);
-        var row_s = x[keys[1]];
-        var row_k = Object.keys(row_s);
-        var new_row = new Array(row_k.length + 1);
+        var new_row = new Array(keys.length);
         var prev_col = this.columnCount('body');
-        var i = 1;
-        for (var _i = 0, row_k_1 = row_k; _i < row_k_1.length; _i++) {
-            var key = row_k_1[_i];
-            new_row[i] = row_s[key];
+        var i = 0;
+        for (var _i = 0, keys_1 = keys; _i < keys_1.length; _i++) {
+            var key = keys_1[_i];
+            new_row[i] = x[key];
             i++;
         }
-        new_row[0] = keys[1];
         var row_num = nr;
         for (var i_1 = 0; i_1 < this.rowCount('body'); i_1++) {
             if (new_row[0] === this._data[i_1][0]) {
@@ -53621,6 +53618,7 @@ var TextHelper = (function (_super) {
     function TextHelper(ws) {
         var _this = _super.call(this, { node: Private.createNode() }) || this;
         _this._ws = ws;
+        _this._tb = _this.node.querySelector('table');
         return _this;
     }
     TextHelper.prototype.tick = function (event) {
@@ -53634,6 +53632,19 @@ var TextHelper = (function (_super) {
             alert('Done!');
             return;
         }
+        var tr1 = document.createElement('tr');
+        var tr2 = document.createElement('tr');
+        for (var _i = 0, _a = x['text'].split(' '); _i < _a.length; _i++) {
+            var s = _a[_i];
+            var td1 = document.createElement('td');
+            var td2 = document.createElement('td');
+            td1.textContent = s;
+            td2.textContent = ' ';
+            tr1.appendChild(td1);
+            tr2.appendChild(td2);
+        }
+        this._tb.appendChild(tr1);
+        this._tb.appendChild(tr2);
         console.log('test');
     };
     ;
@@ -53647,6 +53658,10 @@ var Private;
     function createNode() {
         var div = document.createElement('div');
         div.style.backgroundColor = 'red';
+        div.classList.add('TextData');
+        var table = document.createElement('table');
+        table.classList.add('TextTable');
+        div.appendChild(table);
         return div;
     }
     Private.createNode = createNode;
