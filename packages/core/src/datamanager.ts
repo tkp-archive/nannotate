@@ -21,7 +21,7 @@ class DataManager{
 
     private open(event: MessageEvent): void {
         if(this._loaded){
-            this._helper.tick(event);
+            this._helper.fromServer(event);
         } else {
             console.log(event.data)
             if(!event.data){
@@ -48,20 +48,21 @@ class DataManager{
                 Widget.attach(grid, this._bind);
                 this._grid = grid;
                 this._helper = model;
-                this._ws.onmessage = (event:MessageEvent) => this._helper.tick(event);
+                this._ws.onmessage = (event:MessageEvent) => this._helper.fromServer(event);
 
             } else if (this._type === 'text'){
+
                 let model = new TextHelper(this._ws);
                 Widget.attach(model, this._bind);
                 this._helper = model;
-                this._ws.onmessage = (event:MessageEvent) => this._helper.tick(event);
+                this._ws.onmessage = (event:MessageEvent) => this._helper.fromServer(event);
             }
             this._loaded = true;
         }
     }
 
-    public send(msg: string){
-        this._ws.send(msg);
+    public toServer(msg: string){
+        this._helper.toServer(msg, this._ws);
     }
 
     onResize(msg: Widget.ResizeMessage): void {

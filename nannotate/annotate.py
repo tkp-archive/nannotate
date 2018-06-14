@@ -1,3 +1,4 @@
+import pandas as pd
 from queue import Queue
 from six.moves import range
 from .utils import in_ipynb
@@ -32,35 +33,41 @@ def annotate(df, options, standalone=False):
 
 
 def _handle_msg(df, options, input, output, q_in, q_out):
-    count = 0
-
     data = df.reset_index().to_dict(orient='records')
 
     for i in range(len(data)):
         # output 1
         output(data[i], q_out, options)
 
-        # input
-        x = input('cp', q_in, options)
-        while x:
+        while(True):
+            # input
+            x = input('cp', q_in, options)
+            while not x:
+                x = input('cp', q_in, options)
+
             if x == 'q':
                 output('q', q_out, options)
                 return
-            if x == '+':
-                data[i]['annotate' + str(count)] = ''
-                count += 1
-                output(data[i], q_out, options)
+            # elif x == '+':
+            #     data[i]['annotate' + str(count)] = ''
+            #     count += 1
+            #     output(data[i], q_out, options)
+            #     output('nl', q_out, options)
+            #     continue
+            elif x == 'n':
                 output('nl', q_out, options)
-                x = input('cp', q_in, options)
-            else:
-                # TODO
-                if 'annotate0' not in data[i]:
-                    data[i]['annotate0'] = ''
-                    count += 1
-                data[i]['annotate0'] = x
-                output(data[i], q_out, options)
                 break
+            else:
+                data[i]['annotate0'] = x
+                if options['schema'] != 'text':
+                    output(data[i], q_out, options)
+                    break
+                else:
+                    continue
+
         if i == len(data) - 1:
             output('q', q_out, options)
         elif x == '':
             output('nl', q_out, options)
+
+    return pd.DataFrame(data)

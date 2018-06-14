@@ -33,16 +33,19 @@ class GridHelper extends DataModel implements DataSource {
     return this._data[row][column];
   }
 
-  public tick(event: MessageEvent): void {
+  public fromServer(event: MessageEvent): void {
     let nr = this.rowCount('body');
-    // this._data.splice(i, 1);
-    // this.emitChanged({ type: 'rows-removed', region: 'body', index: i, span: 1 });
-    console.log(event.data)
+
     if(!event.data){
+      //CLEAR
+      this._data = [];
       return;
     }
+
     let x = JSON.parse(event.data);
+
     if (Object.keys(x).length === 0){
+      //DONE
       this._ws.close();
       alert('Done!');
       return;
@@ -50,7 +53,6 @@ class GridHelper extends DataModel implements DataSource {
 
     let keys = Object.keys(x);
     let new_row = new Array(keys.length);
-
     let prev_col = this.columnCount('body');
 
     let i = 0;
@@ -95,6 +97,10 @@ class GridHelper extends DataModel implements DataSource {
       }
     }
   };
+
+  public toServer(msg: string, ws: WebSocket): void {
+    ws.send(msg);
+  }
 
   private _data: object[][] = [];
   public _ws: WebSocket;

@@ -1,20 +1,20 @@
 div.nano-annotate {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    width: 100%;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
 }
 
 
 div.nano-annotate div.nano-data-holder {
-    flex: 2;
-    background-color: magenta;
-    display: flex;
-    flex-direction: row;
+  flex: 2;
+  display: flex;
+  flex-direction: row;
+  overflow: scroll;
 }
 
 div.nano-annotate div.nano-data-holder div{
-    flex: 1;
+  flex: 1;
 }
 
 div.nano-annotate div.nano-data-holder div.nano-data-controls {
@@ -28,50 +28,108 @@ div.nano-annotate div.nano-data-holder div.nano-data-controls> * {
 }
 
 div.nano-annotate div.nano-io-holder {
-    flex: 1;
-    background-color: cyan;
-    display: flex;
-    flex-direction: column;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 
 div.nano-annotate div.nano-io-holder div {
-    flex: 1;
-    background-color: green;
-    display: flex;
-    flex-direction: row;
+  flex: 1;
+  display: flex;
+  flex-direction: row;
 }
 
 
 div.nano-annotate div.nano-io-holder div > *{
-    flex: 1;
+  flex: 1;
 }
 
 
 div.nano-annotate div.nano-io-holder div > textarea{
-    resize: none;
+  resize: none;
 }
 
 
 div.nano-annotate div.nano-io-holder div.nano-io-controls {
-    max-height: 50px;    
+  max-height: 50px;    
 }
 
 
 div.nano-annotate div.nano-data-holder div.p-DataGrid {
-    width: 100%;
-    height: 100%;
-    border: 1px solid #A0A0A0;
+  width: 100%;
+  height: 100%;
+  border: 1px solid #A0A0A0;
 }
 
 div.nano-annotate div.nano-data-holder div.TextData {
   display: flex;
   flex-direction: column;
+  height: 100%;
+  overflow:visible;
+  margin:50px;
 }
 
-div.nano-annotate div.nano-data-holder div.TextData table.TextTable tr,
-div.nano-annotate div.nano-data-holder div.TextData table.TextTable tr td {
+div.nano-annotate div.nano-data-holder div.TextData p.data{
+  border-collapse: collapse;
+  overflow:visible;
+}
+
+div.nano-annotate div.nano-data-holder div.TextData p.data > span {
   height:15px;
+}
+
+/*
+span.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+}
+
+span.tooltip span.tooltiptext {
+  visibility: hidden;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+
+  overflow: overlay; 
+  top: 100%;
+  left: 50%; 
+  margin-left: -60px;
+
+  padding:5px;
+
+  position: absolute;
+  z-index: 1;
+}
+
+span.tooltip:hover span.tooltiptext {
+  visibility: visible;
+}
+*/
+
+div.nano-annotate div.nano-data-holder div.TextData p.data > span:hover{
+  color: grey;
+}
+
+div.nano-annotate div.nano-data-holder div.TextData p.data span.tooltip span.tooltiptext:hover{
+
+}
+
+div.nano-annotate div.nano-data-holder div.TextData p.data span.selected {
+  color: red;
+}
+
+div.nano-annotate div.nano-data-holder div.TextData p.data span.word {
+  font-weight: bold;
+}
+
+div.nano-annotate div.nano-data-holder div.TextData p.data span.annotation {
+  font-style: italic;
+  font-size: 8px;
+  padding:2px;
+  color:blue;
 }
 
 div.nano-annotate div.nano-data div.p-DataGrid-scrollCorner {

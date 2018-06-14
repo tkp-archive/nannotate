@@ -44871,7 +44871,7 @@ exports = module.exports = __webpack_require__(4)();
 
 
 // module
-exports.push([module.i, "div.nano-annotate {\n    display: flex;\n    flex-direction: column;\n    height: 100%;\n    width: 100%;\n}\n\n\ndiv.nano-annotate div.nano-data-holder {\n    flex: 2;\n    background-color: magenta;\n    display: flex;\n    flex-direction: row;\n}\n\ndiv.nano-annotate div.nano-data-holder div{\n    flex: 1;\n}\n\ndiv.nano-annotate div.nano-data-holder div.nano-data-controls {\n  max-width: 50px;\n}\n\ndiv.nano-annotate div.nano-data-holder div.nano-data-controls> * {\n  flex: 1;\n  height: 100%;\n  width: 100%;\n}\n\ndiv.nano-annotate div.nano-io-holder {\n    flex: 1;\n    background-color: cyan;\n    display: flex;\n    flex-direction: column;\n}\n\n\ndiv.nano-annotate div.nano-io-holder div {\n    flex: 1;\n    background-color: green;\n    display: flex;\n    flex-direction: row;\n}\n\n\ndiv.nano-annotate div.nano-io-holder div > *{\n    flex: 1;\n}\n\n\ndiv.nano-annotate div.nano-io-holder div > textarea{\n    resize: none;\n}\n\n\ndiv.nano-annotate div.nano-io-holder div.nano-io-controls {\n    max-height: 50px;    \n}\n\n\ndiv.nano-annotate div.nano-data-holder div.p-DataGrid {\n    width: 100%;\n    height: 100%;\n    border: 1px solid #A0A0A0;\n}\n\ndiv.nano-annotate div.nano-data-holder div.TextData {\n  display: flex;\n  flex-direction: column;\n}\n\ndiv.nano-annotate div.nano-data-holder div.TextData table.TextTable tr,\ndiv.nano-annotate div.nano-data-holder div.TextData table.TextTable tr td {\n  height:15px;\n}\n\ndiv.nano-annotate div.nano-data div.p-DataGrid-scrollCorner {\n  background-color: #F0F0F0;\n}\n\n\ndiv.nano-annotate div.nano-data div.p-DataGrid-scrollCorner::after {\n  content: '';\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 1px;\n  height: 1px;\n  background-color: #A0A0A0;\n}\n", ""]);
+exports.push([module.i, "div.nano-annotate {\n  display: flex;\n  flex-direction: column;\n  height: 100%;\n  width: 100%;\n}\n\n\ndiv.nano-annotate div.nano-data-holder {\n  flex: 2;\n  display: flex;\n  flex-direction: row;\n  overflow: scroll;\n}\n\ndiv.nano-annotate div.nano-data-holder div{\n  flex: 1;\n}\n\ndiv.nano-annotate div.nano-data-holder div.nano-data-controls {\n  max-width: 50px;\n}\n\ndiv.nano-annotate div.nano-data-holder div.nano-data-controls> * {\n  flex: 1;\n  height: 100%;\n  width: 100%;\n}\n\ndiv.nano-annotate div.nano-io-holder {\n  flex: 1;\n  display: flex;\n  flex-direction: column;\n}\n\n\ndiv.nano-annotate div.nano-io-holder div {\n  flex: 1;\n  display: flex;\n  flex-direction: row;\n}\n\n\ndiv.nano-annotate div.nano-io-holder div > *{\n  flex: 1;\n}\n\n\ndiv.nano-annotate div.nano-io-holder div > textarea{\n  resize: none;\n}\n\n\ndiv.nano-annotate div.nano-io-holder div.nano-io-controls {\n  max-height: 50px;    \n}\n\n\ndiv.nano-annotate div.nano-data-holder div.p-DataGrid {\n  width: 100%;\n  height: 100%;\n  border: 1px solid #A0A0A0;\n}\n\ndiv.nano-annotate div.nano-data-holder div.TextData {\n  display: flex;\n  flex-direction: column;\n  height: 100%;\n  overflow:visible;\n  margin:50px;\n}\n\ndiv.nano-annotate div.nano-data-holder div.TextData p.data{\n  border-collapse: collapse;\n  overflow:visible;\n}\n\ndiv.nano-annotate div.nano-data-holder div.TextData p.data > span {\n  height:15px;\n}\n\n/*\nspan.tooltip {\n  position: relative;\n  display: inline-block;\n  border-bottom: 1px dotted black;\n}\n\nspan.tooltip span.tooltiptext {\n  visibility: hidden;\n  background-color: black;\n  color: #fff;\n  text-align: center;\n  border-radius: 6px;\n\n  overflow: overlay; \n  top: 100%;\n  left: 50%; \n  margin-left: -60px;\n\n  padding:5px;\n\n  position: absolute;\n  z-index: 1;\n}\n\nspan.tooltip:hover span.tooltiptext {\n  visibility: visible;\n}\n*/\n\ndiv.nano-annotate div.nano-data-holder div.TextData p.data > span:hover{\n  color: grey;\n}\n\ndiv.nano-annotate div.nano-data-holder div.TextData p.data span.tooltip span.tooltiptext:hover{\n\n}\n\ndiv.nano-annotate div.nano-data-holder div.TextData p.data span.selected {\n  color: red;\n}\n\ndiv.nano-annotate div.nano-data-holder div.TextData p.data span.word {\n  font-weight: bold;\n}\n\ndiv.nano-annotate div.nano-data-holder div.TextData p.data span.annotation {\n  font-style: italic;\n  font-size: 8px;\n  padding:2px;\n  color:blue;\n}\n\ndiv.nano-annotate div.nano-data div.p-DataGrid-scrollCorner {\n  background-color: #F0F0F0;\n}\n\n\ndiv.nano-annotate div.nano-data div.p-DataGrid-scrollCorner::after {\n  content: '';\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 1px;\n  height: 1px;\n  background-color: #A0A0A0;\n}\n", ""]);
 
 // exports
 
@@ -53323,10 +53323,10 @@ var AnnotateWidget = (function (_super) {
         textarea.onkeyup = function (event) {
             if (event.keyCode === 13) {
                 if (textarea.value === '' || textarea.value === '\n' || textarea.value === '\r\n') {
-                    _this._manager.send('');
+                    _this._manager.toServer('');
                 }
                 else {
-                    _this._manager.send(textarea.value);
+                    _this._manager.toServer(textarea.value);
                 }
                 textarea.value = '';
             }
@@ -53347,10 +53347,32 @@ var Private;
         var div = document.createElement('div');
         var data_holder = document.createElement('div');
         data_holder.classList.add('nano-data-holder');
-        data_holder.innerHTML = '<div class="nano-data"></div><div class="nano-data-controls"><input type="button" value="+"></div>';
+        // data_holder.innerHTML = '<div class="nano-data"></div><div class="nano-data-controls"><input type="button" value="+"></div>'
+        var data = document.createElement('div');
+        data.classList.add('nano-data');
+        data_holder.appendChild(data);
         var io_holder = document.createElement('div');
         io_holder.classList.add('nano-io-holder');
-        io_holder.innerHTML = '<div class="nano-controls"><textarea class="nano-io-controls-input"></textarea></div><div class="nano-io-controls"><input type="button" value="Next"><input type="button" value="Previous"><input type="button" value="Skip"></div>';
+        var controls = document.createElement('div');
+        controls.classList.add('nano-controls');
+        var input = document.createElement('textarea');
+        controls.appendChild(input);
+        var io_controls = document.createElement('div');
+        io_controls.classList.add('nano-io-controls');
+        var next = document.createElement('input');
+        next.type = 'button';
+        next.value = 'Next';
+        var previous = document.createElement('button');
+        previous.type = 'button';
+        previous.value = 'Previous';
+        var skip = document.createElement('button');
+        skip.type = 'button';
+        skip.value = 'Skip';
+        io_controls.appendChild(next);
+        io_controls.appendChild(previous);
+        io_controls.appendChild(skip);
+        io_holder.appendChild(controls);
+        io_holder.appendChild(io_controls);
         div.appendChild(data_holder);
         div.appendChild(io_holder);
         return div;
@@ -53453,16 +53475,16 @@ var GridHelper = (function (_super) {
         }
         return this._data[row][column];
     };
-    GridHelper.prototype.tick = function (event) {
+    GridHelper.prototype.fromServer = function (event) {
         var nr = this.rowCount('body');
-        // this._data.splice(i, 1);
-        // this.emitChanged({ type: 'rows-removed', region: 'body', index: i, span: 1 });
-        console.log(event.data);
         if (!event.data) {
+            //CLEAR
+            this._data = [];
             return;
         }
         var x = JSON.parse(event.data);
         if (Object.keys(x).length === 0) {
+            //DONE
             this._ws.close();
             alert('Done!');
             return;
@@ -53511,6 +53533,9 @@ var GridHelper = (function (_super) {
         }
     };
     ;
+    GridHelper.prototype.toServer = function (msg, ws) {
+        ws.send(msg);
+    };
     return GridHelper;
 }(datagrid_1.DataModel));
 exports.GridHelper = GridHelper;
@@ -53549,7 +53574,7 @@ var DataManager = (function () {
     DataManager.prototype.open = function (event) {
         var _this = this;
         if (this._loaded) {
-            this._helper.tick(event);
+            this._helper.fromServer(event);
         }
         else {
             console.log(event.data);
@@ -53571,19 +53596,19 @@ var DataManager = (function () {
                 widgets_1.Widget.attach(grid, this._bind);
                 this._grid = grid;
                 this._helper = model;
-                this._ws.onmessage = function (event) { return _this._helper.tick(event); };
+                this._ws.onmessage = function (event) { return _this._helper.fromServer(event); };
             }
             else if (this._type === 'text') {
                 var model = new textdata_1.TextHelper(this._ws);
                 widgets_1.Widget.attach(model, this._bind);
                 this._helper = model;
-                this._ws.onmessage = function (event) { return _this._helper.tick(event); };
+                this._ws.onmessage = function (event) { return _this._helper.fromServer(event); };
             }
             this._loaded = true;
         }
     };
-    DataManager.prototype.send = function (msg) {
-        this._ws.send(msg);
+    DataManager.prototype.toServer = function (msg) {
+        this._helper.toServer(msg, this._ws);
     };
     DataManager.prototype.onResize = function (msg) {
         if (this._type === 'grid') {
@@ -53616,38 +53641,81 @@ var widgets_1 = __webpack_require__(19);
 var TextHelper = (function (_super) {
     __extends(TextHelper, _super);
     function TextHelper(ws) {
-        var _this = _super.call(this, { node: Private.createNode() }) || this;
+        var _this = this;
+        var node = Private.createNode();
+        _this = _super.call(this, { node: node }) || this;
         _this._ws = ws;
-        _this._tb = _this.node.querySelector('table');
+        _this._div = node;
         return _this;
     }
-    TextHelper.prototype.tick = function (event) {
-        console.log(event.data);
+    TextHelper.prototype.fromServer = function (event) {
         if (!event.data) {
+            //CLEAR
+            while (this._div.lastChild) {
+                this._div.removeChild(this._div.lastChild);
+            }
             return;
         }
         var x = JSON.parse(event.data);
         if (Object.keys(x).length === 0) {
+            //END
             this._ws.close();
             alert('Done!');
             return;
         }
-        var tr1 = document.createElement('tr');
-        var tr2 = document.createElement('tr');
-        for (var _i = 0, _a = x['text'].split(' '); _i < _a.length; _i++) {
-            var s = _a[_i];
-            var td1 = document.createElement('td');
-            var td2 = document.createElement('td');
-            td1.textContent = s;
-            td2.textContent = ' ';
-            tr1.appendChild(td1);
-            tr2.appendChild(td2);
+        var p = document.createElement('p');
+        p.classList.add('data');
+        for (var _i = 0, _a = x['text'].split('\n'); _i < _a.length; _i++) {
+            var line = _a[_i];
+            for (var _b = 0, _c = line.split(' '); _b < _c.length; _b++) {
+                var s = _c[_b];
+                var span = document.createElement('span');
+                span.onclick = function () { this.classList.toggle('selected'); };
+                span.textContent = s;
+                span.classList.add('word');
+                p.appendChild(span);
+                var space = document.createElement('span');
+                space.textContent = ' ';
+                p.appendChild(space);
+            }
+            p.appendChild(document.createElement('br'));
         }
-        this._tb.appendChild(tr1);
-        this._tb.appendChild(tr2);
+        this._div.appendChild(p);
         console.log('test');
     };
     ;
+    TextHelper.prototype.toServer = function (msg, ws) {
+        if (msg === '') {
+            ws.send('n');
+        }
+        else {
+            var selected = this._div.querySelectorAll('span.selected');
+            msg = msg.replace(/(\r\n\t|\n|\r\t)/gm, "");
+            if (selected.length === 0) {
+                ws.send(msg);
+                var span = document.createElement('span');
+                span.classList.add('annotation');
+                span.style.color = 'green';
+                span.textContent = msg;
+                this._div.appendChild(span);
+            }
+            else {
+                var ret = [];
+                for (var i = 0; i < selected.length; i++) {
+                    ret.push(selected[i].textContent);
+                    selected[i].classList.remove('selected');
+                    var span = document.createElement('span');
+                    // span.classList.add('tooltiptext');
+                    span.classList.add('annotation');
+                    span.textContent = msg;
+                    // selected[i].classList.add('tooltip');
+                    selected[i].appendChild(span);
+                }
+                ws.send(JSON.stringify((_a = {}, _a[msg] = ret, _a)));
+            }
+        }
+        var _a;
+    };
     TextHelper.prototype.onAfterAttach = function (msg) {
     };
     return TextHelper;
@@ -53657,11 +53725,7 @@ var Private;
 (function (Private) {
     function createNode() {
         var div = document.createElement('div');
-        div.style.backgroundColor = 'red';
         div.classList.add('TextData');
-        var table = document.createElement('table');
-        table.classList.add('TextTable');
-        div.appendChild(table);
         return div;
     }
     Private.createNode = createNode;

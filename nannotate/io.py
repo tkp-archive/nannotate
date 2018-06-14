@@ -1,4 +1,5 @@
 import pandas as pd
+import queue
 import json
 from pprint import pprint
 
@@ -65,7 +66,10 @@ def _msg_to_out_cm(msg, options):
 # When running as a standalone site'''
 def websocket_input(msg, q, options):
     # q.put(msg)
-    return q.get().strip()
+    try:
+        return q.get(timeout=1).strip()
+    except queue.Empty:
+        return ''
 
 
 def websocket_output(msg, q, options):

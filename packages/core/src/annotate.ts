@@ -38,9 +38,9 @@ class AnnotateWidget extends Widget {
     textarea.onkeyup = (event: KeyboardEvent) => {
       if(event.keyCode === 13){
         if(textarea.value === '' || textarea.value === '\n' || textarea.value === '\r\n'){
-          this._manager.send('');
+          this._manager.toServer('');
         } else {
-          this._manager.send(textarea.value);
+          this._manager.toServer(textarea.value);
         }
         textarea.value = '';
       }
@@ -66,12 +66,40 @@ namespace Private {
     let data_holder = document.createElement('div');
     data_holder.classList.add('nano-data-holder');
 
-    data_holder.innerHTML = '<div class="nano-data"></div><div class="nano-data-controls"><input type="button" value="+"></div>'
+    // data_holder.innerHTML = '<div class="nano-data"></div><div class="nano-data-controls"><input type="button" value="+"></div>'
+    let data = document.createElement('div');
+    data.classList.add('nano-data');
+    data_holder.appendChild(data);
 
     let io_holder = document.createElement('div');
     io_holder.classList.add('nano-io-holder');
 
-    io_holder.innerHTML = '<div class="nano-controls"><textarea class="nano-io-controls-input"></textarea></div><div class="nano-io-controls"><input type="button" value="Next"><input type="button" value="Previous"><input type="button" value="Skip"></div>'
+    let controls = document.createElement('div');
+    controls.classList.add('nano-controls');
+    let input = document.createElement('textarea');
+    controls.appendChild(input);
+
+    let io_controls = document.createElement('div');
+    io_controls.classList.add('nano-io-controls');
+
+    let next = document.createElement('input');
+    next.type = 'button';
+    next.value = 'Next';
+
+    let previous = document.createElement('button');
+    previous.type = 'button';
+    previous.value = 'Previous';
+
+    let skip = document.createElement('button');
+    skip.type = 'button';
+    skip.value = 'Skip';
+
+    io_controls.appendChild(next);
+    io_controls.appendChild(previous);
+    io_controls.appendChild(skip);
+
+    io_holder.appendChild(controls);
+    io_holder.appendChild(io_controls);
 
     div.appendChild(data_holder);
     div.appendChild(io_holder);
