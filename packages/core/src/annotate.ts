@@ -9,7 +9,57 @@ import '../style/index.css';
 export
 class AnnotateWidget extends Widget {
   constructor() {
-    super({ node: Private.createNode() });
+    let div = document.createElement('div');
+
+    let data_holder = document.createElement('div');
+    data_holder.classList.add('nano-data-holder');
+
+    let data = document.createElement('div');
+    data.classList.add('nano-data');
+    data_holder.appendChild(data);
+
+    let io_holder = document.createElement('div');
+    io_holder.classList.add('nano-io-holder');
+
+    let controls = document.createElement('div');
+    controls.classList.add('nano-controls');
+
+    let input = document.createElement('textarea');
+    input.classList.add('nano-io-controls-input');
+    controls.appendChild(input);
+
+    let io_controls = document.createElement('div');
+    io_controls.classList.add('nano-io-controls');
+
+    let next = document.createElement('div');
+    next.textContent = 'Next';
+    next.onclick = () => {
+      this._manager._ws.send(JSON.stringify({'command': 'N'}));
+    }
+
+    let previous = document.createElement('div');
+    previous.textContent = 'Previous';
+    previous.onclick = () => {
+      this._manager._ws.send(JSON.stringify({'command': 'P'}));
+    }
+
+    let skip = document.createElement('div');
+    skip.textContent = 'Skip';
+    skip.onclick = () => {
+      this._manager._ws.send(JSON.stringify({'command': 'N'}));
+    }
+
+    io_controls.appendChild(next);
+    io_controls.appendChild(previous);
+    io_controls.appendChild(skip);
+
+    io_holder.appendChild(controls);
+    io_holder.appendChild(io_controls);
+
+    div.appendChild(data_holder);
+    div.appendChild(io_holder);
+
+    super({ node: div});
     this.setFlag(Widget.Flag.DisallowLayout);
     this.addClass('nano-annotate');
 
@@ -56,53 +106,4 @@ class AnnotateWidget extends Widget {
   }
 
   private _manager: DataManager;
-}
-
-
-namespace Private {
-  export function createNode(): HTMLDivElement {
-    let div = document.createElement('div');
-
-    let data_holder = document.createElement('div');
-    data_holder.classList.add('nano-data-holder');
-
-    let data = document.createElement('div');
-    data.classList.add('nano-data');
-    data_holder.appendChild(data);
-
-    let io_holder = document.createElement('div');
-    io_holder.classList.add('nano-io-holder');
-
-    let controls = document.createElement('div');
-    controls.classList.add('nano-controls');
-    let input = document.createElement('textarea');
-    input.classList.add('nano-io-controls-input');
-    controls.appendChild(input);
-
-    let io_controls = document.createElement('div');
-    io_controls.classList.add('nano-io-controls');
-
-    let next = document.createElement('input');
-    next.type = 'button';
-    next.value = 'Next';
-
-    let previous = document.createElement('button');
-    previous.type = 'button';
-    previous.value = 'Previous';
-
-    let skip = document.createElement('button');
-    skip.type = 'button';
-    skip.value = 'Skip';
-
-    io_controls.appendChild(next);
-    io_controls.appendChild(previous);
-    io_controls.appendChild(skip);
-
-    io_holder.appendChild(controls);
-    io_holder.appendChild(io_controls);
-
-    div.appendChild(data_holder);
-    div.appendChild(io_holder);
-    return div;
-  }
 }

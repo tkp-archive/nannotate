@@ -46,7 +46,7 @@ def _handle_msg(data, options, handle_command, input, output, q_in, q_out):
     handle_command(cmd, i, data, options, input, output, q_in, q_out)
     print('putting: %s' % str(cmd))
 
-    while i < len(data)-1:
+    while i < len(data):
         # cant go previous
         if i < 0:
             i = 0

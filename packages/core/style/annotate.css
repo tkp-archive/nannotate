@@ -13,7 +13,7 @@ div.nano-annotate div.nano-data-holder {
   overflow: scroll;
 }
 
-div.nano-annotate div.nano-data-holder div{
+div.nano-annotate div.nano-data-holder > div{
   flex: 1;
 }
 
@@ -34,7 +34,7 @@ div.nano-annotate div.nano-io-holder {
 }
 
 
-div.nano-annotate div.nano-io-holder div {
+div.nano-annotate div.nano-io-holder > div {
   flex: 1;
   display: flex;
   flex-direction: row;
@@ -50,11 +50,22 @@ div.nano-annotate div.nano-io-holder div > textarea{
   resize: none;
 }
 
-
 div.nano-annotate div.nano-io-holder div.nano-io-controls {
   max-height: 50px;    
 }
 
+div.nano-annotate div.nano-io-holder div.nano-io-controls div {
+  text-align: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid #ccc;
+  border-left: 1px solid #ccc;
+}
+
+div.nano-annotate div.nano-io-holder div.nano-io-controls div:hover {
+  background-color: #ddd;
+}
 
 div.nano-annotate div.nano-data-holder div.p-DataGrid {
   width: 100%;
@@ -113,7 +124,8 @@ div.nano-annotate div.nano-data-holder div.TextData p.data > span:hover{
   color: grey;
 }
 
-div.nano-annotate div.nano-data-holder div.TextData p.data span.tooltip span.tooltiptext:hover{
+div.nano-annotate div.nano-data-holder div.TextData p.data span.word span.annotation:hover{
+  color: red;
 
 }
 
@@ -127,7 +139,7 @@ div.nano-annotate div.nano-data-holder div.TextData p.data span.word {
 
 div.nano-annotate div.nano-data-holder div.TextData p.data span.annotation {
   font-style: italic;
-  font-size: 8px;
+  font-size: 10px;
   padding:2px;
   color:blue;
 }

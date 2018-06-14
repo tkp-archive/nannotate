@@ -94,7 +94,11 @@ class GridHelper extends DataModel implements DataSource {
   };
 
   public toServer(msg: string, ws: WebSocket): void {
-    ws.send(msg);
+    if (msg === ''){
+      ws.send(JSON.stringify({command:'N'}));
+    } else {
+      ws.send(JSON.stringify({command:'A', annotation: msg}));
+    }
   }
 
   private _data: object[][] = [];

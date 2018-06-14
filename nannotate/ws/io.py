@@ -34,18 +34,27 @@ def handle_command(cmd, index, data, options, input, output, q_in, q_out):
         return index
     elif command == 'N':
         output(clear(), q_out, options)
-        index = index + 1
+        index = min(index + 1, len(data)-1)
         ret = {'command': 'D', 'index': index, 'data': data[index]}
         output(ret, q_out, options)
         return index
     elif command == 'P':
         output(clear(), q_out, options)
-        index = index - 1
+        index = max(index - 1, 0)
         ret = {'command': 'D', 'index': index, 'data': data[index]}
         output(ret, q_out, options)
         return index
     elif command == 'A':
-        data[index]['annotation'] = cmd['annotation']
+        if options['schema'] == 'text':
+            if 'annotation' not in data[index]:
+                data[index]['annotation'] = {'paragraph': '', 'phrases': {}}
+            if 'paragraph' in cmd['annotation']:
+                data[index]['annotation']['paragraph'] = cmd['annotation']['paragraph']
+            else:
+                data[index]['annotation']['phrases'].update(cmd['annotation']['phrases'])
+
+        else:
+            data[index]['annotation'] = cmd['annotation']
         ret = {'command': 'A', 'index': index, 'data': data[index], 'annotation': cmd['annotation']}
         # output(ret, q_out, options)
         return index

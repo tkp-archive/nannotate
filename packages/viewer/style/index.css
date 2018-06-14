@@ -39,12 +39,10 @@ body {
 }
 
 
-#palette {
-  min-width: 300px;
-  border-right: 1px solid #DDDDDD;
+div.nano-controls {
+  border: 1px solid #DDDDDD;
 }
 
-
-#dock {
-  padding: 4px;
+div.nano-annotate {
+  border: 1px solid #DDDDDD;
 }
