@@ -1,6 +1,6 @@
 {
   "name": "@nannotate/jlab",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "keywords": [
     "jupyter",
     "jupyterlab"
@@ -25,7 +25,7 @@
     "@jupyterlab/application": "^0.16.0",
     "@jupyterlab/rendermime-interfaces": "^1.0.0",
     "@jupyterlab/services": "^2.0.0",
-    "@nannotate/core": "^0.0.5",
+    "@nannotate/core": "^0.0.6",
     "@phosphor/messaging": "^1.2.2",
     "@phosphor/widgets": "^1.6.0"
   },
