@@ -66,7 +66,6 @@ namespace Private {
     let data_holder = document.createElement('div');
     data_holder.classList.add('nano-data-holder');
 
-    // data_holder.innerHTML = '<div class="nano-data"></div><div class="nano-data-controls"><input type="button" value="+"></div>'
     let data = document.createElement('div');
     data.classList.add('nano-data');
     data_holder.appendChild(data);
@@ -77,6 +76,7 @@ namespace Private {
     let controls = document.createElement('div');
     controls.classList.add('nano-controls');
     let input = document.createElement('textarea');
+    input.classList.add('nano-io-controls-input');
     controls.appendChild(input);
 
     let io_controls = document.createElement('div');

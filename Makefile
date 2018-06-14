@@ -4,7 +4,7 @@ run:  ## clean and make target, run target
 runt:  ## clean and make target, run target (text)
 	python3 -m nannotate text
 
-runi:  ## clean and make target, run target (text)
+runi:  ## clean and make target, run target (inline)
 	python3 -m nannotate inline
 
 build: js  ## Build the repository

@@ -53347,7 +53347,6 @@ var Private;
         var div = document.createElement('div');
         var data_holder = document.createElement('div');
         data_holder.classList.add('nano-data-holder');
-        // data_holder.innerHTML = '<div class="nano-data"></div><div class="nano-data-controls"><input type="button" value="+"></div>'
         var data = document.createElement('div');
         data.classList.add('nano-data');
         data_holder.appendChild(data);
@@ -53356,6 +53355,7 @@ var Private;
         var controls = document.createElement('div');
         controls.classList.add('nano-controls');
         var input = document.createElement('textarea');
+        input.classList.add('nano-io-controls-input');
         controls.appendChild(input);
         var io_controls = document.createElement('div');
         io_controls.classList.add('nano-io-controls');
@@ -53475,27 +53475,27 @@ var GridHelper = (function (_super) {
         }
         return this._data[row][column];
     };
-    GridHelper.prototype.fromServer = function (event) {
+    GridHelper.prototype.fromServer = function (data) {
         var nr = this.rowCount('body');
-        if (!event.data) {
+        if (data['command'] === 'C') {
             //CLEAR
             this._data = [];
             return;
         }
-        var x = JSON.parse(event.data);
-        if (Object.keys(x).length === 0) {
+        if (data['command'] === 'Q') {
             //DONE
             this._ws.close();
             alert('Done!');
             return;
         }
-        var keys = Object.keys(x);
+        var new_data = data['data'];
+        var keys = Object.keys(new_data);
         var new_row = new Array(keys.length);
         var prev_col = this.columnCount('body');
         var i = 0;
         for (var _i = 0, keys_1 = keys; _i < keys_1.length; _i++) {
             var key = keys_1[_i];
-            new_row[i] = x[key];
+            new_row[i] = new_data[key];
             i++;
         }
         var row_num = nr;
@@ -53574,7 +53574,7 @@ var DataManager = (function () {
     DataManager.prototype.open = function (event) {
         var _this = this;
         if (this._loaded) {
-            this._helper.fromServer(event);
+            this.fromServer(event);
         }
         else {
             console.log(event.data);
@@ -53582,12 +53582,15 @@ var DataManager = (function () {
                 return;
             }
             var x = JSON.parse(event.data);
-            if (!x) {
+            console.log(x);
+            if (x['command'] === 'Q') {
                 this._ws.close();
                 alert('Done!');
                 return;
             }
-            this._type = x['schema'];
+            if (x['command'] === 'S') {
+                this._type = x['schema'];
+            }
             if (this._type === 'grid') {
                 var blueStripeStyle = __assign({}, datagrid_2.DataGrid.defaultStyle, { rowBackgroundColor: function (i) { return i % 2 === 0 ? 'rgba(138, 172, 200, 0.3)' : ''; }, columnBackgroundColor: function (i) { return i % 2 === 0 ? 'rgba(100, 100, 100, 0.1)' : ''; } });
                 var model = new datagrid_1.GridHelper(this._ws);
@@ -53596,16 +53599,22 @@ var DataManager = (function () {
                 widgets_1.Widget.attach(grid, this._bind);
                 this._grid = grid;
                 this._helper = model;
-                this._ws.onmessage = function (event) { return _this._helper.fromServer(event); };
             }
             else if (this._type === 'text') {
                 var model = new textdata_1.TextHelper(this._ws);
                 widgets_1.Widget.attach(model, this._bind);
                 this._helper = model;
-                this._ws.onmessage = function (event) { return _this._helper.fromServer(event); };
             }
+            this._ws.onmessage = function (event) { return _this.fromServer(event); };
             this._loaded = true;
         }
+    };
+    DataManager.prototype.fromServer = function (event) {
+        var x = JSON.parse(event.data);
+        if (x['command'] === 'S') {
+            return;
+        }
+        this._helper.fromServer(x);
     };
     DataManager.prototype.toServer = function (msg) {
         this._helper.toServer(msg, this._ws);
@@ -53648,21 +53657,21 @@ var TextHelper = (function (_super) {
         _this._div = node;
         return _this;
     }
-    TextHelper.prototype.fromServer = function (event) {
-        if (!event.data) {
+    TextHelper.prototype.fromServer = function (data) {
+        if (data['command'] === 'C') {
             //CLEAR
             while (this._div.lastChild) {
                 this._div.removeChild(this._div.lastChild);
             }
             return;
         }
-        var x = JSON.parse(event.data);
-        if (Object.keys(x).length === 0) {
+        if (data['command'] === 'Q') {
             //END
             this._ws.close();
             alert('Done!');
             return;
         }
+        var x = data['data'];
         var p = document.createElement('p');
         p.classList.add('data');
         for (var _i = 0, _a = x['text'].split('\n'); _i < _a.length; _i++) {
@@ -53686,13 +53695,13 @@ var TextHelper = (function (_super) {
     ;
     TextHelper.prototype.toServer = function (msg, ws) {
         if (msg === '') {
-            ws.send('n');
+            ws.send(JSON.stringify({ command: 'N' }));
         }
         else {
             var selected = this._div.querySelectorAll('span.selected');
             msg = msg.replace(/(\r\n\t|\n|\r\t)/gm, "");
             if (selected.length === 0) {
-                ws.send(msg);
+                ws.send(JSON.stringify({ command: 'A', annotation: msg }));
                 var span = document.createElement('span');
                 span.classList.add('annotation');
                 span.style.color = 'green';
@@ -53711,7 +53720,7 @@ var TextHelper = (function (_super) {
                     // selected[i].classList.add('tooltip');
                     selected[i].appendChild(span);
                 }
-                ws.send(JSON.stringify((_a = {}, _a[msg] = ret, _a)));
+                ws.send(JSON.stringify({ command: 'A', annotation: JSON.stringify((_a = {}, _a[msg] = ret, _a)) }));
             }
         }
         var _a;

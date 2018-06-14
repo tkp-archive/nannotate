@@ -1,6 +1,6 @@
 import {Widget} from '@phosphor/widgets';
 import {Message} from '@phosphor/messaging';
-import {DataSource} from './datasource';
+import {DataSource, DataJSON} from './datasource';
 
 
 export
@@ -12,8 +12,8 @@ class TextHelper extends Widget implements DataSource {
     this._div = node;
   }
 
-  public fromServer(event: MessageEvent): void {
-    if(!event.data){
+  public fromServer(data: DataJSON): void {
+    if(data['command'] === 'C') {
       //CLEAR
       while(this._div.lastChild){
         this._div.removeChild(this._div.lastChild);
@@ -21,14 +21,14 @@ class TextHelper extends Widget implements DataSource {
       return;
     }
 
-    let x = JSON.parse(event.data);
-
-    if (Object.keys(x).length === 0){
+    if (data['command'] === 'Q') {
       //END
       this._ws.close();
       alert('Done!');
       return;
     }
+
+    let x = <any>data['data'];
 
     let p = document.createElement('p');
     p.classList.add('data');
@@ -56,12 +56,12 @@ class TextHelper extends Widget implements DataSource {
 
   toServer(msg: string, ws: WebSocket): void {
     if (msg === ''){
-        ws.send('n');
+        ws.send(JSON.stringify({command: 'N'}));
     } else {
         let selected = this._div.querySelectorAll('span.selected');
         msg = msg.replace(/(\r\n\t|\n|\r\t)/gm,"");
         if (selected.length === 0){
-            ws.send(msg);
+            ws.send(JSON.stringify({command: 'A', annotation: msg}));
             let span = document.createElement('span');
             span.classList.add('annotation');
             span.style.color = 'green';
@@ -83,7 +83,7 @@ class TextHelper extends Widget implements DataSource {
                 selected[i].appendChild(span);
 
             }
-            ws.send(JSON.stringify({[msg]:ret}));
+            ws.send(JSON.stringify({command: 'A', annotation: {[msg]:ret}}));
         }
     }
   }

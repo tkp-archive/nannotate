@@ -1,6 +1,7 @@
 import sys
 import faker
 import pandas as pd
+from pprint import pprint
 from .annotate import *
 
 f = faker.Faker()
@@ -24,7 +25,8 @@ else:
 
 try:
     while True:
-        out = annotate(dat, options, standalone)
-        print(out)
+        data = dat.reset_index().to_dict(orient='records')
+        annotate(data, options, standalone)
+        pprint(data)
 except KeyboardInterrupt:
     sys.exit(0)

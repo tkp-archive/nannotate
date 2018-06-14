@@ -21,7 +21,7 @@ class DataManager{
 
     private open(event: MessageEvent): void {
         if(this._loaded){
-            this._helper.fromServer(event);
+            this.fromServer(event);
         } else {
             console.log(event.data)
             if(!event.data){
@@ -29,13 +29,17 @@ class DataManager{
             }
             let x = JSON.parse(event.data);
 
-            if (!x){
+            console.log(x);
+            if (x['command'] === 'Q'){
               this._ws.close();
               alert('Done!');
               return;
             }
 
-            this._type = x['schema'];
+            if (x['command'] === 'S'){
+                this._type = x['schema'];
+            }
+
             if (this._type === 'grid') {
                 let blueStripeStyle: DataGrid.IStyle = {
                 ...DataGrid.defaultStyle,
@@ -48,20 +52,23 @@ class DataManager{
                 Widget.attach(grid, this._bind);
                 this._grid = grid;
                 this._helper = model;
-                this._ws.onmessage = (event:MessageEvent) => this._helper.fromServer(event);
-
             } else if (this._type === 'text'){
-
                 let model = new TextHelper(this._ws);
                 Widget.attach(model, this._bind);
                 this._helper = model;
-                this._ws.onmessage = (event:MessageEvent) => this._helper.fromServer(event);
             }
+            this._ws.onmessage = (event:MessageEvent) => this.fromServer(event);
             this._loaded = true;
         }
     }
 
-    public toServer(msg: string){
+    public fromServer(event: MessageEvent): void {
+        let x = JSON.parse(event.data);
+        if(x['command'] === 'S'){return;}
+        this._helper.fromServer(x);
+    }
+
+    public toServer(msg: string): void {
         this._helper.toServer(msg, this._ws);
     }
 

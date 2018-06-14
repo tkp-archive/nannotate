@@ -1,8 +1,5 @@
-import {
-  DataModel
-} from '@phosphor/datagrid';
-
-import {DataSource} from './datasource';
+import {DataModel} from '@phosphor/datagrid';
+import {DataSource, DataJSON} from './datasource';
 
 
 export
@@ -33,31 +30,29 @@ class GridHelper extends DataModel implements DataSource {
     return this._data[row][column];
   }
 
-  public fromServer(event: MessageEvent): void {
+  public fromServer(data: DataJSON): void {
     let nr = this.rowCount('body');
-
-    if(!event.data){
+    if(data['command'] === 'C') {
       //CLEAR
       this._data = [];
       return;
     }
 
-    let x = JSON.parse(event.data);
-
-    if (Object.keys(x).length === 0){
+    if (data['command'] === 'Q') {
       //DONE
       this._ws.close();
       alert('Done!');
       return;
     }
 
-    let keys = Object.keys(x);
+    let new_data = <any>data['data'];
+    let keys = Object.keys(new_data);
     let new_row = new Array(keys.length);
     let prev_col = this.columnCount('body');
 
     let i = 0;
     for(let key of keys){
-        new_row[i] = x[key];
+        new_row[i] = new_data[key];
         i++;
     }
 
