@@ -6,7 +6,7 @@ from .._commands import quit, clear
 # When running as a standalone site'''
 def _input(q, options):
     try:
-        dat = q.get(timeout=1).strip()
+        dat = q.get(timeout=.1).strip()
         return json.loads(dat)
     except queue.Empty:
         return ''

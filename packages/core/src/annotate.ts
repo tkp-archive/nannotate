@@ -86,6 +86,11 @@ class AnnotateWidget extends Widget {
     let textarea = this.textAreaNode;
 
     textarea.onkeyup = (event: KeyboardEvent) => {
+      if(event.keyCode === 8){
+        if(textarea.value === ''){
+          this._manager._ws.send(JSON.stringify({command: 'P'}));
+        }
+      }
       if(event.keyCode === 13){
         if(textarea.value === '' || textarea.value === '\n' || textarea.value === '\r\n'){
           this._manager.toServer('');

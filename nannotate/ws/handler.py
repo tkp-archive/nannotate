@@ -27,7 +27,7 @@ class WSHandler(tornado.websocket.WebSocketHandler):
         self.q_in.put(message)
 
         try:
-            msg = [self.q_out.get(timeout=2)]
+            msg = [self.q_out.get(timeout=.1)]
         except queue.Empty:
             msg = []
 
@@ -45,7 +45,7 @@ class WSHandler(tornado.websocket.WebSocketHandler):
     def run(options, q_in, q_out):
         root = os.path.join(os.path.dirname(__file__), '../', 'assets')
         app = tornado.web.Application([
-            (r"/api/ws", WSHandler, {'options': options, 'q_in': q_in, 'q_out': q_out}),
+            (r"/nannotate/api/ws", WSHandler, {'options': options, 'q_in': q_in, 'q_out': q_out}),
             (r"/(.*)", tornado.web.StaticFileHandler, {"path": root, "default_filename": "index.html"}),
         ])
 

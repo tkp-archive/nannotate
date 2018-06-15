@@ -10,8 +10,10 @@ export
 class DataManager{
     constructor(ws: string, bind: HTMLDivElement){
         this._bind = bind;
-        let path = window.location.host;
-        this._ws = new WebSocket('ws://' + path + '/api/ws');
+        let path1 = window.location.host;
+        let path2 = window.location.pathname;
+
+        this._ws = new WebSocket('ws://' + path1 + path2 + 'nannotate/api/ws');
 
         this._ws.onmessage = (event: MessageEvent) => this.open(event);
         this._ws.onclose = this.close;
