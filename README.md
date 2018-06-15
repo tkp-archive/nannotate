@@ -9,6 +9,7 @@ Automate ML dataset labelling
 [![PyPI](https://img.shields.io/pypi/l/nannotate.svg)](https://pypi.python.org/pypi/nannotate)
 [![PyPI](https://img.shields.io/pypi/v/nannotate.svg)](https://pypi.python.org/pypi/nannotate)
 [![npm](https://img.shields.io/npm/v/@nannotate/core.svg)](https://www.npmjs.com/package/@nannotate/core)
+[![Docs](https://img.shields.io/readthedocs/nannotate.svg)](https://nannotate.readthedocs.io)
 
 
 
