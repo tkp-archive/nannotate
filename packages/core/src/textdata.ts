@@ -63,6 +63,7 @@ class TextHelper extends Widget implements DataSource {
       span.textContent = x['annotation']['paragraph'];
       span.setAttribute('value', x['annotation']['paragraph']);
 
+      let _t = this;
       for(let tag of Object.keys(x['annotation']['phrases'])){
         let phrase = x['annotation']['phrases'][tag]
         for(let word of phrase){
@@ -73,7 +74,9 @@ class TextHelper extends Widget implements DataSource {
               (spans[i].lastChild! as HTMLSpanElement).setAttribute('value', tag);
               (spans[i].lastChild! as HTMLSpanElement).onclick = function(event: MouseEvent){
                 //delete self on click
-                this.parentElement!.removeChild(this);
+                this.setAttribute('value', '');
+                this.textContent = '';
+                _t.submitAnnotation([], '');
                 event.stopPropagation();
               }
             }
@@ -89,47 +92,52 @@ class TextHelper extends Widget implements DataSource {
 
   };
 
+  submitAnnotation(selected: any, msg: string): void{
+      let ret = [];
+      for(let i = 0; i < selected.length; i++){
+          ret.push((selected[i] as HTMLSpanElement).getAttribute('value'));
+          selected[i].classList.remove('selected');
+          selected[i].lastChild!.textContent = msg;
+          (selected[i].lastChild! as HTMLSpanElement).setAttribute('value', msg);
 
-  toServer(msg: string, ws: WebSocket): void {
+          (selected[i].lastChild! as HTMLSpanElement).onclick = function(event: MouseEvent){
+            //delete self on click
+            this.setAttribute('value', '');
+            this.textContent = '';
+            event.stopPropagation();
+          }
+      }
+
+      let phrases: {[key: string]: [string]} = {};
+
+      let all_spans = this._div.querySelectorAll('span.word');
+      for(let i = 0; i < all_spans.length; i++){
+        if ((all_spans[i].lastChild! as HTMLSpanElement).getAttribute('value')! != ''){
+          if (!((all_spans[i].lastChild! as HTMLSpanElement).getAttribute('value')! in phrases)){
+            phrases[(all_spans[i].lastChild! as HTMLSpanElement).getAttribute('value')!] = [(all_spans[i] as HTMLSpanElement).getAttribute('value')!.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"")];
+          } else {
+            phrases[(all_spans[i].lastChild! as HTMLSpanElement).getAttribute('value')!].push((all_spans[i] as HTMLSpanElement).getAttribute('value')!.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,""));
+          }
+        }
+      }
+      console.log(phrases);
+      this._ws.send(JSON.stringify({command: 'A', annotation: {phrases:phrases}}));
+  }
+
+  toServer(msg: string): void {
     if (msg === ''){
-        ws.send(JSON.stringify({command: 'N'}));
+        this._ws.send(JSON.stringify({command: 'N'}));
     } else {
         let selected = this._div.querySelectorAll('span.selected');
         msg = msg.replace(/(\r\n\t|\n|\r\t)/gm,"");
+
         if (selected.length === 0){
-            ws.send(JSON.stringify({command: 'A', annotation: {paragraph:msg}}));
+            this._ws.send(JSON.stringify({command: 'A', annotation: {paragraph:msg}}));
             this._div.lastChild!.textContent = msg;
             (this._div.lastChild! as HTMLSpanElement).setAttribute('value', msg);
 
         } else {
-            let ret = [];
-            for(let i = 0; i < selected.length; i++){
-                ret.push((selected[i] as HTMLSpanElement).getAttribute('value'));
-                selected[i].classList.remove('selected');
-                selected[i].lastChild!.textContent = msg;
-                (selected[i].lastChild! as HTMLSpanElement).setAttribute('value', msg);
-
-                (selected[i].lastChild! as HTMLSpanElement).onclick = function(event: MouseEvent){
-                  //delete self on click
-                  this.parentElement!.removeChild(this);
-                  event.stopPropagation();
-                }
-            }
-
-            let phrases: {[key: string]: [string]} = {};
-
-            let all_spans = this._div.querySelectorAll('span.word');
-            for(let i = 0; i < all_spans.length; i++){
-              if (all_spans[i].lastChild!.textContent != ''){
-                if (!(all_spans[i].lastChild!.textContent! in phrases)){
-                  phrases[all_spans[i].lastChild!.textContent!] = [(all_spans[i] as HTMLSpanElement).getAttribute('value')!.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"")];
-                } else {
-                  phrases[all_spans[i].lastChild!.textContent!].push((all_spans[i] as HTMLSpanElement).getAttribute('value')!.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,""));
-                }
-              }
-            }
-            console.log(phrases);
-            ws.send(JSON.stringify({command: 'A', annotation: {phrases:phrases}}));
+          this.submitAnnotation(selected, msg);
         }
     }
   }

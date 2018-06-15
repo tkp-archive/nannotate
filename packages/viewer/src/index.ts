@@ -12,11 +12,11 @@ import {
 } from '@phosphor/commands';
 
 import {
-  BoxPanel, DockPanel, DockLayout, Menu, MenuBar, Widget, CommandPalette
+  BoxPanel, DockPanel, Menu, MenuBar, Widget, CommandPalette
 } from '@phosphor/widgets';
 
 import {
-  AnnotateWidget, ControlsWidget
+  AnnotateWidget
 } from '@nannotate/core';
 
 
@@ -28,7 +28,6 @@ function main(): void {
   let bar = new MenuBar();
   let menu = new Menu({commands});
 
-  menu.addItem({ command: 'controls:open' });
   menu.addItem({ type: 'separator'});
   menu.addItem({ command: 'save-dock-layout'});
   menu.addItem({ command: 'restore-dock-layout'});
@@ -39,40 +38,15 @@ function main(): void {
   bar.id = 'menuBar';
 
   let palette = new CommandPalette({ commands });
-  palette.addItem({ command: 'controls:open', category: 'New' });
   palette.id = 'palette';
 
   // let contextMenu = new ContextMenu({ commands });
   // contextMenu.addItem({ command: 'example:cut', selector: '.content' });
 
-  let ctrl = new ControlsWidget();
   let anno = new AnnotateWidget();
 
   let dock = new DockPanel();
-  dock.addWidget(ctrl);
-  dock.addWidget(anno, {mode: 'split-right', ref: ctrl});
-
-  commands.addCommand('controls:open', {
-    label: 'Controls',
-    mnemonic: 1,
-    iconClass: 'fa fa-plus',
-    execute: () => {
-      dock.addWidget(ctrl, {mode: 'split-left', ref: anno});
-      /* hack for custom sizing */
-      var layout = dock.saveLayout();
-      var sizes: number[] = (layout.main as DockLayout.ISplitAreaConfig).sizes;
-      sizes[0] = 0.3;
-      sizes[1] = 0.7;
-      dock.restoreLayout(layout);
-    }
-  });
-
-  /* hack for custom sizing */
-  var layout = dock.saveLayout();
-  var sizes: number[] = (layout.main as DockLayout.ISplitAreaConfig).sizes;
-  sizes[0] = 0.3;
-  sizes[1] = 0.7;
-  dock.restoreLayout(layout);
+  dock.addWidget(anno);
 
   let savedLayouts: DockPanel.ILayoutConfig[] = [];
 

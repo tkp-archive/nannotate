@@ -51,7 +51,7 @@ def handle_command(cmd, index, data, options, input, output, q_in, q_out):
             if 'paragraph' in cmd['annotation']:
                 data[index]['annotation']['paragraph'] = cmd['annotation']['paragraph']
             else:
-                data[index]['annotation']['phrases'].update(cmd['annotation']['phrases'])
+                data[index]['annotation']['phrases'] = cmd['annotation']['phrases']
 
         else:
             data[index]['annotation'] = cmd['annotation']

@@ -4,7 +4,7 @@ from enum import Enum
 class Command(Enum):
     '''
     Command:
-        {"command": "S", "schema": <SCHEMA AS JSON>}
+        {"command": "S", "schema": <SCHEMA AS JSON>, "route": <URL or empty>}
     Response:
         {} or None
 

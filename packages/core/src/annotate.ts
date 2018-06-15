@@ -89,6 +89,9 @@ class AnnotateWidget extends Widget {
       if(event.keyCode === 13){
         if(textarea.value === '' || textarea.value === '\n' || textarea.value === '\r\n'){
           this._manager.toServer('');
+        }
+        else if(textarea.value === 'q\r\n' || textarea.value === 'q\n'){
+          this._manager._ws.send(JSON.stringify({command: 'Q'}));
         } else {
           this._manager.toServer(textarea.value);
         }

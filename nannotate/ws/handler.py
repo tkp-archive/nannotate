@@ -1,4 +1,8 @@
+import errno
 import os.path
+import socket
+import time
+import tornado.httpserver
 import tornado.web
 import tornado.websocket
 import queue
@@ -36,7 +40,7 @@ class WSHandler(tornado.websocket.WebSocketHandler):
 
     def on_close(self):
         print("WebSocket closed")
-        self.q_in.put('q')
+        self.q_in.put('{"command":"Q"}')
 
     def run(options, q_in, q_out):
         root = os.path.join(os.path.dirname(__file__), '../', 'assets')
@@ -44,6 +48,28 @@ class WSHandler(tornado.websocket.WebSocketHandler):
             (r"/api/ws", WSHandler, {'options': options, 'q_in': q_in, 'q_out': q_out}),
             (r"/(.*)", tornado.web.StaticFileHandler, {"path": root, "default_filename": "index.html"}),
         ])
-        app.listen(8991)
+
+        if 'port' not in options:
+            tcp = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            tcp.bind(('', 0))
+            addr, port = tcp.getsockname()
+            tcp.close()
+            options['port'] = port
+        else:
+            port = 8080
+
+        server = tornado.httpserver.HTTPServer(app)
+        server.listen(port)
+        print('listening on port: %d' % port)
+
         t = Thread(target=tornado.ioloop.IOLoop.current().start)
         t.start()
+
+        def stop():
+            tornado.ioloop.IOLoop.current().add_callback(tornado.ioloop.IOLoop.current().stop)
+            server.stop()
+            print('asking tornado to stop')
+            t.join()
+            print('thread joined')
+            time.sleep(1)
+        return stop

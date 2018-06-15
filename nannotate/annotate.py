@@ -22,7 +22,7 @@ def annotate(df, options, standalone=False):
         handle = websocket_handle_command
         q_in = Queue()
         q_out = Queue()
-        extra = WSHandler.run(options, q_in, q_out)
+        stop = WSHandler.run(options, q_in, q_out)
 
     else:
         input = console_input
@@ -31,14 +31,16 @@ def annotate(df, options, standalone=False):
         q_in = None
         q_out = None
 
-    return _handle_msg(df, options, handle, input, output, q_in, q_out)
+    msg = _handle_msg(df, options, handle, input, output, q_in, q_out)
+    stop()
+    return msg
 
 
 def _handle_msg(data, options, handle_command, input, output, q_in, q_out):
     i = 0
 
     # initial command is always schema followed by data item
-    initial_command = {'command': 'S', 'schema': options['schema']}
+    initial_command = {'command': 'S', 'schema': options['schema'], 'port': options['port']}
     output(initial_command, q_out, options)
     print('putting: %s' % str(initial_command))
 

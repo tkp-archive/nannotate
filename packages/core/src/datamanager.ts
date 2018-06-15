@@ -9,10 +9,12 @@ import {DataGrid} from '@phosphor/datagrid';
 export
 class DataManager{
     constructor(ws: string, bind: HTMLDivElement){
-        this._ws = new WebSocket('ws://localhost:8991/api/ws');
+        this._bind = bind;
+        let path = window.location.host;
+        this._ws = new WebSocket('ws://' + path + '/api/ws');
+
         this._ws.onmessage = (event: MessageEvent) => this.open(event);
         this._ws.onclose = this.close;
-        this._bind = bind;
     }
 
     private close(event: CloseEvent): void {
@@ -69,7 +71,7 @@ class DataManager{
     }
 
     public toServer(msg: string): void {
-        this._helper.toServer(msg, this._ws);
+        this._helper.toServer(msg);
     }
 
     onResize(msg: Widget.ResizeMessage): void {
