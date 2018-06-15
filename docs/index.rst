@@ -7,7 +7,7 @@ nannotate
 ===================================
 An orchestration layer for plots and tables, dummy datasets, research, reports, and anything else a data scientist might need.
 
-|build-status| |issues| |waffle| |codecov| |gitter| |bch| |pypiv| |pypil| |docs|
+|build-status| |issues| |waffle| |codecov| |bch| |pypiv| |pypil| |docs|
 
 .. image:: ./img/demo.gif
     :scale: 100%
