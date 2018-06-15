@@ -9,12 +9,10 @@ import '../style/index.css';
 export
 const NANO_MIME_TYPE = 'application/nano+json';
 
-// interface PerspectiveSpec {
-//     data: string,
-//     schema: string,
-//     layout: string,
-//     config: string;
-// }
+
+interface NannotateSpec {
+    base: string
+}
 
 
 export class NannotateWidget extends Widget implements IRenderMime.IRenderer {
@@ -26,8 +24,6 @@ export class NannotateWidget extends Widget implements IRenderMime.IRenderer {
 
         div.setAttribute('type', NANO_MIME_TYPE);
         super({node: div});
-
-        this._nanowidget = new AnnotateWidget();
     }
 
     onAfterAttach(msg: Message) : void {
@@ -35,7 +31,9 @@ export class NannotateWidget extends Widget implements IRenderMime.IRenderer {
     }
 
     renderModel(model: IRenderMime.IMimeModel): Promise<void> {
-        // const {data, schema, layout, config} = model.data[MIME_TYPE] as any | PerspectiveSpec;
+        const base = model.data[NANO_MIME_TYPE] as any | NannotateSpec;
+        this._nanowidget = new AnnotateWidget(base);
+
         return Promise.resolve();
     }
 

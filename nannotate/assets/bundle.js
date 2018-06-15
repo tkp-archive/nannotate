@@ -53269,7 +53269,8 @@ var datamanager_1 = __webpack_require__(256);
 __webpack_require__(250);
 var AnnotateWidget = (function (_super) {
     __extends(AnnotateWidget, _super);
-    function AnnotateWidget() {
+    function AnnotateWidget(base) {
+        if (base === void 0) { base = ''; }
         var _this = this;
         var div = document.createElement('div');
         var data_holder = document.createElement('div');
@@ -53315,6 +53316,7 @@ var AnnotateWidget = (function (_super) {
         _this.title.closable = false;
         _this.title.caption = 'Annotation';
         _this.node.id = 'annotate';
+        _this._base = base;
         return _this;
     }
     Object.defineProperty(AnnotateWidget.prototype, "dataNode", {
@@ -53340,7 +53342,7 @@ var AnnotateWidget = (function (_super) {
     });
     AnnotateWidget.prototype.onAfterAttach = function (msg) {
         var _this = this;
-        this._manager = new datamanager_1.DataManager('ws://localhost:8991/api/ws', this.dataNode);
+        this._manager = new datamanager_1.DataManager(this.dataNode, this._base);
         var textarea = this.textAreaNode;
         textarea.onkeyup = function (event) {
             if (event.keyCode === 8) {
@@ -53508,12 +53510,13 @@ var datagrid_1 = __webpack_require__(255);
 var textdata_1 = __webpack_require__(257);
 var datagrid_2 = __webpack_require__(64);
 var DataManager = (function () {
-    function DataManager(ws, bind) {
+    function DataManager(bind, base) {
+        if (base === void 0) { base = ''; }
         var _this = this;
         this._bind = bind;
         var path1 = window.location.host;
         var path2 = window.location.pathname;
-        this._ws = new WebSocket('ws://' + path1 + path2 + 'nannotate/api/ws');
+        this._ws = new WebSocket('ws://' + path1 + path2 + base + 'nannotate/api/ws');
         this._ws.onmessage = function (event) { return _this.open(event); };
         this._ws.onclose = this.close;
     }

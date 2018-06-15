@@ -8,12 +8,12 @@ import {DataGrid} from '@phosphor/datagrid';
 
 export
 class DataManager{
-    constructor(ws: string, bind: HTMLDivElement){
+    constructor(bind: HTMLDivElement, base = ''){
         this._bind = bind;
         let path1 = window.location.host;
         let path2 = window.location.pathname;
 
-        this._ws = new WebSocket('ws://' + path1 + path2 + 'nannotate/api/ws');
+        this._ws = new WebSocket('ws://' + path1 + path2 + base + 'nannotate/api/ws');
 
         this._ws.onmessage = (event: MessageEvent) => this.open(event);
         this._ws.onclose = this.close;

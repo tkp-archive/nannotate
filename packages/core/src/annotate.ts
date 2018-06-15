@@ -8,7 +8,7 @@ import '../style/index.css';
 
 export
 class AnnotateWidget extends Widget {
-  constructor() {
+  constructor(base = '') {
     let div = document.createElement('div');
 
     let data_holder = document.createElement('div');
@@ -67,6 +67,7 @@ class AnnotateWidget extends Widget {
     this.title.closable = false;
     this.title.caption = 'Annotation';
     this.node.id = 'annotate';
+    this._base = base;
   }
 
   get dataNode(): HTMLDivElement {
@@ -82,7 +83,7 @@ class AnnotateWidget extends Widget {
   }
 
   onAfterAttach(msg: Message) : void {
-    this._manager = new DataManager('ws://localhost:8991/api/ws', this.dataNode);
+    this._manager = new DataManager(this.dataNode, this._base);
     let textarea = this.textAreaNode;
 
     textarea.onkeyup = (event: KeyboardEvent) => {
@@ -114,4 +115,5 @@ class AnnotateWidget extends Widget {
   }
 
   private _manager: DataManager;
+  private _base: string;
 }
