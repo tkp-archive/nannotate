@@ -7,7 +7,7 @@ nannotate
 ===================================
 An orchestration layer for plots and tables, dummy datasets, research, reports, and anything else a data scientist might need.
 
-|build-status| |issues| |waffle| |codecov| |bch| |pypiv| |pypil| |docs|
+|build-status| |issues| |waffle| |codecov| |bch| |pypil| |pypiv| |npm| |docs|
 
 .. image:: ./img/demo.gif
     :scale: 100%
@@ -52,15 +52,21 @@ An orchestration layer for plots and tables, dummy datasets, research, reports, 
     :scale: 100%
     :target: https://bettercodehub.com/
 
+.. |pypil| image:: https://img.shields.io/pypi/l/nannotate.svg
+    :alt: License
+    :scale: 100%
+    :target: https://pypi.python.org/pypi/nannotate
+
 .. |pypiv| image:: https://img.shields.io/pypi/v/nannotate.svg
     :alt: Version
     :scale: 100%
     :target: https://pypi.python.org/pypi/nannotate
 
-.. |pypil| image:: https://img.shields.io/pypi/l/nannotate.svg
-    :alt: License
+.. |npm| image:: https://img.shields.io/npm/v/@nannotate/core.svg
+    :alt: Version
     :scale: 100%
-    :target: https://pypi.python.org/pypi/nannotate
+    :target: https://www.npmjs.com/package/@nannotate/core
+
 
 .. |docs| image:: https://img.shields.io/readthedocs/nannotate.svg
     :alt: Docs
