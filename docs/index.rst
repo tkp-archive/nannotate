@@ -47,25 +47,20 @@ An orchestration layer for plots and tables, dummy datasets, research, reports, 
     :scale: 100%
     :target: https://codecov.io/gh/timkpaine/nannotate
 
-.. |gitter| image:: https://img.shields.io/gitter/room/nwjs/nw.js.svg
-    :alt: Gitter
-    :scale: 100%
-    :target: https://gitter.im/pynannotate/Lobby
-
 .. |bch| image:: https://bettercodehub.com/edge/badge/timkpaine/nannotate?branch=master
     :alt: BCH
     :scale: 100%
     :target: https://bettercodehub.com/
 
-.. |pypiv| image:: https://img.shields.io/pypi/v/pynannotate.svg
+.. |pypiv| image:: https://img.shields.io/pypi/v/nannotate.svg
     :alt: Version
     :scale: 100%
-    :target: https://pypi.python.org/pypi/pynannotate
+    :target: https://pypi.python.org/pypi/nannotate
 
-.. |pypil| image:: https://img.shields.io/pypi/l/pynannotate.svg
+.. |pypil| image:: https://img.shields.io/pypi/l/nannotate.svg
     :alt: License
     :scale: 100%
-    :target: https://pypi.python.org/pypi/pynannotate
+    :target: https://pypi.python.org/pypi/nannotate
 
 .. |docs| image:: https://img.shields.io/readthedocs/nannotate.svg
     :alt: Docs
