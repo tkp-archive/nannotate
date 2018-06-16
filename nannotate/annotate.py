@@ -1,22 +1,24 @@
 from queue import Queue
-# from .utils import in_ipynb
+from .utils import in_ipynb
 from .console.io import _input as console_input, output as console_output, handle_command as console_handle_command
 from .ws.io import _input as websocket_input, output as websocket_output, handle_command as websocket_handle_command
 from .ws.handler import WSHandler
-# from .comm.handler import CommHandler
-# from .comm.io import comm_input, comm_output
+from .comm.io import _input as comm_input, output as comm_output, handle_command as comm_handle_command
+from .comm.handler import CommHandler
 
 
 def annotate(df, options, standalone=False):
-    # if in_ipynb():
-    #     input = comm_input
-    #     output = comm_output
-    #     q_in = Queue()
-    #     q_out = Queue()
-    #     extra = CommHandler(options, q_in, q_out)
-    #     extra.run()
-    # elif standalone:
-    if standalone:
+    if in_ipynb():
+        input = comm_input
+        output = comm_output
+        handle = comm_handle_command
+        q_in = Queue()
+        q_out = Queue()
+        extra = CommHandler(options, q_in, q_out)
+        extra.run()
+        stop = lambda: _
+
+    elif standalone:
         input = websocket_input
         output = websocket_output
         handle = websocket_handle_command
@@ -30,6 +32,7 @@ def annotate(df, options, standalone=False):
         handle = console_handle_command
         q_in = None
         q_out = None
+        stop = lambda: _
 
     msg = _handle_msg(df, options, handle, input, output, q_in, q_out)
     stop()

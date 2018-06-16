@@ -3,20 +3,40 @@ import {GridHelper} from './datagrid';
 import {TextHelper} from './textdata';
 import {DataSource} from './datasource';
 import {DataGrid} from '@phosphor/datagrid';
+import {Session, CommHandler} from '@jupyterlab/services';
 
 
 
 export
 class DataManager{
-    constructor(bind: HTMLDivElement, base = ''){
+    constructor(bind: HTMLDivElement, base = '', comm = false){
         this._bind = bind;
         let path1 = window.location.host;
         let path2 = window.location.pathname;
 
-        this._ws = new WebSocket('ws://' + path1 + path2 + base + 'nannotate/api/ws');
+        if(comm){
+            Session.listRunning().then(sessionModels => {
+                for (let i=0; i<sessionModels.length; i++) {
+                    if (sessionModels[i].kernel.id === base) {
+                        Session.connectTo(sessionModels[i]).then(session => {
+                            session.kernel.connectToComm('nannotate').then(comm => {
+                                comm.open('ack');
+                                comm.onMsg = (msg: any) => {
+                                    let dat = msg['content'];
+                                    this.open(dat);
+                                };
+                                comm.onClose = () => {this.close(new CloseEvent('close'))};
+                            });
 
-        this._ws.onmessage = (event: MessageEvent) => this.open(event);
-        this._ws.onclose = this.close;
+                        });
+                    }
+                }
+            });
+        } else {
+            this._ws = new WebSocket('ws://' + path1 + path2 + base + 'nannotate/api/ws');
+            this._ws.onmessage = (event: MessageEvent) => this.open(event);
+            this._ws.onclose = this.close;
+        }
     }
 
     private close(event: CloseEvent): void {
@@ -83,6 +103,7 @@ class DataManager{
     }
 
   _ws: WebSocket;
+  _comm: WebSocket;
   _helper: DataSource;
   _loaded: boolean;
   _type: string;

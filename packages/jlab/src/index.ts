@@ -10,11 +10,6 @@ export
 const NANO_MIME_TYPE = 'application/nano+json';
 
 
-interface NannotateSpec {
-    base: string
-}
-
-
 export class NannotateWidget extends Widget implements IRenderMime.IRenderer {
 
     constructor() {
@@ -31,9 +26,7 @@ export class NannotateWidget extends Widget implements IRenderMime.IRenderer {
     }
 
     renderModel(model: IRenderMime.IMimeModel): Promise<void> {
-        const base = model.data[NANO_MIME_TYPE] as any | NannotateSpec;
-        this._nanowidget = new AnnotateWidget(base);
-
+        this._nanowidget = new AnnotateWidget('', true);
         return Promise.resolve();
     }
 
