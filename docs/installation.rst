@@ -21,3 +21,9 @@ or
 .. code:: bash
 
     make install
+
+For Jupyterlab
+===============
+.. code:: bash
+
+    jupyter labextension install @nannotate/jlab
