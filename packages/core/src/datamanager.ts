@@ -1,10 +1,10 @@
 import {Widget} from '@phosphor/widgets';
+import {DataGrid} from '@phosphor/datagrid';
+import {Session} from '@jupyterlab/services';
+
 import {GridHelper} from './datagrid';
 import {TextHelper} from './textdata';
 import {DataSource} from './datasource';
-import {DataGrid} from '@phosphor/datagrid';
-import {Session, CommHandler} from '@jupyterlab/services';
-
 
 
 export
@@ -20,10 +20,11 @@ class DataManager{
                     if (sessionModels[i].kernel.id === base) {
                         Session.connectTo(sessionModels[i]).then(session => {
                             session.kernel.connectToComm('nannotate').then(comm => {
-                                comm.open('ack');
+                                comm.open('');
                                 comm.onMsg = (msg: any) => {
                                     let dat = msg['content'];
-                                    this.open(dat);
+                                    let event = new MessageEvent('msg', {data:dat});
+                                    this.open(event);
                                 };
                                 comm.onClose = () => {this.close(new CloseEvent('close'))};
                             });
@@ -103,7 +104,7 @@ class DataManager{
     }
 
   _ws: WebSocket;
-  _comm: WebSocket;
+  _comm: any;
   _helper: DataSource;
   _loaded: boolean;
   _type: string;

@@ -1,3 +1,5 @@
+import os
+import os.path
 import queue
 from IPython import get_ipython
 from IPython.display import display
@@ -43,4 +45,6 @@ class CommHandler(object):
         get_ipython().kernel.comm_manager.register_target('nannotate', handle_open)
 
     def run(self):
-        return display({'application/nano+json': ''}, raw=True)
+        p = os.path.abspath(get_ipython().kernel.session.config['IPKernelApp']['connection_file'])
+        sessionid = p.split(os.sep)[-1].replace('kernel-', '').replace('.json', '')
+        return display({'application/nano+json': sessionid}, raw=True)

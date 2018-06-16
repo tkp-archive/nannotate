@@ -9,6 +9,9 @@ import '../style/index.css';
 export
 const NANO_MIME_TYPE = 'application/nano+json';
 
+interface NannotateSpec {
+    sessionid: string
+}
 
 export class NannotateWidget extends Widget implements IRenderMime.IRenderer {
 
@@ -26,7 +29,8 @@ export class NannotateWidget extends Widget implements IRenderMime.IRenderer {
     }
 
     renderModel(model: IRenderMime.IMimeModel): Promise<void> {
-        this._nanowidget = new AnnotateWidget('', true);
+        const {sessionid} = model.data[NANO_MIME_TYPE] as any | NannotateSpec;
+        this._nanowidget = new AnnotateWidget(sessionid, true);
         return Promise.resolve();
     }
 
