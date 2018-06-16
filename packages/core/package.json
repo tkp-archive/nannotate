@@ -1,6 +1,6 @@
 {
   "name": "@nannotate/core",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "main": "build/index.js",
   "types": "build/index.d.ts",
   "scripts": {
@@ -16,13 +16,13 @@
     "access": "public"
   },
   "dependencies": {
+    "@jupyterlab/application": "^0.16.0",
+    "@jupyterlab/services": "^2.0.0",
     "@phosphor/commands": "^1.5.0",
     "@phosphor/datagrid": "^0.1.5",
     "@phosphor/dragdrop": "^1.3.0",
     "@phosphor/messaging": "^1.2.2",
     "@phosphor/widgets": "^1.6.0",
-    "@jupyterlab/application": "^0.16.0",
-    "@jupyterlab/services": "^2.0.0",
     "es6-promise": "^4.0.5"
   },
   "devDependencies": {
