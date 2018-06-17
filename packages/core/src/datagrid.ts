@@ -4,7 +4,7 @@ import {DataSource, DataJSON} from './datasource';
 
 export
 class GridHelper extends DataModel implements DataSource {
-  constructor(ws: WebSocket) {
+  constructor(ws: WebSocket | any) {
     super();
     this._ws = ws;
   }
@@ -102,5 +102,5 @@ class GridHelper extends DataModel implements DataSource {
   }
 
   private _data: object[][] = [];
-  public _ws: WebSocket;
+  public _ws: WebSocket | any;
 }

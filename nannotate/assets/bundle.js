@@ -93588,33 +93588,18 @@ var DataManager = (function () {
                     if (sessionModels[i].kernel.id === base) {
                         services_1.Session.connectTo(sessionModels[i]).then(function (session) {
                             session.kernel.connectToComm('nannotate').then(function (comm) {
-                                comm.open('opened');
                                 comm.onMsg = function (msg) {
                                     console.log('comm msg');
-                                    var dat = msg['content'];
-                                    var event = new MessageEvent('msg', { data: dat });
+                                    var dat = msg['content']['data'];
+                                    var event = new MessageEvent('msg', { data: JSON.stringify(dat) });
                                     _this.open(event);
                                 };
                                 comm.onClose = function () {
                                     console.log('comm closed');
                                     _this.close(new CloseEvent('close'));
                                 };
+                                comm.open('opened');
                                 comm.send('test');
-                            });
-                            session.kernel.registerCommTarget('nannotate', function (comm, commMsg) {
-                                if (commMsg.content.target_name !== 'nannotate') {
-                                    return;
-                                }
-                                comm.onMsg = function (msg) {
-                                    console.log('comm msg');
-                                    var dat = msg['content'];
-                                    var event = new MessageEvent('msg', { data: dat });
-                                    _this.open(event);
-                                };
-                                comm.onClose = function (msg) {
-                                    console.log(msg); // 'bye'
-                                    _this.close(new CloseEvent('close'));
-                                };
                             });
                         });
                     }

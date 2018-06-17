@@ -41,6 +41,7 @@ class CommHandler(object):
             comm.on_close = on_close
             comm.on_msg = on_msg
 
+            comm.send(self.options)
             while self.q_out.qsize() > 0:
                 msg = self.q_out.get()
                 print('writing: ' + msg)
@@ -48,27 +49,20 @@ class CommHandler(object):
 
         get_ipython().kernel.comm_manager.register_target('nannotate', handle_open)
 
+    def close(self):
+        print("Comm closed")
+        self.q_in.put('{"command":"Q"}')
+
     @classmethod
     def run(cls, options, q_in, q_out):
-        p = os.path.abspath(get_ipython().kernel.session.config['IPKernelApp']['connection_file'])
-        sessionid = p.split(os.sep)[-1].replace('kernel-', '').replace('.json', '')
-        display({'application/nano+json': {'sessionid': sessionid}}, raw=True)
+        # p = os.path.abspath(get_ipython().kernel.session.config['IPKernelApp']['connection_file'])
+        # sessionid = p.split(os.sep)[-1].replace('kernel-', '').replace('.json', '')
 
         c = CommHandler(options, q_in, q_out)
 
-        def run_thread():
-            while not c.opened:
-                print('sleeping')
-                time.sleep(1)
-            while c.opened:
-                print('here')
-                time.sleep(1)
-
-        t = Thread(target=run_thread)
-        t.start()
-
         def close():
             c.opened = False
-            t.join()
+            c.comm.close()
 
+        # display({'application/nano+json': {'sessionid': sessionid}}, raw=True)
         return close

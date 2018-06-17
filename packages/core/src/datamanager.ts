@@ -15,44 +15,32 @@ class DataManager{
         let path2 = window.location.pathname;
 
         if(comm){
+            this._ws_type = 'comm';
             Session.listRunning().then(sessionModels => {
                 for (let i=0; i<sessionModels.length; i++) {
                     if (sessionModels[i].kernel.id === base) {
                         Session.connectTo(sessionModels[i]).then(session => {
                             session.kernel.connectToComm('nannotate').then(comm => {
-                                comm.open('opened');
+                                this._ws = comm;
                                 comm.onMsg = (msg: any) => {
                                     console.log('comm msg');
-                                    let dat = msg['content'];
-                                    let event = new MessageEvent('msg', {data:dat});
+                                    let dat = msg['content']['data'];
+                                    let event = new MessageEvent('msg', {data:JSON.stringify(dat)});
                                     this.open(event);
                                 };
                                 comm.onClose = () => {
                                     console.log('comm closed');
                                     this.close(new CloseEvent('close'))
                                 };
+                                comm.open('opened');
                                 comm.send('test');
                             });
-                            session.kernel.registerCommTarget('nannotate', (comm, commMsg) => {
-                                if (commMsg.content.target_name !== 'nannotate') {
-                                   return;
-                                }
-                                comm.onMsg = (msg) => {
-                                    console.log('comm msg');
-                                    let dat = msg['content'];
-                                    let event = new MessageEvent('msg', {data:dat});
-                                    this.open(event);
-                                };
-                                comm.onClose = (msg) => {
-                                    console.log(msg);  // 'bye'
-                                    this.close(new CloseEvent('close'))
-                                };
-                              });
                         });
                     }
                 }
             });
         } else {
+            this._ws_type = 'ws';
             this._ws = new WebSocket('ws://' + path1 + path2 + base + 'nannotate/api/ws');
             this._ws.onmessage = (event: MessageEvent) => this.open(event);
             this._ws.onclose = this.close;
@@ -75,9 +63,9 @@ class DataManager{
 
             console.log(x);
             if (x['command'] === 'Q'){
-              this._ws.close();
-              alert('Done!');
-              return;
+                this._ws.close();
+                alert('Done!');
+                return;
             }
 
             if (x['command'] === 'S'){
@@ -101,7 +89,12 @@ class DataManager{
                 Widget.attach(model, this._bind);
                 this._helper = model;
             }
-            this._ws.onmessage = (event:MessageEvent) => this.fromServer(event);
+
+            if (this._ws_type){
+
+            } else {
+                this._ws.onmessage = (event:MessageEvent) => this.fromServer(event);
+            }
             this._loaded = true;
         }
     }
@@ -122,11 +115,11 @@ class DataManager{
         }
     }
 
-  _ws: WebSocket;
-  _comm: any;
+  _type: string;
+  _ws_type: string;
+  _ws: WebSocket | any;
   _helper: DataSource;
   _loaded: boolean;
-  _type: string;
 
   _grid: DataGrid;
   _bind: HTMLDivElement;

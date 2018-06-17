@@ -5,7 +5,7 @@ import {DataSource, DataJSON} from './datasource';
 
 export
 class TextHelper extends Widget implements DataSource {
-  constructor(ws: WebSocket) {
+  constructor(ws: WebSocket | any) {
     let node = Private.createNode();
     super({ node: node });
     this._ws = ws;
@@ -146,7 +146,7 @@ class TextHelper extends Widget implements DataSource {
 
   }
 
-  public _ws: WebSocket;
+  public _ws: WebSocket | any;
   private _div: HTMLDivElement;
 }
 
