@@ -20,15 +20,34 @@ class DataManager{
                     if (sessionModels[i].kernel.id === base) {
                         Session.connectTo(sessionModels[i]).then(session => {
                             session.kernel.connectToComm('nannotate').then(comm => {
-                                comm.open('');
+                                comm.open('opened');
                                 comm.onMsg = (msg: any) => {
+                                    console.log('comm msg');
                                     let dat = msg['content'];
                                     let event = new MessageEvent('msg', {data:dat});
                                     this.open(event);
                                 };
-                                comm.onClose = () => {this.close(new CloseEvent('close'))};
+                                comm.onClose = () => {
+                                    console.log('comm closed');
+                                    this.close(new CloseEvent('close'))
+                                };
+                                comm.send('test');
                             });
-
+                            session.kernel.registerCommTarget('nannotate', (comm, commMsg) => {
+                                if (commMsg.content.target_name !== 'nannotate') {
+                                   return;
+                                }
+                                comm.onMsg = (msg) => {
+                                    console.log('comm msg');
+                                    let dat = msg['content'];
+                                    let event = new MessageEvent('msg', {data:dat});
+                                    this.open(event);
+                                };
+                                comm.onClose = (msg) => {
+                                    console.log(msg);  // 'bye'
+                                    this.close(new CloseEvent('close'))
+                                };
+                              });
                         });
                     }
                 }

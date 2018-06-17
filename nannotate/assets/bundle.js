@@ -94785,13 +94785,18 @@ var DataManager = (function () {
                     if (sessionModels[i].kernel.id === base) {
                         services_1.Session.connectTo(sessionModels[i]).then(function (session) {
                             session.kernel.connectToComm('nannotate').then(function (comm) {
-                                comm.open('');
+                                comm.open('opened');
                                 comm.onMsg = function (msg) {
+                                    console.log('comm opened');
                                     var dat = msg['content'];
                                     var event = new MessageEvent('msg', { data: dat });
                                     _this.open(event);
                                 };
-                                comm.onClose = function () { _this.close(new CloseEvent('close')); };
+                                comm.onClose = function () {
+                                    console.log('comm closed');
+                                    _this.close(new CloseEvent('close'));
+                                };
+                                comm.send('test');
                             });
                         });
                     }

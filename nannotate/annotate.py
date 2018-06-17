@@ -14,9 +14,7 @@ def annotate(df, options, standalone=False):
         handle = comm_handle_command
         q_in = Queue()
         q_out = Queue()
-        extra = CommHandler(options, q_in, q_out)
-        extra.run()
-        stop = lambda: _
+        stop = CommHandler.run(options, q_in, q_out)
 
     elif standalone:
         input = websocket_input

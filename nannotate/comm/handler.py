@@ -1,8 +1,10 @@
 import os
 import os.path
 import queue
+import time
 from IPython import get_ipython
 from IPython.display import display
+from threading import Thread
 
 
 class CommHandler(object):
@@ -10,6 +12,7 @@ class CommHandler(object):
         self.options = options
         self.q_in = q_in
         self.q_out = q_out
+        self.opened = False
 
         def on_msg(message):
             print('reading: ' + message)
@@ -33,6 +36,7 @@ class CommHandler(object):
 
         def handle_open(comm, message):
             print("Comm opened")
+            self.opened = True
             self.comm = comm
             comm.on_close = on_close
             comm.on_msg = on_msg
@@ -44,7 +48,27 @@ class CommHandler(object):
 
         get_ipython().kernel.comm_manager.register_target('nannotate', handle_open)
 
-    def run(self):
+    @classmethod
+    def run(cls, options, q_in, q_out):
         p = os.path.abspath(get_ipython().kernel.session.config['IPKernelApp']['connection_file'])
         sessionid = p.split(os.sep)[-1].replace('kernel-', '').replace('.json', '')
-        return display({'application/nano+json': sessionid}, raw=True)
+        display({'application/nano+json': {'sessionid': sessionid}}, raw=True)
+
+        c = CommHandler(options, q_in, q_out)
+
+        def run_thread():
+            while not c.opened:
+                print('sleeping')
+                time.sleep(1)
+            while c.opened:
+                print('here')
+                time.sleep(1)
+
+        t = Thread(target=run_thread)
+        t.start()
+
+        def close():
+            c.opened = False
+            t.join()
+
+        return close

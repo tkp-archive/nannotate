@@ -1,13 +1,20 @@
 {
-  "devDependencies": {
-    "lerna": "^2.11.0"
-  },
-  "scripts": {
-    "install": "lerna bootstrap --hoist",
-    "build": "lerna run build",
-    "build:src": "lerna run build --scope \"@nannotate/*\"",
-    "clean": "lerna run clean",
-    "clean:src": "lerna run clean --scope \"@nannotate/*\"",
-    "publish": "npm run clean && npm run build && lerna publish -m \"Publish\""
-  }
+	"dependencies": {
+		"@jupyterlab/application": "^0.16.0",
+		"@jupyterlab/rendermime-interfaces": "^1.0.0",
+		"@jupyterlab/services": "^2.0.0",
+		"@phosphor/commands": "^1.5.0",
+		"@phosphor/datagrid": "^0.1.5",
+		"@phosphor/dragdrop": "^1.3.0",
+		"@phosphor/messaging": "^1.2.2",
+		"@phosphor/widgets": "^1.6.0",
+		"css-loader": "^0.26.1",
+		"es6-promise": "^4.0.5",
+		"file-loader": "^0.11.1",
+		"lerna": "^2.11.0",
+		"rimraf": "^2.5.2",
+		"style-loader": "^0.13.1",
+		"typescript": "~2.3.0",
+		"webpack": "^2.2.1"
+	}
 }
