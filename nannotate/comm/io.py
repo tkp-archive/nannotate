@@ -7,6 +7,7 @@ from .._commands import quit, clear
 def _input(q, options):
     try:
         dat = q.get(timeout=.1).strip()
+        # return dat
         return json.loads(dat)
     except queue.Empty:
         return ''
@@ -18,7 +19,8 @@ def output(cmd, q, options):
 
 
 def _msg_out(cmd):
-    return json.dumps(cmd, default=str)
+    json.dumps(cmd, default=str)
+    return cmd
 
 
 def handle_command(cmd, index, data, options, input, output, q_in, q_out):

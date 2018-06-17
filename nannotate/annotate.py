@@ -1,3 +1,4 @@
+from threading import Thread
 from queue import Queue
 from .utils import in_ipynb
 from .console.io import _input as console_input, output as console_output, handle_command as console_handle_command
@@ -15,26 +16,30 @@ def annotate(df, options, standalone=False):
         q_in = Queue()
         q_out = Queue()
         stop = CommHandler.run(options, q_in, q_out)
-
-    elif standalone:
-        input = websocket_input
-        output = websocket_output
-        handle = websocket_handle_command
-        q_in = Queue()
-        q_out = Queue()
-        stop = WSHandler.run(options, q_in, q_out)
+        t = Thread(target=_handle_msg, args=(df, options, handle, input, output, q_in, q_out))
+        t.start()
+        return 'test'
 
     else:
-        input = console_input
-        output = console_output
-        handle = console_handle_command
-        q_in = None
-        q_out = None
-        stop = lambda: _
+        if standalone:
+            input = websocket_input
+            output = websocket_output
+            handle = websocket_handle_command
+            q_in = Queue()
+            q_out = Queue()
+            stop = WSHandler.run(options, q_in, q_out)
 
-    msg = _handle_msg(df, options, handle, input, output, q_in, q_out)
-    stop()
-    return msg
+        else:
+            input = console_input
+            output = console_output
+            handle = console_handle_command
+            q_in = None
+            q_out = None
+            stop = lambda: _
+
+        msg = _handle_msg(df, options, handle, input, output, q_in, q_out)
+        stop()
+        return msg
 
 
 def _handle_msg(data, options, handle_command, input, output, q_in, q_out):

@@ -25,7 +25,7 @@ class DataManager{
                                 comm.onMsg = (msg: any) => {
                                     console.log('comm msg');
                                     let dat = msg['content']['data'];
-                                    let event = new MessageEvent('msg', {data:JSON.stringify(dat)});
+                                    let event = new MessageEvent('msg', {data:dat});
                                     this.open(event);
                                 };
                                 comm.onClose = () => {

@@ -55,8 +55,8 @@ class CommHandler(object):
 
     @classmethod
     def run(cls, options, q_in, q_out):
-        # p = os.path.abspath(get_ipython().kernel.session.config['IPKernelApp']['connection_file'])
-        # sessionid = p.split(os.sep)[-1].replace('kernel-', '').replace('.json', '')
+        p = os.path.abspath(get_ipython().kernel.session.config['IPKernelApp']['connection_file'])
+        sessionid = p.split(os.sep)[-1].replace('kernel-', '').replace('.json', '')
 
         c = CommHandler(options, q_in, q_out)
 
@@ -64,5 +64,5 @@ class CommHandler(object):
             c.opened = False
             c.comm.close()
 
-        # display({'application/nano+json': {'sessionid': sessionid}}, raw=True)
+        display({'application/nano+json': {'sessionid': sessionid}}, raw=True)
         return close
