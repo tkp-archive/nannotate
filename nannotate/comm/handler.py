@@ -1,10 +1,5 @@
-import os
-import os.path
 import queue
-import time
 from IPython import get_ipython
-from IPython.display import display
-from threading import Thread
 
 
 class CommHandler(object):
@@ -15,7 +10,7 @@ class CommHandler(object):
         self.opened = False
 
         def on_msg(message):
-            print('reading: ' + message)
+            print('reading: ' + message, flush=True)
             self.q_in.put(message)
 
             try:
@@ -27,15 +22,15 @@ class CommHandler(object):
                 msg.append(self.q_out.get())
 
             for x in msg:
-                print('writing' + x)
+                print('writing' + x, flush=True)
                 self.comm.send(x)
 
         def on_close(message):
-            print("Comm closed")
+            print("Comm closed", flush=True)
             self.q_in.put('{"command":"Q"}')
 
         def handle_open(comm, message):
-            print("Comm opened")
+            print("Comm opened", flush=True)
             self.opened = True
             self.comm = comm
             comm.on_close = on_close
@@ -44,25 +39,21 @@ class CommHandler(object):
             comm.send(self.options)
             while self.q_out.qsize() > 0:
                 msg = self.q_out.get()
-                print('writing: ' + msg)
+                print('writing: ' + msg, flush=True)
                 self.comm.send(msg)
 
         get_ipython().kernel.comm_manager.register_target('nannotate', handle_open)
 
     def close(self):
-        print("Comm closed")
+        print("Comm closed", flush=True)
         self.q_in.put('{"command":"Q"}')
 
     @classmethod
     def run(cls, options, q_in, q_out):
-        p = os.path.abspath(get_ipython().kernel.session.config['IPKernelApp']['connection_file'])
-        sessionid = p.split(os.sep)[-1].replace('kernel-', '').replace('.json', '')
-
         c = CommHandler(options, q_in, q_out)
 
         def close():
             c.opened = False
             c.comm.close()
 
-        display({'application/nano+json': {'sessionid': sessionid}}, raw=True)
-        return close
+        return c, close

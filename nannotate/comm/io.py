@@ -19,8 +19,7 @@ def output(cmd, q, options):
 
 
 def _msg_out(cmd):
-    json.dumps(cmd, default=str)
-    return cmd
+    return json.dumps(cmd, default=str)
 
 
 def handle_command(cmd, index, data, options, input, output, q_in, q_out):

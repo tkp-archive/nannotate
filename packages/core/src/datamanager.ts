@@ -91,7 +91,12 @@ class DataManager{
             }
 
             if (this._ws_type){
-
+                this._ws.onMsg = (msg: any) => {
+                    console.log('comm msg');
+                    let dat = msg['content']['data'];
+                    let event = new MessageEvent('msg', {data:dat});
+                    this.fromServer(event);
+                };
             } else {
                 this._ws.onmessage = (event:MessageEvent) => this.fromServer(event);
             }
