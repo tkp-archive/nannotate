@@ -2,7 +2,7 @@ import json
 from .._commands import quit, clear
 
 
-def handle_command(cmd, index, data, options, comm):
+def handle_command(cmd, index, data, options, preprocessor, comm):
     command = cmd['command']
     if command == 'Q':
         comm.send(json.dumps(quit()))

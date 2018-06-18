@@ -10,9 +10,9 @@ from .ws.handler import WSHandler
 from .comm.handler import CommHandler
 
 
-def annotate(df, options, standalone=False):
+def annotate(df, options, standalone=False, preprocessor=None):
     if in_ipynb():
-        comm = CommHandler.run(df, options)
+        comm = CommHandler.run(df, options, preprocessor)
         p = os.path.abspath(get_ipython().kernel.session.config['IPKernelApp']['connection_file'])
         sessionid = p.split(os.sep)[-1].replace('kernel-', '').replace('.json', '')
         return display({'application/nano+json': {'sessionid': sessionid}}, raw=True)
@@ -34,12 +34,12 @@ def annotate(df, options, standalone=False):
             q_out = None
             stop = lambda: _
 
-        msg = _handle_msg(df, options, handle, input, output, q_in, q_out)
+        msg = _handle_msg(df, options, preprocessor, handle, input, output, q_in, q_out)
         stop()
         return msg
 
 
-def _handle_msg(data, options, handle_command, _input, _output, q_in, q_out, comm=None):
+def _handle_msg(data, options, preprocessor, handle_command, _input, _output, q_in, q_out, comm=None):
     i = 0
 
     # initial command is always schema followed by data item
@@ -47,7 +47,7 @@ def _handle_msg(data, options, handle_command, _input, _output, q_in, q_out, com
     _output(initial_command, q_out, options)
 
     cmd = {'command': 'D', 'index': i, 'data': data[i]}
-    handle_command(cmd, i, data, options, _input, _output, q_in, q_out)
+    handle_command(cmd, i, data, options, preprocessor, _input, _output, q_in, q_out)
 
     while i < len(data):
         # cant go previous

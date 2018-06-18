@@ -21,7 +21,7 @@ def _msg_out(cmd):
     return json.dumps(cmd, default=str)
 
 
-def handle_command(cmd, index, data, options, input, output, q_in, q_out):
+def handle_command(cmd, index, data, options, preprocessor, input, output, q_in, q_out):
     command = cmd['command']
     if command == 'Q':
         output(quit(), q_out, options)

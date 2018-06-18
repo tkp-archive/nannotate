@@ -11,7 +11,7 @@ class CommHandler(object):
         self.i = 0
 
     @classmethod
-    def run(cls, data, options):
+    def run(cls, data, options, preprocessor):
         c = CommHandler(data, options)
 
         def handle_open(comm, message):
@@ -21,7 +21,7 @@ class CommHandler(object):
             def on_msg(msg):
                 cmd = msg['content']['data']
                 cmd = json.loads(cmd)
-                c.i = handle_command(cmd, c.i, c.data, c.options, c.comm)
+                c.i = handle_command(cmd, c.i, c.data, c.options, preprocessor, c.comm)
                 if c.i < 0:
                     c.i = 0
 
