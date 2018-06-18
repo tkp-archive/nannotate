@@ -13,7 +13,6 @@ from .comm.handler import CommHandler
 def annotate(df, options, standalone=False):
     if in_ipynb():
         comm = CommHandler.run(df, options)
-
         p = os.path.abspath(get_ipython().kernel.session.config['IPKernelApp']['connection_file'])
         sessionid = p.split(os.sep)[-1].replace('kernel-', '').replace('.json', '')
         return display({'application/nano+json': {'sessionid': sessionid}}, raw=True)
@@ -46,11 +45,9 @@ def _handle_msg(data, options, handle_command, _input, _output, q_in, q_out, com
     # initial command is always schema followed by data item
     initial_command = {'command': 'S', 'schema': options['schema'], 'port': options['port']}
     _output(initial_command, q_out, options)
-    print('putting: %s' % str(initial_command))
 
     cmd = {'command': 'D', 'index': i, 'data': data[i]}
     handle_command(cmd, i, data, options, _input, _output, q_in, q_out)
-    print('putting: %s' % str(cmd))
 
     while i < len(data):
         # cant go previous
@@ -58,9 +55,7 @@ def _handle_msg(data, options, handle_command, _input, _output, q_in, q_out, com
             i = 0
 
         # input
-        print('here', flush=True)
         cmd = _input(q_in, options)
-        print('here2', flush=True)
         while not cmd:
             cmd = _input(q_in, options)
 

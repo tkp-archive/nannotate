@@ -15,14 +15,11 @@ class WSHandler(tornado.websocket.WebSocketHandler):
         self.q_out = q_out
 
     def open(self):
-        print("WebSocket opened")
         while self.q_out.qsize() > 0:
             msg = self.q_out.get()
-            print('writing: ' + msg)
             self.write_message(msg)
 
     def on_message(self, message):
-        print('reading: ' + message)
         self.q_in.put(message)
 
         try:
@@ -34,11 +31,9 @@ class WSHandler(tornado.websocket.WebSocketHandler):
             msg.append(self.q_out.get())
 
         for x in msg:
-            print('writing' + x)
             self.write_message(x)
 
     def on_close(self):
-        print("WebSocket closed")
         self.q_in.put('{"command":"Q"}')
 
     def run(options, q_in, q_out):
@@ -67,8 +62,6 @@ class WSHandler(tornado.websocket.WebSocketHandler):
         def stop():
             tornado.ioloop.IOLoop.current().add_callback(tornado.ioloop.IOLoop.current().stop)
             server.stop()
-            print('asking tornado to stop')
             t.join()
-            print('thread joined')
             time.sleep(1)
         return stop
