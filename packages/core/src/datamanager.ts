@@ -5,12 +5,14 @@ import {Session} from '@jupyterlab/services';
 import {GridHelper} from './datagrid';
 import {TextHelper} from './textdata';
 import {DataSource} from './datasource';
+import {AnnotateWidget} from './annotate';
 
 
 export
 class DataManager{
-    constructor(bind: HTMLDivElement, base = '', comm = false){
-        this._bind = bind;
+    constructor(bind: AnnotateWidget, base = '', comm = false){
+        this._annotate = bind;
+        this._bind = bind.dataNode;
         let path1 = window.location.host;
         let path2 = window.location.pathname;
 
@@ -77,14 +79,14 @@ class DataManager{
                 rowBackgroundColor: i => i % 2 === 0 ? 'rgba(138, 172, 200, 0.3)' : '',
                 columnBackgroundColor: i => i % 2 === 0 ? 'rgba(100, 100, 100, 0.1)' : ''};
 
-                let model = new GridHelper(this._ws);
+                let model = new GridHelper(this._annotate, this._ws);
                 let grid = new DataGrid({ style: blueStripeStyle });
                 grid.model = model;
                 Widget.attach(grid, this._bind);
                 this._grid = grid;
                 this._helper = model;
             } else if (this._type === 'text'){
-                let model = new TextHelper(this._ws);
+                let model = new TextHelper(this._annotate, this._ws);
                 Widget.attach(model, this._bind);
                 this._helper = model;
             }
@@ -125,6 +127,7 @@ class DataManager{
   _helper: DataSource;
   _loaded: boolean;
 
+  _annotate: AnnotateWidget;
   _grid: DataGrid;
   _bind: HTMLDivElement;
 }

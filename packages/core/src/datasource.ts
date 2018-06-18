@@ -2,7 +2,6 @@ export
 interface DataSource {
   fromServer(data: DataJSON): void;
   toServer(msg: string): void;
-  
   _ws: WebSocket;
 }
 

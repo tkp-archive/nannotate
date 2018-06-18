@@ -12,3 +12,12 @@ def in_ipynb():
             return False
         return False
     return False
+
+
+def get_spacy_pos():
+    import spacy
+    ret = []
+    for item in dir(spacy.parts_of_speech):
+        if not item.startswith('__') and item != 'univ_pos_t':
+            ret.append(item)
+    return ret

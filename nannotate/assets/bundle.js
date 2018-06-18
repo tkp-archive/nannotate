@@ -76391,7 +76391,7 @@ exports = module.exports = __webpack_require__(7)();
 
 
 // module
-exports.push([module.i, "div.nano-annotate {\n  display: flex;\n  flex-direction: column;\n  height: 100%;\n  width: 100%;\n}\n\n\ndiv.nano-annotate div.nano-data-holder {\n  flex: 2;\n  display: flex;\n  flex-direction: row;\n  overflow: scroll;\n}\n\ndiv.nano-annotate div.nano-data-holder > div{\n  flex: 1;\n}\n\ndiv.nano-annotate div.nano-data-holder div.nano-data-controls {\n  max-width: 50px;\n}\n\ndiv.nano-annotate div.nano-data-holder div.nano-data-controls> * {\n  flex: 1;\n  height: 100%;\n  width: 100%;\n}\n\ndiv.nano-annotate div.nano-io-holder {\n  flex: 1;\n  display: flex;\n  flex-direction: column;\n}\n\n\ndiv.nano-annotate div.nano-io-holder > div {\n  flex: 1;\n  display: flex;\n  flex-direction: row;\n}\n\n\ndiv.nano-annotate div.nano-io-holder div > *{\n  flex: 1;\n}\n\n\ndiv.nano-annotate div.nano-io-holder div > textarea{\n  resize: none;\n}\n\ndiv.nano-annotate div.nano-io-holder div.nano-io-controls {\n  max-height: 50px;    \n}\n\ndiv.nano-annotate div.nano-io-holder div.nano-io-controls div {\n  text-align: center;\n  justify-content: center;\n  display: flex;\n  flex-direction: column;\n  border-right: 1px solid #ccc;\n  border-left: 1px solid #ccc;\n}\n\ndiv.nano-annotate div.nano-io-holder div.nano-io-controls div:hover {\n  background-color: #ddd;\n}\n\ndiv.nano-annotate div.nano-data-holder div.p-DataGrid {\n  width: 100%;\n  height: 100%;\n  border: 1px solid #A0A0A0;\n}\n\ndiv.nano-annotate div.nano-data-holder div.TextData {\n  display: flex;\n  flex-direction: column;\n  height: 100%;\n  overflow:visible;\n  margin:50px;\n}\n\ndiv.nano-annotate div.nano-data-holder div.TextData p.data{\n  border-collapse: collapse;\n  overflow:visible;\n}\n\ndiv.nano-annotate div.nano-data-holder div.TextData p.data > span {\n  height:15px;\n}\n\n/*\nspan.tooltip {\n  position: relative;\n  display: inline-block;\n  border-bottom: 1px dotted black;\n}\n\nspan.tooltip span.tooltiptext {\n  visibility: hidden;\n  background-color: black;\n  color: #fff;\n  text-align: center;\n  border-radius: 6px;\n\n  overflow: overlay; \n  top: 100%;\n  left: 50%; \n  margin-left: -60px;\n\n  padding:5px;\n\n  position: absolute;\n  z-index: 1;\n}\n\nspan.tooltip:hover span.tooltiptext {\n  visibility: visible;\n}\n*/\n\ndiv.nano-annotate div.nano-data-holder div.TextData p.data > span:hover{\n  color: grey;\n}\n\ndiv.nano-annotate div.nano-data-holder div.TextData p.data span.word span.annotation:hover{\n  color: red;\n\n}\n\ndiv.nano-annotate div.nano-data-holder div.TextData p.data span.selected {\n  color: red;\n}\n\ndiv.nano-annotate div.nano-data-holder div.TextData p.data span.word {\n  font-weight: bold;\n}\n\ndiv.nano-annotate div.nano-data-holder div.TextData p.data span.annotation {\n  font-style: italic;\n  font-size: 10px;\n  padding:2px;\n  color:blue;\n}\n\ndiv.nano-annotate div.nano-data div.p-DataGrid-scrollCorner {\n  background-color: #F0F0F0;\n}\n\n\ndiv.nano-annotate div.nano-data div.p-DataGrid-scrollCorner::after {\n  content: '';\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 1px;\n  height: 1px;\n  background-color: #A0A0A0;\n}\n", ""]);
+exports.push([module.i, "div.nano-annotate {\n  display: flex;\n  flex-direction: column;\n  height: 100%;\n  width: 100%;\n}\n\n\ndiv.nano-annotate div.nano-data-holder {\n  flex: 1;\n  display: flex;\n  flex-direction: row;\n  overflow: scroll;\n}\n\ndiv.nano-annotate div.nano-data-holder > div{\n  flex: 1;\n}\n\ndiv.nano-annotate div.nano-io-holder {\n  flex: 1;\n  display: flex;\n  flex-direction: column;\n}\n\n\ndiv.nano-annotate div.nano-io-holder > div {\n  flex: 1;\n  display: flex;\n  flex-direction: row;\n}\n\n\ndiv.nano-annotate div.nano-io-holder div > *{\n  flex: 1;\n}\n\n\ndiv.nano-annotate div.nano-io-holder div > textarea{\n  resize: none;\n}\n\ndiv.nano-annotate div.nano-io-holder div.nano-controls-options {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: wrap;\n  justify-content: left;\n  padding:5px;\n  padding-bottom:20px;\n  overflow: scroll;\n}\n\ndiv.nano-annotate div.nano-io-holder div.nano-controls-options > div{\n  flex: 1;\n  align-self: center;\n  min-width: 15%;\n  flex-grow: 0;\n  padding: 5px;\n}\n\ndiv.nano-annotate div.nano-io-holder div.nano-controls-options > div:hover{\n  background-color: #ddd;\n\n}\n\ndiv.nano-annotate div.nano-io-holder div.nano-controls-buttons {\n  max-height: 50px;    \n}\n\ndiv.nano-annotate div.nano-io-holder div.nano-controls-buttons div {\n  text-align: center;\n  justify-content: center;\n  display: flex;\n  flex-direction: column;\n  border-right: 1px solid #ccc;\n  border-left: 1px solid #ccc;\n}\n\ndiv.nano-annotate div.nano-io-holder div.nano-controls-buttons div:hover {\n  background-color: #ddd;\n}\n\ndiv.nano-annotate div.nano-data-holder div.p-DataGrid {\n  width: 100%;\n  height: 100%;\n  border: 1px solid #A0A0A0;\n}\n\ndiv.nano-annotate div.nano-data-holder div.TextData {\n  display: flex;\n  flex-direction: column;\n  height: 100%;\n  overflow:visible;\n  padding: 50px;\n}\n\ndiv.nano-annotate div.nano-data-holder div.TextData p.data{\n  border-collapse: collapse;\n  overflow:visible;\n}\n\ndiv.nano-annotate div.nano-data-holder div.TextData p.data > span {\n  height:15px;\n}\n\n/*\nspan.tooltip {\n  position: relative;\n  display: inline-block;\n  border-bottom: 1px dotted black;\n}\n\nspan.tooltip span.tooltiptext {\n  visibility: hidden;\n  background-color: black;\n  color: #fff;\n  text-align: center;\n  border-radius: 6px;\n\n  overflow: overlay; \n  top: 100%;\n  left: 50%; \n  margin-left: -60px;\n\n  padding:5px;\n\n  position: absolute;\n  z-index: 1;\n}\n\nspan.tooltip:hover span.tooltiptext {\n  visibility: visible;\n}\n*/\n\ndiv.nano-annotate div.nano-data-holder div.TextData p.data > span:hover{\n  color: grey;\n}\n\ndiv.nano-annotate div.nano-data-holder div.TextData p.data span.word span.annotation:hover{\n  color: red;\n\n}\n\ndiv.nano-annotate div.nano-data-holder div.TextData p.data span.selected {\n  color: red;\n}\n\ndiv.nano-annotate div.nano-data-holder div.TextData p.data span.word {\n  font-weight: bold;\n}\n\ndiv.nano-annotate div.nano-data-holder div.TextData p.data span.annotation {\n  font-style: italic;\n  font-size: 10px;\n  padding:2px;\n  color:blue;\n}\n\ndiv.nano-annotate div.nano-data div.p-DataGrid-scrollCorner {\n  background-color: #F0F0F0;\n}\n\n\ndiv.nano-annotate div.nano-data div.p-DataGrid-scrollCorner::after {\n  content: '';\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 1px;\n  height: 1px;\n  background-color: #A0A0A0;\n}\n", ""]);
 
 // exports
 
@@ -93345,31 +93345,36 @@ var AnnotateWidget = (function (_super) {
         io_holder.classList.add('nano-io-holder');
         var controls = document.createElement('div');
         controls.classList.add('nano-controls');
+        var options = document.createElement('div');
+        options.classList.add('nano-controls-options');
         var input = document.createElement('textarea');
-        input.classList.add('nano-io-controls-input');
+        input.classList.add('nano-controls-input');
         controls.appendChild(input);
-        var io_controls = document.createElement('div');
-        io_controls.classList.add('nano-io-controls');
+        var controls_buttons = document.createElement('div');
+        controls_buttons.classList.add('nano-controls-buttons');
         var next = document.createElement('div');
+        next.classList.add('next-button');
         next.textContent = 'Next';
         next.onclick = function () {
             _this._manager._ws.send(JSON.stringify({ 'command': 'N' }));
         };
         var previous = document.createElement('div');
         previous.textContent = 'Previous';
+        previous.classList.add('prev-button');
         previous.onclick = function () {
             _this._manager._ws.send(JSON.stringify({ 'command': 'P' }));
         };
-        var skip = document.createElement('div');
-        skip.textContent = 'Skip';
-        skip.onclick = function () {
-            _this._manager._ws.send(JSON.stringify({ 'command': 'N' }));
-        };
-        io_controls.appendChild(next);
-        io_controls.appendChild(previous);
-        io_controls.appendChild(skip);
+        // let skip = document.createElement('div');
+        // skip.textContent = 'Skip';
+        // skip.onclick = () => {
+        //   this._manager._ws.send(JSON.stringify({'command': 'N'}));
+        // }
+        controls_buttons.appendChild(next);
+        controls_buttons.appendChild(previous);
+        // controls_buttons.appendChild(skip);
+        io_holder.appendChild(options);
         io_holder.appendChild(controls);
-        io_holder.appendChild(io_controls);
+        io_holder.appendChild(controls_buttons);
         div.appendChild(data_holder);
         div.appendChild(io_holder);
         _this = _super.call(this, { node: div }) || this;
@@ -93399,14 +93404,35 @@ var AnnotateWidget = (function (_super) {
     });
     Object.defineProperty(AnnotateWidget.prototype, "textAreaNode", {
         get: function () {
-            return this.node.getElementsByClassName('nano-io-controls-input')[0];
+            return this.node.getElementsByClassName('nano-controls-input')[0];
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(AnnotateWidget.prototype, "nextButtonNode", {
+        get: function () {
+            return this.node.querySelector('div.next-button');
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(AnnotateWidget.prototype, "prevButtonNode", {
+        get: function () {
+            return this.node.querySelector('div.prev-button');
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(AnnotateWidget.prototype, "optionsNode", {
+        get: function () {
+            return this.node.querySelector('div.nano-controls-options');
         },
         enumerable: true,
         configurable: true
     });
     AnnotateWidget.prototype.onAfterAttach = function (msg) {
         var _this = this;
-        this._manager = new datamanager_1.DataManager(this.dataNode, this._base, this._comm);
+        this._manager = new datamanager_1.DataManager(this, this._base, this._comm);
         var textarea = this.textAreaNode;
         textarea.onkeyup = function (event) {
             if (event.keyCode === 8) {
@@ -93459,10 +93485,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var datagrid_1 = __webpack_require__(207);
 var GridHelper = (function (_super) {
     __extends(GridHelper, _super);
-    function GridHelper(ws) {
+    function GridHelper(annotate, ws) {
         var _this = _super.call(this) || this;
         _this._data = [];
         _this._ws = ws;
+        _this._annotate = annotate;
         return _this;
     }
     GridHelper.prototype.rowCount = function (region) {
@@ -93579,27 +93606,29 @@ var DataManager = (function () {
         if (base === void 0) { base = ''; }
         if (comm === void 0) { comm = false; }
         var _this = this;
-        this._bind = bind;
+        this._annotate = bind;
+        this._bind = bind.dataNode;
         var path1 = window.location.host;
         var path2 = window.location.pathname;
         if (comm) {
+            this._ws_type = 'comm';
             services_1.Session.listRunning().then(function (sessionModels) {
                 for (var i = 0; i < sessionModels.length; i++) {
                     if (sessionModels[i].kernel.id === base) {
                         services_1.Session.connectTo(sessionModels[i]).then(function (session) {
                             session.kernel.connectToComm('nannotate').then(function (comm) {
-                                comm.onMsg = function (msg) {
+                                _this._ws = comm;
+                                _this._ws.onMsg = function (msg) {
                                     console.log('comm msg');
                                     var dat = msg['content']['data'];
-                                    var event = new MessageEvent('msg', { data: JSON.stringify(dat) });
+                                    var event = new MessageEvent('msg', { data: dat });
                                     _this.open(event);
                                 };
-                                comm.onClose = function () {
+                                _this._ws.onClose = function () {
                                     console.log('comm closed');
                                     _this.close(new CloseEvent('close'));
                                 };
-                                comm.open('opened');
-                                comm.send('test');
+                                _this._ws.open('opened');
                             });
                         });
                     }
@@ -93607,6 +93636,7 @@ var DataManager = (function () {
             });
         }
         else {
+            this._ws_type = 'ws';
             this._ws = new WebSocket('ws://' + path1 + path2 + base + 'nannotate/api/ws');
             this._ws.onmessage = function (event) { return _this.open(event); };
             this._ws.onclose = this.close;
@@ -93637,7 +93667,7 @@ var DataManager = (function () {
             }
             if (this._type === 'grid') {
                 var blueStripeStyle = __assign({}, datagrid_1.DataGrid.defaultStyle, { rowBackgroundColor: function (i) { return i % 2 === 0 ? 'rgba(138, 172, 200, 0.3)' : ''; }, columnBackgroundColor: function (i) { return i % 2 === 0 ? 'rgba(100, 100, 100, 0.1)' : ''; } });
-                var model = new datagrid_2.GridHelper(this._ws);
+                var model = new datagrid_2.GridHelper(this._annotate, this._ws);
                 var grid = new datagrid_1.DataGrid({ style: blueStripeStyle });
                 grid.model = model;
                 widgets_1.Widget.attach(grid, this._bind);
@@ -93645,11 +93675,21 @@ var DataManager = (function () {
                 this._helper = model;
             }
             else if (this._type === 'text') {
-                var model = new textdata_1.TextHelper(this._ws);
+                var model = new textdata_1.TextHelper(this._annotate, this._ws);
                 widgets_1.Widget.attach(model, this._bind);
                 this._helper = model;
             }
-            this._ws.onmessage = function (event) { return _this.fromServer(event); };
+            if (this._ws_type == 'comm') {
+                this._ws.onMsg = function (msg) {
+                    console.log('comm msg');
+                    var dat = msg['content']['data'];
+                    var event = new MessageEvent('msg', { data: dat });
+                    _this.fromServer(event);
+                };
+            }
+            else {
+                this._ws.onmessage = function (event) { return _this.fromServer(event); };
+            }
             this._loaded = true;
         }
     };
@@ -93693,12 +93733,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var widgets_1 = __webpack_require__(28);
 var TextHelper = (function (_super) {
     __extends(TextHelper, _super);
-    function TextHelper(ws) {
+    function TextHelper(annotate, ws) {
         var _this = this;
         var node = Private.createNode();
         _this = _super.call(this, { node: node }) || this;
         _this._ws = ws;
         _this._div = node;
+        _this._annotate = annotate;
         return _this;
     }
     TextHelper.prototype.fromServer = function (data) {
@@ -93718,6 +93759,7 @@ var TextHelper = (function (_super) {
         var x = data['data'];
         var p = document.createElement('p');
         p.classList.add('data');
+        var i = 0;
         for (var _i = 0, _a = x['text'].split('\n'); _i < _a.length; _i++) {
             var line = _a[_i];
             for (var _b = 0, _c = line.split(' '); _b < _c.length; _b++) {
@@ -93726,6 +93768,8 @@ var TextHelper = (function (_super) {
                 span_1.onclick = function () { this.classList.toggle('selected'); };
                 span_1.textContent = s;
                 span_1.setAttribute('value', s);
+                span_1.setAttribute('index', i.toString());
+                i += 1;
                 span_1.classList.add('word');
                 var span2 = document.createElement('span');
                 span2.classList.add('annotation');
@@ -93751,13 +93795,15 @@ var TextHelper = (function (_super) {
                 var tag = _e[_d];
                 var phrase = x['annotation']['phrases'][tag];
                 for (var _f = 0, phrase_1 = phrase; _f < phrase_1.length; _f++) {
-                    var word = phrase_1[_f];
+                    var mapping = phrase_1[_f];
+                    var word = mapping['word'];
+                    var index = mapping['index'];
                     var spans = p.querySelectorAll('span.word');
-                    for (var i = 0; i < spans.length; i++) {
-                        if (spans[i].getAttribute('value') === word) {
-                            spans[i].lastChild.textContent = tag;
-                            spans[i].lastChild.setAttribute('value', tag);
-                            spans[i].lastChild.onclick = function (event) {
+                    for (var i_1 = 0; i_1 < spans.length; i_1++) {
+                        if (spans[i_1].getAttribute('value') === word && i_1 == index) {
+                            spans[i_1].lastChild.textContent = tag;
+                            spans[i_1].lastChild.setAttribute('value', tag);
+                            spans[i_1].lastChild.onclick = function (event) {
                                 //delete self on click
                                 this.setAttribute('value', '');
                                 this.textContent = '';
@@ -93769,8 +93815,38 @@ var TextHelper = (function (_super) {
                 }
             }
         }
+        if ('options' in x) {
+            //FIXME
+            var options = this._annotate.optionsNode;
+            while (options.lastChild) {
+                options.removeChild(options.lastChild);
+            }
+            if (Object.keys(x['options']).length == 0) {
+                options.style.flex = '0';
+            }
+            else {
+                options.style.flex = '1';
+                var _loop_1 = function (option) {
+                    var opt_div = document.createElement('div');
+                    opt_div.classList.add('option');
+                    opt_div.textContent = x['options'][option];
+                    var _t = this_1;
+                    opt_div.onclick = function () {
+                        _t.toServer(this.textContent);
+                    };
+                    options.appendChild(opt_div);
+                };
+                var this_1 = this;
+                for (var option in x['options']) {
+                    _loop_1(option);
+                }
+            }
+        }
+        else {
+            var options = this._annotate.optionsNode;
+            options.style.flex = '0';
+        }
         this._div.appendChild(span);
-        console.log('test');
     };
     ;
     TextHelper.prototype.submitAnnotation = function (selected, msg) {
@@ -93792,10 +93868,10 @@ var TextHelper = (function (_super) {
         for (var i = 0; i < all_spans.length; i++) {
             if (all_spans[i].lastChild.getAttribute('value') != '') {
                 if (!(all_spans[i].lastChild.getAttribute('value') in phrases)) {
-                    phrases[all_spans[i].lastChild.getAttribute('value')] = [all_spans[i].getAttribute('value').replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "")];
+                    phrases[all_spans[i].lastChild.getAttribute('value')] = [{ word: all_spans[i].getAttribute('value').replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, ""), index: parseInt(all_spans[i].getAttribute('index')) }];
                 }
                 else {
-                    phrases[all_spans[i].lastChild.getAttribute('value')].push(all_spans[i].getAttribute('value').replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, ""));
+                    phrases[all_spans[i].lastChild.getAttribute('value')].push({ word: all_spans[i].getAttribute('value').replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, ""), index: parseInt(all_spans[i].getAttribute('index')) });
                 }
             }
         }

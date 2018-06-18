@@ -4,6 +4,9 @@ run:  ## clean and make target, run target
 runt:  ## clean and make target, run target (text)
 	python3 -m nannotate text
 
+runt2:  ## clean and make target, run target (text)
+	python3 -m nannotate text nooptions
+
 runi:  ## clean and make target, run target (inline)
 	python3 -m nannotate inline
 

@@ -1,12 +1,14 @@
 import {DataModel} from '@phosphor/datagrid';
 import {DataSource, DataJSON} from './datasource';
+import {AnnotateWidget} from './annotate';
 
 
 export
 class GridHelper extends DataModel implements DataSource {
-  constructor(ws: WebSocket | any) {
+  constructor(annotate: AnnotateWidget, ws: WebSocket | any) {
     super();
     this._ws = ws;
+    this._annotate = annotate;
   }
 
   rowCount(region: DataModel.RowRegion): number {
@@ -103,4 +105,5 @@ class GridHelper extends DataModel implements DataSource {
 
   private _data: object[][] = [];
   public _ws: WebSocket | any;
+  private _annotate: AnnotateWidget;
 }

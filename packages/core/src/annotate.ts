@@ -24,14 +24,18 @@ class AnnotateWidget extends Widget {
     let controls = document.createElement('div');
     controls.classList.add('nano-controls');
 
+    let options = document.createElement('div');
+    options.classList.add('nano-controls-options');
+
     let input = document.createElement('textarea');
-    input.classList.add('nano-io-controls-input');
+    input.classList.add('nano-controls-input');
     controls.appendChild(input);
 
-    let io_controls = document.createElement('div');
-    io_controls.classList.add('nano-io-controls');
+    let controls_buttons = document.createElement('div');
+    controls_buttons.classList.add('nano-controls-buttons');
 
     let next = document.createElement('div');
+    next.classList.add('next-button');
     next.textContent = 'Next';
     next.onclick = () => {
       this._manager._ws.send(JSON.stringify({'command': 'N'}));
@@ -39,22 +43,24 @@ class AnnotateWidget extends Widget {
 
     let previous = document.createElement('div');
     previous.textContent = 'Previous';
+    previous.classList.add('prev-button');
     previous.onclick = () => {
       this._manager._ws.send(JSON.stringify({'command': 'P'}));
     }
 
-    let skip = document.createElement('div');
-    skip.textContent = 'Skip';
-    skip.onclick = () => {
-      this._manager._ws.send(JSON.stringify({'command': 'N'}));
-    }
+    // let skip = document.createElement('div');
+    // skip.textContent = 'Skip';
+    // skip.onclick = () => {
+    //   this._manager._ws.send(JSON.stringify({'command': 'N'}));
+    // }
 
-    io_controls.appendChild(next);
-    io_controls.appendChild(previous);
-    io_controls.appendChild(skip);
+    controls_buttons.appendChild(next);
+    controls_buttons.appendChild(previous);
+    // controls_buttons.appendChild(skip);
 
+    io_holder.appendChild(options);
     io_holder.appendChild(controls);
-    io_holder.appendChild(io_controls);
+    io_holder.appendChild(controls_buttons);
 
     div.appendChild(data_holder);
     div.appendChild(io_holder);
@@ -80,11 +86,24 @@ class AnnotateWidget extends Widget {
   }
 
   get textAreaNode(): HTMLTextAreaElement {
-    return this.node.getElementsByClassName('nano-io-controls-input')[0] as HTMLTextAreaElement;
+    return this.node.getElementsByClassName('nano-controls-input')[0] as HTMLTextAreaElement;
   }
 
+  get nextButtonNode(): HTMLDivElement {
+    return this.node.querySelector('div.next-button') as HTMLDivElement;
+  }
+
+  get prevButtonNode(): HTMLDivElement {
+    return this.node.querySelector('div.prev-button') as HTMLDivElement;
+  }
+
+  get optionsNode(): HTMLDivElement {
+    return this.node.querySelector('div.nano-controls-options') as HTMLDivElement;
+  }
+
+
   onAfterAttach(msg: Message) : void {
-    this._manager = new DataManager(this.dataNode, this._base, this._comm);
+    this._manager = new DataManager(this, this._base, this._comm);
     let textarea = this.textAreaNode;
 
     textarea.onkeyup = (event: KeyboardEvent) => {

@@ -7,7 +7,7 @@ div.nano-annotate {
 
 
 div.nano-annotate div.nano-data-holder {
-  flex: 2;
+  flex: 1;
   display: flex;
   flex-direction: row;
   overflow: scroll;
@@ -15,16 +15,6 @@ div.nano-annotate div.nano-data-holder {
 
 div.nano-annotate div.nano-data-holder > div{
   flex: 1;
-}
-
-div.nano-annotate div.nano-data-holder div.nano-data-controls {
-  max-width: 50px;
-}
-
-div.nano-annotate div.nano-data-holder div.nano-data-controls> * {
-  flex: 1;
-  height: 100%;
-  width: 100%;
 }
 
 div.nano-annotate div.nano-io-holder {
@@ -50,11 +40,34 @@ div.nano-annotate div.nano-io-holder div > textarea{
   resize: none;
 }
 
-div.nano-annotate div.nano-io-holder div.nano-io-controls {
+div.nano-annotate div.nano-io-holder div.nano-controls-options {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: left;
+  padding:5px;
+  padding-bottom:20px;
+  overflow: scroll;
+}
+
+div.nano-annotate div.nano-io-holder div.nano-controls-options > div{
+  flex: 1;
+  align-self: center;
+  min-width: 15%;
+  flex-grow: 0;
+  padding: 5px;
+}
+
+div.nano-annotate div.nano-io-holder div.nano-controls-options > div:hover{
+  background-color: #ddd;
+
+}
+
+div.nano-annotate div.nano-io-holder div.nano-controls-buttons {
   max-height: 50px;    
 }
 
-div.nano-annotate div.nano-io-holder div.nano-io-controls div {
+div.nano-annotate div.nano-io-holder div.nano-controls-buttons div {
   text-align: center;
   justify-content: center;
   display: flex;
@@ -63,7 +76,7 @@ div.nano-annotate div.nano-io-holder div.nano-io-controls div {
   border-left: 1px solid #ccc;
 }
 
-div.nano-annotate div.nano-io-holder div.nano-io-controls div:hover {
+div.nano-annotate div.nano-io-holder div.nano-controls-buttons div:hover {
   background-color: #ddd;
 }
 
@@ -78,7 +91,7 @@ div.nano-annotate div.nano-data-holder div.TextData {
   flex-direction: column;
   height: 100%;
   overflow:visible;
-  margin:50px;
+  padding: 50px;
 }
 
 div.nano-annotate div.nano-data-holder div.TextData p.data{

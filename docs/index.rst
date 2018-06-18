@@ -9,9 +9,9 @@ An orchestration layer for plots and tables, dummy datasets, research, reports, 
 
 |build-status| |issues| |waffle| |codecov| |bch| |pypil| |pypiv| |npm| |docs|
 
-.. image:: ./img/demo.gif
+.. image:: ./img/demo_full.gif
     :scale: 100%
-    :alt: demo.gif
+    :alt: demo_full.gif
 
 
 .. toctree::
