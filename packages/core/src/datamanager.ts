@@ -22,18 +22,17 @@ class DataManager{
                         Session.connectTo(sessionModels[i]).then(session => {
                             session.kernel.connectToComm('nannotate').then(comm => {
                                 this._ws = comm;
-                                comm.onMsg = (msg: any) => {
+                                this._ws.onMsg = (msg: any) => {
                                     console.log('comm msg');
                                     let dat = msg['content']['data'];
                                     let event = new MessageEvent('msg', {data:dat});
                                     this.open(event);
                                 };
-                                comm.onClose = () => {
+                                this._ws.onClose = () => {
                                     console.log('comm closed');
                                     this.close(new CloseEvent('close'))
                                 };
-                                comm.open('opened');
-                                comm.send('test');
+                                this._ws.open('opened');
                             });
                         });
                     }
@@ -90,7 +89,7 @@ class DataManager{
                 this._helper = model;
             }
 
-            if (this._ws_type){
+            if (this._ws_type == 'comm'){
                 this._ws.onMsg = (msg: any) => {
                     console.log('comm msg');
                     let dat = msg['content']['data'];

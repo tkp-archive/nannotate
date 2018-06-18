@@ -84,12 +84,7 @@ class TextHelper extends Widget implements DataSource {
         }
       }
     }
-
-
-
     this._div.appendChild(span);
-    console.log('test');
-
   };
 
   submitAnnotation(selected: any, msg: string): void{

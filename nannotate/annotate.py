@@ -3,26 +3,16 @@ from IPython.display import display
 import os
 import os.path
 from queue import Queue
-import time
-from threading import Thread
 from .utils import in_ipynb
 from .console.io import _input as console_input, output as console_output, handle_command as console_handle_command
 from .ws.io import _input as websocket_input, output as websocket_output, handle_command as websocket_handle_command
 from .ws.handler import WSHandler
-from .comm.io import _input as comm_input, output as comm_output, handle_command as comm_handle_command
 from .comm.handler import CommHandler
 
 
 def annotate(df, options, standalone=False):
     if in_ipynb():
-        input = comm_input
-        output = comm_output
-        handle = comm_handle_command
-        q_in = Queue()
-        q_out = Queue()
-        comm, stop = CommHandler.run(options, q_in, q_out)
-        t = Thread(target=_handle_msg, args=(df, options, handle, input, output, q_in, q_out, comm))
-        t.start()
+        comm = CommHandler.run(df, options)
 
         p = os.path.abspath(get_ipython().kernel.session.config['IPKernelApp']['connection_file'])
         sessionid = p.split(os.sep)[-1].replace('kernel-', '').replace('.json', '')
@@ -73,7 +63,5 @@ def _handle_msg(data, options, handle_command, _input, _output, q_in, q_out, com
         print('here2', flush=True)
         while not cmd:
             cmd = _input(q_in, options)
-            time.sleep(1)
-            print('sleeping', flush=True)
 
-        i = handle_command(cmd, i, data, options, input, output, q_in, q_out)
+        i = handle_command(cmd, i, data, options, _input, _output, q_in, q_out)
