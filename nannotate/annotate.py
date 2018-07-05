@@ -55,8 +55,11 @@ def _handle_msg(data, options, preprocessor, handle_command, _input, _output, q_
             i = 0
 
         # input
+        # cmd_old = cmd
         cmd = _input(q_in, options)
         while not cmd:
             cmd = _input(q_in, options)
+            # if q_out.qsize() > 0:
+            # i = handle_command(cmd_old, i, data, options, preprocessor, _input, _output, q_in, q_out)
 
-        i = handle_command(cmd, i, data, options, _input, _output, q_in, q_out)
+        i = handle_command(cmd, i, data, options, preprocessor, _input, _output, q_in, q_out)

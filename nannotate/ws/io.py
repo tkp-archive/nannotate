@@ -29,30 +29,40 @@ def handle_command(cmd, index, data, options, preprocessor, input, output, q_in,
         return len(data) + 1
     elif command == 'D':
         output(clear(), q_out, options)
-        ret = {'command': 'D', 'index': index, 'data': data[index]}
+        if preprocessor:
+            ret = {'command': 'D', 'index': index, 'data': preprocessor(data[index])}
+        else:
+            ret = {'command': 'D', 'index': index, 'data': data[index]}
+        print(ret)
         output(ret, q_out, options)
         return index
     elif command == 'N':
         output(clear(), q_out, options)
         index = min(index + 1, len(data)-1)
-        ret = {'command': 'D', 'index': index, 'data': data[index]}
+        if preprocessor:
+            ret = {'command': 'D', 'index': index, 'data': preprocessor(data[index])}
+        else:
+            ret = {'command': 'D', 'index': index, 'data': data[index]}
+        print(ret)
         output(ret, q_out, options)
         return index
     elif command == 'P':
         output(clear(), q_out, options)
         index = max(index - 1, 0)
-        ret = {'command': 'D', 'index': index, 'data': data[index]}
+        if preprocessor:
+            ret = {'command': 'D', 'index': index, 'data': preprocessor(data[index])}
+        else:
+            ret = {'command': 'D', 'index': index, 'data': data[index]}
         output(ret, q_out, options)
         return index
     elif command == 'A':
         if options['schema'] == 'text':
             if 'annotation' not in data[index]:
-                data[index]['annotation'] = {'paragraph': '', 'phrases': {}}
+                data[index]['annotation'] = {'paragraph': '', 'wordss': {}}
             if 'paragraph' in cmd['annotation']:
                 data[index]['annotation']['paragraph'] = cmd['annotation']['paragraph']
             else:
-                data[index]['annotation']['phrases'] = cmd['annotation']['phrases']
-
+                data[index]['annotation']['words'] = cmd['annotation']['words']
         else:
             data[index]['annotation'] = cmd['annotation']
         ret = {'command': 'A', 'index': index, 'data': data[index], 'annotation': cmd['annotation']}
@@ -61,7 +71,10 @@ def handle_command(cmd, index, data, options, preprocessor, input, output, q_in,
     elif command == 'G':
         output(clear(), q_out, options)
         index = int(cmd['index'])
-        ret = {'command': 'D', 'index': index, 'data': data[index]}
+        if preprocessor:
+            ret = {'command': 'D', 'index': index, 'data': preprocessor(data[index])}
+        else:
+            ret = {'command': 'D', 'index': index, 'data': data[index]}
         output(ret, q_out, options)
         return index
     elif command == 'C':

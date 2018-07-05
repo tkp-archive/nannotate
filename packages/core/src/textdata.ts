@@ -70,14 +70,14 @@ class TextHelper extends Widget implements DataSource {
       span.setAttribute('value', x['annotation']['paragraph']);
 
       let _t = this;
-      for(let tag of Object.keys(x['annotation']['phrases'])){
-        let phrase = x['annotation']['phrases'][tag]
-        for(let mapping of phrase){
-          let word = mapping['word'];
+      for(let tag of Object.keys(x['annotation']['words'])){
+        let word_m = x['annotation']['words'][tag]
+        for(let mapping of word_m){
+          let word = mapping['word'].replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"");
           let index = mapping['index'];
           let spans = p.querySelectorAll('span.word');
           for (let i = 0; i < spans.length; i++){
-            if (spans[i].getAttribute('value') === word && i == index){
+            if (spans[i].getAttribute('value').replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"") === word && i == index){
               spans[i].lastChild!.textContent = tag;
               (spans[i].lastChild! as HTMLSpanElement).setAttribute('value', tag);
               (spans[i].lastChild! as HTMLSpanElement).onclick = function(event: MouseEvent){
@@ -140,20 +140,20 @@ class TextHelper extends Widget implements DataSource {
           }
       }
 
-      let phrases: {[key: string]: [{word:string, index:number}]} = {};
+      let words: {[key: string]: [{word:string, index:number}]} = {};
 
       let all_spans = this._div.querySelectorAll('span.word');
       for(let i = 0; i < all_spans.length; i++){
         if ((all_spans[i].lastChild! as HTMLSpanElement).getAttribute('value')! != ''){
-          if (!((all_spans[i].lastChild! as HTMLSpanElement).getAttribute('value')! in phrases)){
-            phrases[(all_spans[i].lastChild! as HTMLSpanElement).getAttribute('value')!] = [{word:(all_spans[i] as HTMLSpanElement).getAttribute('value')!.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,""), index: parseInt((all_spans[i] as HTMLSpanElement).getAttribute('index')!)}];
+          if (!((all_spans[i].lastChild! as HTMLSpanElement).getAttribute('value')! in words)){
+            words[(all_spans[i].lastChild! as HTMLSpanElement).getAttribute('value')!] = [{word:(all_spans[i] as HTMLSpanElement).getAttribute('value')!.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,""), index: parseInt((all_spans[i] as HTMLSpanElement).getAttribute('index')!)}];
           } else {
-            phrases[(all_spans[i].lastChild! as HTMLSpanElement).getAttribute('value')!].push({word:(all_spans[i] as HTMLSpanElement).getAttribute('value')!.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,""), index:parseInt((all_spans[i] as HTMLSpanElement).getAttribute('index')!)});
+            words[(all_spans[i].lastChild! as HTMLSpanElement).getAttribute('value')!].push({word:(all_spans[i] as HTMLSpanElement).getAttribute('value')!.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,""), index:parseInt((all_spans[i] as HTMLSpanElement).getAttribute('index')!)});
           }
         }
       }
-      console.log(phrases);
-      this._ws.send(JSON.stringify({command: 'A', annotation: {phrases:phrases}}));
+      console.log(words);
+      this._ws.send(JSON.stringify({command: 'A', annotation: {words:words}}));
   }
 
   toServer(msg: string): void {

@@ -28,11 +28,11 @@ def handle_command(cmd, index, data, options, preprocessor, comm):
     elif command == 'A':
         if options['schema'] == 'text':
             if 'annotation' not in data[index]:
-                data[index]['annotation'] = {'paragraph': '', 'phrases': {}}
+                data[index]['annotation'] = {'paragraph': '', 'words': {}}
             if 'paragraph' in cmd['annotation']:
                 data[index]['annotation']['paragraph'] = cmd['annotation']['paragraph']
             else:
-                data[index]['annotation']['phrases'] = cmd['annotation']['phrases']
+                data[index]['annotation']['words'] = cmd['annotation']['words']
 
         else:
             data[index]['annotation'] = cmd['annotation']
