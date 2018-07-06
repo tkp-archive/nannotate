@@ -23,7 +23,11 @@ def spacy_preprocess_pos(data):
             ret[pos] = [{'word': txt, 'index': i}] if pos not in ret else ret[pos] + [{'word': txt, 'index': i}]
             i += 1
 
-        data['annotation'] = {'paragraph': 'sentiment: ' + str(doc.sentiment), 'words': ret}
+        ph = {}
+        ph['test1'] = [{'start': 0, 'end': 3}]
+        ph['test2'] = [{'start': 5, 'end': 7}]
+
+        data['annotation'] = {'paragraph': 'sentiment: ' + str(doc.sentiment), 'words': ret, 'phrases': ph}
     return data
 
 if 'text' in sys.argv:

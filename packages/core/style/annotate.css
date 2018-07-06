@@ -5,6 +5,9 @@ div.nano-annotate {
   width: 100%;
 }
 
+mark {
+  background-color: rgba(255,0, 255, .6);
+}
 
 div.nano-annotate div.nano-data-holder {
   flex: 1;
@@ -133,16 +136,16 @@ span.tooltip:hover span.tooltiptext {
 }
 */
 
-div.nano-annotate div.nano-data-holder div.TextData p.data > span:hover{
+div.nano-annotate div.nano-data-holder div.TextData p.data > span:hover,
+div.nano-annotate div.nano-data-holder div.TextData p.data mark > span:hover{
   color: grey;
 }
 
 div.nano-annotate div.nano-data-holder div.TextData p.data span.word span.annotation:hover{
   color: red;
-
 }
 
-div.nano-annotate div.nano-data-holder div.TextData p.data span.selected {
+div.nano-annotate div.nano-data-holder div.TextData p.data span.selected-word {
   color: red;
 }
 
