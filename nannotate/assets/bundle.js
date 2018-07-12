@@ -76391,7 +76391,7 @@ exports = module.exports = __webpack_require__(7)();
 
 
 // module
-exports.push([module.i, "div.nano-annotate {\n  display: flex;\n  flex-direction: column;\n  height: 100%;\n  width: 100%;\n}\n\nmark {\n  background-color: rgba(255,0, 255, .6);\n}\n\ndiv.nano-annotate div.nano-data-holder {\n  flex: 1;\n  display: flex;\n  flex-direction: row;\n  overflow: scroll;\n}\n\ndiv.nano-annotate div.nano-data-holder > div{\n  flex: 1;\n}\n\ndiv.nano-annotate div.nano-io-holder {\n  flex: 1;\n  display: flex;\n  flex-direction: column;\n}\n\n\ndiv.nano-annotate div.nano-io-holder > div {\n  flex: 1;\n  display: flex;\n  flex-direction: row;\n}\n\n\ndiv.nano-annotate div.nano-io-holder div > *{\n  flex: 1;\n}\n\n\ndiv.nano-annotate div.nano-io-holder div > textarea{\n  resize: none;\n}\n\ndiv.nano-annotate div.nano-io-holder div.nano-controls-options {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: wrap;\n  justify-content: left;\n  padding:5px;\n  padding-bottom:20px;\n  overflow: scroll;\n}\n\ndiv.nano-annotate div.nano-io-holder div.nano-controls-options > div{\n  flex: 1;\n  align-self: center;\n  min-width: 15%;\n  flex-grow: 0;\n  padding: 5px;\n}\n\ndiv.nano-annotate div.nano-io-holder div.nano-controls-options > div:hover{\n  background-color: #ddd;\n\n}\n\ndiv.nano-annotate div.nano-io-holder div.nano-controls-buttons {\n  max-height: 50px;    \n}\n\ndiv.nano-annotate div.nano-io-holder div.nano-controls-buttons div {\n  text-align: center;\n  justify-content: center;\n  display: flex;\n  flex-direction: column;\n  border-right: 1px solid #ccc;\n  border-left: 1px solid #ccc;\n}\n\ndiv.nano-annotate div.nano-io-holder div.nano-controls-buttons div:hover {\n  background-color: #ddd;\n}\n\ndiv.nano-annotate div.nano-data-holder div.p-DataGrid {\n  width: 100%;\n  height: 100%;\n  border: 1px solid #A0A0A0;\n}\n\ndiv.nano-annotate div.nano-data-holder div.TextData {\n  display: flex;\n  flex-direction: column;\n  height: 100%;\n  overflow:visible;\n  padding: 50px;\n}\n\ndiv.nano-annotate div.nano-data-holder div.TextData p.data{\n  border-collapse: collapse;\n  overflow:visible;\n}\n\ndiv.nano-annotate div.nano-data-holder div.TextData p.data > span {\n  height:15px;\n}\n\n/*\nspan.tooltip {\n  position: relative;\n  display: inline-block;\n  border-bottom: 1px dotted black;\n}\n\nspan.tooltip span.tooltiptext {\n  visibility: hidden;\n  background-color: black;\n  color: #fff;\n  text-align: center;\n  border-radius: 6px;\n\n  overflow: overlay; \n  top: 100%;\n  left: 50%; \n  margin-left: -60px;\n\n  padding:5px;\n\n  position: absolute;\n  z-index: 1;\n}\n\nspan.tooltip:hover span.tooltiptext {\n  visibility: visible;\n}\n*/\n\ndiv.nano-annotate div.nano-data-holder div.TextData p.data > span:hover,\ndiv.nano-annotate div.nano-data-holder div.TextData p.data mark > span:hover{\n  color: grey;\n}\n\ndiv.nano-annotate div.nano-data-holder div.TextData p.data span.word span.annotation:hover{\n  color: red;\n}\n\ndiv.nano-annotate div.nano-data-holder div.TextData p.data span.selected-word {\n  color: red;\n}\n\ndiv.nano-annotate div.nano-data-holder div.TextData p.data span.word {\n  font-weight: bold;\n}\n\ndiv.nano-annotate div.nano-data-holder div.TextData p.data span.annotation {\n  font-style: italic;\n  font-size: 10px;\n  padding:2px;\n  color:blue;\n}\n\ndiv.nano-annotate div.nano-data div.p-DataGrid-scrollCorner {\n  background-color: #F0F0F0;\n}\n\n\ndiv.nano-annotate div.nano-data div.p-DataGrid-scrollCorner::after {\n  content: '';\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 1px;\n  height: 1px;\n  background-color: #A0A0A0;\n}\n", ""]);
+exports.push([module.i, "div.nano-annotate {\n  display: flex;\n  flex-direction: column;\n  height: 100%;\n  width: 100%;\n}\n\nmark {\n  background-color: rgba(255, 0, 255, .3);\n}\n\ndiv.nano-annotate div.nano-data-holder {\n  flex: 1;\n  display: flex;\n  flex-direction: row;\n  overflow: scroll;\n}\n\ndiv.nano-annotate div.nano-data-holder > div{\n  flex: 1;\n}\n\ndiv.nano-annotate div.nano-io-holder {\n  flex: 1;\n  display: flex;\n  flex-direction: column;\n}\n\n\ndiv.nano-annotate div.nano-io-holder > div {\n  flex: 1;\n  display: flex;\n  flex-direction: row;\n}\n\n\ndiv.nano-annotate div.nano-io-holder div > *{\n  flex: 1;\n}\n\n\ndiv.nano-annotate div.nano-io-holder div > textarea{\n  resize: none;\n}\n\ndiv.nano-annotate div.nano-io-holder div.nano-controls-options {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: wrap;\n  justify-content: left;\n  padding:5px;\n  padding-bottom:20px;\n  overflow: scroll;\n}\n\ndiv.nano-annotate div.nano-io-holder div.nano-controls-options > div{\n  flex: 1;\n  align-self: center;\n  min-width: 15%;\n  flex-grow: 0;\n  padding: 5px;\n}\n\ndiv.nano-annotate div.nano-io-holder div.nano-controls-options > div:hover{\n  background-color: #ddd;\n\n}\n\ndiv.nano-annotate div.nano-io-holder div.nano-controls-buttons {\n  max-height: 50px;    \n}\n\ndiv.nano-annotate div.nano-io-holder div.nano-controls-buttons div {\n  text-align: center;\n  justify-content: center;\n  display: flex;\n  flex-direction: column;\n  border-right: 1px solid #ccc;\n  border-left: 1px solid #ccc;\n}\n\ndiv.nano-annotate div.nano-io-holder div.nano-controls-buttons div:hover {\n  background-color: #ddd;\n}\n\ndiv.nano-annotate div.nano-data-holder div.p-DataGrid {\n  width: 100%;\n  height: 100%;\n  border: 1px solid #A0A0A0;\n}\n\ndiv.nano-annotate div.nano-data-holder div.TextData {\n  display: flex;\n  flex-direction: column;\n  height: 100%;\n  overflow:visible;\n  padding: 50px;\n}\n\ndiv.nano-annotate div.nano-data-holder div.TextData p.data{\n  border-collapse: collapse;\n  overflow:visible;\n}\n\ndiv.nano-annotate div.nano-data-holder div.TextData p.data > span {\n  height:15px;\n}\n\n/*\nspan.tooltip {\n  position: relative;\n  display: inline-block;\n  border-bottom: 1px dotted black;\n}\n\nspan.tooltip span.tooltiptext {\n  visibility: hidden;\n  background-color: black;\n  color: #fff;\n  text-align: center;\n  border-radius: 6px;\n\n  overflow: overlay; \n  top: 100%;\n  left: 50%; \n  margin-left: -60px;\n\n  padding:5px;\n\n  position: absolute;\n  z-index: 1;\n}\n\nspan.tooltip:hover span.tooltiptext {\n  visibility: visible;\n}\n*/\n\ndiv.nano-annotate div.nano-data-holder div.TextData p.data > span:hover,\ndiv.nano-annotate div.nano-data-holder div.TextData p.data mark > span:hover{\n  color: grey;\n}\n\ndiv.nano-annotate div.nano-data-holder div.TextData p.data span.word span.annotation:hover{\n  color: red;\n}\n\ndiv.nano-annotate div.nano-data-holder div.TextData p.data span.word.selected-word {\n  color: blue;\n}\ndiv.nano-annotate div.nano-data-holder div.TextData p.data span.word.selected-phrase {\n  color: magenta;\n}\n\ndiv.nano-annotate div.nano-data-holder div.TextData p.data span.word {\n  font-weight: bold;\n}\n\n\ndiv.nano-annotate div.nano-data-holder div.TextData p.data span.annotation {\n  font-style: italic;\n  font-size: 10px;\n  padding:2px;\n  color: blue;\n}\n\ndiv.nano-annotate div.nano-data-holder div.TextData span.annotation.paragraph-annotation {\n  color: green;\n}\n\ndiv.nano-annotate div.nano-data-holder div.TextData p.data span.annotation.phrase-annotation {\n  color: purple;\n}\n\ndiv.nano-annotate div.nano-data div.p-DataGrid-scrollCorner {\n  background-color: #F0F0F0;\n}\n\n\ndiv.nano-annotate div.nano-data div.p-DataGrid-scrollCorner::after {\n  content: '';\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 1px;\n  height: 1px;\n  background-color: #A0A0A0;\n}\n", ""]);
 
 // exports
 
@@ -93766,7 +93766,20 @@ var TextHelper = (function (_super) {
                 var s = _c[_b];
                 var span_1 = document.createElement('span');
                 // the words of the data
-                span_1.onclick = function () { this.classList.toggle('selected-word'); };
+                span_1.onclick = function (event) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    if (this.classList.contains('selected-word')) {
+                        this.classList.toggle('selected-word');
+                        this.classList.toggle('selected-phrase');
+                    }
+                    else if (this.classList.contains('selected-phrase')) {
+                        this.classList.toggle('selected-phrase');
+                    }
+                    else {
+                        this.classList.toggle('selected-word');
+                    }
+                };
                 span_1.textContent = s;
                 span_1.setAttribute('value', s);
                 span_1.setAttribute('index', i.toString());
@@ -93787,36 +93800,49 @@ var TextHelper = (function (_super) {
             p.appendChild(document.createElement('br'));
         }
         this._div.appendChild(p);
-        document.addEventListener('onmouseup', function () {
-            var selection = window.getSelection();
-            var first = selection.anchorNode.parentElement;
-            var last = selection.focusNode.parentElement;
-            console.log(first);
-            console.log(last);
-            var spanning = false;
-            for (var i_1 = 0; i_1 < p.children.length; i_1++) {
-                if (p.children[i_1] === first) {
-                    spanning = true;
-                    p.children[i_1].classList.add('selected-phrase');
-                }
-                else if (p.children[i_1] === last) {
-                    spanning = false;
-                    p.children[i_1].classList.add('selected-phrase');
-                }
-                else if (spanning) {
-                    p.children[i_1].classList.add('selected-phrase');
-                }
-                else {
-                    if (p.children[i_1].classList.contains('word')) {
-                        p.children[i_1].classList.remove('selected-phrase');
-                    }
-                }
-            }
-        });
+        // document.addEventListener('mouseup', ()=>{
+        //   let selection = window.getSelection();
+        //   if (selection.rangeCount === 0 ){
+        //     return;
+        //   }
+        //   let first = selection.anchorNode.parentElement;
+        //   let last = selection.focusNode.parentElement;
+        //   if (first === last){
+        //     return;
+        //   }
+        //   let spanning = false;
+        //   for(let i =0; i< p.children.length; i++){
+        //     let modify = null;
+        //     if (p.children[i].tagName === 'MARK'){
+        //       modify = p.children[i].children[0];
+        //     } else {
+        //       modify = p.children[i];
+        //     }
+        //     if (modify === first){
+        //       spanning = true;
+        //       modify.classList.add('selected-phrase');
+        //       (modify! as HTMLSpanElement).ondblclick = function(event: MouseEvent){
+        //         //delete self on double click
+        //         this.classList.remove('selected-phrase');
+        //         event.stopPropagation();
+        //       };
+        //     } else if (modify === last){
+        //       spanning = false;
+        //       modify.classList.add('selected-phrase');
+        //     } else if (spanning){
+        //       modify.classList.add('selected-phrase');
+        //     } else {
+        //       if (modify.classList.contains('word')) {
+        //         modify.classList.remove('selected-phrase');
+        //       }
+        //     }
+        //   }
+        // });
         // paragraph annotation
         var span = document.createElement('span');
         span.classList.add('annotation');
-        span.style.color = 'green';
+        span.classList.add('paragraph-annotation');
+        // span.style.color = 'green';
         if ('annotation' in x) {
             // paragraph annotation
             span.textContent = x['annotation']['paragraph'];
@@ -93832,16 +93858,21 @@ var TextHelper = (function (_super) {
                     var word = mapping['word'].replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "");
                     var index = mapping['index'];
                     var spans = p.querySelectorAll('span.word');
-                    for (var i_2 = 0; i_2 < spans.length; i_2++) {
+                    for (var i_1 = 0; i_1 < spans.length; i_1++) {
                         // replace punctuation in text
-                        if (spans[i_2].getAttribute('value').replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "") === word && i_2 == index) {
-                            spans[i_2].lastChild.textContent = tag;
-                            spans[i_2].lastChild.setAttribute('value', tag);
-                            spans[i_2].lastChild.ondblclick = function (event) {
+                        if (spans[i_1].getAttribute('value').replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "") === word && i_1 == index) {
+                            spans[i_1].lastChild.textContent = tag;
+                            spans[i_1].lastChild.setAttribute('value', tag);
+                            spans[i_1].lastChild.onclick = function (event) {
+                                event.preventDefault();
+                                event.stopPropagation();
+                            };
+                            spans[i_1].lastChild.ondblclick = function (event) {
                                 //delete self on double click
                                 this.setAttribute('value', '');
                                 this.textContent = '';
                                 _t_1.submitWordAnnotation([], '');
+                                event.preventDefault();
                                 event.stopPropagation();
                             };
                         }
@@ -93860,29 +93891,30 @@ var TextHelper = (function (_super) {
                     var first = spans[start];
                     var last = spans[end];
                     var spanning = false;
-                    for (var i_3 = 0; i_3 < p.children.length; i_3++) {
-                        if (p.children[i_3] === first) {
+                    for (var i_2 = 0; i_2 < p.children.length; i_2++) {
+                        if (p.children[i_2] === first) {
                             spanning = true;
                             var mark = document.createElement('mark');
-                            mark.appendChild(p.children[i_3]);
-                            p.children[i_3].insertAdjacentElement('beforebegin', mark);
+                            mark.appendChild(p.children[i_2]);
+                            p.children[i_2].insertAdjacentElement('beforebegin', mark);
                         }
-                        else if (p.children[i_3] === last) {
+                        else if (p.children[i_2] === last) {
                             spanning = false;
                             var mark = document.createElement('mark');
-                            mark.appendChild(p.children[i_3]);
+                            mark.appendChild(p.children[i_2]);
                             var span_2 = document.createElement('span');
                             span_2.classList.add('annotation');
+                            span_2.classList.add('phrase-annotation');
                             span_2.style.color = 'purple';
                             span_2.textContent = tag;
-                            p.children[i_3].insertAdjacentElement('beforebegin', mark);
-                            p.children[i_3].insertAdjacentElement('afterend', span_2);
+                            p.children[i_2].insertAdjacentElement('beforebegin', mark);
+                            p.children[i_2].insertAdjacentElement('afterend', span_2);
                             break;
                         }
                         else if (spanning) {
                             var mark = document.createElement('mark');
-                            mark.appendChild(p.children[i_3]);
-                            p.children[i_3].insertAdjacentElement('beforebegin', mark);
+                            mark.appendChild(p.children[i_2]);
+                            p.children[i_2].insertAdjacentElement('beforebegin', mark);
                         }
                     }
                 }
@@ -93933,6 +93965,10 @@ var TextHelper = (function (_super) {
             selected[i].classList.remove('selected-word');
             selected[i].lastChild.textContent = msg;
             selected[i].lastChild.setAttribute('value', msg);
+            selected[i].lastChild.onclick = function (event) {
+                event.preventDefault();
+                event.stopPropagation();
+            };
             selected[i].lastChild.ondblclick = function (event) {
                 //delete self on double click
                 this.setAttribute('value', '');

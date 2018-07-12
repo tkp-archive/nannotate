@@ -6,7 +6,7 @@ div.nano-annotate {
 }
 
 mark {
-  background-color: rgba(255,0, 255, .6);
+  background-color: rgba(255, 0, 255, .3);
 }
 
 div.nano-annotate div.nano-data-holder {
@@ -145,19 +145,31 @@ div.nano-annotate div.nano-data-holder div.TextData p.data span.word span.annota
   color: red;
 }
 
-div.nano-annotate div.nano-data-holder div.TextData p.data span.selected-word {
-  color: red;
+div.nano-annotate div.nano-data-holder div.TextData p.data span.word.selected-word {
+  color: blue;
+}
+div.nano-annotate div.nano-data-holder div.TextData p.data span.word.selected-phrase {
+  color: magenta;
 }
 
 div.nano-annotate div.nano-data-holder div.TextData p.data span.word {
   font-weight: bold;
 }
 
+
 div.nano-annotate div.nano-data-holder div.TextData p.data span.annotation {
   font-style: italic;
   font-size: 10px;
   padding:2px;
-  color:blue;
+  color: blue;
+}
+
+div.nano-annotate div.nano-data-holder div.TextData span.annotation.paragraph-annotation {
+  color: green;
+}
+
+div.nano-annotate div.nano-data-holder div.TextData p.data span.annotation.phrase-annotation {
+  color: purple;
 }
 
 div.nano-annotate div.nano-data div.p-DataGrid-scrollCorner {

@@ -40,7 +40,19 @@ class TextHelper extends Widget implements DataSource {
       for(let s of line.split(' ')){
         let span = document.createElement('span');
         // the words of the data
-        span.onclick = function(){this.classList.toggle('selected-word')};
+        span.onclick = function(event: MouseEvent){
+          event.preventDefault();
+          event.stopPropagation();
+
+          if (this.classList.contains('selected-word')){
+            this.classList.toggle('selected-word');
+            this.classList.toggle('selected-phrase');
+          } else if (this.classList.contains('selected-phrase')) {
+            this.classList.toggle('selected-phrase');
+          } else {
+            this.classList.toggle('selected-word');
+          }
+        };
         span.textContent = s;
         span.setAttribute('value', s);
         span.setAttribute('index', i.toString());
@@ -66,36 +78,56 @@ class TextHelper extends Widget implements DataSource {
 
     this._div.appendChild(p);
 
-    document.addEventListener('onmouseup', ()=>{
-      let selection = window.getSelection();
-      let first = selection.anchorNode.parentElement;
-      let last = selection.focusNode.parentElement;
-      console.log(first);
-      console.log(last);
-      let spanning = false;
-      for(let i =0; i< p.children.length; i++){
-        if (p.children[i] === first){
-          spanning = true;
-          p.children[i].classList.add('selected-phrase');
-        }
-        else if (p.children[i] === last){
-          spanning = false;
-          p.children[i].classList.add('selected-phrase');
-        }
-        else if (spanning){
-          p.children[i].classList.add('selected-phrase');
-        } else {
-          if (p.children[i].classList.contains('word')) {
-            p.children[i].classList.remove('selected-phrase');
-          }
-        }
-      }
-    });
+    // document.addEventListener('mouseup', ()=>{
+    //   let selection = window.getSelection();
+    //   if (selection.rangeCount === 0 ){
+    //     return;
+    //   }
+
+    //   let first = selection.anchorNode.parentElement;
+    //   let last = selection.focusNode.parentElement;
+    //   if (first === last){
+    //     return;
+    //   }
+
+    //   let spanning = false;
+    //   for(let i =0; i< p.children.length; i++){
+    //     let modify = null;
+    //     if (p.children[i].tagName === 'MARK'){
+    //       modify = p.children[i].children[0];
+    //     } else {
+    //       modify = p.children[i];
+    //     }
+
+
+    //     if (modify === first){
+    //       spanning = true;
+    //       modify.classList.add('selected-phrase');
+
+    //       (modify! as HTMLSpanElement).ondblclick = function(event: MouseEvent){
+    //         //delete self on double click
+    //         this.classList.remove('selected-phrase');
+    //         event.stopPropagation();
+    //       };
+
+    //     } else if (modify === last){
+    //       spanning = false;
+    //       modify.classList.add('selected-phrase');
+    //     } else if (spanning){
+    //       modify.classList.add('selected-phrase');
+    //     } else {
+    //       if (modify.classList.contains('word')) {
+    //         modify.classList.remove('selected-phrase');
+    //       }
+    //     }
+    //   }
+    // });
 
     // paragraph annotation
     let span = document.createElement('span');
     span.classList.add('annotation');
-    span.style.color = 'green';
+    span.classList.add('paragraph-annotation');
+    // span.style.color = 'green';
 
 
     if('annotation' in x){
@@ -118,11 +150,18 @@ class TextHelper extends Widget implements DataSource {
             if (spans[i].getAttribute('value').replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"") === word && i == index){
               spans[i].lastChild!.textContent = tag;
               (spans[i].lastChild! as HTMLSpanElement).setAttribute('value', tag);
+
+              (spans[i].lastChild! as HTMLSpanElement).onclick = function(event: MouseEvent){
+                event.preventDefault();
+                event.stopPropagation();
+              };
+
               (spans[i].lastChild! as HTMLSpanElement).ondblclick = function(event: MouseEvent){
                 //delete self on double click
                 this.setAttribute('value', '');
                 this.textContent = '';
                 _t.submitWordAnnotation([], '');
+                event.preventDefault();
                 event.stopPropagation();
               }
             }
@@ -157,6 +196,7 @@ class TextHelper extends Widget implements DataSource {
 
               let span = document.createElement('span');
               span.classList.add('annotation');
+              span.classList.add('phrase-annotation');
               span.style.color = 'purple';
               span.textContent = tag;
 
@@ -219,6 +259,11 @@ class TextHelper extends Widget implements DataSource {
           selected[i].classList.remove('selected-word');
           selected[i].lastChild!.textContent = msg;
           (selected[i].lastChild! as HTMLSpanElement).setAttribute('value', msg);
+
+          (selected[i].lastChild! as HTMLSpanElement).onclick = function(event: MouseEvent){
+            event.preventDefault();
+            event.stopPropagation();
+          };
 
           (selected[i].lastChild! as HTMLSpanElement).ondblclick = function(event: MouseEvent){
             //delete self on double click
