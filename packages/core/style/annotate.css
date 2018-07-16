@@ -94,11 +94,18 @@ div.nano-annotate div.nano-data-holder div.TextData {
   flex-direction: column;
   height: 100%;
   overflow:visible;
-  padding: 50px;
 }
 
 div.nano-annotate div.nano-data-holder div.TextData p.data{
   border-collapse: collapse;
+  overflow:visible;
+}
+
+div.nano-annotate div.nano-data-holder div.TextData  div.CodeMirror {
+  height:100%;
+}
+
+div.nano-annotate div.nano-data-holder div.TextData textarea.data{
   overflow:visible;
 }
 

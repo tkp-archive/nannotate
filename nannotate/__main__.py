@@ -1,16 +1,16 @@
 import sys
 import faker
 import pandas as pd
-import spacy
 from pprint import pprint
 from .annotate import *
 from .utils import get_spacy_pos
 
 f = faker.Faker()
-nlp = spacy.load('en_core_web_sm')
 
 
 def spacy_preprocess_pos(data):
+    import spacy
+    nlp = spacy.load('en_core_web_sm')
     if 'annotation' not in data:
         # dont annotate if custom annotations already exist
         text = data['text']
@@ -32,12 +32,13 @@ def spacy_preprocess_pos(data):
 
 if 'text' in sys.argv:
     print('annotating text')
-    spacy_options = get_spacy_pos()
+    # spacy_options = get_spacy_pos()
 
-    if 'nooptions' in sys.argv:
-        dat = pd.DataFrame([{'text': f.text()} for i in range(10)])
-    else:
-        dat = pd.DataFrame([{'text': f.text(), 'options': spacy_options if i % 2 == 0 else []} for i in range(10)])
+    dat = pd.DataFrame([{'text': f.text()} for i in range(10)])
+    # if 'nooptions' in sys.argv:
+    #     dat = pd.DataFrame([{'text': f.text()} for i in range(10)])
+    # else:
+    #     dat = pd.DataFrame([{'text': f.text(), 'options': spacy_options if i % 2 == 0 else []} for i in range(10)])
     options = {'schema': 'text', 'port': 8080}
     standalone = True
 elif 'inline' in sys.argv:
@@ -57,7 +58,8 @@ data = dat.reset_index().to_dict(orient='records')
 try:
     while True:
         if 'text' in sys.argv:
-            annotate(data, options, standalone, spacy_preprocess_pos)
+            annotate(data, options, standalone)
+            # annotate(data, options, standalone, spacy_preprocess_pos)
         annotate(data, options, standalone)
         pprint(data)
 except KeyboardInterrupt:

@@ -3,6 +3,9 @@ import {Message} from '@phosphor/messaging';
 import {DataSource, DataJSON} from './datasource';
 import {AnnotateWidget} from './annotate';
 
+import * as CodeMirror from 'codemirror';
+
+import 'codemirror/lib/codemirror.css';
 
 export
 class TextHelper extends Widget implements DataSource {
@@ -32,8 +35,43 @@ class TextHelper extends Widget implements DataSource {
 
     let x = <any>data['data'];
 
+    let ta = document.createElement('textarea');
+    ta.classList.add('data');
+    ta.setAttribute('cols', '100');
+    ta.textContent = x['text'];
+
+
+    this._div.appendChild(ta);
+    this._cm = CodeMirror.fromTextArea(ta, {
+      lineNumbers: true,
+      theme: "default",
+      readOnly: true,
+      lineWrapping: true,
+    });
+
+
+    this._cm.on('cursorActivity', () => {
+      if(this._marked){
+        this._marked.clear();
+      }
+      var fl = this._cm.getCursor('from').line;
+      var fc = this._cm.getCursor('from').ch;
+
+      var from_an = this._cm.findWordAt({line: fl, ch: fc}).anchor.ch;
+      // var from_hd = this._cm.findWordAt({line: fl, ch: fc}).head.ch;
+
+      var tl = this._cm.getCursor('to').line;
+      var tc = this._cm.getCursor('to').ch;
+
+      // var to_an = this._cm.findWordAt({line: tl, ch: tc}).anchor.ch;
+      var to_hd = this._cm.findWordAt({line: tl, ch: tc}).head.ch;
+
+      this._marked = this._cm.markText({line: fl, ch: from_an}, {line: tl, ch: to_hd}, {css: 'color: red', title:'test'});
+    });
+
     let p = document.createElement('p');
     p.classList.add('data');
+    p.style.display = 'none';
 
     let i = 0;
     for(let line of x['text'].split('\n')){
@@ -332,6 +370,8 @@ class TextHelper extends Widget implements DataSource {
   public _ws: WebSocket | any;
   private _div: HTMLDivElement;
   private _annotate: AnnotateWidget;
+  private _cm: any;
+  private _marked: any;
 }
 
 namespace Private {
