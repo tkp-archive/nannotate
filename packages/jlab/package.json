@@ -22,9 +22,9 @@
     "access": "public"
   },
   "dependencies": {
-    "@jupyterlab/application": "^0.16.0",
-    "@jupyterlab/rendermime-interfaces": "^1.0.0",
-    "@jupyterlab/services": "^2.0.0",
+    "@jupyterlab/application": "^0.17.0",
+    "@jupyterlab/rendermime-interfaces": "^2.0.0",
+    "@jupyterlab/services": "^3.0.0",
     "@nannotate/core": "^0.1.0",
     "@phosphor/messaging": "^1.2.2",
     "@phosphor/widgets": "^1.6.0"
