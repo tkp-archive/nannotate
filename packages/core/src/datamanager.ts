@@ -21,22 +21,20 @@ class DataManager{
             Session.listRunning().then(sessionModels => {
                 for (let i=0; i<sessionModels.length; i++) {
                     if (sessionModels[i].kernel.id === base) {
-                        Session.connectTo(sessionModels[i]).then(session => {
-                            session.kernel.connectToComm('nannotate').then(comm => {
-                                this._ws = comm;
-                                this._ws.onMsg = (msg: any) => {
-                                    console.log('comm msg');
-                                    let dat = msg['content']['data'];
-                                    let event = new MessageEvent('msg', {data:dat});
-                                    this.open(event);
-                                };
-                                this._ws.onClose = () => {
-                                    console.log('comm closed');
-                                    this.close(new CloseEvent('close'))
-                                };
-                                this._ws.open('opened');
-                            });
-                        });
+                        let session = Session.connectTo(sessionModels[i]);
+                        let comm = session.kernel.connectToComm('nannotate');
+                        this._ws = comm;
+                        this._ws.onMsg = (msg: any) => {
+                            console.log('comm msg');
+                            let dat = msg['content']['data'];
+                            let event = new MessageEvent('msg', {data:dat});
+                            this.open(event);
+                        };
+                        this._ws.onClose = () => {
+                            console.log('comm closed');
+                            this.close(new CloseEvent('close'))
+                        };
+                        this._ws.open('opened');
                     }
                 }
             });
