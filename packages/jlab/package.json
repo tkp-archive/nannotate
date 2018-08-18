@@ -1,6 +1,6 @@
 {
   "name": "@nannotate/jlab",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "keywords": [
     "jupyter",
     "jupyterlab"
@@ -22,10 +22,10 @@
     "access": "public"
   },
   "dependencies": {
-    "@jupyterlab/application": "^0.17.0",
-    "@jupyterlab/rendermime-interfaces": "^2.0.0",
-    "@jupyterlab/services": "^3.0.0",
-    "@nannotate/core": "^0.1.0",
+    "@jupyterlab/application": "^0.18.0",
+    "@jupyterlab/rendermime-interfaces": "^1.1.0",
+    "@jupyterlab/services": "^3.1.0",
+    "@nannotate/core": "^0.1.1",
     "@phosphor/messaging": "^1.2.2",
     "@phosphor/widgets": "^1.6.0"
   },
